@@ -1,0 +1,107 @@
+ 
+└── 📁 react-portfolio-barath/
+    ├── 📁 public/
+    ├── 📁 src/
+    │   ├── 📁 assets/
+    │   │   ├── 📁 fonts/
+    │   │   │   └── 📄 priestacy.regular.otf
+    │   │   ├── 📁 images/
+    │   │   │   ├── 📁 Brands/
+    │   │   │   │   ├── 🖼️ 1.png
+    │   │   │   │   ├── 🖼️ 2.png
+    │   │   │   │   ├── 🖼️ 3.png
+    │   │   │   │   ├── 🖼️ 4.png
+    │   │   │   │   ├── 🖼️ 5.png
+    │   │   │   │   ├── 🖼️ 6.jpg
+    │   │   │   │   └── 🖼️ 7.png
+    │   │   │   ├── 📁 Insta/
+    │   │   │   │   ├── 🖼️ 1.jpg
+    │   │   │   │   ├── 🖼️ 10.jpg
+    │   │   │   │   ├── 🖼️ 2.jpg
+    │   │   │   │   ├── 🖼️ 3.jpg
+    │   │   │   │   ├── 🖼️ 4.jpg
+    │   │   │   │   ├── 🖼️ 5.jpg
+    │   │   │   │   ├── 🖼️ 6.jpg
+    │   │   │   │   ├── 🖼️ 7.jpg
+    │   │   │   │   ├── 🖼️ 8.jpg
+    │   │   │   │   └── 🖼️ 9.jpg
+    │   │   │   ├── 📁 Tools/
+    │   │   │   │   ├── 🖼️ 1.png
+    │   │   │   │   ├── 🖼️ 2.png
+    │   │   │   │   ├── 🖼️ 3.png
+    │   │   │   │   ├── 🖼️ 4.png
+    │   │   │   │   ├── 🖼️ 5.png
+    │   │   │   │   ├── 🖼️ 6.png
+    │   │   │   │   └── 🖼️ 7.png
+    │   │   │   ├── 📁 icon/
+    │   │   │   │   └── 🖼️ sk.jpg
+    │   │   │   ├── 📁 icons/
+    │   │   │   │   ├── 🖼️ 1.png
+    │   │   │   │   ├── 🖼️ 2.png
+    │   │   │   │   ├── 🖼️ 3.png
+    │   │   │   │   ├── 🖼️ 4.png
+    │   │   │   │   ├── 🖼️ 5.png
+    │   │   │   │   ├── 🖼️ 6.png
+    │   │   │   │   └── 🖼️ 7.png
+    │   │   │   ├── 📁 logo/
+    │   │   │   │   └── 🖼️ broadway.png
+    │   │   │   ├── 🖼️ BS.png
+    │   │   │   ├── 🖼️ about.webp
+    │   │   │   ├── 🖼️ dummy.webp
+    │   │   │   └── 🖼️ hero-img.png
+    │   │   └── 📁 videos/
+    │   │       └── 📁 achievement/
+    │   │           └── 🎬 1.mp4
+    │   ├── 📁 components/
+    │   │   ├── 📁 About/
+    │   │   │   ├── 🎨 About.css
+    │   │   │   └── 📄 About.jsx
+    │   │   ├── 📁 Branding/
+    │   │   │   ├── 🎨 Branding.css
+    │   │   │   └── 📄 Branding.jsx
+    │   │   ├── 📁 CareerHighlights/
+    │   │   │   ├── 🎨 CareerHighlights.css
+    │   │   │   └── 📄 CareerHighlights.jsx
+    │   │   ├── 📁 Contact/
+    │   │   │   ├── 🎨 Contact.css
+    │   │   │   └── 📄 Contact.jsx
+    │   │   ├── 📁 CreativeExpertise/
+    │   │   │   ├── 🎨 CreativeExpertise.css
+    │   │   │   └── 📄 CreativeExpertise.jsx
+    │   │   ├── 📁 FontsColors/
+    │   │   │   ├── 🎨 FontsColors.css
+    │   │   │   └── 📄 FontsColors.jsx
+    │   │   ├── 📁 Footer/
+    │   │   │   ├── 🎨 Footer.css
+    │   │   │   └── 📄 Footer.jsx
+    │   │   ├── 📁 Hero/
+    │   │   │   ├── 🎨 Hero.css
+    │   │   │   └── 📄 Hero.jsx
+    │   │   ├── 📁 InstagramPosts/
+    │   │   │   ├── 🎨 InstagramPosts.css
+    │   │   │   └── 📄 InstagramPosts.jsx
+    │   │   ├── 📁 Navbar/
+    │   │   │   ├── 🎨 Navbar.css
+    │   │   │   └── 📄 Navbar.jsx
+    │   │   ├── 📁 Tools/
+    │   │   │   ├── 🎨 Tools.css
+    │   │   │   └── 📄 Tools.jsx
+    │   │   └── 📁 VisualCreations/
+    │   │       ├── 🎨 VisualCreations.css
+    │   │       └── 📄 VisualCreations.jsx
+    │   ├── 📁 styles/
+    │   │   └── 🎨 fonts.css
+    │   ├── 🎨 App.css
+    │   ├── 📄 App.jsx
+    │   ├── 🎨 index.css
+    │   └── 📄 main.jsx
+    ├── ⚙️ .gitignore
+    ├── 📄 Folder-Structure.txt
+    ├── 📝 README.md
+    ├── 📄 eslint.config.js
+    ├── 🌐 index.html
+    ├── ⚙️ package-lock.json
+    ├── ⚙️ package.json
+    └── 📄 vite.config.js
+
+ 

@@ -1,0 +1,12 @@
+ .branding-section {
+  background: radial-gradient(circle, aliceblue 0%, #d9f2ff 60%, #b8e6ff 100%);
+  color: #fff;
+  position: relative;
+  width: 100%;
+}
+
+ 
+ 
+.branding-main {
+  position: relative;
+}

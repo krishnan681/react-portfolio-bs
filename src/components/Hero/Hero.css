@@ -1,0 +1,568 @@
+:root {
+  --bg: radial-gradient(circle, aliceblue 0%, #d9f2ff 60%, #b8e6ff 100%);
+  --text: #000000;
+  --primary: #2b6bff;
+  --white: #ffffff;
+  --border: #d9d9d9;
+  --muted: #707070;
+
+  --body-font: "Roboto", sans-serif;
+  --heading-font: "Priestacy", serif;
+  --alt-font: "Helvetica Now Text", serif;
+
+  --primary-color: #1b4ef5;
+  --primary-hsl: hsl(226, 92%, 53%);
+}
+
+.hero {
+  padding-top: 170px;
+}
+
+.hero {
+  background: radial-gradient(circle, aliceblue 0%, #d9f2ff 60%, #b8e6ff 100%);;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding-top: 110px;
+  padding-bottom: 50px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: clamp(300px, 45vw, 700px);
+  height: clamp(300px, 45vw, 700px);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.4) 55%,
+    transparent 100%
+  );
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: clamp(220px, 34vw, 520px);
+  height: clamp(220px, 34vw, 520px);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.hero-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+/* ===========================================
+   INTRO
+=========================================== */
+.hero-intro {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(15px, 1.6vw, 25px);
+  color: #404040;
+  margin-bottom: clamp(36px, 9vw, 98px);
+  font-weight: 400;
+  text-align: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 16px;
+}
+
+.hero-intro strong {
+  color: var(--text);
+}
+
+#wave {
+  display: inline-block;
+  transform-origin: 70% 70%;
+  font-size: 1.1em;
+}
+
+/* ===========================================
+   HERO TITLE
+   NOTE: offsets below use em (relative to each
+   element's own font-size) instead of fixed px,
+   so the "BARATH / SACHWIN" overlap amount stays
+   proportionally correct at every screen size
+   instead of only looking right at one width.
+=========================================== */
+.hero-title {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 0.83;
+  padding: 0 16px;
+}
+
+.title-fill,
+.title-outline {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.055em;
+  user-select: none;
+  white-space: nowrap;
+  line-height: 0.82;
+  max-width: 100%;
+}
+
+.title-fill {
+  font-size: clamp(64px, 14vw, 240px);
+  color: var(--text);
+  position: relative;
+  top: -0.42em;
+}
+
+.title-outline {
+  margin-top: -0.09em;
+  font-size: clamp(64px, 14vw, 240px);
+  color: transparent;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-text-stroke: clamp(1.5px, 0.14vw, 2px) var(--text);
+  position: relative;
+  z-index: 2;
+  top: -0.23em;
+}
+
+/* Decorative lines */
+.hero-title::before {
+  content: "";
+  position: absolute;
+  left: -120px;
+  top: 40%;
+  width: 90px;
+  height: 2px;
+  background: #111;
+  opacity: 0.15;
+}
+
+.hero-title::after {
+  content: "";
+  position: absolute;
+  right: -120px;
+  top: 60%;
+  width: 90px;
+  height: 2px;
+  background: #111;
+  opacity: 0.15;
+}
+
+/* ===========================================
+   INFO ROW
+=========================================== */
+.hero-info {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  margin-top: clamp(40px, 8vw, 80px);
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 0 16px;
+}
+
+.hero-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(18px, 4vw, 58px);
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.hero-right span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* ===========================================
+   HERO IMAGE – centered lower + cloud fade
+=========================================== */
+.hero-image {
+  position: absolute;
+  left: 50%;
+  bottom: 14%;
+  transform: translateX(-50%);
+  z-index: 40;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: clamp(200px, 34vw, 470px);
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: clamp(200px, 44vw, 470px);
+  object-fit: contain;
+  filter: grayscale(100%);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* ===========================================
+   FLOATING BLUR CIRCLES
+=========================================== */
+.blur-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffffff;
+  opacity: 0.55;
+  filter: blur(50px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.blur-one {
+  width: clamp(100px, 12vw, 180px);
+  height: clamp(100px, 12vw, 180px);
+  top: 18%;
+  left: 10%;
+}
+
+.blur-two {
+  width: clamp(130px, 16vw, 240px);
+  height: clamp(130px, 16vw, 240px);
+  bottom: 8%;
+  right: 8%;
+}
+
+/* ===========================================
+   RESPONSIVE
+   (font-size still needs breakpoints because
+   clamp's vw-only curve doesn't reflow layout;
+   the em-based offsets above now ride along
+   automatically at every size below)
+=========================================== */
+
+@media (max-width: 1200px) {
+  .hero {
+    min-height: 100vh;
+  }
+
+  .hero-image {
+    bottom: 12%;
+    max-width: clamp(200px, 32vw, 400px);
+  }
+
+  .hero-image img {
+    max-width: clamp(200px, 32vw, 400px);
+  }
+
+  .title-fill,
+  .title-outline {
+    font-size: clamp(100px, 14vw, 200px);
+  }
+}
+
+@media (max-width: 992px) {
+  .hero {
+    min-height: 100vh;
+    padding-top: 100px;
+    padding-bottom: 40px;
+  }
+
+  .hero-wrapper {
+    position: relative;
+  }
+
+  .title-fill,
+  .title-outline {
+    font-size: clamp(70px, 18vw, 160px);
+  }
+
+  .title-fill {
+    top: -0.35em;
+  }
+
+  .title-outline {
+    top: -0.18em;
+  }
+
+  .hero-image {
+    position: absolute;
+    left: 50%;
+    bottom: auto;
+    top: 50%;
+    transform: translate(-50%, -55%);
+    width: clamp(200px, 45vw, 300px);
+    max-width: 300px;
+    z-index: 50;
+  }
+
+  .hero-image img {
+    max-width: 300px;
+  }
+
+  .hero-info {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    max-width: 500px;
+  }
+
+  .hero-title::before,
+  .hero-title::after {
+    display: none;
+  }
+
+  .rotating-text {
+    min-width: auto;
+    height: 24px;
+  }
+
+  .rotating-text .word {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 100vh;
+    padding-top: 90px;
+    padding-bottom: 30px;
+  }
+
+  .hero-intro {
+    font-size: 14px;
+    margin-bottom: 56px;
+  }
+
+  .title-fill,
+  .title-outline {
+    font-size: clamp(56px, 17vw, 120px);
+  }
+
+  .title-fill {
+    top: -0.35em;
+  }
+
+  .title-outline {
+    top: -0.18em;
+  }
+
+  .hero-image {
+    position: absolute;
+    left: 50%;
+    bottom: auto;
+    top: 50%;
+    transform: translate(-50%, -55%);
+    width: clamp(180px, 50vw, 260px);
+    max-width: 260px;
+    z-index: 100;
+  }
+
+  .hero-image img {
+    max-width: 260px;
+  }
+
+  .hero-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+    position: relative;
+    bottom: -80px;
+    max-width: 400px;
+    /* margin-top: 15px; */
+  }
+
+  .rotating-text {
+    height: 22px;
+  }
+
+  .rotating-text .word {
+    font-size: 12px;
+  }
+
+  .hero::before {
+    width: clamp(200px, 60vw, 350px);
+    height: clamp(200px, 60vw, 350px);
+  }
+
+  .hero::after {
+    width: clamp(160px, 50vw, 280px);
+    height: clamp(160px, 50vw, 280px);
+  }
+}
+
+@media (max-width: 480px) {
+  .title-fill,
+  .title-outline {
+    font-size: clamp(48px, 16vw, 90px);
+  }
+
+  .hero-image {
+    width: clamp(160px, 48vw, 220px);
+    max-width: 220px;
+    top: 48%;
+  }
+
+  .hero-image img {
+    max-width: 220px;
+  }
+
+  .hero-info {
+    margin-top: 10px;
+    gap: 8px;
+    max-width: 340px;
+  }
+
+  .rotating-text {
+    height: 20px;
+  }
+
+  .rotating-text .word {
+    font-size: 11px;
+  }
+
+  .hero-intro {
+    font-size: 12px;
+    margin-bottom: 42px;
+  }
+
+  .hero-title h1 {
+    margin: 0;
+    padding: 0;
+    line-height: -10;
+    font-size: 80px;
+  }
+}
+
+/*===============================
+    Rotating Text
+================================*/
+
+.rotating-text {
+  position: relative;
+  height: 30px;
+  overflow: hidden;
+  min-width: clamp(150px, 20vw, 240px);
+}
+
+.rotating-text .word {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(100%) rotateX(80deg);
+  transform-origin: bottom;
+  font-size: 18px;
+  font-weight: 600;
+  color: #666;
+  letter-spacing: 0.5px;
+  transition:
+    transform 0.75s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 0.75s;
+}
+
+.rotating-text .word.active {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
+
+.rotating-text .word.exit {
+  opacity: 0;
+  transform: translateY(-120%) rotateX(-80deg);
+}
+
+/*=====================================
+    APPLE STYLE ROTATING TEXT
+======================================*/
+
+.hero-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(20px, 3vw, 60px);
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+
+.rotating-text {
+  position: relative;
+  width: clamp(180px, 18vw, 240px);
+  height: 28px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rotating-text .word {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+
+  transform: translateY(100%);
+  filter: blur(8px);
+
+  color: #606060;
+  font-size: clamp(13px, 1vw, 16px);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+
+  will-change: transform, opacity, filter;
+
+  transition:
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.8s ease,
+    filter 0.8s ease;
+}
+
+/* Current Word */
+
+.rotating-text .word.active {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
+  z-index: 2;
+}
+
+/* Leaving Word */
+
+.rotating-text .word.exit {
+  opacity: 0;
+  transform: translateY(-100%);
+  filter: blur(8px);
+  z-index: 1;
+}

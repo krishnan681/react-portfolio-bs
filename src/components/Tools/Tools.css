@@ -1,0 +1,172 @@
+/* ===================== TOOLS ===================== */
+
+#tools {
+  text-align: center;
+  padding-bottom: 80px;
+  position: relative;
+  /* overflow: hidden; */
+}
+
+ 
+.title {
+  position: relative;
+  display: block;
+  text-align: center;
+  padding-top: 100px;
+}
+
+.bg-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -63%);
+  z-index: 1;
+  font-family: var(--heading-font);
+  font-size: clamp(5rem, 14vw, 12rem);
+  white-space: nowrap;
+  padding: 0px 20px 10px;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.45) 30%,
+    rgba(0, 0, 0, 0.15) 60%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.main-title {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #000;
+  text-transform: uppercase;
+}
+
+
+/* ===================== DOCK / TOOLBAR ===================== */
+
+.toolbar-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0 10px;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  gap: 8px;
+  padding: 20px 30px;
+  margin: 30px auto 20px;
+  width: fit-content;
+  list-style: none;
+  /* subtle dock background – optional */
+  /* background: rgba(55, 66, 77, 0.15); */
+  /* border-radius: 16px 16px 0 0; */
+}
+
+.toolbarItem {
+  width: clamp(48px, 5vw, 80px);
+  height: clamp(48px, 5vw, 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-origin: center bottom;
+  cursor: pointer;
+  will-change: transform;
+}
+
+.toolbarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+  border-radius: 12px;
+}
+
+/* ===================== EXPERTISE TAGS ===================== */
+
+.expertise {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 50px;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.tag:hover {
+  transform: translateY(-4px);
+  border-color: #ffd400;
+}
+
+.tag img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (min-width: 1200px) {
+  .toolbarItem {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .toolbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+    padding: 15px;
+    gap: 12px;
+  }
+
+  /* Disable magnification on mobile – icons stay normal size */
+  .toolbarItem {
+    width: 52px;
+    height: 52px;
+  }
+
+  .expertise {
+    margin-top: 30px;
+    gap: 10px;
+  }
+
+  .tag {
+    font-size: 13px;
+    padding: 10px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .toolbarItem {
+    width: 44px;
+    height: 44px;
+  }
+}

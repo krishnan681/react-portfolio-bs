@@ -1,0 +1,144 @@
+import "./CreativeExpertise.css";
+
+export default function CreativeExpertise() {
+  return (
+    <section className="expertise-section" id="creative-expertise">
+      <div className="container">
+        <div className="title">
+          <div className="bg-text">Creative</div>
+          <h1 className="main-title">Expertise</h1>
+        </div>
+
+        <div className="row g-4">
+          {/* Left Card */}
+
+          <div className="col-lg-6">
+            <div className="expertise-card">
+              <div className="card-top">
+                <span className="line"></span>
+                <span className="category">DESIGN &amp; VISUAL</span>
+                <span className="number">01</span>
+              </div>
+
+              <h2>
+                Design that
+                <br />
+                communicates with clarity.
+              </h2>
+
+              <div className="divider"></div>
+
+              <div className="service-item">
+                <div className="count">01</div>
+
+                <div className="icon">
+                  <i className="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+
+                <div className="content">
+                  <h4>Motion &amp; Visual Design</h4>
+                  <p>Dynamic visuals crafted to engage and inspire.</p>
+                </div>
+              </div>
+
+              <div className="service-item">
+                <div className="count">02</div>
+
+                <div className="icon">
+                  <i className="fa-solid fa-font"></i>
+                </div>
+
+                <div className="content">
+                  <h4>Typography</h4>
+                  <p>
+                    Letterforms that strengthen identity and communication.
+                  </p>
+                </div>
+              </div>
+
+              <div className="service-item">
+                <div className="count">03</div>
+
+                <div className="icon">
+                  <i className="fa-solid fa-palette"></i>
+                </div>
+
+                <div className="content">
+                  <h4>Color Theory</h4>
+                  <p>
+                    Balanced palettes that create emotion and consistency.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Card */}
+
+          <div className="col-lg-6">
+            <div className="expertise-card">
+              <div className="card-top">
+                <span className="line"></span>
+                <span className="category">CONTENT &amp; MEDIA</span>
+                <span className="number">02</span>
+              </div>
+
+              <h2>
+                Content that
+                <br />
+                leaves an impression.
+              </h2>
+
+              <div className="divider"></div>
+
+              <div className="service-item">
+                <div className="count">01</div>
+
+                <div className="icon">
+                  <i className="fa-solid fa-share-nodes"></i>
+                </div>
+
+                <div className="content">
+                  <h4>Social Media Content</h4>
+                  <p>
+                    Creative campaigns designed to capture attention.
+                  </p>
+                </div>
+              </div>
+
+              <div className="service-item">
+                <div className="count">02</div>
+
+                <div className="icon">
+                  <i className="fa-solid fa-camera"></i>
+                </div>
+
+                <div className="content">
+                  <h4>Product Photography</h4>
+                  <p>
+                    Premium visuals that showcase products with precision.
+                  </p>
+                </div>
+              </div>
+
+              <div className="service-item">
+                <div className="count">03</div>
+
+                <div className="icon">
+                  <i className="fa-solid fa-clapperboard"></i>
+                </div>
+
+                <div className="content">
+                  <h4>Cinematography</h4>
+                  <p>
+                    Story-driven visuals with cinematic quality.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

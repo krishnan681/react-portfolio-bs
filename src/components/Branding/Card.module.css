@@ -1,0 +1,276 @@
+.cardContainer {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: -25%;
+  height: 520px;
+  width: min(1000px, 92vw);
+  border-radius: 25px;
+  padding: 40px 50px;
+  transform-origin: top;
+  color: #fff;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+}
+
+.header {
+  text-align: center;
+}
+
+.year {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  opacity: 0.85;
+  text-transform: uppercase;
+}
+
+.header h2 {
+  margin: 6px 0 4px;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+}
+
+.category {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.85;
+  font-weight: 500;
+}
+
+.body {
+  display: flex;
+  height: 100%;
+  margin-top: 32px;
+  gap: 40px;
+}
+
+.description {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.description p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 1.5rem;
+  opacity: 0.95;
+}
+
+.deliverables .label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-size: 0.75rem;
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+}
+
+.imageContainer {
+  position: relative;
+  width: 60%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.inner {
+  width: 100%;
+  height: 100%;
+}
+
+.inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .card {
+    height: auto;
+    min-height: 480px;
+    padding: 28px 24px;
+  }
+
+  .body {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .description,
+  .imageContainer {
+    width: 100%;
+  }
+
+  .imageContainer {
+    height: 220px;
+  }
+}
+
+
+.cardContainer {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: -25%;
+  height: 500px;                 /* fixed height */
+  width: min(1000px, 92vw);
+  border-radius: 25px;
+  padding: 36px 44px;
+  transform-origin: top;
+  color: #fff;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+  overflow: hidden;              /* ← critical: clips anything that tries to escape */
+}
+
+.header {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.year {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  opacity: 0.85;
+  text-transform: uppercase;
+}
+
+.header h2 {
+  margin: 6px 0 4px;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+}
+
+.category {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.85;
+  font-weight: 500;
+}
+
+.body {
+  display: flex;
+  flex: 1;                       /* take remaining height */
+  min-height: 0;                 /* ← important for flex children to shrink */
+  margin-top: 28px;
+  gap: 36px;
+  overflow: hidden;
+}
+
+.description {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.description p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin: 0 0 1.4rem;
+  opacity: 0.95;
+}
+
+.deliverables .label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-size: 0.75rem;
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+}
+
+.imageContainer {
+  position: relative;
+  width: 60%;
+  height: 100%;                  /* fill the body height */
+  border-radius: 18px;
+  overflow: hidden;              /* ← clips the scaled image */
+  flex-shrink: 0;
+}
+
+.inner {
+  width: 100%;
+  height: 100%;
+  /* transform-origin stays center by default */
+}
+
+.inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .card {
+    height: auto;
+    min-height: 520px;
+    padding: 28px 22px;
+  }
+
+  .body {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .description,
+  .imageContainer {
+    width: 100%;
+  }
+
+  .imageContainer {
+    height: 240px;
+    flex-shrink: 0;
+  }
+}
