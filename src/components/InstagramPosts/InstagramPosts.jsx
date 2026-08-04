@@ -164,7 +164,7 @@ export default function InstagramPosts() {
   return (
     <section className="cf" aria-label="3D coverflow carousel" id="instagram">
       <header className="cf__head">
-        <div className="title" style={{ paddingTop: 0 }}>
+        <div className="title">
           <div className="bg-text">Instagram</div>
           <h1 className="main-title">Post's</h1>
         </div>

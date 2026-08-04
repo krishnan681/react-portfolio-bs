@@ -192,8 +192,8 @@ export default function Branding() {
     <section className="branding-section">
       {/* Title */}
       <div className="title">
-        <div className="bg-text">Creative</div>
-        <h1 className="main-title">Expertise</h1>
+        <div className="bg-text">Branding</div>
+        <h1 className="main-title">Works</h1>
       </div>
 
       <div ref={container} className="branding-main">
