@@ -193,7 +193,11 @@ export default function Branding() {
       {/* Title */}
       <div className="title">
         <div className="bg-text">Branding</div>
-        <h1 className="main-title">Works</h1>
+        <h1 className="main-title">Collaborations</h1>
+      </div>
+
+      <div className="BC-heading text-center" >
+        <p>Creative work delivered across diverse industries — entertainment, retail, <br></br>  hospitality, and healthcare — showcasing versatile design and content expertise.</p>
       </div>
 
       <div ref={container} className="branding-main">
@@ -201,7 +205,7 @@ export default function Branding() {
           const targetScale = 1 - (BRANDS.length - i) * 0.05;
 
           return (
-            <Card
+            <Card   
               key={project.id}
               i={i}
               {...project}

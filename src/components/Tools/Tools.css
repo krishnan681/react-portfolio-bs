@@ -5,6 +5,8 @@
   padding-bottom: 80px;
   position: relative;
   /* overflow: hidden; */
+  background: radial-gradient(circle, aliceblue 0%, #d9f2ff 60%, #b8e6ff 100%);
+
 }
 
  
@@ -168,5 +170,41 @@
   .toolbarItem {
     width: 44px;
     height: 44px;
+  }
+}
+
+
+
+
+ .TE-heading {
+  max-width: 760px;
+  margin: 0 auto 80px;
+  position: relative;
+  z-index: 5;
+}
+
+.TE-heading p {
+  font-size: 1.08rem;
+  line-height: 1.9;
+  color: #6b7280;
+  max-width: 700px;
+  margin: auto;
+  text-align: center;
+}
+
+
+
+@media (max-width: 768px) {
+  .TE-heading {
+    position: relative;
+    bottom: 25px;
+    padding: 1rem;
+    margin: -2.8rem auto;
+  }
+
+  .TE-heading p {
+    
+    font-size: 1rem;
+    line-height: 1.6;
   }
 }

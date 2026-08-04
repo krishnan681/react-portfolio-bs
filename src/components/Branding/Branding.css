@@ -10,3 +10,34 @@
 .branding-main {
   position: relative;
 }
+
+ .BC-heading {
+  max-width: 760px;
+  margin: 0 auto 80px;
+  position: relative;
+  z-index: 5;
+}
+
+.BC-heading p {
+  font-size: 1.08rem;
+  line-height: 1.9;
+  color: #6b7280;
+  max-width: 700px;
+  margin: auto;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .BC-heading {
+    position: relative;
+    bottom: 45px;
+    padding: 1rem;
+    margin: -0.8rem auto;
+  }
+
+  .BC-heading p {
+    
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}

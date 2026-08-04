@@ -113,6 +113,12 @@ useEffect(() => {
           <h1 className="main-title">Expertise</h1>
         </div>
 
+        <div className="TE-heading text-center">
+          <p>
+            The ability to conceptualize, design, and produce visually engaging content that communicates a brand's message and resonates with target audiences.
+          </p>
+        </div>
+
         <div className="toolbar-wrapper">
           <ul className="toolbar" ref={toolbarRef}>
             {TOOLS.map((src, i) => (

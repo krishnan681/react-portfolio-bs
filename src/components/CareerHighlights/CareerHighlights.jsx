@@ -100,7 +100,7 @@ export default function CareerHighlights() {
         icon: profileIcon,
       },
     ],
-    []
+    [],
   );
 
   /* =====================================
@@ -109,21 +109,14 @@ export default function CareerHighlights() {
 
   const infiniteVideos = useMemo(
     () => [...sliderVideos, ...sliderVideos],
-    [sliderVideos]
+    [sliderVideos],
   );
 
   /* ===============================
       Gallery Images
   =============================== */
 
-  const galleryImages = useMemo(
-    () => [
-      aboutImage,
-      aboutImage,
-      aboutImage,
-    ],
-    []
-  );
+  const galleryImages = useMemo(() => [aboutImage, aboutImage, aboutImage], []);
 
   /* ===============================
       Highlight Cards
@@ -135,10 +128,10 @@ export default function CareerHighlights() {
         id: 1,
         number: "01",
 
-        title: "HyperX Screen × VIVID",
+        title: "HyperX launch:",
 
         description:
-          "Motion graphics & marketing creatives for the launch of India's only premium cinema screen format at Broadway Cinemas.",
+          "Contributed to the launch of HyperX and Vivid premium large-format (PLF) cinema screens at Broadway Cinemas, Tiruppur, India, delivering immersive visuals that showcased the enhanced brightness, vibrant colors, high contrast, and large-screen cinematic experience.",
 
         video: achievementVideo,
       },
@@ -147,47 +140,43 @@ export default function CareerHighlights() {
         id: 2,
         number: "02",
 
-        title: "Luxury Fashion Launch",
+        title: "Giggles and twrils:",
 
         description:
-          "Launch creatives, motion graphics & promotional videos driving brand awareness for a luxury fashion label.",
+          "Contributed to the successful launch of Giggles & Twirls by editing promotional videos, designing brand posters, and creating visually compelling campaign content that brought the brand's kids' and women's fashion collections to life with a cohesive visual identity.",
 
         video: achievementVideo,
       },
     ],
-    []
+    [],
   );
 
   return (
-    <section
-      className="career__highlights sc_py"
-      id="career__highlights"
-    >
+    <section className="career__highlights sc_py" id="career__highlights">
       <div className="container">
-
         {/* ===============================
             Section Title
         =============================== */}
 
         <div className="title">
-          <div className="bg-text">
-            Career
-          </div>
+          <div className="bg-text">Career</div>
 
-          <h1 className="main-title">
-            HIGHLIGHTS
-          </h1>
+          <h1 className="main-title">HIGHLIGHTS</h1>
         </div>
-                {/* =====================================
+
+        <div className="CH-heading text-center">
+          <p>
+            
+Recognized for outstanding creative performance and industry acknowledgment from leading entertainment brands, delivering consistent quality and audience impact.
+          </p>
+        </div>
+        {/* =====================================
             Infinite Video Slider
         ====================================== */}
 
         <div className="video-slider">
-
-          <div className="slider-track" style={{columnGap:"1%"}}>
-
+          <div className="slider-track" style={{ columnGap: "1%" }}>
             {infiniteVideos.map((item, index) => (
-
               <div
                 className="video-card"
                 key={`${item.id}-${index}`}
@@ -200,28 +189,16 @@ export default function CareerHighlights() {
                   }
                 }}
               >
-
                 {/* Profile Icon */}
 
                 <div className="video-icon">
-                  <img
-                    src={item.icon}
-                    alt=""
-                  />
+                  <img src={item.icon} alt="" />
                 </div>
 
                 {/* Video */}
 
-                <video
-                  muted
-                  autoPlay
-                  loop
-                  playsInline
-                >
-                  <source
-                    src={item.video}
-                    type="video/mp4"
-                  />
+                <video muted autoPlay loop playsInline>
+                  <source src={item.video} type="video/mp4" />
                 </video>
 
                 {/* Overlay */}
@@ -234,16 +211,10 @@ export default function CareerHighlights() {
 
                 {/* Title */}
 
-                <div className="video-title">
-                  {item.title}
-                </div>
-
+                <div className="video-title">{item.title}</div>
               </div>
-
             ))}
-
           </div>
-
         </div>
 
         {/* =====================================
@@ -251,29 +222,20 @@ export default function CareerHighlights() {
         ====================================== */}
 
         <div className="three-images">
-
           {galleryImages.map((image, index) => (
-
             <div
               key={index}
               className={
                 index === 0
                   ? "imageone"
                   : index === 1
-                  ? "imagetwo"
-                  : "imagethree"
+                    ? "imagetwo"
+                    : "imagethree"
               }
             >
-
-              <img
-                src={image}
-                alt={`Gallery ${index + 1}`}
-              />
-
+              <img src={image} alt={`Gallery ${index + 1}`} />
             </div>
-
           ))}
-
         </div>
 
         {/* =====================================
@@ -281,67 +243,34 @@ export default function CareerHighlights() {
         ====================================== */}
 
         <div className="highlights-grid">
-
           {highlights.map((item) => (
-
-            <div
-              className="highlight-card"
-              key={item.id}
-            >
-
+            <div className="highlight-card" key={item.id}>
               <div className="highlight-video">
-
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  controls
-                >
-                  <source
-                    src={item.video}
-                    type="video/mp4"
-                  />
+                <video autoPlay muted loop playsInline controls>
+                  <source src={item.video} type="video/mp4" />
                 </video>
-
               </div>
 
               <div className="highlight-content">
+                <div className="highlight-number">{item.number}</div>
 
-                <div className="highlight-number">
-                  {item.number}
-                </div>
+                <h3>{item.title}</h3>
 
-                <h3>
-                  {item.title}
-                </h3>
-
-                <p>
-                  {item.description}
-                </p>
-
+                <p>{item.description}</p>
               </div>
-
             </div>
-
           ))}
-
         </div>
-                {/* =====================================
+        {/* =====================================
             Video Modal
         ====================================== */}
 
         {selectedVideo && (
-          <div
-            className="video-modal"
-            onClick={closeVideo}
-          >
-
+          <div className="video-modal" onClick={closeVideo}>
             <div
               className="video-modal-content"
               onClick={(e) => e.stopPropagation()}
             >
-
               <button
                 className="video-close"
                 onClick={closeVideo}
@@ -350,9 +279,7 @@ export default function CareerHighlights() {
                 ×
               </button>
 
-              <h4 className="modal-title">
-                {selectedVideo.title}
-              </h4>
+              <h4 className="modal-title">{selectedVideo.title}</h4>
 
               <video
                 ref={videoRef}
@@ -361,17 +288,11 @@ export default function CareerHighlights() {
                 autoPlay
                 playsInline
               >
-                <source
-                  src={selectedVideo.video}
-                  type="video/mp4"
-                />
+                <source src={selectedVideo.video} type="video/mp4" />
               </video>
-
             </div>
-
           </div>
         )}
-
       </div>
     </section>
   );

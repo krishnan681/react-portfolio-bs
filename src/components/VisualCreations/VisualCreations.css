@@ -529,3 +529,19 @@
     animation: none !important;
   }
 }
+
+
+@media (max-width: 768px) {
+  .section-heading {
+    position: relative;
+    bottom: 75px;
+    padding: 1rem;
+    margin:  auto;
+  }
+
+  .section-heading p {
+    
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
