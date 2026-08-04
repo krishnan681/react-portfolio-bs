@@ -108,7 +108,7 @@ useEffect(() => {
   return (
     <section id="tools">
       <div className="container-fluid px-0">
-        <div className="title">
+        <div className="title ">
           <div className="bg-text">Tools</div>
           <h1 className="main-title">Expertise</h1>
         </div>
