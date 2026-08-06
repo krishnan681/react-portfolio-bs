@@ -96,69 +96,86 @@ import brand6 from "../../assets/images/Brands/6.jpg";
 const BRANDS = [
   {
     id: "01",
-    title: "Madras Co.",
-    category: "Brand Identity & Logo System",
-    year: "2025",
+    title: "Broadway cinemas",
+    // category: "Brand Identity & Logo System",
+    // year: "2025",
     src: brand1,
     description:
-      "Crafted a distinctive, modern brand mark and scalable visual identity system for digital platforms.",
-    deliverables: ["Logo Suite", "Brand Guidelines", "Typography"],
+      "Broadway Cinemas, Coimbatore is a premium multiplex featuring South India's first IMAX with Laser and Tamil Nadu's first EPIQ for an unmatched big-screen experience. HyperX and Vivid deliver enhanced visuals, vibrant colors, and immersive Dolby Atmos sound.",
+    deliverables: [
+      "Social media contents",
+      "Imax Collectible cards",
+      "Prints works",
+      "Menu design",
+      "Led wall designs",
+    ],
     color: "#BBACAF",
   },
   {
     id: "02",
-    title: "TubeForge",
-    category: "Social Ad Campaigns",
-    year: "2025",
+    title: "Aarthi Grand Cineplex (AGC)",
+    // category: "Social Ad Campaigns",
+    // year: "2025",
     src: brand2,
     description:
-      "Designed high-converting promotional ad suites and social templates for multi-channel marketing.",
-    deliverables: ["Ad Creatives", "Social Templates", "Motion Graphics"],
+      "Aarthi Grand Cineplex (AGC) is a premium multiplex in Dindigul, offering 4K Barco Laser projection, Dolby Atmos sound, modern interiors, and comfortable seating for a high-quality movie experience.",
+    deliverables: ["Social media contents", "Led wall designs"],
     color: "#977F6D",
   },
   {
     id: "03",
-    title: "Aura Studio",
-    category: "Packaging & Print Collateral",
-    year: "2024",
+    title: "That's Y Food, On the Go (OTG), Café Totaram  ",
+    // category: "Packaging & Print Collateral",
+    // year: "2024",
     src: brand3,
     description:
-      "Developed tactile packaging graphics and print system guidelines for high-end retail products.",
-    deliverables: ["Packaging Mockups", "Print Collateral", "Color Palette"],
+      "That's Y Food  A premium multi-cuisine restaurant known for global flavors and fine dining. On the Go (OTG)  A casual café and restaurant serving quick meals, beverages, and comfort food. Café Totaram - A cozy café at Race Course, Coimbatore, popular for fusion food, desserts, coffee, and baked treats in a relaxed ambience.",
+    deliverables: ["Social media contents ", "Video shoot", "Pla cards"],
     color: "#C24914",
   },
   {
     id: "04",
-    title: "Next Ventures",
-    category: "Digital Asset System",
-    year: "2024",
+    title: "The Crimson",
+    // category: "Digital Asset System",
+    // year: "2024",
     src: brand4,
     description:
-      "Built a comprehensive digital graphic library optimized for complex web and app user interfaces.",
-    deliverables: ["UI Design", "Iconography", "Design System"],
+      "The Crimson is a premium restobar in Broadway Square, Coimbatore, known for its stylish ambience, handcrafted cocktails, multi-cuisine menu, and vibrant dining experience.",
+    deliverables: ["Social media contents" ],
     color: "#B6244F",
   },
   {
     id: "05",
-    title: "Nova Mobile",
-    category: "App Launch Marketing",
-    year: "2024",
+    title: "Giggles and twrils:",
+    // category: "App Launch Marketing",
+    // year: "2024",
     src: brand5,
     description:
-      "Created high-impact visual assets and digital promotional banners for mobile application rollouts.",
-    deliverables: ["App Store Graphics", "Banner Suite", "Promo Video Assets"],
+      "Giggles & Twirls is a premium fashion brand offering luxury linen clothing for women and kids, combining elegant designs, breathable fabrics, and everyday comfort.",
+    deliverables: ["Social media contents", "Website banner"],
     color: "#88A28D",
   },
   {
     id: "06",
-    title: "CyberMesh",
-    category: "Corporate Design System",
-    year: "2023",
+    title: "New City Developers",
+    // category: "Corporate Design System",
+    // year: "2023",
     src: brand6,
     description:
-      "Formulated a unified visual brand manual and corporate asset library for cross-platform usage.",
-    deliverables: ["Brand Manual", "Vector Assets", "Digital Ads"],
+      "New City Developers is a construction company specializing in residential construction, home renovation, and redevelopment, delivering quality craftsmanship and modern living spaces.",
+    deliverables: ["Social media contents"],
     color: "#1C1C1C",
+  },
+  {
+    id: "07",
+    title: "Pavizham Jewellers",
+    // category: "Corporate Design System",
+    // year: "2023",
+    src: brand6,
+    description:
+      "Pavizham Jewellers is a trusted jewellery brand in Coimbatore, offering gold, diamond, platinum, and silver jewellery with quality craftsmanship and elegant designs.",
+    deliverables: ["Social media contents", "Jewelry product shoot"],
+    color: "#868f45",
   },
 ];
 
@@ -196,8 +213,12 @@ export default function Branding() {
         <h1 className="main-title">Collaborations</h1>
       </div>
 
-      <div className="BC-heading text-center" >
-        <p>Creative work delivered across diverse industries — entertainment, retail, <br></br>  hospitality, and healthcare — showcasing versatile design and content expertise.</p>
+      <div className="BC-heading text-center">
+        <p>
+          Creative work delivered across diverse industries — entertainment,
+          retail, <br></br> hospitality, and healthcare — showcasing versatile
+          design and content expertise.
+        </p>
       </div>
 
       <div ref={container} className="branding-main">
@@ -205,7 +226,7 @@ export default function Branding() {
           const targetScale = 1 - (BRANDS.length - i) * 0.05;
 
           return (
-            <Card   
+            <Card
               key={project.id}
               i={i}
               {...project}

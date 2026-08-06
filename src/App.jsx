@@ -24,7 +24,7 @@ function App() {
         <Branding />
         <VisualCreations />
         <Tools />
-        <InstagramPosts />
+        {/* <InstagramPosts /> */}
         <FontsColors />
         <Contact />
       </main>
