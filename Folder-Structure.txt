@@ -58,7 +58,9 @@
     │   │   │   └── 📄 About.jsx
     │   │   ├── 📁 Branding/
     │   │   │   ├── 🎨 Branding.css
-    │   │   │   └── 📄 Branding.jsx
+    │   │   │   ├── 📄 Branding.jsx
+    │   │   │   ├── 📄 Card.jsx
+    │   │   │   └── 🎨 Card.module.css
     │   │   ├── 📁 CareerHighlights/
     │   │   │   ├── 🎨 CareerHighlights.css
     │   │   │   └── 📄 CareerHighlights.jsx
@@ -89,6 +91,13 @@
     │   │   └── 📁 VisualCreations/
     │   │       ├── 🎨 VisualCreations.css
     │   │       └── 📄 VisualCreations.jsx
+    │   ├── 📁 data/
+    │   │   └── 📄 brands.js
+    │   ├── 📁 pages/
+    │   │   ├── 📁 ProjectPage/
+    │   │   │   ├── 🎨 projectpage.css
+    │   │   │   └── 📄 projectpage.jsx
+    │   │    
     │   ├── 📁 styles/
     │   │   └── 🎨 fonts.css
     │   ├── 🎨 App.css
@@ -103,5 +112,4 @@
     ├── ⚙️ package-lock.json
     ├── ⚙️ package.json
     └── 📄 vite.config.js
-
  

@@ -1,0 +1,338 @@
+.project-page {
+  min-height: 100vh;
+
+  background: #f5f5f5;
+
+  color: #111;
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.project-nav {
+  width: min(1200px, 90vw);
+
+  margin: 0 auto;
+
+  padding: 30px 0;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.project-back {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #111;
+
+  text-decoration: none;
+
+  font-size: 0.9rem;
+
+  font-weight: 600;
+
+  transition: transform 0.3s ease;
+}
+
+.project-back:hover {
+  transform: translateX(-4px);
+}
+
+.project-number {
+  font-size: 0.8rem;
+
+  letter-spacing: 2px;
+
+  opacity: 0.5;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.project-hero {
+  width: min(1200px, 90vw);
+
+  margin: 60px auto 0;
+
+  display: grid;
+
+  grid-template-columns: 0.8fr 1.2fr;
+
+  gap: 70px;
+
+  align-items: center;
+}
+
+.project-hero-content {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+.project-label {
+  font-size: 0.75rem;
+
+  text-transform: uppercase;
+
+  letter-spacing: 2px;
+
+  opacity: 0.5;
+
+  margin-bottom: 20px;
+}
+
+.project-hero h1 {
+  font-size: clamp(3rem, 7vw, 7rem);
+
+  line-height: 0.95;
+
+  margin: 0 0 30px;
+
+  letter-spacing: -0.05em;
+}
+
+.project-hero p {
+  max-width: 550px;
+
+  font-size: 1rem;
+
+  line-height: 1.7;
+
+  opacity: 0.7;
+
+  margin: 0;
+}
+
+
+/* =========================================
+   HERO IMAGE
+========================================= */
+
+.project-hero-image {
+  width: 100%;
+
+  aspect-ratio: 16 / 10;
+
+  overflow: hidden;
+
+  border-radius: 25px;
+
+  background: var(--project-color);
+}
+
+.project-hero-image img {
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+
+/* =========================================
+   INFORMATION
+========================================= */
+
+.project-information {
+  width: min(1200px, 90vw);
+
+  margin: 100px auto 0;
+
+  padding-top: 35px;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.project-info-block > span {
+  display: block;
+
+  margin-bottom: 20px;
+
+  font-size: 0.75rem;
+
+  text-transform: uppercase;
+
+  letter-spacing: 2px;
+
+  opacity: 0.5;
+}
+
+.project-tags {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+}
+
+.project-tags span {
+  padding: 10px 16px;
+
+  border-radius: 8px;
+
+  background: var(--project-color);
+
+  color: #fff;
+
+  font-size: 0.85rem;
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.project-content {
+  width: min(900px, 90vw);
+
+  margin: 120px auto;
+}
+
+.project-content h2 {
+  font-size: clamp(2rem, 5vw, 4rem);
+
+  margin-bottom: 25px;
+
+  letter-spacing: -0.04em;
+}
+
+.project-content p {
+  font-size: 1.1rem;
+
+  line-height: 1.8;
+
+  max-width: 700px;
+
+  opacity: 0.7;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.project-footer {
+  width: min(1200px, 90vw);
+
+  margin: 0 auto;
+
+  padding: 50px 0 100px;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.project-footer a {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: #111;
+
+  text-decoration: none;
+
+  font-weight: 600;
+}
+
+
+/* =========================================
+   NOT FOUND
+========================================= */
+
+.project-not-found {
+  min-height: 100vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 20px;
+}
+
+.project-not-found h1 {
+  font-size: 3rem;
+}
+
+.project-not-found a {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #111;
+
+  text-decoration: none;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .project-nav {
+    padding: 20px 0;
+  }
+
+  .project-hero {
+    grid-template-columns: 1fr;
+
+    gap: 40px;
+
+    margin-top: 40px;
+  }
+
+  .project-hero h1 {
+    font-size: clamp(3rem, 15vw, 5rem);
+  }
+
+  .project-hero p {
+    font-size: 0.9rem;
+  }
+
+  .project-hero-image {
+    aspect-ratio: 4 / 3;
+
+    border-radius: 18px;
+  }
+
+  .project-information {
+    margin-top: 70px;
+  }
+
+  .project-content {
+    margin: 80px auto;
+  }
+
+  .project-content h2 {
+    font-size: 2.5rem;
+  }
+
+  .project-content p {
+    font-size: 0.95rem;
+  }
+}
