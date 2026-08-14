@@ -1,13 +1,13 @@
 /* ============================================
-   CONTACT / FOOTER SECTION
+   CONTACT / FOOTER SECTION (LIGHT ALICE-BLUE THEME)
 ============================================ */
 
 #contact {
   position: relative;
-  padding: 80px 0 0;
+  padding: 100px 0 30px;
   overflow: hidden;
-  background: #0a0a0a;
-  color: #e5e7eb;
+  background: radial-gradient(circle at 50% 0%, #eaf6fc 0%, #dcf0fb 50%, #cceaf7 100%);
+  color: #04193a;
 }
 
 #contact .container-fluid {
@@ -36,13 +36,13 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  border: 1.5px solid var(--accent, #3ca2fa);
+  border: 1.5px solid #0284c7;
   opacity: 0.6;
 }
 
 .rings span:nth-child(1) {
   opacity: 1;
-  background: var(--accent, #3ca2fa);
+  background: #0284c7;
 }
 
 .rings span:nth-child(2) {
@@ -58,7 +58,7 @@
   height: 1px;
   background: linear-gradient(
     to right,
-    rgba(60, 162, 250, 0.4),
+    rgba(2, 132, 199, 0.4),
     transparent
   );
 }
@@ -66,11 +66,11 @@
 /* ── Heading ─────────────────────────────── */
 
 #contact h2 {
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  font-weight: 800;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 900;
   margin: 0 0 48px;
-  letter-spacing: -0.02em;
-  color: #fff;
+  letter-spacing: -0.03em;
+  color: #04193a;
 }
 
 /* ── Footer wrapper ──────────────────────── */
@@ -107,22 +107,22 @@
 
 .base-text {
   fill: transparent;
-  stroke: #262626;
-  font-family: Helvetica, Arial, sans-serif;
+  stroke: #bcd9ea;
+  font-family: "Inter", Helvetica, Arial, sans-serif;
   font-size: 5rem;
-  font-weight: bold;
-  stroke-width: 0.3;
-  opacity: 0;
+  font-weight: 900;
+  stroke-width: 0.5;
+  opacity: 0.6;
   transition: opacity 0.3s ease;
 }
 
 .draw-text {
   fill: transparent;
-  stroke: #3ca2fa;
-  font-family: Helvetica, Arial, sans-serif;
+  stroke: #0284c7;
+  font-family: "Inter", Helvetica, Arial, sans-serif;
   font-size: 5rem;
-  font-weight: bold;
-  stroke-width: 2.5;
+  font-weight: 900;
+  stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-dasharray: 900;
@@ -151,11 +151,11 @@
 .gradient-text {
   fill: transparent;
   stroke: url(#textGradient);
-  stroke-width: 2.5;
+  stroke-width: 2.2;
   mask: url(#textMask);
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "Inter", Helvetica, Arial, sans-serif;
   font-size: 5rem;
-  font-weight: bold;
+  font-weight: 900;
 }
 
 /* ── Footer inner content ────────────────── */
@@ -188,24 +188,24 @@
 }
 
 .brand-heart {
-  color: var(--accent, #3ca2fa);
+  color: #0284c7;
   font-size: 1.25rem;
   line-height: 1;
 }
 
 .brand-name {
-  font-size: 1.35rem;
-  font-weight: 800;
+  font-size: 1.4rem;
+  font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #fff;
+  color: #04193a;
 }
 
 .brand-desc {
   font-size: 0.95rem;
   line-height: 1.7;
-  color: #9ca3af;
-  max-width: 360px;
+  color: #526071;
+  max-width: 380px;
   margin: 0;
 }
 
@@ -215,9 +215,9 @@
   font-size: 0.8rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #6b7280;
+  color: #0284c7;
   margin: 0 0 1.25rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .contact-list {
@@ -237,18 +237,19 @@
 
 .contact-list a,
 .contact-list span {
-  color: inherit;
+  color: #04193a;
   text-decoration: none;
   font-size: 0.95rem;
+  font-weight: 600;
   transition: color 0.2s ease;
 }
 
 .contact-list a:hover {
-  color: var(--accent, #3ca2fa);
+  color: #0284c7;
 }
 
 .icon {
-  color: var(--accent, #3ca2fa);
+  color: #0284c7;
   flex-shrink: 0;
   width: 18px;
   height: 18px;
@@ -258,7 +259,7 @@
 
 hr.divider {
   border: none;
-  border-top: 1px solid #1f2937;
+  border-top: 1px solid rgba(4, 25, 58, 0.1);
   margin: 2.5rem 0 1.75rem;
 }
 
@@ -283,17 +284,18 @@ hr.divider {
 .social-links {
   display: flex;
   gap: 1.5rem;
-  color: #9ca3af;
+  color: #04193a;
 }
 
 .social-links a {
   color: inherit;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
   display: inline-flex;
 }
 
 .social-links a:hover {
-  color: var(--accent, #3ca2fa);
+  color: #0284c7;
+  transform: translateY(-2px);
 }
 
 .social-links svg {
@@ -304,7 +306,7 @@ hr.divider {
 .copyright {
   text-align: center;
   margin: 0;
-  color: #6b7280;
+  color: #64748b;
   font-size: 0.85rem;
 }
 
@@ -325,7 +327,7 @@ hr.divider {
   height: 200px;
   background: radial-gradient(
     ellipse at center bottom,
-    rgba(60, 162, 250, 0.12) 0%,
+    rgba(2, 132, 199, 0.12) 0%,
     transparent 70%
   );
   pointer-events: none;
@@ -336,7 +338,7 @@ hr.divider {
 
 @media (max-width: 640px) {
   #contact {
-    padding: 60px 0 0;
+    padding: 70px 0 20px;
   }
 
   #contact h2 {

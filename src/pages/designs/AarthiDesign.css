@@ -1,0 +1,507 @@
+/* =========================================================
+   AARTHI PROJECT PAGE STYLES (LIGHT ALICE-BLUE THEME)
+========================================================= */
+
+.aarthi-page {
+  width: 100%;
+  min-height: 100vh;
+  background: radial-gradient(circle at 10% 20%, #eaf6fc 0%, #f4fafe 50%, #e5f2fa 100%);
+  color: #04193a;
+  overflow-x: hidden;
+  position: relative;
+  font-family: inherit;
+}
+
+/* =========================================================
+   TOP NAVIGATION
+========================================================= */
+
+.aarthi-top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 5vw;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(4, 25, 58, 0.08);
+}
+
+.aarthi-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #04193a;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: #ffffff;
+  border: 1px solid rgba(4, 25, 58, 0.1);
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(4, 25, 58, 0.04);
+}
+
+.aarthi-back-btn:hover {
+  background: #04193a;
+  color: #ffffff;
+  transform: translateX(-3px);
+}
+
+.aarthi-project-badge {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #0284c7;
+  background: #e0f2fe;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.aarthi-hero {
+  width: 100%;
+  min-height: 100vh;
+  padding: 120px 5vw 60px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.aarthi-logo {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.aarthi-logo img {
+  width: 130px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
+.aarthi-hero-content {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 45% 55%;
+  align-items: center;
+  gap: 40px;
+  max-width: 1500px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.aarthi-title-area {
+  padding-right: 30px;
+}
+
+.aarthi-eyebrow {
+  margin: 0 0 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #0284c7;
+  font-weight: 700;
+}
+
+.sparkle-icon {
+  color: #0284c7;
+}
+
+.aarthi-title-area h1 {
+  margin: 0;
+  font-size: clamp(3.2rem, 6.5vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #04193a;
+}
+
+/* =========================================================
+   HERO IMAGE
+========================================================= */
+
+.aarthi-hero-image {
+  position: relative;
+  width: 100%;
+  height: min(65vh, 620px);
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(4, 25, 58, 0.12);
+  border: 1px solid rgba(4, 25, 58, 0.08);
+  background: #ffffff;
+}
+
+.aarthi-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.aarthi-hero-image:hover img {
+  transform: scale(1.03);
+}
+
+/* =========================================================
+   CLICKABLE MEDIA & EXPAND HINT
+========================================================= */
+
+.clickable-media {
+  cursor: pointer;
+}
+
+.media-expand-hint {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(4, 25, 58, 0.12);
+  display: grid;
+  place-items: center;
+  color: #04193a;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: all 0.25s ease;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.clickable-media:hover .media-expand-hint {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* =========================================================
+   DESCRIPTION SECTION
+========================================================= */
+
+.aarthi-description {
+  min-height: 50vh;
+  padding: 80px 5vw;
+  display: grid;
+  grid-template-columns: 28% 72%;
+  gap: 40px;
+  border-top: 1px solid rgba(4, 25, 58, 0.08);
+  box-sizing: border-box;
+}
+
+.aarthi-description-label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.aarthi-description-content {
+  max-width: 900px;
+}
+
+.aarthi-description-content h2 {
+  margin: 0 0 25px;
+  max-width: 800px;
+  font-size: clamp(2rem, 3.5vw, 3.8rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+  color: #04193a;
+}
+
+.aarthi-description-content p {
+  max-width: 700px;
+  margin: 0 0 18px;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #526071;
+}
+
+.aarthi-tags-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.aarthi-tag-pill {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: #e0f2fe;
+  border: 1px solid rgba(2, 132, 199, 0.2);
+  color: #0284c7;
+  font-weight: 600;
+}
+
+/* =========================================================
+   MEDIA SECTION
+========================================================= */
+
+.aarthi-media-section {
+  min-height: 80vh;
+  padding: 80px 0 60px;
+  border-top: 1px solid rgba(4, 25, 58, 0.08);
+}
+
+/* =========================================================
+   FILTER BAR
+========================================================= */
+
+.aarthi-filter-bar {
+  padding: 0 5vw 40px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.aarthi-filter-title {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.aarthi-filters {
+  display: flex;
+  gap: 10px;
+}
+
+.aarthi-filters button {
+  border: 1px solid rgba(4, 25, 58, 0.1);
+  background: #ffffff;
+  color: #526071;
+  padding: 8px 20px;
+  border-radius: 100px;
+  cursor: pointer;
+  font-family: inherit;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(4, 25, 58, 0.03);
+}
+
+.aarthi-filters button:hover {
+  color: #04193a;
+  border-color: #0284c7;
+}
+
+.aarthi-filters button.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.25);
+}
+
+/* =========================================================
+   HORIZONTAL MEDIA CONTAINER
+========================================================= */
+
+.aarthi-horizontal-media {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #0284c7 #e0f2fe;
+}
+
+.aarthi-media-track {
+  display: flex;
+  width: max-content;
+  gap: 28px;
+  padding: 10px 5vw 40px;
+}
+
+/* =========================================================
+   MEDIA CARD
+========================================================= */
+
+.aarthi-media-card {
+  position: relative;
+  width: min(48vw, 680px);
+  height: min(55vh, 520px);
+  flex-shrink: 0;
+  overflow: hidden;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid rgba(4, 25, 58, 0.08);
+  box-shadow: 0 15px 35px rgba(4, 25, 58, 0.06);
+}
+
+.aarthi-media-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.aarthi-media-card:hover img {
+  transform: scale(1.03);
+}
+
+/* =========================================================
+   VIDEO WRAPPER
+========================================================= */
+
+.aarthi-video-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #04193a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aarthi-video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* =========================================================
+   MEDIA INFO OVERLAY
+========================================================= */
+
+.aarthi-media-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 24px 20px 16px;
+  background: linear-gradient(to top, rgba(4, 25, 58, 0.85) 0%, rgba(4, 25, 58, 0.4) 60%, transparent 100%);
+  pointer-events: none;
+}
+
+.aarthi-media-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #7dd3fc;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.aarthi-media-info h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* =========================================================
+   BOTTOM FOOTER
+========================================================= */
+
+.aarthi-bottom-footer {
+  padding: 60px 5vw 80px;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid rgba(4, 25, 58, 0.08);
+}
+
+.aarthi-footer-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  border-radius: 100px;
+  background: #0284c7;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.25);
+}
+
+.aarthi-footer-back:hover {
+  background: #0369a1;
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+  .aarthi-hero-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .aarthi-title-area {
+    padding-right: 0;
+  }
+  .aarthi-description {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 60px 5vw;
+  }
+  .aarthi-media-card {
+    width: 80vw;
+    height: 50vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .aarthi-top-nav {
+    padding: 15px 5vw;
+  }
+  .aarthi-hero {
+    padding-top: 100px;
+  }
+  .aarthi-filter-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .aarthi-media-card {
+    width: 88vw;
+    height: 45vh;
+  }
+}

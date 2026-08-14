@@ -1,0 +1,125 @@
+.custom-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(4, 25, 58, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  animation: modalFadeIn 0.25s ease-out forwards;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.custom-image-modal-content,
+.custom-video-modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: modalScaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalScaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.custom-modal-close-btn {
+  position: absolute;
+  top: -45px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(4, 25, 58, 0.15);
+  color: #04193a;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+}
+
+.custom-modal-close-btn:hover {
+  background: #04193a;
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.custom-modal-image-wrapper {
+  max-width: 88vw;
+  max-height: 78vh;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 25px 60px rgba(4, 25, 58, 0.2);
+  border: 1px solid rgba(4, 25, 58, 0.1);
+  padding: 8px;
+}
+
+.custom-modal-image-wrapper img {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 12px;
+  display: block;
+}
+
+.custom-modal-video-wrapper {
+  width: min(85vw, 1000px);
+  max-height: 75vh;
+  background: #04193a;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(4, 25, 58, 0.25);
+  border: 1px solid rgba(4, 25, 58, 0.12);
+}
+
+.custom-modal-video-wrapper video {
+  width: 100%;
+  max-height: 75vh;
+  display: block;
+}
+
+.custom-modal-caption {
+  margin-top: 14px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.custom-modal-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7dd3fc;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.custom-modal-caption h4 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+}

@@ -67,7 +67,7 @@ padding-bottom: 10%;
   overflow: hidden;
   border-radius: 28px;
   cursor: pointer;
-  background: #000;
+  background: #d6ecff;
   transition: .45s ease;
 }
 
@@ -437,7 +437,7 @@ padding-bottom: 10%;
 
   padding: 30px;
 
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(4, 25, 58, 0.6);
   backdrop-filter: blur(14px);
 
   animation: modalFade .35s ease;
@@ -468,7 +468,7 @@ padding-bottom: 10%;
   overflow: hidden;
 
   box-shadow:
-    0 30px 80px rgba(0,0,0,.35);
+    0 30px 80px rgba(4, 25, 58, 0.25);
 
   animation: modalUp .45s cubic-bezier(.22,1,.36,1);
 
@@ -491,12 +491,12 @@ padding-bottom: 10%;
 .video-modal-content h4 {
 
   margin: 0;
-  padding: 28px;
+  padding: 24px 28px;
 
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 800;
 
-  color: #111;
+  color: #04193a;
 
 }
 
@@ -506,7 +506,7 @@ padding-bottom: 10%;
   display: block;
 
   max-height: 75vh;
-  background: #000;
+  background: #04193a;
 
 }
 
@@ -517,16 +517,17 @@ padding-bottom: 10%;
   top: 18px;
   right: 18px;
 
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
 
   border: none;
 
   border-radius: 50%;
 
-  background: rgba(0,0,0,.08);
+  background: rgba(4, 25, 58, 0.08);
+  color: #04193a;
 
-  font-size: 30px;
+  font-size: 26px;
 
   cursor: pointer;
 
@@ -536,7 +537,7 @@ padding-bottom: 10%;
 
 .video-close:hover {
 
-  background: #111;
+  background: #04193a;
   color: #fff;
 
   transform: rotate(90deg);

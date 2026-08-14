@@ -1,43 +1,39 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ArrowUpRight, FolderOpen, Images, Video, Sparkles } from "lucide-react";
 import "./VisualCreations.css";
 
-const IMAGE_FILES = [
-  "🖼️ Hero Banner.webp",
-  "🎨 Brand Identity.ai",
-  "📸 Product Shoot.jpg",
-  "📰 Campaign Poster.psd",
-  "🌈 Social Creative.png",
+const IMAGE_PREVIEWS = [
+  "🖼️ Branding & Identity",
+  "🎨 Posters & Typography",
+  "📸 Commercial Visuals",
+  "📰 Campaign Collaterals",
+  "✨ 3D Digital Art",
 ];
 
-const VIDEO_FILES = [
-  "🎬 HyperX Launch.mp4",
-  "🎞 Luxury Fashion.mp4",
-  "📹 Instagram Reel.mp4",
-  "🎥 Motion Graphics.mov",
-  "🎬 Product Promo.mp4",
+const VIDEO_PREVIEWS = [
+  "🎬 Commercial Trailers",
+  "🎞 3D Motion Graphics",
+  "📹 9:16 Vertical Reels",
+  "🎥 Anamorphic Teasers",
+  "⚡ Kinetic Visuals",
 ];
 
 export default function VisualCreations() {
+  const navigate = useNavigate();
   const sectionRef = useRef(null);
-  const [isInView, setIsInView] = useState(false);
   const [imageOpen, setImageOpen] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
 
-  // Auto-open when section enters viewport
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsInView(true);
-          // Stagger the open animation
-          setTimeout(() => setImageOpen(true), 300);
-          setTimeout(() => setVideoOpen(true), 600);
+          setTimeout(() => setImageOpen(true), 350);
+          setTimeout(() => setVideoOpen(true), 650);
         }
       },
-      {
-        threshold: 0.35, // open when ~35% of section is visible
-        rootMargin: "0px 0px -10% 0px",
-      }
+      { threshold: 0.3 }
     );
 
     if (sectionRef.current) {
@@ -47,12 +43,18 @@ export default function VisualCreations() {
     return () => observer.disconnect();
   }, []);
 
+  const handleOpenImages = (e) => {
+    e.stopPropagation();
+    navigate("/images");
+  };
+
+  const handleOpenVideos = (e) => {
+    e.stopPropagation();
+    navigate("/videos");
+  };
+
   return (
-    <section
-      className="visual-creations"
-      id="visual-creations"
-      ref={sectionRef}
-    >
+    <section className="visual-creations" id="visual" ref={sectionRef}>
       <div className="title">
         <div className="bg-text">Visual Creations</div>
         <h1 className="main-title">Visual Creations</h1>
@@ -61,64 +63,96 @@ export default function VisualCreations() {
       <div className="container">
         <div className="section-heading text-center">
           <p>
-            Explore my collection of creative work through two interactive
-            folders. Browse premium image designs and motion graphics projects
-            crafted for brands, campaigns, and digital experiences.
+            Explore my collection of creative work through two dedicated interactive folders.
+            Open each folder to enter custom-crafted showcases of high-impact image designs and cinematic motion graphics.
           </p>
         </div>
 
         <div className="folders-grid">
-          {/* ========== IMAGE FOLDER ========== */}
+          {/* ========== IMAGE FOLDER CARD ========== */}
           <div
-            className={`folder-card ${imageOpen ? "is-open" : ""}`}
-            onClick={() => setImageOpen((prev) => !prev)}
+            className={`folder-card image-card ${imageOpen ? "is-open" : ""}`}
+            onMouseEnter={() => setImageOpen(true)}
+            onClick={handleOpenImages}
+            role="button"
+            tabIndex={0}
+            aria-label="Open Images Gallery"
+            onKeyDown={(e) => e.key === "Enter" && handleOpenImages(e)}
           >
+            <div className="folder-action-pill">
+              <Sparkles size={13} className="pill-icon" />
+              <span>Open to see the works</span>
+              <ArrowUpRight size={14} className="pill-arrow" />
+            </div>
+
             <div className="folder-container image-folder">
-              {/* Folder Back */}
               <svg className="folder-back" viewBox="0 0 50 40" fill="none">
                 <path d="M0 4C0 1.79 1.79 0 4 0H16.5C17.7 0 18.8.54 19.6 1.47L22.4 5.06C23.2 5.99 24.3 6.53 25.5 6.53H46C48.2 6.53 50 8.32 50 10.53V36C50 38.2 48.2 40 46 40H4C1.79 40 0 38.2 0 36V4Z" />
               </svg>
 
-              {/* Badge */}
               <div className="folder-badge">
                 <div className="status-dot"></div>
                 <div>
-                  <span>IMAGES</span>
-                  <strong>120+</strong>
+                  <span>GALLERY</span>
+                  <strong>16+ Works</strong>
                 </div>
               </div>
 
-              {/* Files */}
-              {IMAGE_FILES.map((file, i) => (
-                <div key={i} className={`file file-${i + 1}`}>
-                  {file}
+              {IMAGE_PREVIEWS.map((file, i) => (
+                <div
+                  key={i}
+                  className={`file file-${i + 1}`}
+                  onClick={handleOpenImages}
+                >
+                  <span>{file}</span>
+                  <ArrowUpRight size={13} className="file-arrow" />
                 </div>
               ))}
 
-              {/* Folder Front */}
               <div className="folder-front-wrapper">
                 <svg className="folder-front" viewBox="0 0 50 34" fill="none">
                   <path d="M0 4C0 1.79 1.79 0 4 0H46C48.2 0 50 1.79 50 4V30C50 32.2 48.2 34 46 34H4C1.79 34 0 32.2 0 30V4Z" />
                 </svg>
 
                 <div className="folder-content">
-                  <div className="folder-icon">🖼️</div>
+                  <div className="folder-icon">
+                    <Images size={28} />
+                  </div>
                   <h3>Images</h3>
                   <p>
-                    Posters, Branding,
+                    Posters, Typography,
                     <br />
-                    Social Media & Photography
+                    Branding & 3D Visuals
                   </p>
+                  <button
+                    type="button"
+                    className="folder-explore-btn"
+                    onClick={handleOpenImages}
+                  >
+                    <FolderOpen size={15} />
+                    <span>View Image Works</span>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* ========== VIDEO FOLDER ========== */}
+          {/* ========== VIDEO FOLDER CARD ========== */}
           <div
-            className={`folder-card ${videoOpen ? "is-open" : ""}`}
-            onClick={() => setVideoOpen((prev) => !prev)}
+            className={`folder-card video-card ${videoOpen ? "is-open" : ""}`}
+            onMouseEnter={() => setVideoOpen(true)}
+            onClick={handleOpenVideos}
+            role="button"
+            tabIndex={0}
+            aria-label="Open Videos Showcase"
+            onKeyDown={(e) => e.key === "Enter" && handleOpenVideos(e)}
           >
+            <div className="folder-action-pill video-pill">
+              <Sparkles size={13} className="pill-icon" />
+              <span>Open to see the works</span>
+              <ArrowUpRight size={14} className="pill-arrow" />
+            </div>
+
             <div className="folder-container video-folder">
               <svg className="folder-back" viewBox="0 0 50 40" fill="none">
                 <path d="M0 4C0 1.79 1.79 0 4 0H16.5C17.7 0 18.8.54 19.6 1.47L22.4 5.06C23.2 5.99 24.3 6.53 25.5 6.53H46C48.2 6.53 50 8.32 50 10.53V36C50 38.2 48.2 40 46 40H4C1.79 40 0 38.2 0 36V4Z" />
@@ -127,14 +161,19 @@ export default function VisualCreations() {
               <div className="folder-badge">
                 <div className="status-dot"></div>
                 <div>
-                  <span>VIDEOS</span>
-                  <strong>25+</strong>
+                  <span>SHOWCASE</span>
+                  <strong>8+ Reels</strong>
                 </div>
               </div>
 
-              {VIDEO_FILES.map((file, i) => (
-                <div key={i} className={`file file-${i + 1}`}>
-                  {file}
+              {VIDEO_PREVIEWS.map((file, i) => (
+                <div
+                  key={i}
+                  className={`file file-${i + 1}`}
+                  onClick={handleOpenVideos}
+                >
+                  <span>{file}</span>
+                  <ArrowUpRight size={13} className="file-arrow" />
                 </div>
               ))}
 
@@ -144,13 +183,23 @@ export default function VisualCreations() {
                 </svg>
 
                 <div className="folder-content">
-                  <div className="folder-icon">🎬</div>
+                  <div className="folder-icon video-icon">
+                    <Video size={28} />
+                  </div>
                   <h3>Videos</h3>
                   <p>
-                    Motion Graphics,
+                    Motion Graphics, Reels,
                     <br />
-                    Reels & Commercials
+                    Trailers & Commercials
                   </p>
+                  <button
+                    type="button"
+                    className="folder-explore-btn video-explore-btn"
+                    onClick={handleOpenVideos}
+                  >
+                    <FolderOpen size={15} />
+                    <span>View Video Works</span>
+                  </button>
                 </div>
               </div>
             </div>
