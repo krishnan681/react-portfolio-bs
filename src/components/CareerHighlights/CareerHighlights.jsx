@@ -171,6 +171,32 @@ Recognized for outstanding creative performance and industry acknowledgment from
           </p>
         </div>
         {/* =====================================
+            Production House 
+        ====================================== */}
+        <div className="production-house-section">
+          <div className="production-house">
+            <div className="production-house-heading">
+              <span>PRODUCTION HOUSE</span>
+              <span className="colon">:</span>
+            </div>
+
+            <div className="production-house-images">
+              <img src={profileIcon} alt="Production House" />
+              <img src={profileIcon} alt="Production House" />
+              <img src={profileIcon} alt="Production House" />
+              <img src={profileIcon} alt="Production House" />
+              <img src={profileIcon} alt="Production House" />
+              <img src={profileIcon} alt="Production House" />
+              <img src={profileIcon} alt="Production House" />
+            </div>
+          </div>
+        </div>
+
+
+
+
+        
+        {/* =====================================
             Infinite Video Slider
         ====================================== */}
 

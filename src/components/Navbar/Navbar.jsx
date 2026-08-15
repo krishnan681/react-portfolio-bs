@@ -6,7 +6,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 820) {
+      if (window.innerWidth > 992) {
         setMenuOpen(false);
       }
     };
@@ -17,42 +17,56 @@ export default function Navbar() {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className="navbar-wrapper">
+    <>
+      {/* Mobile Backdrop Overlay */}
+      {menuOpen && (
+        <div
+          className="navbar-backdrop"
+          onClick={closeMenu}
+          aria-hidden="true"
+        />
+      )}
 
-      {/* Left Nav Links */}
-      <nav className={`navbar-menu ${menuOpen ? "active" : ""}`}>
-        <a href="#hero" onClick={closeMenu}>Home</a>
-        <a href="#about" onClick={closeMenu}>About</a>
-        <a href="#branding" onClick={closeMenu}>Branding</a>
-        <a href="#tools" onClick={closeMenu}>Tools</a>
-        <a href="#visual" onClick={closeMenu}>Visuals</a>
-        <a href="#contact" onClick={closeMenu}>Contact</a>
-        <div className="navbar-menu-mobile-cta">
-          <a href="mailto:barath@email.com" className="mobile-mail-btn" onClick={closeMenu}>
-            Get in Touch ↗
+      <header className="navbar-wrapper">
+        {/* Left Nav Links */}
+        <nav className={`navbar-menu ${menuOpen ? "active" : ""}`}>
+          <a href="#hero" onClick={closeMenu}>Home</a>
+          <a href="#about" onClick={closeMenu}>About</a>
+          <a href="#creative-expertise" onClick={closeMenu}>Expertise</a>
+          <a href="#career" onClick={closeMenu}>Highlights</a>
+          <a href="#branding" onClick={closeMenu}>Branding</a>
+          <a href="#visual" onClick={closeMenu}>Visuals</a>
+          <a href="#tools" onClick={closeMenu}>Tools</a>
+          <a href="#fonts-colors" onClick={closeMenu}>Palettes</a>
+          <a href="#contact" onClick={closeMenu}>Contact</a>
+
+          <div className="navbar-menu-mobile-cta">
+            <a href="mailto:barath@gmail.com" className="mobile-mail-btn" onClick={closeMenu}>
+              Get in Touch ↗
+            </a>
+          </div>
+        </nav>
+
+        {/* Right Desktop CTA */}
+        <div className="navbar-right">
+          <a href="mailto:barath@gmail.com">
+            barath@gmail.com
           </a>
         </div>
-      </nav>
 
-      {/* Right Desktop CTA */}
-      <div className="navbar-right">
-        <a href="mailto:barath@email.com">
-          barath@email.com
-        </a>
-      </div>
-
-      {/* Hamburger Toggle */}
-      <div
-        className={`hamburger ${menuOpen ? "active" : ""}`}
-        onClick={() => setMenuOpen(!menuOpen)}
-        aria-label="Toggle navigation menu"
-        role="button"
-        tabIndex={0}
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </header>
+        {/* Hamburger Toggle */}
+        <button
+          type="button"
+          className={`hamburger ${menuOpen ? "active" : ""}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={menuOpen}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </header>
+    </>
   );
 }

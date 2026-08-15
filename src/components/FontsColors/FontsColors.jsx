@@ -67,40 +67,27 @@ const fontCards = [
 export default function FontsColors() {
   return (
     <section className="fonts-colors-section" id="fonts-colors">
-      <div className="fc-bg-title">COLOR PALETTES</div>
+      
 
       <div className="fc-container">
         {/* Left Side */}
 
         <div className="fc-left-text">VISUAL IDENTITY</div>
-
-        {/* Right Side */}
-
-        {/* <div className="fc-right-text">
-          <span>06</span>
-
-          <small>PALETTES</small>
-        </div> */}
+ 
 
         {/* Heading */}
 
         <div className="fc-heading">
-          <div className="fc-top-line">
-            <span></span>
-
-            <p>DESIGN SYSTEM</p>
-
-            <span></span>
+          <div className="title ">
+            <div className="bg-text">Color</div>
+            <h1 className="main-title">Palettes</h1>
           </div>
-
-          <h2>Color Palettes</h2>
 
           <p className="fc-description">
             A curated collection of premium fonts paired with harmonious color
             palettes to create timeless visual identities.
           </p>
-
-          <div className="fc-heading-line"></div>
+ 
         </div>
 
         {/* Cards */}
@@ -167,11 +154,11 @@ export default function FontsColors() {
 
         {/* Footer */}
 
-        <div className="fc-footer">
+        {/* <div className="fc-footer">
           <div className="fc-dot">✦</div>
 
           <p>CHOOSE YOUR PALETTE. DEFINE YOUR STORY.</p>
-        </div>
+        </div> */}
       </div>
     </section>
   );

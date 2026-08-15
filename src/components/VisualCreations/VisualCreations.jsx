@@ -117,8 +117,8 @@ export default function VisualCreations() {
   return (
     <section className="visual-creations" id="visual" ref={sectionRef}>
       <div className="title">
-        <div className="bg-text">Visual Creations</div>
-        <h1 className="main-title">Visual Creations</h1>
+        <div className="bg-text">Visual</div>
+        <h1 className="main-title">Creations</h1>
       </div>
 
       <div className="container">

@@ -29,7 +29,9 @@
   position: relative;
   display: block;
   text-align: center;
-  padding-top: 100px;
+  padding-top: clamp(40px, 6vw, 100px);
+  overflow: hidden;
+  max-width: 100%;
 }
 
 .bg-text {
@@ -39,7 +41,7 @@
   transform: translate(-50%, -63%);
   z-index: 1;
   font-family: var(--heading-font);
-  font-size: clamp(5rem, 14vw, 12rem);
+  font-size: clamp(3rem, 11vw, 12rem);
   white-space: nowrap;
   padding: 0px 20px 10px;
   pointer-events: none;
@@ -58,7 +60,7 @@
 .main-title {
   position: relative;
   z-index: 2;
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(1.8rem, 5vw, 5rem);
   font-weight: 900;
   letter-spacing: 2px;
   color: #000;
@@ -214,90 +216,6 @@
   transition: 0.4s;
 }
 
-/*=========================
-Responsive
-=========================*/
-
-@media (max-width: 1200px) {
-  .expertise-card h2 {
-    font-size: 2.5rem;
-  }
-}
-
-@media (max-width: 992px) {
-  .expertise-section {
-    padding: 20px 0;
-  }
-
-  .expertise-card {
-    margin-bottom: 30px;
-  }
-}
-
-@media (max-width: 768px) {
-  .expertise-card {
-    padding: 30px;
-  }
-
-  .expertise-card h2 {
-    font-size: 2rem;
-  }
-
-  .service-item {
-    gap: 15px;
-  }
-
-  .icon {
-    width: 60px;
-    height: 60px;
-    font-size: 1.3rem;
-  }
-
-  .content h4 {
-    font-size: 1.25rem;
-  }
-
-  .count {
-    font-size: 1.1rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .card-top {
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .number {
-    margin-left: 0;
-  }
-
-  .expertise-card {
-    padding: 25px;
-  }
-
-  .expertise-card h2 {
-    font-size: 1.7rem;
-  }
-
-  .service-item {
-    align-items: flex-start;
-  }
-
-  .icon {
-    width: 55px;
-    height: 55px;
-  }
-
-  .content h4 {
-    font-size: 1.1rem;
-  }
-
-  .content p {
-    font-size: 0.95rem;
-  }
-}
-
 .icon {
   width: 72px;
   height: 72px;
@@ -305,20 +223,15 @@ Responsive
   display: flex;
   align-items: center;
   justify-content: center;
-
   background: linear-gradient(135deg, #daf3fc, #ffffff);
-
   border: 1px solid rgba(4, 25, 58, 0.12);
-
   color: #04193a;
-
   font-size: 1.7rem;
-
   box-shadow:
     0 10px 25px rgba(4, 25, 58, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
-
   transition: 0.35s ease;
+  flex-shrink: 0;
 }
 
 .service-item:hover .icon {
@@ -328,37 +241,139 @@ Responsive
   box-shadow: 0 20px 40px rgba(4, 25, 58, 0.18);
 }
 
-
-
- .CE-heading {
+.CE-heading {
   max-width: 760px;
-  margin: 0 auto 80px;
+  margin: 0 auto 60px;
   position: relative;
   z-index: 5;
 }
 
 .CE-heading p {
   font-size: 1.08rem;
-   
   color: #6b7280;
   max-width: 700px;
   margin: auto;
   text-align: center;
+  line-height: 1.8;
 }
 
+/*=========================
+Responsive Breakpoints
+=========================*/
 
+@media (max-width: 1200px) {
+  .expertise-card h2 {
+    font-size: 2.4rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .expertise-section {
+    padding: 60px 0;
+  }
+
+  .expertise-card {
+    margin-bottom: 24px;
+    padding: 36px;
+  }
+}
 
 @media (max-width: 768px) {
   .CE-heading {
-    position: relative;
-    bottom: 25px;
-    padding: 1rem;
-    margin: -2.8rem auto;
+    margin-bottom: 40px;
+    padding: 0 16px;
   }
 
   .CE-heading p {
-    
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+
+  .expertise-card {
+    padding: 28px 20px;
+    border-radius: 26px;
+  }
+
+  .expertise-card h2 {
+    font-size: 1.85rem;
+    margin-bottom: 24px;
+  }
+
+  .service-item {
+    gap: 14px;
+    padding: 18px 0;
+  }
+
+  .icon {
+    width: 54px;
+    height: 54px;
+    font-size: 1.25rem;
+  }
+
+  .content h4 {
+    font-size: 1.15rem;
+  }
+
+  .content p {
+    font-size: 0.92rem;
+  }
+
+  .count {
     font-size: 1rem;
-     
+    width: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-top {
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .line {
+    width: 25px;
+  }
+
+  .category {
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+  }
+
+  .expertise-card {
+    padding: 22px 16px;
+    border-radius: 22px;
+  }
+
+  .expertise-card h2 {
+    font-size: 1.55rem;
+  }
+
+  .service-item {
+    gap: 10px;
+    padding: 14px 0;
+  }
+
+  .icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.05rem;
+  }
+
+  .content h4 {
+    font-size: 1.02rem;
+  }
+
+  .content p {
+    font-size: 0.86rem;
+  }
+
+  .count {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .expertise-card h2 {
+    font-size: 1.35rem;
   }
 }

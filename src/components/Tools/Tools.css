@@ -2,17 +2,19 @@
 
 #tools {
   text-align: center;
-  padding-bottom: 80px;
+  padding: 80px 0 40px;
   position: relative;
   background: transparent;
+  overflow: hidden;
 }
 
- 
 .title {
   position: relative;
   display: block;
   text-align: center;
-  padding-top: 100px;
+  padding-top: clamp(40px, 6vw, 100px);
+  overflow: hidden;
+  max-width: 100%;
 }
 
 .bg-text {
@@ -22,7 +24,7 @@
   transform: translate(-50%, -63%);
   z-index: 1;
   font-family: var(--heading-font);
-  font-size: clamp(5rem, 14vw, 12rem);
+  font-size: clamp(3rem, 11vw, 12rem);
   white-space: nowrap;
   padding: 0px 20px 10px;
   pointer-events: none;
@@ -41,46 +43,150 @@
 .main-title {
   position: relative;
   z-index: 2;
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(1.8rem, 5vw, 5rem);
   font-weight: 900;
   letter-spacing: 2px;
   color: #000;
   text-transform: uppercase;
 }
 
+.TE-heading {
+  max-width: 760px;
+  margin: 0 auto 20px;
+  position: relative;
+  z-index: 5;
+}
+
+.TE-heading p {
+  font-size: 1.08rem;
+  line-height: 1.8;
+  color: #6b7280;
+  max-width: 700px;
+  margin: auto;
+  text-align: center;
+}
 
 /* ===================== DOCK / TOOLBAR ===================== */
 
 .toolbar-wrapper {
   display: flex;
   justify-content: center;
-  padding: 0px 0 10px;
+  padding: 10px 0 30px;
+  position: relative;
+  z-index: 10;
+}
+
+.dock-container {
+  position: relative;
+  padding: 8px;
 }
 
 .toolbar {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  flex-wrap: nowrap;
-  gap: 8px;
-  padding: 20px 30px;
-  margin: 30px auto 20px;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 30px;
+  margin: 0 auto;
   width: fit-content;
   list-style: none;
-  /* subtle dock background – optional */
-  /* background: rgba(55, 66, 77, 0.15); */
-  /* border-radius: 16px 16px 0 0; */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.45) 100%);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 36px;
+  box-shadow:
+    0 20px 50px rgba(4, 25, 58, 0.08),
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.95),
+    inset 0 -1px 1px rgba(4, 25, 58, 0.02);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.toolbar:hover {
+  border-color: rgba(255, 255, 255, 0.98);
+  box-shadow:
+    0 26px 60px rgba(4, 25, 58, 0.12),
+    inset 0 1.5px 1px rgba(255, 255, 255, 1);
+}
+
+/* Floating Item Animation */
 .toolbarItem {
-  width: clamp(48px, 5vw, 80px);
-  height: clamp(48px, 5vw, 80px);
+  position: relative;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  transform-origin: center bottom;
+  justify-content: center;
   cursor: pointer;
-  will-change: transform;
+  animation: toolFloat 3.8s ease-in-out infinite;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes toolFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.toolbarItem.is-hovered {
+  animation-play-state: paused;
+  transform: translateY(-16px) scale(1.22);
+  z-index: 20;
+}
+
+/* Tooltip Badge */
+.tool-tooltip {
+  position: absolute;
+  top: -42px;
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  background: rgba(4, 25, 58, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #ffffff;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 20px rgba(4, 25, 58, 0.25);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toolbarItem.is-hovered .tool-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Tool Icon Box */
+.tool-icon-box {
+  width: clamp(52px, 5.5vw, 76px);
+  height: clamp(52px, 5.5vw, 76px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 100%);
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 6px 16px rgba(4, 25, 58, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.toolbarItem.is-hovered .tool-icon-box {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(218, 243, 252, 0.9) 100%);
+  border-color: #0284c7;
+  box-shadow:
+    0 16px 30px rgba(2, 132, 199, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 .toolbarImg {
@@ -90,133 +196,54 @@
   user-select: none;
   pointer-events: none;
   border-radius: 12px;
+  transition: transform 0.3s ease;
 }
 
-/* ===================== EXPERTISE TAGS ===================== */
-
-.expertise {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin-top: 50px;
-  justify-content: center;
-  padding: 0 20px;
-}
-
-.tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 24px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.48) 100%);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  border-radius: 50px;
-  color: #04193a;
-  font-size: 14px;
-  font-weight: 600;
-  box-shadow:
-    0 8px 24px rgba(4, 25, 58, 0.06),
-    inset 0 1px 1px rgba(255, 255, 255, 0.95),
-    inset 0 -1px 1px rgba(4, 25, 58, 0.02);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  user-select: none;
-  cursor: default;
-}
-
-.tag:hover {
-  transform: translateY(-4px);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.62) 100%);
-  border-color: rgba(255, 255, 255, 1);
-  box-shadow:
-    0 14px 32px rgba(4, 25, 58, 0.12),
-    inset 0 1px 1px rgba(255, 255, 255, 1);
-  color: #0284c7;
-}
-
-.tag img {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
-  flex-shrink: 0;
-  filter: drop-shadow(0 2px 4px rgba(4, 25, 58, 0.1));
+.toolbarItem.is-hovered .toolbarImg {
+  transform: rotate(4deg);
 }
 
 /* ===================== RESPONSIVE ===================== */
 
-@media (min-width: 1200px) {
-  .toolbarItem {
-    width: 80px;
-    height: 80px;
-  }
-}
-
 @media (max-width: 768px) {
   .toolbar {
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: 100%;
-    padding: 15px;
-    gap: 12px;
-  }
-
-  /* Disable magnification on mobile – icons stay normal size */
-  .toolbarItem {
-    width: 52px;
-    height: 52px;
-  }
-
-  .expertise {
-    margin-top: 30px;
     gap: 10px;
+    padding: 14px 18px;
+    border-radius: 24px;
+    flex-wrap: wrap;
   }
 
-  .tag {
-    font-size: 13px;
-    padding: 10px 16px;
+  .tool-icon-box {
+    width: 48px;
+    height: 48px;
+    padding: 6px;
+    border-radius: 14px;
+  }
+
+  .toolbarItem.is-hovered {
+    transform: translateY(-8px) scale(1.12);
+  }
+
+  .tool-tooltip {
+    display: none;
+  }
+
+  .TE-heading {
+    position: relative;
+    bottom: 10px;
+    padding: 1rem;
+    margin: -1rem auto 10px;
+  }
+
+  .TE-heading p {
+    font-size: 1rem;
+    line-height: 1.6;
   }
 }
 
 @media (max-width: 480px) {
-  .toolbarItem {
-    width: 44px;
-    height: 44px;
-  }
-}
-
-
-
-
- .TE-heading {
-  max-width: 760px;
-  margin: 0 auto 80px;
-  position: relative;
-  z-index: 5;
-}
-
-.TE-heading p {
-  font-size: 1.08rem;
-  line-height: 1.9;
-  color: #6b7280;
-  max-width: 700px;
-  margin: auto;
-  text-align: center;
-}
-
-
-
-@media (max-width: 768px) {
-  .TE-heading {
-    position: relative;
-    bottom: 25px;
-    padding: 1rem;
-    margin: -2.8rem auto;
-  }
-
-  .TE-heading p {
-    
-    font-size: 1rem;
-    line-height: 1.6;
+  .tool-icon-box {
+    width: 42px;
+    height: 42px;
   }
 }
