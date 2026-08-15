@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import "./Hero.css";
 
-import heroImage from "../../assets/images/BS.png";
+import heroImage from "../../assets/images/BS.webp";
 
 export default function Hero() {
   const heroRef = useRef(null);

@@ -18,7 +18,7 @@ import insta9 from "../assets/images/Insta/9.jpg";
 import insta10 from "../assets/images/Insta/10.jpg";
 
 import heroImg from "../assets/images/hero-img.png";
-import bsImg from "../assets/images/BS.png";
+import bsImg from "../assets/images/BS.webp";
 import video1 from "../assets/videos/achievement/1.mp4";
 
 export const IMAGE_THEMES = [

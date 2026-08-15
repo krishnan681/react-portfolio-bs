@@ -78,7 +78,7 @@
   backdrop-filter: blur(28px) saturate(190%);
   -webkit-backdrop-filter: blur(28px) saturate(190%);
   border: 1px solid rgba(255, 255, 255, 0.85);
-  border-radius: 32px;
+  border-radius: 7px;
   padding: 45px;
   height: 100%;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -254,7 +254,7 @@
   max-width: 700px;
   margin: auto;
   text-align: center;
-  line-height: 1.8;
+  /* line-height: 1.8; */
 }
 
 /*=========================
@@ -286,7 +286,7 @@ Responsive Breakpoints
 
   .CE-heading p {
     font-size: 0.98rem;
-    line-height: 1.6;
+    /* line-height: 1.6; */
   }
 
   .expertise-card {
