@@ -132,11 +132,11 @@ export default function VisualCreations() {
         <div className="folders-grid">
           {/* ==================== IMAGE FOLDER ==================== */}
           <div className="folder-wrapper-card" onClick={handleOpenImages}>
-            <div className="folder-hint-pill">
+            {/* <div className="folder-hint-pill">
               <Sparkles size={13} className="hint-sparkle" />
               <span>Click to open collection</span>
               <ArrowUpRight size={13} />
-            </div>
+            </div> */}
 
             <div
               className={`folder-card image-folder-card ${imageOpen ? "is-open" : ""}`}
@@ -153,7 +153,7 @@ export default function VisualCreations() {
                 </svg>
 
                 {/* Animated Search Bar */}
-                <div
+                {/* <div
                   className="folder-search"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -167,7 +167,7 @@ export default function VisualCreations() {
                     className="search-input"
                     readOnly
                   />
-                </div>
+                </div> */}
 
                 {/* 5 Stacked Files */}
                 {IMAGE_FILES.map((file, i) => (
@@ -192,11 +192,11 @@ export default function VisualCreations() {
                     />
                   </svg>
                   <div className="folder-label"></div>
-                  <div className="counter">
+                  {/* <div className="counter">
                     <div className="status-dot"></div>
                     <span className="counter-label">IMAGES</span>
                     <span className="counter-number">16+</span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -228,11 +228,11 @@ export default function VisualCreations() {
 
           {/* ==================== VIDEO FOLDER ==================== */}
           <div className="folder-wrapper-card" onClick={handleOpenVideos}>
-            <div className="folder-hint-pill video-pill">
+            {/* <div className="folder-hint-pill video-pill">
               <Sparkles size={13} className="hint-sparkle" />
               <span>Click to open collection</span>
               <ArrowUpRight size={13} />
-            </div>
+            </div> */}
 
             <div
               className={`folder-card video-folder-card ${videoOpen ? "is-open" : ""}`}
@@ -249,7 +249,7 @@ export default function VisualCreations() {
                 </svg>
 
                 {/* Animated Search Bar */}
-                <div
+                {/* <div
                   className="folder-search"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -263,7 +263,7 @@ export default function VisualCreations() {
                     className="search-input"
                     readOnly
                   />
-                </div>
+                </div> */}
 
                 {/* 5 Stacked Files */}
                 {VIDEO_FILES.map((file, i) => (
@@ -288,11 +288,11 @@ export default function VisualCreations() {
                     />
                   </svg>
                   <div className="folder-label"></div>
-                  <div className="counter">
+                  {/* <div className="counter">
                     <div className="status-dot"></div>
                     <span className="counter-label">VIDEOS</span>
                     <span className="counter-number">08+</span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

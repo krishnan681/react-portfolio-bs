@@ -95,11 +95,17 @@
 │   │       ├── 🎨 VisualCreations.css
 │   │       └── 📄 VisualCreations.jsx
 │   ├── 📁 data/
-│   │   └── 📄 brands.js
+│   │   ├── 📄 brands.js
+│   │   └── 📄 visualCreationsData.js
 │   ├── 📁 pages/
 │   │   ├── 📁 ProjectPage/
-│   │   │   ├── 🎨 projectpage.css
-│   │   │   └── 📄 projectpage.jsx
+│   │   │   ├── 🎨 ProjectPage.css
+│   │   │   └── 📄 ProjectPage.jsx
+│   │   ├── 📁 VisualCreations/
+│   │   │   ├── 🎨 ImagesPage.css
+│   │   │   ├── 📄 ImagesPage.jsx
+│   │   │   ├── 🎨 VideosPage.css
+│   │   │   └── 📄 VideosPage.jsx
 │   │   └── 📁 designs/
 │   │       ├── 🎨 AarthiDesign.css
 │   │       ├── 📄 AarthiDesign.jsx
@@ -125,4 +131,5 @@
 ├── ⚙️ package-lock.json
 ├── ⚙️ package.json
 └── 📄 vite.config.js
+
  

@@ -4,9 +4,7 @@
   text-align: center;
   padding-bottom: 80px;
   position: relative;
-  /* overflow: hidden; */
-  background: radial-gradient(circle, aliceblue 0%, #d9f2ff 60%, #b8e6ff 100%);
-
+  background: transparent;
 }
 
  
@@ -99,29 +97,42 @@
 .expertise {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
   margin-top: 50px;
   justify-content: center;
   padding: 0 20px;
 }
 
 .tag {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 20px;
-  background: #111;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 12px 24px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.48) 100%);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
   border-radius: 50px;
-  color: #fff;
+  color: #04193a;
   font-size: 14px;
-  font-weight: 500;
-  transition: 0.3s ease;
+  font-weight: 600;
+  box-shadow:
+    0 8px 24px rgba(4, 25, 58, 0.06),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95),
+    inset 0 -1px 1px rgba(4, 25, 58, 0.02);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  cursor: default;
 }
 
 .tag:hover {
   transform: translateY(-4px);
-  border-color: #ffd400;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.62) 100%);
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow:
+    0 14px 32px rgba(4, 25, 58, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 1);
+  color: #0284c7;
 }
 
 .tag img {
@@ -129,6 +140,7 @@
   height: 22px;
   object-fit: contain;
   flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(4, 25, 58, 0.1));
 }
 
 /* ===================== RESPONSIVE ===================== */

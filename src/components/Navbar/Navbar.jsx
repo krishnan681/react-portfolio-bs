@@ -18,14 +18,8 @@ export default function Navbar() {
 
   return (
     <header className="navbar-wrapper">
-      {/* Left Logo */}
-      <div className="navbar-logo">
-        <a href="#hero" onClick={closeMenu}>
-          <img src="/logo.png" alt="Barath Sachwin Logo" />
-        </a>
-      </div>
 
-      {/* Center Nav Links */}
+      {/* Left Nav Links */}
       <nav className={`navbar-menu ${menuOpen ? "active" : ""}`}>
         <a href="#hero" onClick={closeMenu}>Home</a>
         <a href="#about" onClick={closeMenu}>About</a>

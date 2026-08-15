@@ -2,6 +2,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Familjen+Grotesk:wght@400;500&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap");
 
 /* Priestacy */
 
@@ -12,20 +13,25 @@
   font-style: normal;
 }
 
-/* Clash Grotesk Bold */
+/* Clash Grotesk Aliases */
 
 @font-face {
   font-family: "ClashGrotesk";
-  src: url("../assets/fonts/ClashGrotesk-Bold.ttf") format("truetype");
+  src: local("Clash Grotesk Bold"), local("ClashGrotesk-Bold");
   font-weight: 700;
   font-style: normal;
 }
 
-/* Clash Grotesk SemiBold */
-
 @font-face {
   font-family: "ClashSemi";
-  src: url("../assets/fonts/ClashGrotesk-Semibold.ttf") format("truetype");
+  src: local("Clash Grotesk Semibold"), local("ClashGrotesk-Semibold");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Clashsemi";
+  src: local("Clash Grotesk Semibold"), local("ClashGrotesk-Semibold");
   font-weight: 600;
   font-style: normal;
 }

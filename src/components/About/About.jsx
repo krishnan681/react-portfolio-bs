@@ -1,93 +1,90 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./About.css";
-import gsap from "gsap";
 import aboutImage from "../../assets/images/about.webp";
 
-export default function About() {
-  const aboutRef = useRef(null);
+function StatCounter({ target, suffix = "", label, decimals = 0 }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const animatedRef = useRef(false);
 
   useEffect(() => {
-    const counters = aboutRef.current?.querySelectorAll(".counter");
+    const el = ref.current;
+    if (!el) return;
 
-    if (!counters || !counters.length) return;
+    const startAnimation = () => {
+      if (animatedRef.current) return;
+      animatedRef.current = true;
+
+      const duration = 1600;
+      const startTime = performance.now();
+
+      const animate = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const currentVal = target * easeOut;
+
+        setCount(currentVal);
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          setCount(target);
+        }
+      };
+
+      requestAnimationFrame(animate);
+    };
 
     const observer = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-
-          const el = entry.target;
-          const target = parseFloat(el.dataset.target) || 0;
-          const suffix = el.dataset.suffix || "";
-
-          // GSAP Animation (if GSAP is loaded)
-          if (gsap) {
-            const obj = { value: 0 };
-
-            gsap.to(obj, {
-              value: target,
-              duration: 1.6,
-              ease: "power2.out",
-              onUpdate: () => {
-                el.textContent =
-                  (target % 1 === 0
-                    ? Math.floor(obj.value)
-                    : obj.value.toFixed(1)) + suffix;
-              },
-            });
-          }
-
-          // Vanilla JS Fallback
-          else {
-            let start = 0;
-
-            const duration = 1500;
-            const interval = 30;
-            const steps = duration / interval;
-            const increment = target / steps;
-
-            const timer = setInterval(() => {
-              start += increment;
-
-              if (start >= target) {
-                el.textContent =
-                  (target % 1 === 0
-                    ? Math.floor(target)
-                    : target.toFixed(1)) + suffix;
-
-                clearInterval(timer);
-              } else {
-                el.textContent =
-                  (target % 1 === 0
-                    ? Math.floor(start)
-                    : start.toFixed(1)) + suffix;
-              }
-            }, interval);
-          }
-
-          obs.unobserve(el);
-        });
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          startAnimation();
+          observer.disconnect();
+        }
       },
       {
-        threshold: 0.3,
+        threshold: 0.1,
+        rootMargin: "0px 0px 60px 0px",
       }
     );
 
-    counters.forEach((counter) => observer.observe(counter));
+    observer.observe(el);
 
-    return () => observer.disconnect();
-  }, []);
+    const fallbackTimer = setTimeout(() => {
+      if (!animatedRef.current) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight + 100 && rect.bottom > -100) {
+          startAnimation();
+        }
+      }
+    }, 400);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(fallbackTimer);
+    };
+  }, [target]);
+
+  const formattedValue =
+    decimals > 0
+      ? count.toFixed(decimals) + suffix
+      : Math.round(count) + suffix;
 
   return (
-    <section
-      className="about sc_py"
-      id="about"
-      ref={aboutRef}
-    >
+    <div className="stat" ref={ref}>
+      <b>{formattedValue}</b>
+      <span>{label}</span>
+    </div>
+  );
+}
+
+export default function About() {
+  return (
+    <section className="about sc_py" id="about">
       <div className="container">
         <div className="row justify-content-center row-gap-4 align-items-center">
           {/* Left Side */}
-
           <div className="col-8 col-lg-4">
             <div className="about__image">
               <div className="text-center">
@@ -108,10 +105,9 @@ export default function About() {
           </div>
 
           {/* Right Side */}
-
           <div className="offset-lg-1 col-lg-7">
             <div className="sub__title">
-              <span>About Me</span>
+              <span>Hii 👋</span>
             </div>
 
             <div className="main__title mb-4">
@@ -126,7 +122,6 @@ export default function About() {
               promotional videos, and digital marketing content across
               diverse industries.
               <br />
-              <br />
               Skilled in graphic design, motion design, video editing,
               visual storytelling, color grading and post-production
               workflows, delivering high-impact creative solutions that
@@ -134,62 +129,36 @@ export default function About() {
             </p>
 
             {/* Stats */}
-
             <div className="stats">
-              <div className="stat">
-                <b
-                  className="counter"
-                  data-target="150"
-                  data-suffix="+"
-                >
-                  0
-                </b>
-
-                <span>VIDEOS PRODUCED</span>
-              </div>
-
-              <div className="stat">
-                <b
-                  className="counter"
-                  data-target="200"
-                  data-suffix="+"
-                >
-                  0
-                </b>
-
-                <span>SOCIAL CREATIVES</span>
-              </div>
-
-              <div className="stat">
-                <b
-                  className="counter"
-                  data-target="5.5"
-                  data-suffix="M+"
-                >
-                  0
-                </b>
-
-                <span>TOTAL VIEWS</span>
-              </div>
+              <StatCounter
+                target={150}
+                suffix="+"
+                label="VIDEOS PRODUCED"
+                decimals={0}
+              />
+              <StatCounter
+                target={200}
+                suffix="+"
+                label="SOCIAL CREATIVES"
+                decimals={0}
+              />
+              <StatCounter
+                target={5.5}
+                suffix="M+"
+                label="TOTAL VIEWS"
+                decimals={1}
+              />
             </div>
 
             {/* Industries */}
-
             <div className="industries">
               <span className="tag">🎓 Education</span>
-
               <span className="tag">🏥 Healthcare</span>
-
               <span className="tag">🏠 Real Estate</span>
-
               <span className="tag">🏨 Hospitality</span>
-
               <span className="tag">🎬 Entertainment</span>
-
               <span className="tag">👗 Fashion</span>
-
               <span className="tag">🧘 Wellness</span>
-
               <span className="tag">🍽️ Food & Beverage</span>
             </div>
           </div>

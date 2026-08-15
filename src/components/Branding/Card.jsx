@@ -1,196 +1,24 @@
-// import { useTransform, motion, useScroll } from "framer-motion";
-// import { useRef } from "react";
-// import styles from "./Card.module.css";
-
-// const Card = ({
-//   i,
-//   title,
-//   description,
-//   src,
-//   category,
-//   year,
-//   deliverables,
-//   color,
-//   progress,
-//   range,
-//   targetScale,
-// }) => {
-//   const container = useRef(null);
-
-//   const { scrollYProgress } = useScroll({
-//     target: container,
-//     offset: ["start end", "start start"],
-//   });
-
-//   const imageScale = useTransform(scrollYProgress, [0, 1], [2, 1]);
-//   const scale = useTransform(progress, range, [1, targetScale]);
-
-//   return (
-//     <div ref={container} className={styles.cardContainer}>
-//       <motion.div
-//         style={{
-//           backgroundColor: color,
-//           scale,
-//           top: `calc(-5vh + ${i * 25}px)`,
-//         }}
-//         className={styles.card}
-//       >
-//         <div className={styles.header}>
-//           <span className={styles.year}>{year}</span>
-//           <h2>{title}</h2>
-//           <p className={styles.category}>{category}</p>
-//         </div>
-
-//         <div className={styles.body}>
-//           <div className={styles.description}>
-//             <p>{description}</p>
-
-//             <div className={styles.deliverables}>
-//               <span className={styles.label}>Deliverables</span>
-//               <div className={styles.tags}>
-//                 {deliverables.map((item, idx) => (
-//                   <span key={idx} className={styles.tag}>
-//                     {item}
-//                   </span>
-//                 ))}
-//               </div>
-//             </div>
-//           </div>
-
-//           <div className={styles.imageContainer}>
-//             <motion.div className={styles.inner} style={{ scale: imageScale }}>
-//               <img src={src} alt={title} />
-//             </motion.div>
-//           </div>
-//         </div>
-//       </motion.div>
-//     </div>
-//   );
-// };
-
-// export default Card;
-
-
-import { useTransform, motion, useScroll } from "framer-motion";
-import { useRef } from "react";
-import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
-
+import { ArrowUpRight } from "lucide-react";
 import styles from "./Card.module.css";
 
-const MotionLink = motion(Link);
-
-const Card = ({
-  i,
-  title,
-  description,
-  src,
-  category,
-  year,
-  deliverables,
-  color,
-  progress,
-  range,
-  targetScale,
-  slug,
-}) => {
-  const container = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ["start end", "start start"],
-  });
-
-  const imageScale = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [1.15, 1]
-  );
-
-  const scale = useTransform(
-    progress,
-    range,
-    [1, targetScale]
-  );
-
+export default function Card({ title, src, category, slug }) {
   return (
-    <div
-      ref={container}
-      className={styles.cardContainer}
-    >
-      <MotionLink
-        to={`/branding/${slug}`}
-        style={{
-          backgroundColor: color,
-          scale,
-          top: `calc(-5vh + ${i * 25}px)`,
-        }}
-        className={styles.card}
-      >
-        {/* Arrow */}
-        <div className={styles.arrowWrapper}>
-          <ArrowUpRight
-            className={styles.arrowIcon}
-          />
+    <Link to={`/branding/${slug}`} className={styles.masonryCard}>
+      <div className={styles.imageWrap}>
+        <img src={src} alt={title} loading="lazy" />
+      </div>
+
+      <div className={styles.cardFooter}>
+        <div className={styles.metaText}>
+          {category && <span className={styles.category}>{category}</span>}
+          <h3 className={styles.title}>{title}</h3>
         </div>
 
-        {/* Header */}
-        <div className={styles.header}>
-          {year && (
-            <span className={styles.year}>
-              {year}
-            </span>
-          )}
-
-          <h2>{title}</h2>
-
-          {category && (
-            <p className={styles.category}>
-              {category}
-            </p>
-          )}
+        <div className={styles.arrowBtn} aria-label={`View ${title}`}>
+          <ArrowUpRight size={18} className={styles.arrow} />
         </div>
-
-        {/* Body */}
-        <div className={styles.body}>
-          <div className={styles.description}>
-            <p>{description}</p>
-
-            <div className={styles.deliverables}>
-              <span className={styles.label}>
-                Deliverables
-              </span>
-
-              <div className={styles.tags}>
-                {deliverables?.map((item, idx) => (
-                  <span
-                    key={idx}
-                    className={styles.tag}
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.imageContainer}>
-            <motion.div
-              className={styles.inner}
-              style={{
-                scale: imageScale,
-              }}
-            >
-              <img
-                src={src}
-                alt={title}
-              />
-            </motion.div>
-          </div>
-        </div>
-      </MotionLink>
-    </div>
+      </div>
+    </Link>
   );
-};
-
-export default Card;
+}

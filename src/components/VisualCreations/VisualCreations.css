@@ -3,8 +3,8 @@
 =========================================*/
 
 .visual-creations {
-  padding: 120px 0 140px;
-  background: var(--bg, #f8fafc);
+  /* padding: 120px 0 140px; */
+  background: transparent;
   position: relative;
   overflow: hidden;
 }

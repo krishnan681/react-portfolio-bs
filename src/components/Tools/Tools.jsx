@@ -24,15 +24,15 @@ const TOOLS = [
   tool3, tool5, tool4, tool3, tool2, tool1,
 ];
 
-const EXPERTISE = [
-  { icon: icon1, label: "Motion & Visual Design" },
-  { icon: icon2, label: "Typography" },
-  { icon: icon3, label: "Social Media Content" },
-  { icon: icon4, label: "Product Photography" },
-  { icon: icon5, label: "Cinematography" },
-  { icon: icon6, label: "Color Theory" },
-  { icon: icon7, label: "Creative Direction" },
-];
+// const EXPERTISE = [
+//   { icon: icon1, label: "Motion & Visual Design" },
+//   { icon: icon2, label: "Typography" },
+//   { icon: icon3, label: "Social Media Content" },
+//   { icon: icon4, label: "Product Photography" },
+//   { icon: icon5, label: "Cinematography" },
+//   { icon: icon6, label: "Color Theory" },
+//   { icon: icon7, label: "Creative Direction" },
+// ];
 
 export default function Tools() {
   const toolbarRef = useRef(null);
@@ -133,14 +133,14 @@ useEffect(() => {
           </ul>
         </div>
 
-        <div className="expertise">
+        {/* <div className="expertise">
           {EXPERTISE.map((item, i) => (
             <span className="tag" key={i}>
               <img src={item.icon} alt="" />
               {item.label}
             </span>
           ))}
-        </div>
+        </div> */}
       </div>
     </section>
   );
