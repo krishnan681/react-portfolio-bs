@@ -23,7 +23,7 @@ import insta10 from "../assets/images/Insta/10.jpg";
 
 export const BRANDS = [
   {
-    id: "01",
+    // id: "01",  
     slug: "broadway-cinemas",
     title: "Broadway Cinemas",
     headline: "Transforming the multiplex entertainment landscape.",
@@ -51,7 +51,7 @@ export const BRANDS = [
     ],
   },
   {
-    id: "02",
+    // id: "02",
     slug: "the-crimson",
     title: "The Crimson Restobar",
     headline: "Electrifying nightlife and cocktail visual storytelling.",
@@ -78,7 +78,7 @@ export const BRANDS = [
     ],
   },
   {
-    id: "03",
+    // id: "03",
     slug: "giggles-and-twirls",
     title: "Giggles & Twirls",
     headline: "Elegance and playful comfort for modern luxury linen fashion.",
@@ -105,7 +105,7 @@ export const BRANDS = [
     ],
   },
   {
-    id: "04",
+    // id: "04",
     slug: "aarthi-grand-cineplex",
     title: "Aarthi Grand Cineplex (AGC)",
     headline: "Creating a visual language for a cinematic experience.",
@@ -132,9 +132,9 @@ export const BRANDS = [
     ],
   },
   {
-    id: "05",
+    // id: "05",
     slug: "thats-y-food",
-    title: "That's Y Food, OTG & Café Totaram",
+    title: "Cafe All Rise, Cafe Totaram, That's Y Food, On The Go",    
     headline: "Crafting appetizing aesthetics for culinary excellence.",
     category: "Hospitality / Culinary / Social Media",
     logo: broadwayLogo,
@@ -159,7 +159,7 @@ export const BRANDS = [
     ],
   },
   {
-    id: "06",
+    // id: "06",
     slug: "the-long-story",
     title: "The Long Story - Spirits & Spice",
     headline: "Crafting bespoke narrative and ambiance for fine spirits & dining.",
@@ -186,7 +186,7 @@ export const BRANDS = [
     ],
   },
   {
-    id: "07",
+    // id: "07",
     slug: "pavizham-jewellers",
     title: "Pavizham Jewellers",
     headline: "Timeless craftsmanship in gold, diamond and silver.",
@@ -213,7 +213,7 @@ export const BRANDS = [
     ],
   },
   {
-    id: "08",
+    // id: "08",
     slug: "new-city-developers",
     title: "New City Developers",
     headline: "Building architectural landmarks with precision & trust.",
@@ -240,7 +240,7 @@ export const BRANDS = [
     ],
   },
   {
-    id: "09",
+    // id: "09",
     slug: "sunbeam-international-school",
     title: "Sunbeam International School",
     headline: "Inspiring future minds with vibrant educational identity & campus visuals.",
@@ -267,7 +267,7 @@ export const BRANDS = [
     ],
   },
   {
-    id: "10",
+    // id: "10",  
     slug: "newrish-pharmaceuticals",
     title: "Newrish Pharmaceuticals",
     headline: "Pioneering healthcare excellence with trustworthy pharmaceutical branding.",
