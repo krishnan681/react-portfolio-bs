@@ -157,25 +157,18 @@ export default function CareerHighlights() {
       {
         id: 1,
         number: "01",
-
-        title: "HyperX launch:",
-
+        title: "HyperX Launch",
         description:
           "Contributed to the launch of HyperX and Vivid premium large-format (PLF) cinema screens at Broadway Cinemas, Tiruppur, India, delivering immersive visuals that showcased the enhanced brightness, vibrant colors, high contrast, and large-screen cinematic experience.",
-
-        // video: achievementVideo,
+        video: epiqandsk,
       },
-
       {
         id: 2,
         number: "02",
-
-        title: "Giggles and twrils:",
-
+        title: "Giggles and Twirls",
         description:
           "Contributed to the successful launch of Giggles & Twirls by editing promotional videos, designing brand posters, and creating visually compelling campaign content that brought the brand's kids' and women's fashion collections to life with a cohesive visual identity.",
-
-        // video: achievementVideo,
+        video: IMAX,
       },
     ],
     [],
@@ -293,16 +286,22 @@ export default function CareerHighlights() {
         </div>
 
         {/* =====================================
-            Highlight Cards
+            Highlight Cards (Vertical Videos)
         ====================================== */}
 
         <div className="highlights-grid">
           {highlights.map((item) => (
-            <div className="highlight-card" key={item.id}>
-              <div className="highlight-video">
-                <video autoPlay muted loop playsInline controls>
-                  <source src={item.video} type="video/mp4" />
-                </video>
+            <div className="highlight-card vertical-reel" key={item.id}>
+              <div className="highlight-video-frame">
+                <div className="highlight-video">
+                  <video autoPlay muted loop playsInline controls>
+                    <source src={item.video} type="video/mp4" />
+                  </video>
+                  <div className="reel-badge">
+                    <span className="reel-dot"></span>
+                    <span>Reel</span>
+                  </div>
+                </div>
               </div>
 
               <div className="highlight-content">

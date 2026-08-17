@@ -250,178 +250,189 @@
 }
 
 /*=========================================
-            HIGHLIGHT GRID
+            HIGHLIGHT GRID (VERTICAL VIDEOS)
 =========================================*/
 
-.highlights-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:40px;
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(24px, 3.5vw, 48px);
+  width: 100%;
 }
 
 /*=========================================
-            CARD
+            CARD (VERTICAL REEL)
 =========================================*/
 
-.highlight-card{
-
-  position:relative;
-
-  background:#fff;
-
-  border:1px solid rgba(0,0,0,.08);
-
-  border-radius:32px;
-
-  overflow:hidden;
-
-  transition:.45s ease;
-
+.highlight-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.75) 100%);
+  border: 1px solid rgba(4, 25, 58, 0.08);
+  border-radius: 32px;
+  overflow: hidden;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
   box-shadow:
-      0 15px 40px rgba(0,0,0,.05);
-
+    0 15px 35px rgba(4, 25, 58, 0.06),
+    0 1px 3px rgba(4, 25, 58, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
 }
 
-.highlight-card:hover{
-
-  transform:translateY(-10px);
-
+.highlight-card:hover {
+  transform: translateY(-10px);
   box-shadow:
-      0 25px 60px rgba(0,0,0,.12);
-
+    0 25px 60px rgba(4, 25, 58, 0.12),
+    0 8px 24px rgba(27, 78, 245, 0.08);
 }
 
 /*=========================================
-            VIDEO
+            VERTICAL VIDEO (9:16 REEL)
 =========================================*/
 
-.highlight-video{
-
-  position:relative;
-
-  width:100%;
-
-  height:340px;
-
-  overflow:hidden;
-
+.highlight-video-frame {
+  position: relative;
+  width: 100%;
+  padding: clamp(20px, 3vw, 32px) clamp(20px, 3vw, 32px) 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, rgba(4, 25, 58, 0.03) 0%, transparent 100%);
 }
 
-.highlight-video video{
-
-  width:100%;
-  height:100%;
-
-  object-fit:cover;
-
-  display:block;
-
-  transition:transform .8s ease;
-
+.highlight-video {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 9 / 16;
+  max-height: 560px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #04193a;
+  box-shadow:
+    0 16px 36px rgba(4, 25, 58, 0.16),
+    0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-.highlight-card:hover video{
+.highlight-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
 
-  transform:scale(1.05);
+.highlight-card:hover .highlight-video video {
+  transform: scale(1.03);
+}
 
+.reel-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(4, 25, 58, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  z-index: 2;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.reel-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
 }
 
 /*=========================================
             CONTENT
 =========================================*/
 
-.highlight-content{
-
-  padding:38px;
-
+.highlight-content {
+  padding: clamp(24px, 3.5vw, 38px);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
-.highlight-number{
-
-  width:62px;
-  height:62px;
-
-  border-radius:50%;
-
-  background:#111;
-  color:#fff;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-size:18px;
-  font-weight:700;
-
-  margin-bottom:24px;
-
+.highlight-number {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #04193a 0%, #1b4ef5 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 20px rgba(27, 78, 245, 0.25);
 }
 
-.highlight-content h3{
-
-  font-size:32px;
-
-  line-height:1.2;
-
-  font-weight:800;
-
-  margin-bottom:18px;
-
-  color:#111;
-
+.highlight-content h3 {
+  font-size: clamp(1.45rem, 2.2vw, 1.95rem);
+  line-height: 1.25;
+  font-weight: 800;
+  margin-bottom: 14px;
+  color: #04193a;
+  letter-spacing: -0.01em;
 }
 
-.highlight-content p{
-
-  font-size:16px;
-
-  line-height:1.8;
-
-  color:#666;
-
+.highlight-content p {
+  font-size: clamp(0.92rem, 1.1vw, 1.02rem);
+  line-height: 1.8;
+  color: #596780;
 }
 
 /*=========================================
             CARD BORDER GLOW
 =========================================*/
 
-.highlight-card::before{
-
-  content:"";
-
-  position:absolute;
-
-  inset:-1px;
-
-  border-radius:32px;
-
-  padding:1px;
-
-  background:linear-gradient(
-      135deg,
-      rgba(27,78,245,.25),
-      transparent,
-      rgba(27,78,245,.15)
+.highlight-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 32px;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(27, 78, 245, 0.35),
+    transparent 50%,
+    rgba(56, 189, 248, 0.25)
   );
-
   -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-
-  -webkit-mask-composite:xor;
-
-          mask-composite:exclude;
-
-  opacity:0;
-
-  transition:.4s;
-
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: 0.4s;
+  pointer-events: none;
 }
 
-.highlight-card:hover::before{
-
-  opacity:1;
-
+.highlight-card:hover::before {
+  opacity: 1;
 }
 
 
@@ -560,12 +571,6 @@ height:380px;
 
 }
 
-.highlight-video{
-
-height:300px;
-
-}
-
 .imageone,
 .imagetwo,
 .imagethree{
@@ -685,12 +690,6 @@ border-radius:20px;
 
 }
 
-.highlight-video{
-
-height:250px;
-
-}
-
 .highlight-content{
 
 padding:24px;
@@ -793,12 +792,6 @@ border-bottom:7px solid transparent;
 .imagethree{
 
 height:260px;
-
-}
-
-.highlight-video{
-
-height:210px;
 
 }
 
