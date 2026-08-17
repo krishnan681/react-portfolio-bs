@@ -46,7 +46,7 @@ function StatCounter({ target, suffix = "", label, decimals = 0 }) {
       {
         threshold: 0.1,
         rootMargin: "0px 0px 60px 0px",
-      }
+      },
     );
 
     observer.observe(el);
@@ -83,7 +83,7 @@ export default function About() {
   return (
     <section className="about sc_py" id="about">
       <div className="container">
-        <div className="row justify-content-center row-gap-4 align-items-center">
+        <div className="row justify-content-center row-gap-4">
           {/* Left Side */}
           <div className="col-8 col-lg-4">
             <div className="about__image">
@@ -107,25 +107,24 @@ export default function About() {
           {/* Right Side */}
           <div className="offset-lg-1 col-lg-7">
             <div className="sub__title">
-              <span>Hii 👋</span>
+              <span>Hey !</span>
             </div>
 
-            <div className="main__title mb-4">
+            {/* <div className="main__title mb-4">
               Solving Problems With
               <br />
               <span>Intuitive Design</span>
-            </div>
+            </div> */}
 
             <p>
               Creative Graphic Designer & Video Editor with 2 years of
-              professional experience creating motion graphics,
-              promotional videos, and digital marketing content across
-              diverse industries.
+              professional experience creating motion graphics, promotional
+              videos, and digital marketing content across diverse industries.
               <br />
-              Skilled in graphic design, motion design, video editing,
-              visual storytelling, color grading and post-production
-              workflows, delivering high-impact creative solutions that
-              strengthen brand identity and audience engagement.
+              Skilled in graphic design, motion design, video editing, visual
+              storytelling, color grading and post-production workflows,
+              delivering high-impact creative solutions that strengthen brand
+              identity and audience engagement.
             </p>
 
             {/* Stats */}

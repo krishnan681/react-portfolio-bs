@@ -18,7 +18,7 @@ import insta8 from "../assets/images/Insta/8.jpg";
 import insta9 from "../assets/images/Insta/9.jpg";
 import insta10 from "../assets/images/Insta/10.jpg";
 
-import video1 from "../assets/videos/achievement/1.mp4";
+// import video1 from "../assets/videos/achievement/1.mp4";
 
 export const BRANDS = [
   {
@@ -43,7 +43,7 @@ export const BRANDS = [
     ],
     media: [
       { id: 1, type: "image", src: brand1, title: "IMAX Laser Visual Identity", tag: "Brand Identity" },
-      { id: 2, type: "video", src: video1, title: "IMAX Experience Trailer", tag: "Motion Ad" },
+      // { id: 2, type: "video", src: video1, title: "IMAX Experience Trailer", tag: "Motion Ad" },
       { id: 3, type: "image", src: insta1, title: "Collectible Ticket Series", tag: "Print Work" },
       { id: 4, type: "image", src: insta2, title: "Premiere Night Digital Banner", tag: "Digital Poster" },
       { id: 5, type: "image", src: insta3, title: "Dolby Atmos Visualizer", tag: "Social Media" },
@@ -71,7 +71,7 @@ export const BRANDS = [
     ],
     media: [
       { id: 1, type: "image", src: brand2, title: "Brand Identity & Key Visuals", tag: "Brand Identity" },
-      { id: 2, type: "video", src: video1, title: "Cinematic Trailer & LED Wall Ad", tag: "Motion Video" },
+      // { id: 2, type: "video", src: video1, title: "Cinematic Trailer & LED Wall Ad", tag: "Motion Video" },
       { id: 3, type: "image", src: insta5, title: "Social Media Campaign 01", tag: "Social Media" },
       { id: 4, type: "image", src: insta6, title: "Premiere Experience Visuals", tag: "Promotion" },
       { id: 5, type: "image", src: insta7, title: "Dolby Atmos Acoustic Campaign", tag: "Audio-Visual" },
@@ -99,7 +99,7 @@ export const BRANDS = [
     ],
     media: [
       { id: 1, type: "image", src: brand3, title: "Signature Dish Feature", tag: "Food Photography" },
-      { id: 2, type: "video", src: video1, title: "Chef's Special Reel", tag: "Food Reel" },
+      // { id: 2, type: "video", src: video1, title: "Chef's Special Reel", tag: "Food Reel" },
       { id: 3, type: "image", src: insta9, title: "Artisan Coffee Campaign", tag: "Beverage Visual" },
       { id: 4, type: "image", src: insta10, title: "Weekend Brunch Menu Placard", tag: "Print Menu" },
       { id: 5, type: "image", src: insta1, title: "Festive Dining Showcase", tag: "Social Creative" },
@@ -127,7 +127,7 @@ export const BRANDS = [
     ],
     media: [
       { id: 1, type: "image", src: brand4, title: "Neon Nights Identity", tag: "Brand Visual" },
-      { id: 2, type: "video", src: video1, title: "Weekend DJ Promo Reel", tag: "Motion Video" },
+      // { id: 2, type: "video", src: video1, title: "Weekend DJ Promo Reel", tag: "Motion Video" },
       { id: 3, type: "image", src: insta3, title: "Mixology Spotlight", tag: "Cocktail Series" },
       { id: 4, type: "image", src: insta4, title: "Live Music Night Poster", tag: "Event Poster" },
       { id: 5, type: "image", src: insta5, title: "Gourmet Bites Creative", tag: "Social Post" },
@@ -155,7 +155,7 @@ export const BRANDS = [
     ],
     media: [
       { id: 1, type: "image", src: brand5, title: "Summer Linen Collection", tag: "Lookbook" },
-      { id: 2, type: "video", src: video1, title: "Behind The Seams Reel", tag: "Brand Reel" },
+      // { id: 2, type: "video", src: video1, title: "Behind The Seams Reel", tag: "Brand Reel" },
       { id: 3, type: "image", src: insta7, title: "Kids Couture Showcase", tag: "Catalog" },
       { id: 4, type: "image", src: insta8, title: "E-Commerce Hero Banner", tag: "Web Banner" },
       { id: 5, type: "image", src: insta9, title: "Minimalist Brand Palette", tag: "Brand Guide" },
@@ -183,7 +183,7 @@ export const BRANDS = [
     ],
     media: [
       { id: 1, type: "image", src: brand6, title: "Skyline Villa Elevation", tag: "Architecture" },
-      { id: 2, type: "video", src: video1, title: "Construction Walkthrough", tag: "3D Motion" },
+      // { id: 2, type: "video", src: video1, title: "Construction Walkthrough", tag: "3D Motion" },
       { id: 3, type: "image", src: insta1, title: "Interior Blueprint Showcase", tag: "Design Render" },
       { id: 4, type: "image", src: insta2, title: "Site Hoarding Billboard", tag: "Outdoor Print" },
       { id: 5, type: "image", src: insta3, title: "Luxury Brochure Cover", tag: "Print Collateral" },
@@ -211,7 +211,7 @@ export const BRANDS = [
     ],
     media: [
       { id: 1, type: "image", src: brand7, title: "Bridal Gold Heritage Series", tag: "Jewelry Shoot" },
-      { id: 2, type: "video", src: video1, title: "Sparkle & Craft Film", tag: "Commercial Film" },
+      // { id: 2, type: "video", src: video1, title: "Sparkle & Craft Film", tag: "Commercial Film" },
       { id: 3, type: "image", src: insta5, title: "Solitaire Diamond Close-up", tag: "Product Macro" },
       { id: 4, type: "image", src: insta6, title: "Festival Print Newspaper Ad", tag: "Print Ad" },
       { id: 5, type: "image", src: insta7, title: "Traditional Temple Ornaments", tag: "Social Post" },

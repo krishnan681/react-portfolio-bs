@@ -19,7 +19,7 @@ import insta10 from "../assets/images/Insta/10.jpg";
 
 import heroImg from "../assets/images/hero-img.png";
 import bsImg from "../assets/images/BS.webp";
-import video1 from "../assets/videos/achievement/1.mp4";
+// import video1 from "../assets/videos/achievement/1.mp4";
 
 export const IMAGE_THEMES = [
   { id: "all", label: "All Works" },
@@ -270,7 +270,7 @@ export const VIDEOS_DATA = [
     title: "HyperX Laser Brand Experience",
     theme: "commercials",
     category: "Commercials & Ads",
-    src: video1,
+    // src: video1,
     poster: brand1,
     duration: "0:45",
     aspect: "landscape",
@@ -287,7 +287,7 @@ export const VIDEOS_DATA = [
     title: "Midnight Premiere Viral Reel",
     theme: "reels",
     category: "9:16 Vertical Reels",
-    src: video1,
+    // src: video1,
     poster: insta1,
     duration: "0:30",
     aspect: "vertical",
@@ -304,7 +304,7 @@ export const VIDEOS_DATA = [
     title: "Aarthi Grand LED Wall Promo",
     theme: "motion",
     category: "Motion Graphics",
-    src: video1,
+    // src: video1,
     poster: brand2,
     duration: "0:38",
     aspect: "landscape",
@@ -321,7 +321,7 @@ export const VIDEOS_DATA = [
     title: "Artisanal Cafe Morning Routine",
     theme: "reels",
     category: "9:16 Vertical Reels",
-    src: video1,
+    // src: video1,
     poster: brand3,
     duration: "0:25",
     aspect: "vertical",
@@ -338,7 +338,7 @@ export const VIDEOS_DATA = [
     title: "The Crimson Luxury Showcase",
     theme: "trailers",
     category: "Cinematic Trailers",
-    src: video1,
+    // src: video1,
     poster: brand4,
     duration: "1:15",
     aspect: "landscape",
@@ -355,7 +355,7 @@ export const VIDEOS_DATA = [
     title: "Dessert Factory Hyperlapse",
     theme: "reels",
     category: "9:16 Vertical Reels",
-    src: video1,
+    // src: video1,
     poster: insta5,
     duration: "0:20",
     aspect: "vertical",
@@ -372,7 +372,7 @@ export const VIDEOS_DATA = [
     title: "Urban Skyline 3D Architecture Flythrough",
     theme: "motion",
     category: "Motion Graphics",
-    src: video1,
+    // src: video1,
     poster: brand5,
     duration: "0:50",
     aspect: "landscape",
@@ -389,7 +389,7 @@ export const VIDEOS_DATA = [
     title: "Heritage Gold Royal Reveal",
     theme: "commercials",
     category: "Commercials & Ads",
-    src: video1,
+    // src: video1,
     poster: brand6,
     duration: "0:40",
     aspect: "landscape",

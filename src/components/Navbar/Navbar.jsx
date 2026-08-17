@@ -48,11 +48,11 @@ export default function Navbar() {
         </nav>
 
         {/* Right Desktop CTA */}
-        <div className="navbar-right">
+        {/* <div className="navbar-right">
           <a href="mailto:barath@gmail.com">
             barath@gmail.com
           </a>
-        </div>
+        </div> */}
 
         {/* Hamburger Toggle */}
         <button

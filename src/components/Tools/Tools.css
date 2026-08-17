@@ -2,68 +2,10 @@
 
 #tools {
   text-align: center;
-  padding: 80px 0 40px;
+  padding: clamp(40px, 5vw, 65px) 0 clamp(20px, 3vw, 35px);
   position: relative;
   background: transparent;
-  overflow: hidden;
-}
-
-.title {
-  position: relative;
-  display: block;
-  text-align: center;
-  padding-top: clamp(40px, 6vw, 100px);
-  overflow: hidden;
-  max-width: 100%;
-}
-
-.bg-text {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -63%);
-  z-index: 1;
-  font-family: var(--heading-font);
-  font-size: clamp(3rem, 11vw, 12rem);
-  white-space: nowrap;
-  padding: 0px 20px 10px;
-  pointer-events: none;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.9) 0%,
-    rgba(0, 0, 0, 0.45) 30%,
-    rgba(0, 0, 0, 0.15) 60%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.main-title {
-  position: relative;
-  z-index: 2;
-  font-size: clamp(1.8rem, 5vw, 5rem);
-  font-weight: 900;
-  letter-spacing: 2px;
-  color: #000;
-  text-transform: uppercase;
-}
-
-.TE-heading {
-  max-width: 760px;
-  margin: 0 auto 20px;
-  position: relative;
-  z-index: 5;
-}
-
-.TE-heading p {
-  font-size: 1.08rem;
-  line-height: 1.8;
-  color: #6b7280;
-  max-width: 700px;
-  margin: auto;
-  text-align: center;
+  overflow-x: clip;
 }
 
 /* ===================== DOCK / TOOLBAR ===================== */
@@ -227,23 +169,19 @@
   .tool-tooltip {
     display: none;
   }
-
-  .TE-heading {
-    position: relative;
-    bottom: 10px;
-    padding: 1rem;
-    margin: -1rem auto 10px;
-  }
-
-  .TE-heading p {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
 }
 
 @media (max-width: 480px) {
+  .toolbar {
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 20px;
+  }
+
   .tool-icon-box {
     width: 42px;
     height: 42px;
+    padding: 5px;
+    border-radius: 12px;
   }
 }

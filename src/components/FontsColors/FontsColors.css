@@ -25,36 +25,16 @@ SECTION
 
 .fonts-colors-section {
   position: relative;
-  overflow: hidden;
+  overflow-x: clip;
   background: transparent;
-  padding: 140px 0 120px;
+  padding: clamp(45px, 6vw, 70px) 0;
 }
 
 .fc-container {
   position: relative;
-  width: min(1380px, 92%);
+  width: min(1380px, 94%);
   margin: auto;
   z-index: 2;
-}
-
-/*==================================================
-BACKGROUND TITLE
-==================================================*/
-
-.fc-bg-title {
-  position: absolute;
-  top: 35px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: clamp(70px, 11vw, 230px);
-  font-family: "Playfair Display", serif;
-  font-weight: 700;
-  white-space: nowrap;
-  letter-spacing: -8px;
-  color: #000;
-  opacity: 0.035;
-  pointer-events: none;
-  user-select: none;
 }
 
 /*==================================================
@@ -489,7 +469,7 @@ PREMIUM MICRO INTERACTIONS
   }
 
   .fc-grid {
-    gap: 28px;
+    gap: 24px;
   }
 }
 
@@ -498,18 +478,9 @@ PREMIUM MICRO INTERACTIONS
 ==================================================*/
 
 @media (max-width: 1200px) {
-  .fonts-colors-section {
-    padding: 120px 0 100px;
-  }
-
   .fc-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 28px;
-  }
-
-  .fc-bg-title {
-    font-size: 140px;
-    letter-spacing: -5px;
+    gap: 24px;
   }
 
   .fc-left-text {
@@ -527,39 +498,17 @@ PREMIUM MICRO INTERACTIONS
 ==================================================*/
 
 @media (max-width: 992px) {
-  .fonts-colors-section {
-    padding: 100px 0 90px;
-  }
-
-  .fc-bg-title {
-    font-size: 110px;
-    top: 45px;
-  }
-
-  .fc-heading {
-    margin-bottom: 55px;
-  }
-
-  .fc-heading h2 {
-    font-size: 3.4rem;
-  }
-
-  .fc-description {
-    font-size: 0.95rem;
-    line-height: 1.8;
-  }
-
   .fc-card {
-    padding: 24px;
+    padding: 22px;
   }
 
   .fc-preview {
     min-height: 180px;
-    gap: 22px;
+    gap: 20px;
   }
 
   .fc-aa {
-    font-size: 4.8rem;
+    font-size: 4.6rem;
   }
 }
 
@@ -568,36 +517,11 @@ PREMIUM MICRO INTERACTIONS
 ==================================================*/
 
 @media (max-width: 768px) {
-  .fonts-colors-section {
-    padding: 90px 0 80px;
-  }
-
   .fc-grid {
     grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .fc-bg-title {
-    font-size: 72px;
-    top: 40px;
-    letter-spacing: -2px;
-  }
-
-  .fc-heading {
-    margin-bottom: 45px;
-  }
-
-  .fc-heading h2 {
-    font-size: 2.7rem;
-  }
-
-  .fc-description {
-    max-width: 100%;
-    font-size: 0.92rem;
-  }
-
-  .fc-top-line span {
-    width: 50px;
+    gap: 20px;
+    max-width: 540px;
+    margin: 0 auto;
   }
 
   .fc-right-text {
@@ -605,16 +529,16 @@ PREMIUM MICRO INTERACTIONS
   }
 
   .fc-card {
-    padding: 22px;
-    border-radius: 22px;
+    padding: 20px;
+    border-radius: 20px;
   }
 
   .fc-preview {
-    min-height: 170px;
+    min-height: 160px;
   }
 
   .fc-aa {
-    font-size: 4.5rem;
+    font-size: 4.2rem;
   }
 
   .fc-meta {
@@ -622,7 +546,7 @@ PREMIUM MICRO INTERACTIONS
   }
 
   .fc-footer {
-    margin-top: 70px;
+    margin-top: 45px;
   }
 
   .fc-footer p {
@@ -637,86 +561,54 @@ PREMIUM MICRO INTERACTIONS
 ==================================================*/
 
 @media (max-width: 576px) {
-  .fonts-colors-section {
-    padding: 80px 0 70px;
-  }
-
   .fc-container {
-    width: 92%;
-  }
-
-  .fc-bg-title {
-    font-size: 52px;
-    top: 35px;
-  }
-
-  .fc-top-line {
-    gap: 12px;
-  }
-
-  .fc-top-line span {
-    width: 36px;
-  }
-
-  .fc-top-line p {
-    font-size: 0.7rem;
-    letter-spacing: 3px;
-  }
-
-  .fc-heading h2 {
-    font-size: 2.2rem;
-    letter-spacing: -1px;
-  }
-
-  .fc-description {
-    font-size: 0.88rem;
-    line-height: 1.7;
+    width: 94%;
   }
 
   .fc-card {
-    padding: 20px;
-    border-radius: 20px;
+    padding: 18px;
+    border-radius: 18px;
   }
 
   .fc-card-top {
-    margin-bottom: 18px;
+    margin-bottom: 16px;
   }
 
   .fc-number {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
   }
 
   .fc-button {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
   }
 
   .fc-preview {
-    min-height: 150px;
-    gap: 18px;
+    min-height: 140px;
+    gap: 16px;
   }
 
   .fc-aa {
-    font-size: 3.9rem;
+    font-size: 3.6rem;
   }
 
   .fc-swatches {
-    height: 40px;
-    border-radius: 12px;
+    height: 38px;
+    border-radius: 10px;
   }
 
   .fc-card h3 {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
   }
 
   .fc-meta {
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 12px;
   }
 
   .fc-meta div {
     border-bottom: 1px solid #efefef;
-    padding-bottom: 10px;
+    padding-bottom: 8px;
   }
 
   .fc-meta div:last-child {
@@ -730,36 +622,20 @@ PREMIUM MICRO INTERACTIONS
 ==================================================*/
 
 @media (max-width: 400px) {
-  .fonts-colors-section {
-    padding: 70px 0 60px;
-  }
-
-  .fc-bg-title {
-    font-size: 42px;
-  }
-
-  .fc-heading h2 {
-    font-size: 1.9rem;
-  }
-
-  .fc-description {
-    font-size: 0.82rem;
-  }
-
   .fc-card {
-    padding: 18px;
+    padding: 16px;
   }
 
   .fc-preview {
-    min-height: 135px;
+    min-height: 125px;
   }
 
   .fc-aa {
-    font-size: 3.3rem;
+    font-size: 3.2rem;
   }
 
   .fc-swatches {
-    height: 34px;
+    height: 32px;
   }
 
   .fc-card h3 {
@@ -771,12 +647,12 @@ PREMIUM MICRO INTERACTIONS
   }
 
   .fc-footer {
-    margin-top: 60px;
+    margin-top: 35px;
   }
 
   .fc-dot {
-    width: 46px;
-    height: 46px;
+    width: 42px;
+    height: 42px;
   }
 
   .fc-footer p {

@@ -2,11 +2,23 @@ import { useMemo, useRef, useState, useEffect } from "react";
 import "./CareerHighlights.css";
 
 /* Images */
-import profileIcon from "../../assets/images/icon/sk.jpg";
+import profileIcon1 from "../../assets/images/icon/imax.png";
+import profileIcon2 from "../../assets/images/icon/wb.jpeg";
+import profileIcon3 from "../../assets/images/icon/uni.jpeg";
+import profileIcon4 from "../../assets/images/icon/ags.jpeg";
+import profileIcon5 from "../../assets/images/icon/sk.jpg";
+import profileIcon6 from "../../assets/images/icon/epiq.png";
+import profileIcon7 from "../../assets/images/icon/dream.jpeg";
+import profileIcon8 from "../../assets/images/icon/parvatha.jpeg";
+
 import aboutImage from "../../assets/images/about.webp";
 
 /* Video */
-import achievementVideo from "../../assets/videos/achievement/1.mp4";
+import IMAX from "../../assets/videos/C-H/Stray Kids Promotion.mp4";
+import Parvatha from "../../assets/videos/C-H/Youth.mp4";
+import epiqandsk from "../../assets/videos/C-H/Thaai Kelavi Promotion Reel.mp4";
+import F1 from "../../assets/videos/C-H/F1.mp4";
+// import achievementVideo from "../../assets/videos/achievement/1.mp4";
 
 export default function CareerHighlights() {
   /* ===============================
@@ -67,37 +79,55 @@ export default function CareerHighlights() {
     () => [
       {
         id: 1,
-        title: "HyperX Screen × VIVID",
-        video: achievementVideo,
-        icon: profileIcon,
+        title: "Stray Kids Promotion (Final Out)",
+        video: IMAX,
+        icon: profileIcon1,
       },
 
       {
         id: 2,
-        title: "Luxury Fashion Launch",
-        video: achievementVideo,
-        icon: profileIcon,
+        title: "F1",
+        video: F1,
+        icon: profileIcon2,
       },
 
-      {
-        id: 3,
-        title: "Brand Motion Reel",
-        video: achievementVideo,
-        icon: profileIcon,
-      },
+      // {
+      //   id: 3,
+      //   title: "ags photo",
+      //   // video: achievementVideo,
+      //   icon: profileIcon3,
+      // },
 
-      {
-        id: 4,
-        title: "Cinema Campaign",
-        video: achievementVideo,
-        icon: profileIcon,
-      },
+      // {
+      //   id: 4,
+      //   title: "Cinema Campaign",
+      //   // video: achievementVideo,
+      //   icon: profileIcon4,
+      // },
 
       {
         id: 5,
-        title: "Product Reveal",
-        video: achievementVideo,
-        icon: profileIcon,
+        title: "Thaai Kelavi Promotion Reel",
+        video: epiqandsk,
+        icon: profileIcon5,
+      },
+      {
+        id: 6,
+        title: "Thaai Kelavi Promotion Reel",
+        video: epiqandsk,
+        icon: profileIcon6,
+      },
+      // {
+      //   id: 7,
+      //   title: "Thaai Kelavi Promotion Reel",
+      //   video: epiqandsk,
+      //   icon: profileIcon6,
+      // },
+      {
+        id: 8,
+        title: "Parvatha",
+        video: Parvatha,
+        icon: profileIcon8,
       },
     ],
     [],
@@ -133,7 +163,7 @@ export default function CareerHighlights() {
         description:
           "Contributed to the launch of HyperX and Vivid premium large-format (PLF) cinema screens at Broadway Cinemas, Tiruppur, India, delivering immersive visuals that showcased the enhanced brightness, vibrant colors, high contrast, and large-screen cinematic experience.",
 
-        video: achievementVideo,
+        // video: achievementVideo,
       },
 
       {
@@ -145,7 +175,7 @@ export default function CareerHighlights() {
         description:
           "Contributed to the successful launch of Giggles & Twirls by editing promotional videos, designing brand posters, and creating visually compelling campaign content that brought the brand's kids' and women's fashion collections to life with a cohesive visual identity.",
 
-        video: achievementVideo,
+        // video: achievementVideo,
       },
     ],
     [],
@@ -166,8 +196,9 @@ export default function CareerHighlights() {
 
         <div className="CH-heading text-center">
           <p>
-            
-Recognized for outstanding creative performance and industry acknowledgment from leading entertainment brands, delivering consistent quality and audience impact.
+            Recognized for outstanding creative performance and industry
+            acknowledgment from leading entertainment brands, delivering
+            consistent quality and audience impact.
           </p>
         </div>
         {/* =====================================
@@ -181,27 +212,24 @@ Recognized for outstanding creative performance and industry acknowledgment from
             </div>
 
             <div className="production-house-images">
-              <img src={profileIcon} alt="Production House" />
-              <img src={profileIcon} alt="Production House" />
-              <img src={profileIcon} alt="Production House" />
-              <img src={profileIcon} alt="Production House" />
-              <img src={profileIcon} alt="Production House" />
-              <img src={profileIcon} alt="Production House" />
-              <img src={profileIcon} alt="Production House" />
+              <img src={profileIcon1} alt="Production House"  style={{objectFit:"contain"}}/>
+              <img src={profileIcon2} alt="Production House" />
+              <img src={profileIcon3} alt="Production House" />
+              <img src={profileIcon4} alt="Production House" />
+              <img src={profileIcon5} alt="Production House" />
+              <img src={profileIcon6} alt="Production House" />
+              <img src={profileIcon7} alt="Production House" />
+              <img src={profileIcon8} alt="Production House" />
             </div>
           </div>
         </div>
 
-
-
-
-        
         {/* =====================================
             Infinite Video Slider
         ====================================== */}
 
         <div className="video-slider">
-          <div className="slider-track" style={{ columnGap: "1%" }}>
+          <div className="slider-track">
             {infiniteVideos.map((item, index) => (
               <div
                 className="video-card"
@@ -218,7 +246,7 @@ Recognized for outstanding creative performance and industry acknowledgment from
                 {/* Profile Icon */}
 
                 <div className="video-icon">
-                  <img src={item.icon} alt="" />
+                  <img src={item.icon} alt=""  style={{objectFit:"contain", background:"white"}}/>
                 </div>
 
                 {/* Video */}

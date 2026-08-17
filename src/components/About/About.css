@@ -34,7 +34,7 @@
   background: transparent;
   position: relative;
   overflow: hidden;
-  padding: 60px 0;
+  padding: clamp(40px, 5vw, 65px) 0;
 }
 
 .main__title {
@@ -51,19 +51,12 @@
 
 .sub__title {
   display: inline-block;
-  padding: 8px 18px;
-  margin-bottom: 1.2rem;
-  border-radius: 999px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.45) 100%);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  box-shadow: 0 4px 14px rgba(4, 25, 58, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.95);
 }
 
 .sub__title span {
-  font-size: 0.85rem;
+  font-size: 2.85rem;
   font-weight: 700;
+  --heading-font: "Priestacy", "Playfair Display", Georgia, serif;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: #04193a;
@@ -250,55 +243,87 @@
 
 /* Responsive */
 @media (max-width: 992px) {
-  .about {
-    padding: 40px 0;
-  }
   .exe {
     right: 0px;
     top: 0px;
   }
   .stat {
-    flex: 1 1 calc(50% - 15px);
+    flex: 1 1 calc(33.333% - 12px);
   }
 }
 
 @media (max-width: 768px) {
-  .about {
-    padding: 30px 0;
-  }
   .exe {
     position: relative;
     right: auto;
-    top: -30px;
+    top: -24px;
     margin: 0 auto;
     display: flex;
     justify-content: center;
   }
   .experience {
-    width: 92px;
-    height: 92px;
+    width: 90px;
+    height: 90px;
   }
   .experience span {
-    font-size: 28px;
+    font-size: 26px;
   }
   .stats {
-    gap: 12px;
+    gap: 10px;
   }
   .stat {
-    flex: 1 1 calc(50% - 10px);
-    padding: 12px 14px;
+    flex: 1 1 calc(33.333% - 10px);
+    padding: 12px 10px;
+    min-width: 90px;
+  }
+  .stat b {
+    font-size: 1.6rem;
+  }
+  .stat span {
+    font-size: 0.68rem;
   }
 }
 
 @media (max-width: 480px) {
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
   .stat {
-    flex: 1 1 100%;
+    padding: 10px 6px;
+    text-align: center;
+  }
+  .stat b {
+    font-size: 1.4rem;
+  }
+  .stat span {
+    font-size: 0.62rem;
+    letter-spacing: 0.8px;
   }
   .tag {
     font-size: 0.8rem;
-    padding: 7px 14px;
+    padding: 7px 12px;
   }
   .about p {
-    font-size: 0.96rem;
+    font-size: 0.94rem;
+    line-height: 1.65;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
