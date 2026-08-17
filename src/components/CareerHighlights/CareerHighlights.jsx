@@ -11,7 +11,10 @@ import profileIcon6 from "../../assets/images/icon/epiq.png";
 import profileIcon7 from "../../assets/images/icon/dream.jpeg";
 import profileIcon8 from "../../assets/images/icon/parvatha.jpeg";
 
-import aboutImage from "../../assets/images/about.webp";
+import CHimg1 from "../../assets/images/CH/1.jpeg";
+import CHimg2 from "../../assets/images/CH/2.jpeg";
+import CHimg3 from "../../assets/images/CH/3.jpeg";
+import CHimg4 from "../../assets/images/CH/4.jpeg";
 
 /* Video */
 import IMAX from "../../assets/videos/C-H/Stray Kids Promotion.mp4";
@@ -19,6 +22,9 @@ import Parvatha from "../../assets/videos/C-H/Youth.mp4";
 import epiqandsk from "../../assets/videos/C-H/Thaai Kelavi Promotion Reel.mp4";
 import F1 from "../../assets/videos/C-H/F1.mp4";
 // import achievementVideo from "../../assets/videos/achievement/1.mp4";
+
+import hyperx from "../../assets/videos/C-H/hyperx.mp4"
+import gandt from "../../assets/videos/C-H/gandt.mp4"
 
 export default function CareerHighlights() {
   /* ===============================
@@ -146,7 +152,7 @@ export default function CareerHighlights() {
       Gallery Images
   =============================== */
 
-  const galleryImages = useMemo(() => [aboutImage, aboutImage, aboutImage], []);
+  const galleryImages = useMemo(() => [CHimg1, CHimg2, CHimg3, CHimg4], []);
 
   /* ===============================
       Highlight Cards
@@ -160,7 +166,7 @@ export default function CareerHighlights() {
         title: "HyperX Launch",
         description:
           "Contributed to the launch of HyperX and Vivid premium large-format (PLF) cinema screens at Broadway Cinemas, Tiruppur, India, delivering immersive visuals that showcased the enhanced brightness, vibrant colors, high contrast, and large-screen cinematic experience.",
-        video: epiqandsk,
+        video: hyperx,
       },
       {
         id: 2,
@@ -168,7 +174,7 @@ export default function CareerHighlights() {
         title: "Giggles and Twirls",
         description:
           "Contributed to the successful launch of Giggles & Twirls by editing promotional videos, designing brand posters, and creating visually compelling campaign content that brought the brand's kids' and women's fashion collections to life with a cohesive visual identity.",
-        video: IMAX,
+        video: gandt,
       },
     ],
     [],
@@ -205,7 +211,11 @@ export default function CareerHighlights() {
             </div>
 
             <div className="production-house-images">
-              <img src={profileIcon1} alt="Production House"  style={{objectFit:"contain"}}/>
+              <img
+                src={profileIcon1}
+                alt="Production House"
+                style={{ objectFit: "contain" }}
+              />
               <img src={profileIcon2} alt="Production House" />
               <img src={profileIcon3} alt="Production House" />
               <img src={profileIcon4} alt="Production House" />
@@ -239,12 +249,27 @@ export default function CareerHighlights() {
                 {/* Profile Icon */}
 
                 <div className="video-icon">
-                  <img src={item.icon} alt=""  style={{objectFit:"contain", background:"white"}}/>
+                  <img
+                    src={item.icon}
+                    alt=""
+                    style={{ objectFit: "contain", background: "white" }}
+                  />
                 </div>
 
                 {/* Video */}
 
-                <video muted autoPlay loop playsInline>
+                <video
+                  muted
+                  defaultMuted
+                  autoPlay
+                  loop
+                  playsInline
+                  preload="auto"
+                  onLoadedMetadata={(e) => {
+                    e.target.muted = true;
+                    e.target.play().catch(() => {});
+                  }}
+                >
                   <source src={item.video} type="video/mp4" />
                 </video>
 
@@ -265,7 +290,7 @@ export default function CareerHighlights() {
         </div>
 
         {/* =====================================
-            Three Images
+            Gallery Images (4 Images)
         ====================================== */}
 
         <div className="three-images">
@@ -277,7 +302,9 @@ export default function CareerHighlights() {
                   ? "imageone"
                   : index === 1
                     ? "imagetwo"
-                    : "imagethree"
+                    : index === 2
+                      ? "imagethree"
+                      : "imagefour"
               }
             >
               <img src={image} alt={`Gallery ${index + 1}`} />
@@ -294,13 +321,21 @@ export default function CareerHighlights() {
             <div className="highlight-card vertical-reel" key={item.id}>
               <div className="highlight-video-frame">
                 <div className="highlight-video">
-                  <video autoPlay muted loop playsInline controls>
+                  <video
+                    autoPlay
+                    muted
+                    defaultMuted
+                    loop
+                    playsInline
+                    controls
+                    preload="auto"
+                    onLoadedMetadata={(e) => {
+                      e.target.muted = true;
+                      e.target.play().catch(() => {});
+                    }}
+                  >
                     <source src={item.video} type="video/mp4" />
                   </video>
-                  <div className="reel-badge">
-                    <span className="reel-dot"></span>
-                    <span>Reel</span>
-                  </div>
                 </div>
               </div>
 

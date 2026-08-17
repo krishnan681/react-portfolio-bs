@@ -184,34 +184,36 @@
 
 }
 /*=========================================
-            THREE IMAGES
+            GALLERY IMAGES (4 IMAGES)
 =========================================*/
 
 .three-images {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: clamp(16px, 2.5vw, 28px);
   margin-bottom: clamp(35px, 5vw, 60px);
 }
 
 .imageone,
 .imagetwo,
-.imagethree {
+.imagethree,
+.imagefour {
   position: relative;
   overflow: hidden;
   border-radius: 28px;
-  height: 480px;
+  height: 380px;
   cursor: pointer;
   background: #f4f4f4;
+  box-shadow: 0 10px 30px rgba(4, 25, 58, 0.06);
 }
 
 .imageone img,
 .imagetwo img,
-.imagethree img {
+.imagethree img,
+.imagefour img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-
   transition:
     transform .8s cubic-bezier(.22,1,.36,1),
     filter .8s ease;
@@ -219,34 +221,33 @@
 
 .imageone:hover img,
 .imagetwo:hover img,
-.imagethree:hover img{
+.imagethree:hover img,
+.imagefour:hover img {
   transform: scale(1.08);
-  filter: brightness(.85);
+  filter: brightness(.9);
 }
 
 .imageone::after,
 .imagetwo::after,
-.imagethree::after{
-  content:"";
-
-  position:absolute;
-  inset:0;
-
-  background:linear-gradient(
+.imagethree::after,
+.imagefour::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
       to top,
-      rgba(0,0,0,.45),
+      rgba(4, 25, 58, 0.4),
       transparent 60%
   );
-
-  opacity:0;
-
-  transition:.45s;
+  opacity: 0;
+  transition: .45s;
 }
 
 .imageone:hover::after,
 .imagetwo:hover::after,
-.imagethree:hover::after{
-  opacity:1;
+.imagethree:hover::after,
+.imagefour:hover::after {
+  opacity: 1;
 }
 
 /*=========================================
@@ -589,7 +590,7 @@ height:420px;
 
 .three-images{
 
-grid-template-columns:1fr;
+grid-template-columns: repeat(2, 1fr);
 
 }
 
@@ -603,9 +604,10 @@ gap:30px;
 
 .imageone,
 .imagetwo,
-.imagethree{
+.imagethree,
+.imagefour{
 
-height:450px;
+height:380px;
 
 }
 
@@ -682,9 +684,10 @@ border-left:13px solid #fff;
 
 .imageone,
 .imagetwo,
-.imagethree{
+.imagethree,
+.imagefour{
 
-height:340px;
+height:300px;
 
 border-radius:20px;
 
@@ -789,9 +792,10 @@ border-bottom:7px solid transparent;
 
 .imageone,
 .imagetwo,
-.imagethree{
+.imagethree,
+.imagefour{
 
-height:260px;
+height:220px;
 
 }
 
