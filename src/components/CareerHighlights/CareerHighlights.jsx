@@ -21,7 +21,7 @@ import IMAX from "../../assets/videos/C-H/Stray Kids Promotion.mp4";
 import Parvatha from "../../assets/videos/C-H/Youth.mp4";
 import epiqandsk from "../../assets/videos/C-H/Thaai Kelavi Promotion Reel.mp4";
 import F1 from "../../assets/videos/C-H/F1.mp4";
-// import achievementVideo from "../../assets/videos/achievement/1.mp4";
+ 
 
 import hyperx from "../../assets/videos/C-H/hyperx.mp4"
 import gandt from "../../assets/videos/C-H/gandt.mp4"
