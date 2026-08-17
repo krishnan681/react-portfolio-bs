@@ -214,7 +214,7 @@ export default function CareerHighlights() {
               <img
                 src={profileIcon1}
                 alt="Production House"
-                style={{ objectFit: "contain" }}
+                
               />
               <img src={profileIcon2} alt="Production House" />
               <img src={profileIcon3} alt="Production House" />

@@ -14,8 +14,9 @@
 }
 
 .branding-masonry-grid {
-  column-count: 3;
-  column-gap: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 2.5vw, 32px);
   width: min(1340px, 94%);
   margin: 0 auto;
 }
@@ -23,15 +24,15 @@
 /* Breakpoints */
 @media (max-width: 1024px) {
   .branding-masonry-grid {
-    column-count: 2;
-    column-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .branding-masonry-grid {
-    column-count: 1;
+    grid-template-columns: 1fr;
     width: 100%;
-    max-width: 540px;
+    max-width: 480px;
   }
 }
