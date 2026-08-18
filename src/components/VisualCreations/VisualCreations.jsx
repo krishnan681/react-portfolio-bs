@@ -129,9 +129,10 @@ export default function VisualCreations() {
           </p>
         </div>
 
-        <div className="folders-grid">
+        <div className="row g-4 justify-content-center">
           {/* ==================== IMAGE FOLDER ==================== */}
-          <div className="folder-wrapper-card" onClick={handleOpenImages}>
+          <div className="col-12 col-md-6 col-lg-5">
+            <div className="folder-wrapper-card" onClick={handleOpenImages}>
             {/* <div className="folder-hint-pill">
               <Sparkles size={13} className="hint-sparkle" />
               <span>Click to open collection</span>
@@ -225,9 +226,11 @@ export default function VisualCreations() {
               </button>
             </div>
           </div>
+        </div>
 
           {/* ==================== VIDEO FOLDER ==================== */}
-          <div className="folder-wrapper-card" onClick={handleOpenVideos}>
+          <div className="col-12 col-md-6 col-lg-5">
+            <div className="folder-wrapper-card" onClick={handleOpenVideos}>
             {/* <div className="folder-hint-pill video-pill">
               <Sparkles size={13} className="hint-sparkle" />
               <span>Click to open collection</span>
@@ -323,6 +326,7 @@ export default function VisualCreations() {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 }

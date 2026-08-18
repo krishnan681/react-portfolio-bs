@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import "./About.css";
 import aboutImage from "../../assets/images/about.webp";
+import ImageWithSkeleton from "../Common/ImageWithSkeleton";
 
 function StatCounter({ target, suffix = "", label, decimals = 0 }) {
   const [count, setCount] = useState(0);
@@ -85,10 +86,10 @@ export default function About() {
       <div className="container">
         <div className="row justify-content-center row-gap-4">
           {/* Left Side */}
-          <div className="col-8 col-lg-4">
+          <div className="col-12 col-md-5 col-lg-4">
             <div className="about__image">
               <div className="text-center">
-                <img
+                <ImageWithSkeleton
                   src={aboutImage}
                   className="w-100"
                   alt="About Barath Sachwin"
@@ -110,14 +111,8 @@ export default function About() {
               <span>Hey !</span>
             </div>
 
-            {/* <div className="main__title mb-4">
-              Solving Problems With
-              <br />
-              <span>Intuitive Design</span>
-            </div> */}
-
             <p>
-              Creative Graphic Designer & Video Editor with 2 years of
+              I'm a creative Graphic Designer &amp; Video Editor with 2 years of
               professional experience creating motion graphics, promotional
               videos, and digital marketing content across diverse industries.
               <br />
@@ -150,7 +145,7 @@ export default function About() {
             </div>
 
             {/* Industries */}
-            <div className="industries">
+            {/* <div className="industries">
               <span className="tag">🎓 Education</span>
               <span className="tag">🏥 Healthcare</span>
               <span className="tag">🏠 Real Estate</span>
@@ -159,7 +154,7 @@ export default function About() {
               <span className="tag">👗 Fashion</span>
               <span className="tag">🧘 Wellness</span>
               <span className="tag">🍽️ Food & Beverage</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

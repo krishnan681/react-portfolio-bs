@@ -52,7 +52,13 @@ export default function Tools() {
                   </div>
 
                   <div className="tool-icon-box">
-                    <img className="toolbarImg" src={tool.src} alt={tool.name} />
+                    <img
+                      className="toolbarImg"
+                      src={tool.src}
+                      alt={tool.name}
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
                 </li>
               ))}

@@ -137,8 +137,8 @@ export default function InstagramPosts() {
         scale(${scale})
       `,
       zIndex,
-      opacity,
-      filter: abs === 0 ? "none" : "brightness(0.7)",
+      opacity: abs > 3 ? 0 : 1,
+      filter: "none",
     };
   };
 
@@ -183,7 +183,13 @@ export default function InstagramPosts() {
               style={getSlideStyle(i)}
               onClick={() => handleDot(i)}
             >
-              <img src={src} alt={`Instagram post ${i + 1}`} draggable={false} />
+              <img
+                src={src}
+                alt={`Instagram post ${i + 1}`}
+                draggable={false}
+                loading="lazy"
+                decoding="async"
+              />
             </figure>
           ))}
         </div>

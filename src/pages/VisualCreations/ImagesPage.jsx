@@ -180,7 +180,7 @@ export default function ImagesPage() {
                 onClick={() => setActiveImageIndex(idx)}
               >
                 <div className="card-media-wrap">
-                  <img src={img.src} alt={img.title} loading="lazy" />
+                  <img src={img.src} alt={img.title} loading="lazy" decoding="async" />
                   <div className="card-overlay">
                     <div className="card-top-tags">
                       <span className="aspect-badge">{img.sizeLabel}</span>
@@ -234,7 +234,7 @@ export default function ImagesPage() {
                   onClick={() => setActiveImageIndex(idx)}
                 >
                   <div className="filmstrip-media">
-                    <img src={img.src} alt={img.title} loading="lazy" />
+                    <img src={img.src} alt={img.title} loading="lazy" decoding="async" />
                     <div className="filmstrip-hover-curtain">
                       <Eye size={22} />
                       <span>Inspect Artwork</span>
@@ -264,7 +264,7 @@ export default function ImagesPage() {
                 onClick={() => setActiveImageIndex(idx)}
               >
                 <div className="masonry-media-wrap">
-                  <img src={img.src} alt={img.title} loading="lazy" />
+                  <img src={img.src} alt={img.title} loading="lazy" decoding="async" />
                   <div className="masonry-overlay">
                     <span className="masonry-aspect-pill">{img.sizeLabel}</span>
                     <div className="masonry-text">

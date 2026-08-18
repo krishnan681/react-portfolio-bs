@@ -11,10 +11,9 @@
   width: 480px;
   height: 480px;
   border-radius: 50%;
-  filter: blur(120px);
+  background: radial-gradient(circle, rgba(199, 233, 251, 0.45) 0%, transparent 70%);
   top: -180px;
   left: -180px;
-  opacity: 0.7;
   pointer-events: none;
 }
 
@@ -23,12 +22,10 @@
   position: absolute;
   width: 450px;
   height: 450px;
-  background: #c7e9fb;
+  background: radial-gradient(circle, rgba(199, 233, 251, 0.4) 0%, transparent 70%);
   border-radius: 50%;
-  filter: blur(130px);
   bottom: -220px;
   right: -180px;
-  opacity: 0.6;
   pointer-events: none;
 }
 
