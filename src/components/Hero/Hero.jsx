@@ -1,7 +1,9 @@
 import { useEffect, useRef } from "react";
 import "./Hero.css";
 
-import heroImage from "../../assets/images/BS.webp";
+import { getR2Url } from "../../config/r2";
+
+const heroImage = getR2Url("profile/BS.webp");
 
 export default function Hero() {
   const heroRef = useRef(null);

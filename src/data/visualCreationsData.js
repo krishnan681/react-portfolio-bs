@@ -1,28 +1,4 @@
-import brand1 from "../assets/images/Brands/1.jpg";
-import brand2 from "../assets/images/Brands/2.jpg";
-import brand3 from "../assets/images/Brands/3.jpg";
-import brand4 from "../assets/images/Brands/4.jpg";
-import brand5 from "../assets/images/Brands/5.jpg";
-import brand6 from "../assets/images/Brands/6.jpg";
-import brand7 from "../assets/images/Brands/7.jpeg";
-import brand8 from "../assets/images/Brands/8.jpg";
-import brand9 from "../assets/images/Brands/9.jpg";
-import brand10 from "../assets/images/Brands/10.jpg";
-
-import insta1 from "../assets/images/Insta/1.jpg";
-import insta2 from "../assets/images/Insta/2.jpg";
-import insta3 from "../assets/images/Insta/3.jpg";
-import insta4 from "../assets/images/Insta/4.jpg";
-import insta5 from "../assets/images/Insta/5.jpg";
-import insta6 from "../assets/images/Insta/6.jpg";
-import insta7 from "../assets/images/Insta/7.jpg";
-import insta8 from "../assets/images/Insta/8.jpg";
-import insta9 from "../assets/images/Insta/9.jpg";
-import insta10 from "../assets/images/Insta/10.jpg";
-
-import heroImg from "../assets/images/hero-img.png";
-import bsImg from "../assets/images/BS.webp";
-// import video1 from "../assets/videos/achievement/1.mp4";
+import { getR2Url } from "../config/r2";
 
 export const IMAGE_THEMES = [
   { id: "all", label: "All Works" },
@@ -38,7 +14,7 @@ export const IMAGES_DATA = [
     title: "IMAX Laser Key Visual",
     theme: "branding",
     category: "Branding & Identity",
-    src: brand1,
+    src: getR2Url("brands/covers/1.jpg"),
     aspect: "landscape",
     sizeLabel: "16:9 Widescreen",
     span: "col-span-2 row-span-1",
@@ -52,7 +28,7 @@ export const IMAGES_DATA = [
     title: "The Crimson Luxury Identity",
     theme: "branding",
     category: "Branding & Identity",
-    src: brand2,
+    src: getR2Url("brands/covers/2.jpg"),
     aspect: "landscape",
     sizeLabel: "16:9 Widescreen",
     span: "col-span-2 row-span-1",
@@ -66,7 +42,7 @@ export const IMAGES_DATA = [
     title: "Summer Linen Collection",
     theme: "branding",
     category: "Branding & Identity",
-    src: brand3,
+    src: getR2Url("brands/covers/3.jpg"),
     aspect: "square",
     sizeLabel: "1:1 Square",
     span: "col-span-1 row-span-1",
@@ -80,7 +56,7 @@ export const IMAGES_DATA = [
     title: "Aarthi Grand Visual System",
     theme: "branding",
     category: "Branding & Identity",
-    src: brand4,
+    src: getR2Url("brands/covers/4.jpg"),
     aspect: "landscape",
     sizeLabel: "16:9 Widescreen",
     span: "col-span-2 row-span-1",
@@ -94,7 +70,7 @@ export const IMAGES_DATA = [
     title: "Artisanal Culinary Branding",
     theme: "branding",
     category: "Branding & Identity",
-    src: brand5,
+    src: getR2Url("brands/covers/5.jpg"),
     aspect: "square",
     sizeLabel: "1:1 Square",
     span: "col-span-1 row-span-1",
@@ -108,7 +84,7 @@ export const IMAGES_DATA = [
     title: "The Long Story - Spirits & Spice",
     theme: "branding",
     category: "Branding & Identity",
-    src: brand6,
+    src: getR2Url("brands/covers/6.jpg"),
     aspect: "landscape",
     sizeLabel: "16:9 Widescreen",
     span: "col-span-2 row-span-1",
@@ -122,7 +98,7 @@ export const IMAGES_DATA = [
     title: "Jewellery Heritage Campaign",
     theme: "branding",
     category: "Branding & Identity",
-    src: brand7,
+    src: getR2Url("brands/covers/7.jpeg"),
     aspect: "square",
     sizeLabel: "1:1 Square",
     span: "col-span-1 row-span-1",
@@ -136,7 +112,7 @@ export const IMAGES_DATA = [
     title: "New City Architectural Branding",
     theme: "branding",
     category: "Branding & Identity",
-    src: brand8,
+    src: getR2Url("brands/covers/8.jpg"),
     aspect: "square",
     sizeLabel: "1:1 Square",
     span: "col-span-1 row-span-1",
@@ -150,7 +126,7 @@ export const IMAGES_DATA = [
     title: "Sunbeam Academic Identity",
     theme: "branding",
     category: "Branding & Identity",
-    src: brand9,
+    src: getR2Url("brands/covers/9.jpg"),
     aspect: "square",
     sizeLabel: "1:1 Square",
     span: "col-span-1 row-span-1",
@@ -164,7 +140,7 @@ export const IMAGES_DATA = [
     title: "Newrish Pharmaceuticals Corporate Identity",
     theme: "branding",
     category: "Branding & Identity",
-    src: brand10,
+    src: getR2Url("brands/covers/10.jpg"),
     aspect: "landscape",
     sizeLabel: "16:9 Widescreen",
     span: "col-span-2 row-span-1",
@@ -178,7 +154,7 @@ export const IMAGES_DATA = [
     title: "Creative Direction Monograph",
     theme: "editorial",
     category: "Editorial & 3D Art",
-    src: bsImg,
+    src: getR2Url("profile/BS.webp"),
     aspect: "square",
     sizeLabel: "1:1 Square",
     span: "col-span-1 row-span-1",
@@ -192,7 +168,7 @@ export const IMAGES_DATA = [
     title: "Urban Motion Keyframe",
     theme: "posters",
     category: "Posters & Typography",
-    src: insta6,
+    src: getR2Url("instagram/6.jpg"),
     aspect: "portrait",
     sizeLabel: "4:5 Vertical",
     span: "col-span-1 row-span-2",
@@ -206,7 +182,7 @@ export const IMAGES_DATA = [
     title: "Editorial Campaign Magazine Spread",
     theme: "editorial",
     category: "Editorial & 3D Art",
-    src: insta7,
+    src: getR2Url("instagram/7.jpg"),
     aspect: "square",
     sizeLabel: "1:1 Square",
     span: "col-span-1 row-span-1",
@@ -220,7 +196,7 @@ export const IMAGES_DATA = [
     title: "Interactive Studio Portrait",
     theme: "social",
     category: "Social & Campaigns",
-    src: heroImg,
+    src: getR2Url("hero/hero-img.png"),
     aspect: "portrait",
     sizeLabel: "4:5 Vertical",
     span: "col-span-1 row-span-2",
@@ -234,7 +210,7 @@ export const IMAGES_DATA = [
     title: "Digital Concession Display",
     theme: "social",
     category: "Social & Campaigns",
-    src: insta8,
+    src: getR2Url("instagram/8.jpg"),
     aspect: "square",
     sizeLabel: "1:1 Square",
     span: "col-span-1 row-span-1",
@@ -259,8 +235,8 @@ export const VIDEOS_DATA = [
     title: "HyperX Laser Brand Experience",
     theme: "commercials",
     category: "Commercials & Ads",
-    // src: video1,
-    poster: brand1,
+    src: getR2Url("career-highlights/videos/hyperx.mp4"),
+    poster: getR2Url("brands/covers/1.jpg"),
     duration: "0:45",
     aspect: "landscape",
     sizeLabel: "16:9 Cinematic",
@@ -276,8 +252,8 @@ export const VIDEOS_DATA = [
     title: "Midnight Premiere Viral Reel",
     theme: "reels",
     category: "9:16 Vertical Reels",
-    // src: video1,
-    poster: insta1,
+    src: getR2Url("career-highlights/videos/Youth.mp4"),
+    poster: getR2Url("instagram/1.jpg"),
     duration: "0:30",
     aspect: "vertical",
     sizeLabel: "9:16 Reel",
@@ -293,8 +269,8 @@ export const VIDEOS_DATA = [
     title: "Aarthi Grand LED Wall Promo",
     theme: "motion",
     category: "Motion Graphics",
-    // src: video1,
-    poster: brand2,
+    src: getR2Url("career-highlights/videos/Thaai Kelavi Promotion Reel.mp4"),
+    poster: getR2Url("brands/covers/2.jpg"),
     duration: "0:38",
     aspect: "landscape",
     sizeLabel: "16:9 Motion",
@@ -310,8 +286,8 @@ export const VIDEOS_DATA = [
     title: "Artisanal Cafe Morning Routine",
     theme: "reels",
     category: "9:16 Vertical Reels",
-    // src: video1,
-    poster: brand3,
+    src: getR2Url("career-highlights/videos/Stray Kids Promotion.mp4"),
+    poster: getR2Url("brands/covers/3.jpg"),
     duration: "0:25",
     aspect: "vertical",
     sizeLabel: "9:16 Reel",
@@ -327,8 +303,8 @@ export const VIDEOS_DATA = [
     title: "The Crimson Luxury Showcase",
     theme: "trailers",
     category: "Cinematic Trailers",
-    // src: video1,
-    poster: brand4,
+    src: getR2Url("career-highlights/videos/F1.mp4"),
+    poster: getR2Url("brands/covers/4.jpg"),
     duration: "1:15",
     aspect: "landscape",
     sizeLabel: "2.39:1 Anamorphic",
@@ -344,8 +320,8 @@ export const VIDEOS_DATA = [
     title: "Dessert Factory Hyperlapse",
     theme: "reels",
     category: "9:16 Vertical Reels",
-    // src: video1,
-    poster: insta5,
+    src: getR2Url("career-highlights/videos/gandt.mp4"),
+    poster: getR2Url("instagram/5.jpg"),
     duration: "0:20",
     aspect: "vertical",
     sizeLabel: "9:16 Reel",
@@ -361,8 +337,8 @@ export const VIDEOS_DATA = [
     title: "Urban Skyline 3D Architecture Flythrough",
     theme: "motion",
     category: "Motion Graphics",
-    // src: video1,
-    poster: brand5,
+    src: getR2Url("career-highlights/videos/Youth.mp4"),
+    poster: getR2Url("brands/covers/5.jpg"),
     duration: "0:50",
     aspect: "landscape",
     sizeLabel: "16:9 Motion",
@@ -378,8 +354,8 @@ export const VIDEOS_DATA = [
     title: "Heritage Gold Royal Reveal",
     theme: "commercials",
     category: "Commercials & Ads",
-    // src: video1,
-    poster: brand6,
+    src: getR2Url("career-highlights/videos/F1.mp4"),
+    poster: getR2Url("brands/covers/6.jpg"),
     duration: "0:40",
     aspect: "landscape",
     sizeLabel: "16:9 Commercial",

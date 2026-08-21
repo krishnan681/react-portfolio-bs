@@ -1,30 +1,30 @@
 import { useMemo, useRef, useState, useEffect } from "react";
 import "./CareerHighlights.css";
 
+import { getR2Url } from "../../config/r2";
+
 /* Images */
-import profileIcon1 from "../../assets/images/icon/imax.png";
-import profileIcon2 from "../../assets/images/icon/wb.jpeg";
-import profileIcon3 from "../../assets/images/icon/uni.jpeg";
-import profileIcon4 from "../../assets/images/icon/ags.jpeg";
-import profileIcon5 from "../../assets/images/icon/sk.jpg";
-import profileIcon6 from "../../assets/images/icon/epiq.png";
-import profileIcon7 from "../../assets/images/icon/dream.jpeg";
-import profileIcon8 from "../../assets/images/icon/parvatha.jpeg";
+const profileIcon1 = getR2Url("production-house-icons/imax.webp");
+const profileIcon2 = getR2Url("production-house-icons/wb.webp");
+const profileIcon3 = getR2Url("production-house-icons/uni.webp");
+const profileIcon4 = getR2Url("production-house-icons/ags.webp");
+const profileIcon5 = getR2Url("production-house-icons/sk.webp");
+const profileIcon6 = getR2Url("production-house-icons/epiq.webp");
+const profileIcon7 = getR2Url("production-house-icons/dream.webp");
+const profileIcon8 = getR2Url("production-house-icons/parvatha.webp");
 
-import CHimg1 from "../../assets/images/CH/1.jpeg";
-import CHimg2 from "../../assets/images/CH/2.jpeg";
-import CHimg3 from "../../assets/images/CH/3.jpeg";
-import CHimg4 from "../../assets/images/CH/4.jpeg";
+const CHimg1 = getR2Url("career-highlights/images/1.webp");
+const CHimg2 = getR2Url("career-highlights/images/2.webp");
+const CHimg3 = getR2Url("career-highlights/images/3.webp");
+const CHimg4 = getR2Url("career-highlights/images/4.webp ");
 
-/* Video */
-import IMAX from "../../assets/videos/C-H/Stray Kids Promotion.mp4";
-import Parvatha from "../../assets/videos/C-H/Youth.mp4";
-import epiqandsk from "../../assets/videos/C-H/Thaai Kelavi Promotion Reel.mp4";
-import F1 from "../../assets/videos/C-H/F1.mp4";
- 
-
-import hyperx from "../../assets/videos/C-H/hyperx.mp4"
-import gandt from "../../assets/videos/C-H/gandt.mp4"
+/* Videos */
+const IMAX = getR2Url("career-highlights/videos/Stray Kids Promotion.mp4");
+const Parvatha = getR2Url("career-highlights/videos/Youth.mp4");
+const epiqandsk = getR2Url("career-highlights/videos/Thaai Kelavi Promotion Reel.mp4");
+const F1 = getR2Url("career-highlights/videos/F1.mp4");
+const hyperx = getR2Url("career-highlights/videos/hyperx.mp4");
+const gandt = getR2Url("career-highlights/videos/gandt.mp4");
 
 export default function CareerHighlights() {
   /* ===============================
@@ -192,6 +192,18 @@ export default function CareerHighlights() {
     [],
   );
 
+  const sliderRef = useRef(null);
+
+  const scrollSlider = (direction) => {
+    if (sliderRef.current) {
+      const scrollAmount = 360;
+      sliderRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <section className="career__highlights sc_py" id="career__highlights">
       <div className="container">
@@ -237,64 +249,84 @@ export default function CareerHighlights() {
         </div>
 
         {/* =====================================
-            Infinite Video Slider (Optimized with Zero CPU/GPU Decode Bottleneck)
+            Infinite Video Slider with Arrow Controls
         ====================================== */}
 
-        <div className="video-slider">
-          <div className="slider-track">
-            {infiniteVideos.map((item, index) => (
-              <div
-                className="video-card"
-                key={`${item.id}-${index}`}
-                role="button"
-                tabIndex={0}
-                onClick={() => openVideo(item.video, item.title)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    openVideo(item.video, item.title);
-                  }
-                }}
-              >
-                {/* Profile Icon */}
-                <div className="video-icon">
-                  <img
-                    src={item.icon}
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    style={{ objectFit: "contain", background: "white" }}
-                  />
+        <div className="video-slider-wrap">
+          <button
+            type="button"
+            className="video-slider-arrow left"
+            onClick={() => scrollSlider("left")}
+            aria-label="Previous videos"
+          >
+            <i className="fa-solid fa-chevron-left"></i>
+          </button>
+
+          <div className="video-slider" ref={sliderRef}>
+            <div className="slider-track">
+              {infiniteVideos.map((item, index) => (
+                <div
+                  className="video-card"
+                  key={`${item.id}-${index}`}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => openVideo(item.video, item.title)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      openVideo(item.video, item.title);
+                    }
+                  }}
+                >
+                  {/* Profile Icon */}
+                  <div className="video-icon">
+                    <img
+                      src={item.icon}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      style={{ objectFit: "contain", background: "white" }}
+                    />
+                  </div>
+
+                  {/* Video Preview Frame */}
+                  <div className="video-preview-frame">
+                    <video
+                      autoPlay
+                      muted
+                      defaultMuted
+                      loop
+                      playsInline
+                      preload="auto"
+                      onLoadedMetadata={(e) => {
+                        e.target.muted = true;
+                        e.target.play().catch(() => {});
+                      }}
+                    >
+                      <source src={item.video} type="video/mp4" />
+                    </video>
+                  </div>
+
+                  {/* Overlay */}
+                  <div className="video-overlay"></div>
+
+                  {/* Play Button */}
+                  <div className="play-btn"></div>
+
+                  {/* Title */}
+                  <div className="video-title">{item.title}</div>
                 </div>
-
-                {/* Video Preview Frame */}
-                <div className="video-preview-frame">
-                  <video
-                    muted
-                    defaultMuted
-                    loop
-                    playsInline
-                    preload="none"
-                    onMouseEnter={(e) => e.target.play().catch(() => {})}
-                    onMouseLeave={(e) => {
-                      e.target.pause();
-                      e.target.currentTime = 0;
-                    }}
-                  >
-                    <source src={item.video} type="video/mp4" />
-                  </video>
-                </div>
-
-                {/* Overlay */}
-                <div className="video-overlay"></div>
-
-                {/* Play Button */}
-                <div className="play-btn"></div>
-
-                {/* Title */}
-                <div className="video-title">{item.title}</div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
+
+          <button
+            type="button"
+            className="video-slider-arrow right"
+            onClick={() => scrollSlider("right")}
+            aria-label="Next videos"
+          >
+            <i className="fa-solid fa-chevron-right"></i>
+          </button>
         </div>
 
         {/* =====================================
@@ -334,8 +366,16 @@ export default function CareerHighlights() {
         </div>
 
         {/* =====================================
-            Highlight Cards (Vertical Videos - Click to open Portrait Modal)
+            Featured Launches Title & Highlight Cards
         ====================================== */}
+
+        <div className="featured-launches-header text-center">
+          <div className="title">
+            
+            <h2 className="main-title">FEATURED LAUNCHES</h2>
+          </div>
+           
+        </div>
 
         <div className="highlights-grid">
           {highlights.map((item) => (

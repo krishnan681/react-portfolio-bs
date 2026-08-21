@@ -1,16 +1,18 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import "./InstagramPosts.css";
 
-import img1 from "../../assets/images/Insta/1.jpg";
-import img2 from "../../assets/images/Insta/2.jpg";
-import img3 from "../../assets/images/Insta/3.jpg";
-import img4 from "../../assets/images/Insta/4.jpg";
-import img5 from "../../assets/images/Insta/5.jpg";
-import img6 from "../../assets/images/Insta/6.jpg";
-import img7 from "../../assets/images/Insta/7.jpg";
-import img8 from "../../assets/images/Insta/8.jpg";
+import { getR2Url } from "../../config/r2";
 
-const IMAGES = [img1, img2, img3, img4, img5, img6, img7, img8];
+const IMAGES = [
+  getR2Url("instagram/1.jpg"),
+  getR2Url("instagram/2.jpg"),
+  getR2Url("instagram/3.jpg"),
+  getR2Url("instagram/4.jpg"),
+  getR2Url("instagram/5.jpg"),
+  getR2Url("instagram/6.jpg"),
+  getR2Url("instagram/7.jpg"),
+  getR2Url("instagram/8.jpg"),
+];
 const AUTOPLAY_DELAY = 3000; // 3 seconds
 
 export default function InstagramPosts() {

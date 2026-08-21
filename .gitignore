@@ -11,6 +11,14 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
+.env.*
+!.env.example
+
+# Large media assets (hosted on Cloudflare R2)
+src/assets/images/Branding-cards/
+src/assets/videos/
+*.mp4
 
 # Editor directories and files
 .vscode/*

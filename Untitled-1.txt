@@ -230,16 +230,16 @@
 │   │   │   │   │       └── 🎬 Pavizham Traditonal reels 2.mp4
 │   │   │   │   └── 📁 sentosa/
 │   │   │   ├── 📁 Brands/
-│   │   │   │   ├── 🖼️ 1.webp
-│   │   │   │   ├── 🖼️ 10.webp
-│   │   │   │   ├── 🖼️ 2.webp
-│   │   │   │   ├── 🖼️ 3.webp
-│   │   │   │   ├── 🖼️ 4.webp
-│   │   │   │   ├── 🖼️ 5.webp
-│   │   │   │   ├── 🖼️ 6.webp
-│   │   │   │   ├── 🖼️ 7.webp
-│   │   │   │   ├── 🖼️ 8.webp
-│   │   │   │   └── 🖼️ 9.webp
+│   │   │   │   ├── 🖼️ 1.jpg
+│   │   │   │   ├── 🖼️ 10.jpg
+│   │   │   │   ├── 🖼️ 2.jpg
+│   │   │   │   ├── 🖼️ 3.jpg
+│   │   │   │   ├── 🖼️ 4.jpg
+│   │   │   │   ├── 🖼️ 5.jpg
+│   │   │   │   ├── 🖼️ 6.jpg
+│   │   │   │   ├── 🖼️ 7.jpeg
+│   │   │   │   ├── 🖼️ 8.jpg
+│   │   │   │   └── 🖼️ 9.jpg
 │   │   │   ├── 📁 BrandsBanner/
 │   │   │   │   ├── 🖼️ Banners-01.jpg
 │   │   │   │   ├── 🖼️ Banners-02.jpg
@@ -252,10 +252,10 @@
 │   │   │   │   ├── 🖼️ Banners-09.jpg
 │   │   │   │   └── 🖼️ Banners-10.jpg
 │   │   │   ├── 📁 CH/
-│   │   │   │   ├── 🖼️ 1.webp
-│   │   │   │   ├── 🖼️ 2.webp
-│   │   │   │   ├── 🖼️ 3.webp
-│   │   │   │   └── 🖼️ 4.webp
+│   │   │   │   ├── 🖼️ 1.jpeg
+│   │   │   │   ├── 🖼️ 2.jpeg
+│   │   │   │   ├── 🖼️ 3.jpeg
+│   │   │   │   └── 🖼️ 4.jpeg
 │   │   │   ├── 📁 Insta/
 │   │   │   │   ├── 🖼️ 1.jpg
 │   │   │   │   ├── 🖼️ 10.jpg
@@ -275,17 +275,30 @@
 │   │   │   │   ├── 🖼️ 5.png
 │   │   │   │   ├── 🖼️ 6.png
 │   │   │   │   └── 🖼️ 7.png
+│   │   │   ├── 📁 icon/
+│   │   │   │   ├── 🖼️ ags.jpeg
+│   │   │   │   ├── 🖼️ dream.jpeg
+│   │   │   │   ├── 🖼️ epiq.png
+│   │   │   │   ├── 🖼️ imax.png
+│   │   │   │   ├── 🖼️ parvatha.jpeg
+│   │   │   │   ├── 🖼️ sk.jpg
+│   │   │   │   ├── 🖼️ uni.jpeg
+│   │   │   │   └── 🖼️ wb.jpeg
 │   │   │   ├── 📁 icons/
-│   │   │   │   ├── 🖼️ ags.webp
-│   │   │   │   ├── 🖼️ dream.webp
-│   │   │   │   ├── 🖼️ epiq.webp
-│   │   │   │   ├── 🖼️ imax.webp
-│   │   │   │   ├── 🖼️ parvatha.webp
-│   │   │   │   ├── 🖼️ sk.webp
-│   │   │   │   ├── 🖼️ uni.webp
-│   │   │   │   └── 🖼️ wb.webp
+│   │   │   │   ├── 🖼️ 1.png
+│   │   │   │   ├── 🖼️ 2.png
+│   │   │   │   ├── 🖼️ 3.png
+│   │   │   │   ├── 🖼️ 4.png
+│   │   │   │   ├── 🖼️ 5.png
+│   │   │   │   ├── 🖼️ 6.png
+│   │   │   │   └── 🖼️ 7.png
+│   │   │   ├── 📁 logo/
+│   │   │   │   ├── 🖼️ BS.png
+│   │   │   │   └── 🖼️ broadway.png
 │   │   │   ├── 🖼️ BS.webp
-│   │   │   └── 🖼️ about.webp
+│   │   │   ├── 🖼️ about.webp
+│   │   │   ├── 🖼️ dummy.webp
+│   │   │   └── 🖼️ hero-img.png
 │   │   └── 📁 videos/
 │   │       ├── 📁 C-H/
 │   │       │   ├── 🎬 F1.mp4
@@ -377,11 +390,11 @@
 ├── ⚙️ .gitignore
 ├── 📄 Folder-Structure.txt
 ├── 📝 README.md
-├── 📄 Untitled-1.txt
 ├── 📄 eslint.config.js
 ├── 📄 example.txt
 ├── 🌐 index.html
 ├── ⚙️ package-lock.json
 ├── ⚙️ package.json
 └── 📄 vite.config.js
+
  

@@ -144,7 +144,7 @@ ul {
 .TE-heading p,
 .fc-description {
   font-size: clamp(0.92rem, 1.1vw, 1.05rem);
-  line-height: 1.7;
+ 
   color: #596780;
   max-width: 680px;
   margin: 0 auto;

@@ -1,7 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import "./About.css";
-import aboutImage from "../../assets/images/about.webp";
+import { getR2Url } from "../../config/r2";
 import ImageWithSkeleton from "../Common/ImageWithSkeleton";
+
+const aboutImage = getR2Url("profile/about.webp");
 
 function StatCounter({ target, suffix = "", label, decimals = 0 }) {
   const [count, setCount] = useState(0);
@@ -107,8 +109,12 @@ export default function About() {
 
           {/* Right Side */}
           <div className="offset-lg-1 col-lg-7">
-            <div className="sub__title">
-              <span>Hey !</span>
+            {/* Hey Title */}
+            <div className="hey" aria-label="Hey!">
+              <span className="letter h">h</span>
+              <span className="letter e">E</span>
+              <span className="letter y">y</span>
+              <span className="letter exclamation">!</span>
             </div>
 
             <p>

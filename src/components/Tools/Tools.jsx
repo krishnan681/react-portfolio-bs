@@ -1,21 +1,15 @@
 import { useState } from "react";
 import "./Tools.css";
 
-// Tool icons
-import tool1 from "../../assets/images/Tools/1.png";
-import tool2 from "../../assets/images/Tools/2.png";
-import tool3 from "../../assets/images/Tools/3.png";
-import tool4 from "../../assets/images/Tools/4.png";
-import tool5 from "../../assets/images/Tools/5.png";
-import tool6 from "../../assets/images/Tools/6.png";
+import { getR2Url } from "../../config/r2";
 
 const TOOLS = [
-  { id: "tool-1", name: "Premiere Pro", src: tool1, delay: "0s" },
-  { id: "tool-2", name: "After Effects", src: tool2, delay: "0.2s" },
-  { id: "tool-3", name: "Photoshop", src: tool3, delay: "0.4s" },
-  { id: "tool-4", name: "Illustrator", src: tool4, delay: "0.1s" },
-  { id: "tool-5", name: "DaVinci Resolve", src: tool5, delay: "0.3s" },
-  { id: "tool-6", name: "Lightroom", src: tool6, delay: "0.5s" },
+  { id: "tool-1", name: "Premiere Pro", src: getR2Url("tools/1.png"), delay: "0s" },
+  { id: "tool-2", name: "After Effects", src: getR2Url("tools/2.png"), delay: "0.2s" },
+  { id: "tool-3", name: "Photoshop", src: getR2Url("tools/3.png"), delay: "0.4s" },
+  { id: "tool-4", name: "Illustrator", src: getR2Url("tools/4.png"), delay: "0.1s" },
+  { id: "tool-5", name: "DaVinci Resolve", src: getR2Url("tools/5.png"), delay: "0.3s" },
+  { id: "tool-6", name: "Lightroom", src: getR2Url("tools/6.png"), delay: "0.5s" },
 ];
 
 export default function Tools() {

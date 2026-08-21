@@ -211,7 +211,7 @@ export default function VisualCreations() {
                   </div>
                   <h3>Images</h3>
                 </div>
-                <span className="folder-count-chip">16+ Works</span>
+               
               </div>
               <p className="folder-bottom-text">
                 Posters, Typography, Branding Identity & 3D Visual Art
@@ -221,7 +221,7 @@ export default function VisualCreations() {
                 className="folder-open-cta-btn"
                 onClick={handleOpenImages}
               >
-                <span>View Image Works</span>
+                <span>Explore my works</span>
                 <ArrowUpRight size={15} />
               </button>
             </div>
@@ -309,7 +309,7 @@ export default function VisualCreations() {
                   </div>
                   <h3>Videos</h3>
                 </div>
-                <span className="folder-count-chip">8+ Works</span>
+              
               </div>
               <p className="folder-bottom-text">
                 Commercial Trailers, 3D Motion Graphics, Reels & Shorts
@@ -319,7 +319,7 @@ export default function VisualCreations() {
                 className="folder-open-cta-btn"
                 onClick={handleOpenVideos}
               >
-                <span>View Video Works</span>
+                <span>Explore my works</span>
                 <ArrowUpRight size={15} />
               </button>
             </div>

@@ -20,19 +20,74 @@
 }
 
 /*=========================
-      VIDEO SLIDER
+      VIDEO SLIDER & ARROWS
 ==========================*/
 
-.video-slider {
+.video-slider-wrap {
   position: relative;
   width: 100vw;
   left: 50%;
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  overflow: hidden;
   margin-bottom: clamp(35px, 5vw, 60px);
+  display: flex;
+  align-items: center;
+}
+
+.video-slider {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
   padding: 16px 0 24px;
+}
+
+.video-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.video-slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(4, 25, 58, 0.14);
+  color: #04193a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 8px 24px rgba(4, 25, 58, 0.16);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.video-slider-arrow:hover {
+  background: #04193a;
+  color: #ffffff;
+  border-color: #04193a;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 12px 28px rgba(4, 25, 58, 0.28);
+}
+
+.video-slider-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.video-slider-arrow.left {
+  left: clamp(16px, 3.5vw, 40px);
+}
+
+.video-slider-arrow.right {
+  right: clamp(16px, 3.5vw, 40px);
 }
 
 .slider-track {
@@ -40,9 +95,10 @@
   width: max-content;
   gap: clamp(16px, 2vw, 28px);
   animation: marquee 34s linear infinite;
-  padding: 0 16px;
+  padding: 0 clamp(20px, 4vw, 50px);
 }
 
+.video-slider-wrap:hover .slider-track,
 .video-slider:hover .slider-track {
   animation-play-state: paused;
 }
@@ -68,9 +124,9 @@
   width: 320px;
   height: 420px;
   overflow: hidden;
-  border-radius: 28px;
+  border-radius: 8px;
   cursor: pointer;
-  background: #d6ecff;
+  background: #04193a;
   transition: 0.45s ease;
 }
 
@@ -78,6 +134,15 @@
   transform: translateY(-12px);
 }
 
+.video-preview-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.video-preview-frame video,
 .video-card video {
   width: 100%;
   height: 100%;
@@ -201,7 +266,7 @@
 .imagefour {
   position: relative;
   overflow: hidden;
-  border-radius: 18px;
+  border-radius: 8px;
   width: 100%;
   aspect-ratio: 3.5 / 5;
   cursor: pointer;
@@ -383,6 +448,27 @@
 
 
 /*=========================================
+        FEATURED LAUNCHES HEADER
+=========================================*/
+
+.featured-launches-header {
+  margin: clamp(40px, 6vw, 75px) 0 clamp(25px, 4vw, 40px);
+  position: relative;
+  width: 100%;
+}
+
+.featured-launches-header .title {
+  margin-bottom: 8px;
+}
+
+.FL-heading p {
+  font-size: clamp(0.92rem, 1.1vw, 1.05rem);
+  color: #596780;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/*=========================================
             HIGHLIGHT GRID (VERTICAL VIDEOS)
 =========================================*/
 
@@ -405,7 +491,7 @@
     rgba(255, 255, 255, 0.75) 100%
   );
   border: 1px solid rgba(4, 25, 58, 0.08);
-  border-radius: 32px;
+  border-radius: 8px;
   overflow: hidden;
   transition:
     transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
@@ -488,7 +574,7 @@
   max-width: 360px;
   aspect-ratio: 9 / 16;
   max-height: 560px;
-  border-radius: 24px;
+  border-radius: 8px;
   overflow: hidden;
   background: #04193a;
   box-shadow:

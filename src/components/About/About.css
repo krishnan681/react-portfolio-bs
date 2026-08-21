@@ -1,4 +1,6 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap');
+
 /* ===========================================
    ROOT VARIABLES
 =========================================== */
@@ -49,24 +51,55 @@
   color: var(--primary-color, #1b4ef5);
 }
 
-.sub__title {
-  display: inline-block;
+/* ==================== 
+   HEY TYPOGRAPHY TITLE
+==================== */
+.hey {
+  position: relative;
+  width: 390px;
+  height: 180px;
+  font-family: "Bowlby One", sans-serif;
+  color: #168fe5;
+  user-select: none;
 }
 
-.sub__title span {
-  font-size: 2.85rem;
-  font-weight: 700;
-  --heading-font: "Priestacy", "Playfair Display", Georgia, serif;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: #04193a;
+.letter {
+  position: absolute;
+  display: block;
+  font-size: 125px;
+  line-height: 1;
+  transform-origin: center;
+}
+
+.h {
+  left: 15px;
+  top: 28px;
+  transform: rotate(-3deg);
+}
+
+.e {
+  left: 100px;
+  top: 14px;
+  transform: rotate(-9deg);
+}
+
+.y {
+  left: 183px;
+  top: 28px;
+  transform: rotate(14deg);
+}
+
+.exclamation {
+  left: 286px;
+  top: 8px;
+  transform: rotate(14deg);
 }
 
 .about p {
   color: #4b5563;
   font-size: 1.05rem;
   line-height: 1.75;
-  margin-top: 1rem;
+  margin-top: 0.75rem;
 }
 
 /* Experience Circle */
@@ -79,7 +112,7 @@
 .about__image img {
   width: 100%;
   height: auto;
-  border-radius: 24px;
+  border-radius: 8px;
 }
 
 .exe {
@@ -253,6 +286,11 @@
 }
 
 @media (max-width: 768px) {
+  .hey {
+    transform-origin: left top;
+    transform: scale(0.85);
+    margin-bottom: -20px;
+  }
   .exe {
     position: relative;
     right: auto;
@@ -285,6 +323,11 @@
 }
 
 @media (max-width: 480px) {
+  .hey {
+    transform-origin: left top;
+    transform: scale(0.72);
+    margin-bottom: -45px;
+  }
   .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
