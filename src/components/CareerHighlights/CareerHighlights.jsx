@@ -205,19 +205,19 @@ export default function CareerHighlights() {
   };
 
   return (
-    <section className="career__highlights sc_py" id="career__highlights">
+    <section className="career__highlights sc_py" id="career">
       <div className="container">
         {/* ===============================
             Section Title
         =============================== */}
 
-        <div className="title">
+        <div className="title" data-aos="fade-up">
           <div className="bg-text">Career</div>
 
           <h1 className="main-title">HIGHLIGHTS</h1>
         </div>
 
-        <div className="CH-heading text-center">
+        <div className="CH-heading text-center" data-aos="fade-up" data-aos-delay="100">
           <p>
             Recognized for outstanding creative performance and industry
             acknowledgment from leading entertainment brands, delivering
@@ -370,7 +370,7 @@ export default function CareerHighlights() {
         ====================================== */}
 
         <div className="featured-launches-header text-center">
-          <div className="title">
+          <div className="title" data-aos="fade-up">
             
             <h2 className="main-title">FEATURED LAUNCHES</h2>
           </div>

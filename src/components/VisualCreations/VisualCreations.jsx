@@ -116,13 +116,13 @@ export default function VisualCreations() {
 
   return (
     <section className="visual-creations" id="visual" ref={sectionRef}>
-      <div className="title">
+      <div className="title" data-aos="fade-up">
         <div className="bg-text">Visual</div>
         <h1 className="main-title">Creations</h1>
       </div>
 
       <div className="container">
-        <div className="section-heading text-center">
+        <div className="section-heading text-center" data-aos="fade-up" data-aos-delay="100">
           <p>
             Explore my collection of creative work through two dedicated interactive folders.
             Click each folder to enter custom-crafted showcases of high-impact image designs and cinematic motion graphics.

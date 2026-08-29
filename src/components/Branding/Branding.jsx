@@ -168,13 +168,13 @@ export default function Branding() {
     <section className="branding-section" id="branding" aria-label="Branding Collaborations">
       <div className="container-fluid px-0">
         {/* ================= TITLE ================= */}
-        <div className="title">
+        <div className="title" data-aos="fade-up">
           <div className="bg-text">Branding</div>
           <h1 className="main-title">COLLABORATIONS</h1>
         </div>
 
         {/* ================= DESCRIPTION ================= */}
-        <div className="BC-heading text-center">
+        <div className="BC-heading text-center" data-aos="fade-up" data-aos-delay="100">
           <p>
             Creative work delivered across diverse industries — entertainment, retail,
             <br />

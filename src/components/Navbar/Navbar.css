@@ -1,11 +1,14 @@
 :root {
-  --nav-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.48) 100%);
-  --nav-border: rgba(255, 255, 255, 0.85);
+  --nav-glass: rgba(255, 255, 255, 0.75);
+  --nav-glass-compact: rgba(255, 255, 255, 0.88);
+  --nav-border: rgba(255, 255, 255, 0.88);
   --nav-text: #04193a;
-  --nav-hover: #0284c7;
+  --nav-hover: #1b4ef5;
 }
 
-/* Mobile Backdrop Overlay */
+/* =========================================================
+   BACKDROP OVERLAY (Mobile)
+========================================================= */
 .navbar-backdrop {
   position: fixed;
   inset: 0;
@@ -16,47 +19,82 @@
   transition: opacity 0.3s ease;
 }
 
+/* =========================================================
+   NAVBAR WRAPPER — EXPANDED (Default / Hero)
+========================================================= */
 .navbar-wrapper {
   position: fixed;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  /* width: min(94%, 1360px); */
+  width: min(94%, 1280px);
   max-width: calc(100vw - 24px);
-  height: 64px;
-  padding: 0 24px;
+  height: 62px;
+  padding: 0 32px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   border-radius: 60px;
   background: var(--nav-glass);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
   border: 1px solid var(--nav-border);
   box-shadow:
-    0 12px 36px rgba(4, 25, 58, 0.08),
+    0 14px 40px rgba(4, 25, 58, 0.08),
     inset 0 1px 1px rgba(255, 255, 255, 0.95),
     inset 0 -1px 1px rgba(4, 25, 58, 0.02);
   z-index: 9999;
   box-sizing: border-box;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Smooth morph transitions */
+  transition:
+    width 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    padding 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    top 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.5s ease,
+    box-shadow 0.5s ease,
+    border-radius 0.4s ease;
 }
 
-/* Nav Menu (Desktop) */
+/* =========================================================
+   NAVBAR WRAPPER — COMPACT (Scrolled past Hero)
+========================================================= */
+.navbar-wrapper.navbar-compact {
+  top: 12px;
+  width: min(90%, 820px);
+  height: 48px;
+  padding: 0 20px;
+  background: var(--nav-glass-compact);
+  box-shadow:
+    0 8px 28px rgba(4, 25, 58, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95);
+}
+
+/* =========================================================
+   NAV MENU — Desktop Links
+========================================================= */
 .navbar-menu {
   display: flex;
   align-items: center;
   gap: clamp(10px, 1.8vw, 24px);
+  justify-content: center;
+  width: 100%;
 }
 
 .navbar-menu a {
   text-decoration: none;
   color: var(--nav-text);
   font-weight: 600;
-  font-size: clamp(0.8rem, 0.95vw, 0.9rem);
+  font-size: clamp(0.78rem, 0.9vw, 0.88rem);
   position: relative;
-  transition: color 0.25s ease;
   white-space: nowrap;
+
+  /* Smooth font-size & opacity transitions */
+  transition:
+    color 0.25s ease,
+    font-size 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.4s ease;
 }
 
 .navbar-menu a::after {
@@ -80,42 +118,79 @@
   transform: scaleX(1);
 }
 
+/* =========================================================
+   COMPACT MODE — Shrink Link Fonts
+========================================================= */
+.navbar-compact .navbar-menu a {
+  font-size: clamp(0.7rem, 0.78vw, 0.78rem);
+}
+
+/* =========================================================
+   HIRE ME BUTTON
+========================================================= */
+.hire-me-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 18px !important;
+  border-radius: 999px !important;
+  background: #04193a !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.3px;
+  text-decoration: none !important;
+  white-space: nowrap;
+  border: none;
+  box-shadow: 0 4px 14px rgba(4, 25, 58, 0.15);
+  flex-shrink: 0;
+
+  /* Hidden by default — only shows in compact */
+  opacity: 0;
+  max-width: 0;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0;
+  overflow: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    max-width 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    padding 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    margin 0.4s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.hire-me-btn::after {
+  display: none !important;
+}
+
+/* Show Hire Me only in compact navbar */
+.navbar-compact .hire-me-btn {
+  opacity: 1;
+  max-width: 120px;
+  padding: 6px 18px !important;
+  margin-left: 8px;
+  pointer-events: auto;
+}
+
+.hire-me-btn:hover {
+  background: #1b4ef5 !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(27, 78, 245, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Mobile CTA inside dropdown */
 .navbar-menu-mobile-cta {
   display: none;
 }
 
-/* Right Desktop CTA */
-.navbar-right {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-shrink: 0;
-}
-
-.navbar-right a {
-  text-decoration: none;
-  color: var(--nav-text);
-  font-weight: 600;
-  font-size: 0.84rem;
-  padding: 8px 18px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.45) 100%);
-  backdrop-filter: blur(12px) saturate(160%);
-  -webkit-backdrop-filter: blur(12px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  box-shadow: 0 4px 14px rgba(4, 25, 58, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.95);
-  transition: all 0.25s ease;
-  white-space: nowrap;
-}
-
-.navbar-right a:hover {
-  background: #04193a;
-  color: #ffffff;
-  border-color: #04193a;
-  box-shadow: 0 6px 20px rgba(4, 25, 58, 0.2);
-}
-
-/* Hamburger Button */
+/* =========================================================
+   HAMBURGER BUTTON
+========================================================= */
 .hamburger {
   display: none;
   background: transparent;
@@ -152,17 +227,23 @@
 }
 
 /* =========================================================
-   RESPONSIVE BREAKPOINTS
+   RESPONSIVE — Tablet / Mobile
 ========================================================= */
 
 @media (max-width: 992px) {
-  .navbar-right {
-    display: none;
-  }
-
   .hamburger {
     display: flex;
-    margin-left: auto;
+    position: absolute;
+    right: 20px;
+  }
+
+  .navbar-wrapper {
+    justify-content: center;
+  }
+
+  .navbar-wrapper.navbar-compact {
+    width: min(94%, 1280px);
+    height: 52px;
   }
 
   .navbar-menu {
@@ -204,6 +285,17 @@
     padding: 4px 0;
   }
 
+  /* Show Hire Me in mobile dropdown always */
+  .hire-me-btn {
+    opacity: 1 !important;
+    max-width: 200px !important;
+    padding: 10px 28px !important;
+    margin-left: 0 !important;
+    pointer-events: auto !important;
+    font-size: 0.95rem !important;
+    margin-top: 6px;
+  }
+
   .navbar-menu-mobile-cta {
     display: block;
     width: 100%;
@@ -232,6 +324,10 @@
     height: 56px;
     padding: 0 16px;
     top: 12px;
+  }
+
+  .navbar-wrapper.navbar-compact {
+    height: 48px;
   }
 
   .navbar-menu {

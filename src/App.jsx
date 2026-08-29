@@ -1,8 +1,12 @@
+import { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
+// import HeroOld from "./components/Hero/HeroOld"; // Original Hero component preserved
 import About from "./components/About/About";
 import CreativeExpertise from "./components/CreativeExpertise/CreativeExpertise";
 import CareerHighlights from "./components/CareerHighlights/CareerHighlights";
@@ -23,15 +27,17 @@ function Home() {
 
       <main>
         <Hero />
-        <About />
-        <CreativeExpertise />
-        <CareerHighlights />
-        <Branding />
-        <VisualCreations />
-        <Tools />
-        {/* <InstagramPosts /> */}
-        <FontsColors />
-        <Contact />
+        <div className="content-layers">
+          <About />
+          <CreativeExpertise />
+          <CareerHighlights />
+          <Branding />
+          <VisualCreations />
+          <Tools />
+          {/* <InstagramPosts /> */}
+          <FontsColors />
+          <Contact />
+        </div>
       </main>
 
       {/* <Footer /> */}
@@ -40,6 +46,16 @@ function Home() {
 }
 
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: "ease-out-cubic",
+      once: true,
+      offset: 60,
+      delay: 0,
+    });
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>

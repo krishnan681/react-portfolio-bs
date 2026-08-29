@@ -26,7 +26,7 @@ export default function Contact() {
     <section id="contact" className="contact-section">
       <div className="container">
         {/* ================= HEADER ================= */}
-        <div className="contact-header">
+        <div className="contact-header" data-aos="fade-up">
           <div className="eyebrow">
             <div className="rings">
               <span></span>
@@ -50,7 +50,7 @@ export default function Contact() {
         </div>
 
         {/* ================= CTA BANNER ================= */}
-        <div className="contact-cta-card">
+        <div className="contact-cta-card" data-aos="fade-up" data-aos-delay="100">
           <div className="cta-content">
             <div className="cta-badge">AVAILABLE FOR FREELANCE &amp; COLLABORATIONS</div>
             <h3 className="cta-title">Have a project or opportunity?</h3>
@@ -93,7 +93,15 @@ export default function Contact() {
               <ul className="footer-nav-list">
                 {NAV_LINKS.map((link, idx) => (
                   <li key={idx}>
-                    <a href={link.href}>{link.label}</a>
+                    <a
+                      href={link.href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.querySelector(link.href)?.scrollIntoView({ behavior: "smooth" });
+                      }}
+                    >
+                      {link.label}
+                    </a>
                   </li>
                 ))}
               </ul>

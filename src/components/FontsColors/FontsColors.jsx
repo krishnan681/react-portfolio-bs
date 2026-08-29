@@ -78,12 +78,12 @@ export default function FontsColors() {
         {/* Heading */}
 
         <div className="fc-heading">
-          <div className="title ">
+          <div className="title " data-aos="fade-up">
             <div className="bg-text">Color</div>
             <h1 className="main-title">Palettes</h1>
           </div>
 
-          <p className="fc-description">
+          <p className="fc-description" data-aos="fade-up" data-aos-delay="100">
             A curated collection of premium fonts paired with harmonious color
             palettes to create timeless visual identities.
           </p>

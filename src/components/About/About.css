@@ -1,54 +1,134 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap');
 
 /* ===========================================
    ROOT VARIABLES
 =========================================== */
 :root {
-  --bg: radial-gradient(circle, aliceblue 0%, #d9f2ff 60%, #b8e6ff 100%);
-  --text: #000000;
-  --primary: #2b6bff;
-  --white: #ffffff;
-  --border: #d9d9d9;
-  --muted: #707070;
-
-  --body-font: "Roboto", sans-serif;
-  --heading-font: "Priestacy", serif;
-  --alt-font: "Helvetica Now Text", serif;
-
+  --about-bg: #ffffff;
+  --about-text: #04193a;
   --primary-color: #1b4ef5;
-  --primary-hsl: hsl(226, 92%, 53%);
 }
 
 /* ==================== 
- SECTION : ABOUT
+   SECTION : ABOUT
 ==================== */
 
-.t-font {
-  font-family: "ClashGrotesk", sans-serif;
-}
-
-.alt-font {
-  font-family: "Priestacy", serif;
-}
-
 .about {
-  background: transparent;
+  background: var(--about-bg);
   position: relative;
+  z-index: 10;
+  overflow: visible;
+  padding: clamp(60px, 8vw, 110px) 0 clamp(60px, 8vw, 100px) 0;
+  box-shadow: 0 -25px 50px rgba(4, 25, 58, 0.05);
+}
+
+/* ==================== 
+   FLIPPED CUSTOM SHAPE DIVIDER
+==================== */
+.custom-shape-divider-top-1788027072 {
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 100%;
   overflow: hidden;
-  padding: clamp(40px, 5vw, 65px) 0;
+  line-height: 0;
+  z-index: 2;
+  pointer-events: none;
 }
 
-.main__title {
-  font-size: clamp(2rem, 3.5vw, 2.75rem);
-  font-family: "Clashsemi", "Inter", sans-serif;
-  line-height: 1.25;
-  color: #04193a;
+.custom-shape-divider-top-1788027072 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 81px;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-top-1788027072 .shape-fill {
+  fill: #ffffff;
+}
+
+/* ==================== 
+   BOTTOM CUSTOM SHAPE DIVIDER
+==================== */
+.custom-shape-divider-bottom-1788027072 {
+  position: absolute;
+  bottom: -80px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.custom-shape-divider-bottom-1788027072 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 81px;
+}
+
+.custom-shape-divider-bottom-1788027072 .shape-fill {
+  fill: #ffffff;
+}
+
+/* ==================== 
+   CENTERED CONTENT WRAPPER
+==================== */
+.about-center-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ==================== 
+   SCROLL BLOCK FADE-IN
+==================== */
+.scroll-block {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-block.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==================== 
+   WORD-BY-WORD ANIMATIONS
+==================== */
+.animated-words-container {
+  display: inline;
+}
+
+.word-span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(18px) scale(0.96);
+  filter: blur(5px);
+  will-change: opacity, transform, filter;
+  transition:
+    opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.word-span.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0px);
+}
+
+.word-span.highlight-word {
+  color: #1b4ef5;
   font-weight: 700;
-}
-
-.main__title span {
-  color: var(--primary-color, #1b4ef5);
 }
 
 /* ==================== 
@@ -56,164 +136,213 @@
 ==================== */
 .hey {
   position: relative;
-  width: 390px;
-  height: 180px;
+  width: 380px;
+  height: 160px;
   font-family: "Bowlby One", sans-serif;
-  color: #168fe5;
+  color: #1b4ef5;
   user-select: none;
+  margin: 0 auto 10px auto;
 }
 
 .letter {
   position: absolute;
   display: block;
-  font-size: 125px;
+  font-size: 118px;
   line-height: 1;
-  transform-origin: center;
+  transform-origin: center bottom;
+  opacity: 0;
+  transform: translateY(-80px) scale(0.3);
 }
 
+/* Initial hidden state — letters invisible until triggered */
 .h {
   left: 15px;
-  top: 28px;
-  transform: rotate(-3deg);
+  top: 24px;
 }
 
 .e {
-  left: 100px;
-  top: 14px;
-  transform: rotate(-9deg);
+  left: 95px;
+  top: 10px;
 }
 
 .y {
-  left: 183px;
-  top: 28px;
-  transform: rotate(14deg);
+  left: 178px;
+  top: 24px;
 }
 
 .exclamation {
-  left: 286px;
-  top: 8px;
-  transform: rotate(14deg);
-}
-
-.about p {
-  color: #4b5563;
-  font-size: 1.05rem;
-  line-height: 1.75;
-  margin-top: 0.75rem;
-}
-
-/* Experience Circle */
-.about__image {
-  position: relative;
-  z-index: 1;
-  max-width: 100%;
-}
-
-.about__image img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
-.exe {
-  position: absolute;
-  right: -20px;
-  top: 10px;
-  z-index: 10;
-}
-
-.experience {
-  position: relative;
-  width: 105px;
-  height: 105px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #1b4ef5 0%, #0284c7 100%);
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-family: sans-serif;
-  overflow: visible;
-  box-shadow: 0 12px 30px rgba(27, 78, 245, 0.35);
-}
-
-.experience::before,
-.experience::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 2px solid #1b4ef5;
-  animation: wave 2.5s infinite;
-}
-
-.experience::after {
-  animation-delay: 1.25s;
-}
-
-.experience span {
-  font-size: 34px;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.experience small {
-  font-size: 10.5px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-
-@keyframes wave {
-  0% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1.4);
-    opacity: 0;
-  }
+  left: 275px;
+  top: 4px;
 }
 
 /* ==================== 
- STATS (Numbers Working & Styled)
+   HEY BOUNCE-IN ANIMATION
+==================== */
+@keyframes letterBounceIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-80px) scale(0.3) rotate(0deg);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(12px) scale(1.15) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-8px) scale(0.95) rotate(3deg);
+  }
+  70% {
+    transform: translateY(4px) scale(1.05) rotate(-1.5deg);
+  }
+  85% {
+    transform: translateY(-2px) scale(0.98) rotate(0.5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+/* Add final resting rotations per letter */
+.hey.hey-bounce-in .h {
+  animation: letterBounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0s forwards;
+}
+
+.hey.hey-bounce-in .e {
+  animation: letterBounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s forwards;
+}
+
+.hey.hey-bounce-in .y {
+  animation: letterBounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+}
+
+.hey.hey-bounce-in .exclamation {
+  animation: letterBounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
+}
+
+/* After bounce, apply the resting rotation */
+.hey.hey-bounce-in .h { --rest-rotate: -3deg; }
+.hey.hey-bounce-in .e { --rest-rotate: -9deg; }
+.hey.hey-bounce-in .y { --rest-rotate: 14deg; }
+.hey.hey-bounce-in .exclamation { --rest-rotate: 14deg; }
+
+/* Continuous subtle wobble after landing */
+@keyframes letterWobble {
+  0%, 100% { transform: translateY(0) rotate(var(--rest-rotate, 0deg)); }
+  25% { transform: translateY(-4px) rotate(calc(var(--rest-rotate, 0deg) + 2deg)); }
+  75% { transform: translateY(-2px) rotate(calc(var(--rest-rotate, 0deg) - 2deg)); }
+}
+
+.hey.hey-bounce-in .letter {
+  animation-fill-mode: forwards;
+}
+
+/* Apply wobble after initial bounce completes */
+.hey.hey-bounce-in .h {
+  animation: letterBounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0s forwards,
+             letterWobble 3s ease-in-out 1.2s infinite;
+}
+
+.hey.hey-bounce-in .e {
+  animation: letterBounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s forwards,
+             letterWobble 3s ease-in-out 1.4s infinite;
+}
+
+.hey.hey-bounce-in .y {
+  animation: letterBounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards,
+             letterWobble 3s ease-in-out 1.6s infinite;
+}
+
+.hey.hey-bounce-in .exclamation {
+  animation: letterBounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards,
+             letterWobble 3s ease-in-out 1.8s infinite;
+}
+
+/* ==================== 
+   EXPERIENCE BADGE
+==================== */
+.experience-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 22px;
+  border-radius: 999px;
+  background: rgba(27, 78, 245, 0.08);
+  border: 1px solid rgba(27, 78, 245, 0.2);
+  margin-bottom: 24px;
+}
+
+.exp-num {
+  font-family: "Clash Grotesk", "Inter", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #1b4ef5;
+}
+
+.exp-text {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #04193a;
+  letter-spacing: 0.3px;
+}
+
+/* ==================== 
+   TEXT CONTENT
+==================== */
+.about-text-content {
+  max-width: 780px;
+  margin-bottom: 36px;
+}
+
+.about-text-content .lead-text {
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+  font-weight: 500;
+  line-height: 1.6;
+  color: #04193a;
+  margin-bottom: 18px;
+}
+
+.about-text-content .body-text {
+  font-size: clamp(1rem, 1.15vw, 1.1rem);
+  line-height: 1.85;
+  color: #55627a;
+  margin: 0;
+}
+
+/* ==================== 
+   STATS COUNTER
 ==================== */
 .stats {
   display: flex;
-  gap: 16px;
-  margin: 35px 0;
+  gap: 20px;
+  width: 100%;
+  max-width: 760px;
+  margin-top: 10px;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
 .stat {
-  padding: 16px 20px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.42) 100%);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  border-radius: 7px;
-  box-shadow:
-    0 8px 24px rgba(4, 25, 58, 0.05),
-    inset 0 1px 1px rgba(255, 255, 255, 0.95);
+  padding: 20px 24px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(4, 25, 58, 0.04);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  min-width: 130px;
-  flex: 1 1 calc(33.333% - 16px);
+  min-width: 170px;
+  flex: 1 1 calc(33.333% - 20px);
+  text-align: center;
 }
 
 .stat:hover {
-  transform: translateY(-3px);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.55) 100%);
-  border-color: rgba(255, 255, 255, 0.98);
-  box-shadow:
-    0 14px 30px rgba(4, 25, 58, 0.09),
-    inset 0 1px 1px rgba(255, 255, 255, 1);
+  transform: translateY(-4px);
+  background: #ffffff;
+  border-color: #1b4ef5;
+  box-shadow: 0 12px 30px rgba(27, 78, 245, 0.1);
 }
 
 .stat b {
   font-family: "Clash Grotesk", "Inter", -apple-system, sans-serif;
-  font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+  font-size: clamp(2rem, 3.2vw, 2.6rem);
   font-weight: 800;
   color: #04193a;
   display: block;
@@ -222,111 +351,143 @@
 }
 
 .stat span {
-  font-size: 0.75rem;
+  font-size: 0.76rem;
   letter-spacing: 1.5px;
   color: #64748b;
   font-weight: 700;
   text-transform: uppercase;
-  margin-top: 6px;
+  margin-top: 8px;
   display: block;
 }
 
 /* ==================== 
- INDUSTRIES (.tag Glassmorphism)
+   RESPONSIVE
 ==================== */
-.industries {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 28px 0;
-}
 
-.tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 18px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.45) 100%);
-  backdrop-filter: blur(18px) saturate(180%);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  border-radius: 999px;
-  font-size: 0.88rem;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  color: #04193a;
-  box-shadow:
-    0 6px 18px rgba(4, 25, 58, 0.05),
-    inset 0 1px 1px rgba(255, 255, 255, 0.95),
-    inset 0 -1px 1px rgba(4, 25, 58, 0.02);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  user-select: none;
-  cursor: default;
-}
-
-.tag:hover {
-  transform: translateY(-3px);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.6) 100%);
-  border-color: rgba(255, 255, 255, 0.98);
-  box-shadow:
-    0 12px 28px rgba(4, 25, 58, 0.1),
-    inset 0 1px 1px rgba(255, 255, 255, 1);
-  color: #0284c7;
-}
-
-/* Responsive */
+/* Tablet Landscape */
 @media (max-width: 992px) {
-  .exe {
-    right: 0px;
-    top: 0px;
+  .about {
+    padding: clamp(50px, 7vw, 90px) 0 clamp(50px, 7vw, 80px) 0;
   }
-  .stat {
-    flex: 1 1 calc(33.333% - 12px);
+  .about-center-wrapper {
+    max-width: 700px;
+    padding: 0 20px;
+  }
+  .custom-shape-divider-top-1788027072 {
+    top: -60px;
+  }
+  .custom-shape-divider-top-1788027072 svg {
+    height: 62px;
+  }
+  .custom-shape-divider-bottom-1788027072 {
+    bottom: -60px;
+  }
+  .custom-shape-divider-bottom-1788027072 svg {
+    height: 62px;
   }
 }
 
+/* Tablet Portrait */
 @media (max-width: 768px) {
+  .about {
+    padding: clamp(45px, 6vw, 70px) 0 clamp(45px, 6vw, 70px) 0;
+  }
   .hey {
-    transform-origin: left top;
+    transform-origin: center top;
     transform: scale(0.85);
-    margin-bottom: -20px;
+    margin-bottom: -15px;
   }
-  .exe {
-    position: relative;
-    right: auto;
-    top: -24px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
+  .about-text-content .lead-text {
+    font-size: 1.15rem;
   }
-  .experience {
-    width: 90px;
-    height: 90px;
+  .about-text-content .body-text {
+    font-size: 0.95rem;
   }
-  .experience span {
-    font-size: 26px;
+  .experience-badge {
+    padding: 6px 18px;
+    gap: 8px;
+  }
+  .exp-num {
+    font-size: 1rem;
+  }
+  .exp-text {
+    font-size: 0.82rem;
   }
   .stats {
-    gap: 10px;
+    gap: 14px;
   }
   .stat {
-    flex: 1 1 calc(33.333% - 10px);
-    padding: 12px 10px;
-    min-width: 90px;
+    flex: 1 1 calc(33.333% - 14px);
+    min-width: 110px;
+    padding: 16px 12px;
   }
   .stat b {
-    font-size: 1.6rem;
+    font-size: 1.7rem;
   }
   .stat span {
     font-size: 0.68rem;
+    letter-spacing: 1px;
+  }
+  .custom-shape-divider-top-1788027072 {
+    top: -50px;
+  }
+  .custom-shape-divider-top-1788027072 svg {
+    height: 52px;
+  }
+  .custom-shape-divider-bottom-1788027072 {
+    bottom: -50px;
+  }
+  .custom-shape-divider-bottom-1788027072 svg {
+    height: 52px;
   }
 }
 
+/* Mobile */
 @media (max-width: 480px) {
+  .about {
+    padding: 40px 0;
+  }
+  .about-center-wrapper {
+    padding: 0 12px;
+  }
+  .custom-shape-divider-top-1788027072 {
+    top: -40px;
+  }
+  .custom-shape-divider-top-1788027072 svg {
+    height: 42px;
+  }
+  .custom-shape-divider-bottom-1788027072 {
+    bottom: -40px;
+  }
+  .custom-shape-divider-bottom-1788027072 svg {
+    height: 42px;
+  }
   .hey {
-    transform-origin: left top;
-    transform: scale(0.72);
-    margin-bottom: -45px;
+    transform: scale(0.7);
+    margin-bottom: -30px;
+  }
+  .experience-badge {
+    padding: 5px 14px;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+  .exp-num {
+    font-size: 0.92rem;
+  }
+  .exp-text {
+    font-size: 0.76rem;
+  }
+  .about-text-content {
+    margin-bottom: 28px;
+  }
+  .about-text-content .lead-text {
+    font-size: 1.05rem;
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+  .about-text-content .body-text {
+    font-size: 0.88rem;
+    line-height: 1.7;
   }
   .stats {
     display: grid;
@@ -334,39 +495,36 @@
     gap: 8px;
   }
   .stat {
-    padding: 10px 6px;
-    text-align: center;
+    padding: 12px 6px;
+    min-width: unset;
+    border-radius: 12px;
   }
   .stat b {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
   }
   .stat span {
-    font-size: 0.62rem;
-    letter-spacing: 0.8px;
-  }
-  .tag {
-    font-size: 0.8rem;
-    padding: 7px 12px;
-  }
-  .about p {
-    font-size: 0.94rem;
-    line-height: 1.65;
+    font-size: 0.6rem;
+    letter-spacing: 0.5px;
+    margin-top: 5px;
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Small Mobile */
+@media (max-width: 360px) {
+  .hey {
+    transform: scale(0.6);
+    margin-bottom: -40px;
+  }
+  .about-text-content .lead-text {
+    font-size: 0.96rem;
+  }
+  .about-text-content .body-text {
+    font-size: 0.82rem;
+  }
+  .stat b {
+    font-size: 1.15rem;
+  }
+  .stat span {
+    font-size: 0.55rem;
+  }
+}

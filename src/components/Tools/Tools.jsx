@@ -18,12 +18,12 @@ export default function Tools() {
   return (
     <section id="tools">
       <div className="container-fluid px-0">
-        <div className="title">
+        <div className="title" data-aos="fade-up">
           <div className="bg-text">Tools</div>
           <h1 className="main-title">Expertise</h1>
         </div>
 
-        <div className="TE-heading text-center">
+        <div className="TE-heading text-center" data-aos="fade-up" data-aos-delay="100">
           <p>
             The ability to conceptualize, design, and produce visually engaging content that communicates a brand's message and resonates with target audiences.
           </p>

@@ -1,8 +1,32 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./Navbar.css";
+
+const NAV_LINKS = [
+  { label: "Home", href: "#hero" },
+  { label: "About", href: "#about" },
+  { label: "Expertise", href: "#creative-expertise" },
+  { label: "Highlights", href: "#career" },
+  { label: "Branding", href: "#branding" },
+  { label: "Visuals", href: "#visual" },
+  { label: "Tools", href: "#tools" },
+  { label: "Contact", href: "#contact" },
+];
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const handleScroll = useCallback(() => {
+    // Shrink when scrolled past hero (roughly viewport height)
+    const heroHeight = window.innerHeight * 0.85;
+    setScrolled(window.scrollY > heroHeight);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Check initial state
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -16,6 +40,15 @@ export default function Navbar() {
 
   const closeMenu = () => setMenuOpen(false);
 
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    closeMenu();
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       {/* Mobile Backdrop Overlay */}
@@ -27,32 +60,34 @@ export default function Navbar() {
         />
       )}
 
-      <header className="navbar-wrapper">
-        {/* Left Nav Links */}
+      <header className={`navbar-wrapper ${scrolled ? "navbar-compact" : ""}`}>
+        {/* Center Nav Links */}
         <nav className={`navbar-menu ${menuOpen ? "active" : ""}`}>
-          <a href="#hero" onClick={closeMenu}>Home</a>
-          <a href="#about" onClick={closeMenu}>About</a>
-          <a href="#creative-expertise" onClick={closeMenu}>Expertise</a>
-          <a href="#career" onClick={closeMenu}>Highlights</a>
-          <a href="#branding" onClick={closeMenu}>Branding</a>
-          <a href="#visual" onClick={closeMenu}>Visuals</a>
-          <a href="#tools" onClick={closeMenu}>Tools</a>
-          <a href="#fonts-colors" onClick={closeMenu}>Palettes</a>
-          <a href="#contact" onClick={closeMenu}>Contact</a>
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
+            >
+              {link.label}
+            </a>
+          ))}
+
+          {/* Hire Me button - visible only in compact mode on desktop */}
+          <a
+            href="#contact"
+            className="hire-me-btn"
+            onClick={(e) => handleNavClick(e, "#contact")}
+          >
+            Hire Me
+          </a>
 
           <div className="navbar-menu-mobile-cta">
-            <a href="mailto:barath@gmail.com" className="mobile-mail-btn" onClick={closeMenu}>
+            <a href="#contact" className="mobile-mail-btn" onClick={closeMenu}>
               Get in Touch ↗
             </a>
           </div>
         </nav>
-
-        {/* Right Desktop CTA */}
-        {/* <div className="navbar-right">
-          <a href="mailto:barath@gmail.com">
-            barath@gmail.com
-          </a>
-        </div> */}
 
         {/* Hamburger Toggle */}
         <button

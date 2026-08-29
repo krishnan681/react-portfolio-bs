@@ -4,12 +4,12 @@ export default function CreativeExpertise() {
   return (
     <section className="expertise-section" id="creative-expertise">
       <div className="container">
-        <div className="title">
+        <div className="title" data-aos="fade-up">
           <div className="bg-text">Creative</div>
           <h1 className="main-title">Expertise</h1>
         </div>
 
-        <div className="CE-heading text-center">
+        <div className="CE-heading text-center" data-aos="fade-up" data-aos-delay="100">
           <p>
             The ability to conceptualize, design, and produce visually engaging content that communicates a brand's message and resonates with target audiences.
           </p>
@@ -18,7 +18,7 @@ export default function CreativeExpertise() {
         <div className="row g-4">
           {/* Left Card */}
 
-          <div className="col-lg-6">
+          <div className="col-lg-6" data-aos="fade-up" data-aos-delay="150">
             <div className="expertise-card">
               <div className="card-top">
                 <span className="line"></span>
@@ -81,7 +81,7 @@ export default function CreativeExpertise() {
 
           {/* Right Card */}
 
-          <div className="col-lg-6">
+          <div className="col-lg-6" data-aos="fade-up" data-aos-delay="250">
             <div className="expertise-card">
               <div className="card-top">
                 <span className="line"></span>
