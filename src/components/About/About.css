@@ -4,7 +4,7 @@
    ROOT VARIABLES
 =========================================== */
 :root {
-  --about-bg: #ffffff;
+  --about-bg: #FFF9F1;
   --about-text: #04193a;
   --primary-color: #1b4ef5;
 }
@@ -18,16 +18,16 @@
   position: relative;
   z-index: 10;
   overflow: visible;
-  padding: clamp(60px, 8vw, 110px) 0 clamp(60px, 8vw, 100px) 0;
+  padding: clamp(70px, 9vw, 120px) 0 clamp(60px, 8vw, 100px) 0;
   box-shadow: 0 -25px 50px rgba(4, 25, 58, 0.05);
 }
 
 /* ==================== 
-   FLIPPED CUSTOM SHAPE DIVIDER
+   CUSTOM SHAPE DIVIDER (sky-band.svg - Combined with About)
 ==================== */
 .custom-shape-divider-top-1788027072 {
   position: absolute;
-  top: -80px;
+  top: -250px;
   left: 0;
   width: 100%;
   overflow: hidden;
@@ -36,16 +36,32 @@
   pointer-events: none;
 }
 
-.custom-shape-divider-top-1788027072 svg {
-  position: relative;
+.skyband-divider-img {
+  width: 100%;
+  height: auto;
+  min-height: 180px;
+  max-height: 480px;
   display: block;
-  width: calc(100% + 1.3px);
-  height: 81px;
-  transform: rotate(180deg);
+  object-fit: cover;
+  object-position: bottom center;
 }
 
-.custom-shape-divider-top-1788027072 .shape-fill {
-  fill: #ffffff;
+@media (max-width: 1200px) {
+  .custom-shape-divider-top-1788027072 {
+    top: -190px;
+  }
+}
+
+@media (max-width: 992px) {
+  .custom-shape-divider-top-1788027072 {
+    top: -140px;
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-shape-divider-top-1788027072 {
+    top: -95px;
+  }
 }
 
 /* ==================== 
@@ -70,13 +86,15 @@
 }
 
 .custom-shape-divider-bottom-1788027072 .shape-fill {
-  fill: #ffffff;
+  fill: var(--about-bg);
 }
 
 /* ==================== 
    CENTERED CONTENT WRAPPER
 ==================== */
 .about-center-wrapper {
+  position: relative;
+  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -451,10 +469,10 @@
     padding: 0 12px;
   }
   .custom-shape-divider-top-1788027072 {
-    top: -40px;
+    top: -55px;
   }
-  .custom-shape-divider-top-1788027072 svg {
-    height: 42px;
+  .skyband-divider-img {
+    min-height: 70px;
   }
   .custom-shape-divider-bottom-1788027072 {
     bottom: -40px;

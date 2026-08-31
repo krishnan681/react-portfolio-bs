@@ -1,19 +1,18 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { ArrowUpRight, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 import { BRANDS } from "../../data/brands";
 import ImageWithSkeleton from "../Common/ImageWithSkeleton";
 import "./Branding.css";
 
-const AUTOPLAY_DELAY = 3500; // 3.5s autoplay delay
+const AUTOPLAY_DELAY = 3800; // 3.8s autoplay delay
 
 export default function Branding() {
   const navigate = useNavigate();
   const [active, setActive] = useState(0);
-  const deckRef = useRef(null);
-  const dragRef = useRef({ startX: 0, dragging: false });
-  const timerRef = useRef(null);
   const isPaused = useRef(false);
+  const timerRef = useRef(null);
+  const dragInfo = useRef({ startX: 0, startY: 0, isDragging: false });
 
   const total = BRANDS.length;
 
@@ -76,40 +75,6 @@ export default function Branding() {
     return () => window.removeEventListener("keydown", onKey);
   }, [prev, next]);
 
-  // ── Pointer Drag / Swipe ─────────────────────────────
-  useEffect(() => {
-    const deck = deckRef.current;
-    if (!deck) return;
-
-    const onPointerDown = (e) => {
-      pause();
-      dragRef.current = { startX: e.clientX, dragging: true };
-      deck.setPointerCapture?.(e.pointerId);
-    };
-
-    const onPointerUp = (e) => {
-      if (!dragRef.current.dragging) return;
-      const delta = e.clientX - dragRef.current.startX;
-      dragRef.current.dragging = false;
-
-      if (Math.abs(delta) > 50) {
-        if (delta > 0) prev();
-        else next();
-      }
-      setTimeout(resume, AUTOPLAY_DELAY);
-    };
-
-    deck.addEventListener("pointerdown", onPointerDown);
-    deck.addEventListener("pointerup", onPointerUp);
-    deck.addEventListener("pointercancel", onPointerUp);
-
-    return () => {
-      deck.removeEventListener("pointerdown", onPointerDown);
-      deck.removeEventListener("pointerup", onPointerUp);
-      deck.removeEventListener("pointercancel", onPointerUp);
-    };
-  }, [prev, next]);
-
   // ── 3D Coverflow Transform Calculation ───────────────
   const getSlideStyle = (index) => {
     let offset = index - active;
@@ -136,25 +101,61 @@ export default function Branding() {
     };
   };
 
-  const handlePrev = () => {
+  const handlePrev = (e) => {
+    e.stopPropagation();
     pause();
     prev();
     setTimeout(resume, AUTOPLAY_DELAY);
   };
 
-  const handleNext = () => {
+  const handleNext = (e) => {
+    e.stopPropagation();
     pause();
     next();
     setTimeout(resume, AUTOPLAY_DELAY);
   };
 
-  const handleDot = (i) => {
+  const handleDot = (e, i) => {
+    e.stopPropagation();
     pause();
     goTo(i);
     setTimeout(resume, AUTOPLAY_DELAY);
   };
 
-  const handleCardClick = (index, slug) => {
+  // Drag handling without swallowing clicks
+  const handlePointerDown = (e) => {
+    dragInfo.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      isDragging: false,
+    };
+    pause();
+  };
+
+  const handlePointerMove = (e) => {
+    const deltaX = Math.abs(e.clientX - dragInfo.current.startX);
+    const deltaY = Math.abs(e.clientY - dragInfo.current.startY);
+    if (deltaX > 10 || deltaY > 10) {
+      dragInfo.current.isDragging = true;
+    }
+  };
+
+  const handlePointerUp = (e) => {
+    const deltaX = e.clientX - dragInfo.current.startX;
+    if (Math.abs(deltaX) > 60) {
+      if (deltaX > 0) prev();
+      else next();
+    }
+    setTimeout(resume, AUTOPLAY_DELAY);
+  };
+
+  const handleCardClick = (e, index, slug) => {
+    // If the user performed a drag gesture, do not navigate
+    if (dragInfo.current.isDragging) {
+      e.preventDefault();
+      return;
+    }
+
     if (index === active) {
       navigate(`/branding/${slug}`);
     } else {
@@ -187,8 +188,11 @@ export default function Branding() {
           className="branding-cf-stage"
           onMouseEnter={pause}
           onMouseLeave={resume}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
         >
-          <div className="branding-cf-deck" ref={deckRef}>
+          <div className="branding-cf-deck">
             {BRANDS.map((brand, i) => {
               const isActive = i === active;
               return (
@@ -199,7 +203,7 @@ export default function Branding() {
                     ...getSlideStyle(i),
                     "--brand-accent": brand.color || "#0284c7",
                   }}
-                  onClick={() => handleCardClick(i, brand.slug)}
+                  onClick={(e) => handleCardClick(e, i, brand.slug)}
                 >
                   {/* Full-bleed Brand Cover / Logo Media */}
                   <div className="branding-cf-image-wrap">
@@ -230,12 +234,34 @@ export default function Branding() {
                     </div>
 
                     <div className="branding-cf-footer-action">
-                      <span className="branding-cf-cta-link">
-                        {isActive ? "View Case Study" : "Select Project"}
-                      </span>
-                      <div className="branding-cf-arrow-circle">
-                        <ArrowUpRight size={16} />
-                      </div>
+                      {isActive ? (
+                        <Link
+                          to={`/branding/${brand.slug}`}
+                          className="branding-cf-cta-link"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <span>View Case Study</span>
+                          <div className="branding-cf-arrow-circle">
+                            <ArrowUpRight size={16} />
+                          </div>
+                        </Link>
+                      ) : (
+                        <button
+                          type="button"
+                          className="branding-cf-cta-link-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            pause();
+                            goTo(i);
+                            setTimeout(resume, AUTOPLAY_DELAY);
+                          }}
+                        >
+                          <span>Select Project</span>
+                          <div className="branding-cf-arrow-circle">
+                            <ArrowUpRight size={16} />
+                          </div>
+                        </button>
+                      )}
                     </div>
                   </div>
                 </article>
@@ -261,7 +287,7 @@ export default function Branding() {
                 key={brand.slug}
                 type="button"
                 className={`branding-cf-dot ${active === idx ? "is-active" : ""}`}
-                onClick={() => handleDot(idx)}
+                onClick={(e) => handleDot(e, idx)}
                 aria-label={`Go to project ${idx + 1}`}
                 role="tab"
                 aria-selected={active === idx}
