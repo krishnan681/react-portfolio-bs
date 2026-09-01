@@ -9,12 +9,128 @@ import {
   Image as ImageIcon,
   Film,
   Layers,
+  Clapperboard,
+  Plus,
 } from "lucide-react";
 import { BRANDS } from "../../data/brands";
 import ImageModal from "../../components/Modals/ImageModal";
 import VideoModal from "../../components/Modals/VideoModal";
 import ImageWithSkeleton from "../../components/Common/ImageWithSkeleton";
+import EmptyState from "../../components/Common/EmptyState";
+import { safeStorage } from "../../utils/storage";
 import "./ProjectDetail.css";
+
+/* =========================================================
+   1. STAGGERED GRID GALLERY (Square Wave Grid)
+========================================================= */
+function StaggeredGridGallery({ items, onSelectImage, categoryTitle }) {
+  return (
+    <div className="staggered-custom-gallery">
+      {items.map((item, idx) => {
+        const itemNumber = String(idx + 1).padStart(2, "0");
+        return (
+          <figure
+            key={item.id || `gallery-item-${idx}`}
+            className="staggered-custom-item"
+            onClick={() => onSelectImage(item)}
+            tabIndex={0}
+          >
+            <ImageWithSkeleton
+              src={item.src}
+              alt={`${categoryTitle} Visual ${idx + 1}`}
+              className="staggered-custom-img"
+              wrapperClassName="staggered-custom-img-wrap"
+            />
+            <span className="staggered-custom-tag">{itemNumber}</span>
+          </figure>
+        );
+      })}
+    </div>
+  );
+}
+
+/* =========================================================
+   2. PORTRAIT POSTERS GALLERY (2:3 Cinema Poster Cards)
+   With progressive batched loading (Load More) and lazy loading
+========================================================= */
+function PortraitPostersGrid({
+  items,
+  onSelectImage,
+  categoryTitle,
+  initialCount = 8,
+  step = 4,
+}) {
+  const [visibleCount, setVisibleCount] = useState(initialCount);
+
+  const hasMore = visibleCount < items.length;
+  const visibleItems = items.slice(0, visibleCount);
+  const remainingCount = items.length - visibleCount;
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + step, items.length));
+  };
+
+  return (
+    <div className="portrait-posters-wrapper">
+      <div className="portrait-posters-gallery">
+        {visibleItems.map((item, idx) => {
+          const itemNumber = String(idx + 1).padStart(2, "0");
+          const isNewlyRevealed = idx >= initialCount;
+          return (
+            <article
+              key={item.id || `portrait-item-${idx}`}
+              className={`portrait-poster-card ${isNewlyRevealed ? "is-revealed" : ""}`}
+              onClick={() => onSelectImage(item)}
+            >
+              <div className="portrait-poster-thumb">
+                <ImageWithSkeleton
+                  src={item.src}
+                  alt={`${categoryTitle} Poster ${idx + 1}`}
+                  className="portrait-poster-img"
+                  wrapperClassName="portrait-poster-img-wrap"
+                />
+
+                <div className="portrait-poster-vignette" />
+
+                <div className="portrait-poster-badge">
+                  <Clapperboard size={13} />
+                  <span>Feature {itemNumber}</span>
+                </div>
+
+                <div className="portrait-poster-hover-scrim">
+                  <div className="portrait-poster-zoom-btn">
+                    <Maximize2 size={16} />
+                    <span>View Poster</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      {hasMore && (
+        <div className="portrait-load-more-container">
+          <button
+            type="button"
+            className="portrait-load-more-btn"
+            onClick={handleLoadMore}
+            aria-label={`Load more ${categoryTitle} posters`}
+          >
+            <Plus size={16} />
+            <span>Load More Posters</span>
+            <span className="portrait-load-count-badge">
+              +{Math.min(step, remainingCount)}
+            </span>
+          </button>
+          <p className="portrait-load-status-text">
+            Showing {visibleItems.length} of {items.length} posters
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
 
 /* =========================================================
    MAIN PROJECT DETAIL COMPONENT
@@ -35,6 +151,47 @@ export default function ProjectDetail({ data }) {
     if (!slug) return BRANDS[0];
     return BRANDS.find((item) => item.slug === slug);
   }, [data, slug]);
+
+  // Track recently viewed project in persistent storage
+  useEffect(() => {
+    if (project) {
+      safeStorage.addRecentlyViewed(project);
+    }
+  }, [project]);
+
+  // Collect all flat images for continuous lightbox navigation
+  const allProjectImages = useMemo(() => {
+    if (!project) return [];
+    if (project.categories && project.categories.length > 0) {
+      return project.categories.flatMap((cat) => cat.images || []);
+    }
+    return project.images || [];
+  }, [project]);
+
+  const activeImageIndex = useMemo(() => {
+    if (!selectedImage || allProjectImages.length === 0) return -1;
+    return allProjectImages.findIndex(
+      (img) => img.id === selectedImage.id || img.src === selectedImage.src
+    );
+  }, [selectedImage, allProjectImages]);
+
+  const handleNextImage = () => {
+    if (allProjectImages.length === 0) return;
+    if (activeImageIndex >= 0 && activeImageIndex < allProjectImages.length - 1) {
+      setSelectedImage(allProjectImages[activeImageIndex + 1]);
+    } else {
+      setSelectedImage(allProjectImages[0]);
+    }
+  };
+
+  const handlePrevImage = () => {
+    if (allProjectImages.length === 0) return;
+    if (activeImageIndex > 0) {
+      setSelectedImage(allProjectImages[activeImageIndex - 1]);
+    } else {
+      setSelectedImage(allProjectImages[allProjectImages.length - 1]);
+    }
+  };
 
   // Find index for Next/Previous project navigation
   const currentIndex = useMemo(() => {
@@ -157,15 +314,19 @@ export default function ProjectDetail({ data }) {
           )}
         </header>
 
-        {/* ================= DISTINCT CATEGORY SECTIONS (FOR BRANDS WITH SUBFOLDERS LIKE BROADWAY) ================= */}
+        {/* ================= DISTINCT CATEGORY SECTIONS ================= */}
         {hasCategories &&
           project.categories.map((category) => {
             const catImages = category.images || [];
             if (catImages.length === 0) return null;
 
+            const isPortraitLayout =
+              category.layout === "portrait" || category.id === "portrait-poster";
+
             return (
               <section
                 key={category.id}
+                id={category.id}
                 className="project-media-section project-category-section"
               >
                 <div className="section-title-wrap">
@@ -179,40 +340,27 @@ export default function ProjectDetail({ data }) {
                   )}
                 </div>
 
-                {/* Compact, Eye-Catching Mosaic Masonry (See All at a Glance - No Scrolling Needed) */}
-                <div className="project-mosaic-masonry-gallery">
-                  {catImages.map((item, idx) => {
-                    const isFeatured = idx === 0 && catImages.length >= 4;
-                    return (
-                      <article
-                        key={item.id || `${category.id}-img-${idx}`}
-                        className={`project-mosaic-item ${isFeatured ? "is-featured" : ""}`}
-                        onClick={() => setSelectedImage(item)}
-                      >
-                        <div className="mosaic-thumb-card">
-                          <ImageWithSkeleton
-                            src={item.src}
-                            alt={`${category.title} Visual ${idx + 1}`}
-                            className="mosaic-img"
-                            wrapperClassName="w-100 h-100"
-                          />
-
-                          <div className="mosaic-hover-overlay">
-                            <div className="mosaic-zoom-pill">
-                              <Maximize2 size={15} />
-                              <span>View Fullscreen</span>
-                            </div>
-                          </div>
-                        </div>
-                      </article>
-                    );
-                  })}
-                </div>
+                {/* Render Portrait Posters Grid or Staggered Square Grid */}
+                {isPortraitLayout ? (
+                  <PortraitPostersGrid
+                    items={catImages}
+                    onSelectImage={(item) => setSelectedImage(item)}
+                    categoryTitle={category.title}
+                    initialCount={category.initialCount || 8}
+                    step={category.step || 4}
+                  />
+                ) : (
+                  <StaggeredGridGallery
+                    items={catImages}
+                    onSelectImage={(item) => setSelectedImage(item)}
+                    categoryTitle={category.title}
+                  />
+                )}
               </section>
             );
           })}
 
-        {/* ================= SINGLE IMAGES SECTION (FOR BRANDS WITHOUT SUBFOLDERS) ================= */}
+        {/* ================= SINGLE IMAGES SECTION ================= */}
         {hasImages && (
           <section className="project-media-section project-images-section">
             <div className="section-title-wrap">
@@ -223,35 +371,12 @@ export default function ProjectDetail({ data }) {
               <h2 className="section-heading">Visual Showcase</h2>
             </div>
 
-            {/* Compact Mosaic Masonry */}
-            <div className="project-mosaic-masonry-gallery">
-              {imagesList.map((item, idx) => {
-                const isFeatured = idx === 0 && imagesList.length >= 4;
-                return (
-                  <article
-                    key={item.id || `img-${idx}`}
-                    className={`project-mosaic-item ${isFeatured ? "is-featured" : ""}`}
-                    onClick={() => setSelectedImage(item)}
-                  >
-                    <div className="mosaic-thumb-card">
-                      <ImageWithSkeleton
-                        src={item.src}
-                        alt={`${project.title} Visual ${idx + 1}`}
-                        className="mosaic-img"
-                        wrapperClassName="w-100 h-100"
-                      />
-
-                      <div className="mosaic-hover-overlay">
-                        <div className="mosaic-zoom-pill">
-                          <Maximize2 size={15} />
-                          <span>View Fullscreen</span>
-                        </div>
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
+            {/* Staggered Grid Gallery */}
+            <StaggeredGridGallery
+              items={imagesList}
+              onSelectImage={(item) => setSelectedImage(item)}
+              categoryTitle={project.title}
+            />
           </section>
         )}
 
@@ -302,6 +427,16 @@ export default function ProjectDetail({ data }) {
           </section>
         )}
 
+        {/* ================= EMPTY STATE IF NO MEDIA ================= */}
+        {!hasCategories && !hasImages && !hasVideos && (
+          <EmptyState
+            title="Curating Project Visuals"
+            message={`Assets for ${project.title} are currently being prepared for high-definition showcase.`}
+            actionText="Browse All Projects"
+            onAction={() => window.location.href = "/"}
+          />
+        )}
+
         {/* ================= BOTTOM PROJECT NAVIGATION ================= */}
         <footer className="project-footer-navigation">
           {prevProject && (
@@ -344,6 +479,10 @@ export default function ProjectDetail({ data }) {
         src={selectedImage?.src}
         title={selectedImage?.title || project.title}
         tag={selectedImage?.tag}
+        onNext={handleNextImage}
+        onPrev={handlePrevImage}
+        hasNext={allProjectImages.length > 1}
+        hasPrev={allProjectImages.length > 1}
       />
 
       <VideoModal

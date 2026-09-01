@@ -6,7 +6,8 @@ export const BRANDS = [
     slug: "broadway-cinemas",
     title: "Broadway Cinemas",
     sectionTitle: "IMAX & EPIQ CINEMATIC SUITE",
-    headline: "Transforming the multiplex entertainment landscape with South India's premier IMAX with Laser.",
+    headline:
+      "Transforming the multiplex entertainment landscape with South India's premier IMAX with Laser.",
     category: "Premium Cinemas / Advanced Technology / Immersive Experience",
     logo: getR2Url("branding/covers/1.webp"),
     banner: getR2Url("branding/banners/Banners-01.webp"),
@@ -28,49 +29,175 @@ export const BRANDS = [
     categories: [
       {
         id: "imax",
-        title: "IMAX Key Visuals",
-        subtext: "Large-format IMAX with Laser promotional artworks and laser-format key visuals.",
+        title: "IMAX Works",
+        // subtext: "Large-format IMAX with Laser promotional artworks and laser-format key visuals.",
         images: [
-          { id: "bwc-imax-1", src: getR2Url("branding/broadway/images/imax/1.webp") },
-          { id: "bwc-imax-2", src: getR2Url("branding/broadway/images/imax/2.webp") },
-          { id: "bwc-imax-3", src: getR2Url("branding/broadway/images/imax/3.webp") },
-          { id: "bwc-imax-4", src: getR2Url("branding/broadway/images/imax/4.webp") },
-          { id: "bwc-imax-5", src: getR2Url("branding/broadway/images/imax/5.webp") },
-          { id: "bwc-imax-6", src: getR2Url("branding/broadway/images/imax/6.webp") },
-          { id: "bwc-imax-7", src: getR2Url("branding/broadway/images/imax/7.webp") },
+          {
+            id: "bwc-imax-1",
+            src: getR2Url("branding/broadway/images/imax/1.webp"),
+          },
+          {
+            id: "bwc-imax-2",
+            src: getR2Url("branding/broadway/images/imax/2.webp"),
+          },
+          {
+            id: "bwc-imax-3",
+            src: getR2Url("branding/broadway/images/imax/3.webp"),
+          },
+          {
+            id: "bwc-imax-4",
+            src: getR2Url("branding/broadway/images/imax/4.webp"),
+          },
+          {
+            id: "bwc-imax-5",
+            src: getR2Url("branding/broadway/images/imax/5.webp"),
+          },
+          {
+            id: "bwc-imax-6",
+            src: getR2Url("branding/broadway/images/imax/6.webp"),
+          },
+          {
+            id: "bwc-imax-7",
+            src: getR2Url("branding/broadway/images/imax/7.webp"),
+          },
+          {
+            id: "bwc-imax-8",
+            src: getR2Url("branding/broadway/images/imax/8.webp"),
+          },
         ],
       },
       {
         id: "poster",
-        title: "Movie & Premiere Posters",
-        subtext: "Blockbuster premiere key art, commemorative releases, and campaign posters.",
+        title: "Special Menu Designs ",
+        // subtext: "Blockbuster premiere key art, commemorative releases, and campaign posters.",
         images: [
-          { id: "bwc-post-1", src: getR2Url("branding/broadway/images/poster/1.webp") },
-          { id: "bwc-post-2", src: getR2Url("branding/broadway/images/poster/2.webp") },
-          { id: "bwc-post-3", src: getR2Url("branding/broadway/images/poster/3.webp") },
-          { id: "bwc-post-4", src: getR2Url("branding/broadway/images/poster/4.webp") },
+          {
+            id: "bwc-post-1",
+            src: getR2Url("branding/broadway/images/poster/1.webp"),
+          },
+          {
+            id: "bwc-post-2",
+            src: getR2Url("branding/broadway/images/poster/2.webp"),
+          },
+          {
+            id: "bwc-post-3",
+            src: getR2Url("branding/broadway/images/poster/3.webp"),
+          },
+          {
+            id: "bwc-post-4",
+            src: getR2Url("branding/broadway/images/poster/4.webp"),
+          },
         ],
       },
       {
-        id: "menu-design",
-        title: "Concession & Dining Menus",
-        subtext: "Digital signage, food & beverage menus, and artisanal concession placards.",
+        id: "this-week-movies",
+        title: "This Week Movies",
+        layout: "portrait",
         images: [
-          { id: "bwc-menu-1", src: getR2Url("branding/broadway/images/menu-design/1.webp") },
-          { id: "bwc-menu-2", src: getR2Url("branding/broadway/images/menu-design/2.webp") },
-          { id: "bwc-menu-3", src: getR2Url("branding/broadway/images/menu-design/3.webp") },
-          { id: "bwc-menu-4", src: getR2Url("branding/broadway/images/menu-design/4.webp") },
+          {
+            id: "bwc-twm-1",
+            src: getR2Url("branding/broadway/images/this_week_movies/1.png"),
+          },
+          {
+            id: "bwc-twm-2",
+            src: getR2Url("branding/broadway/images/this_week_movies/2.jpg"),
+          },
+          {
+            id: "bwc-twm-3",
+            src: getR2Url("branding/broadway/images/this_week_movies/3.jpg"),
+          },
+          {
+            id: "bwc-twm-4",
+            src: getR2Url("branding/broadway/images/this_week_movies/4.jpg"),
+          },
         ],
       },
       {
         id: "portrait-poster",
-        title: "Portrait & Re-Release Posters",
+        title: "Poster Design",
+        layout: "portrait",
         subtext: "Iconic cinematic re-release posters and vertical visual art.",
         images: [
-          { id: "bwc-port-1", src: getR2Url("branding/broadway/images/portrait-poster/1.webp") },
-          { id: "bwc-port-2", src: getR2Url("branding/broadway/images/portrait-poster/2.webp") },
-          { id: "bwc-port-3", src: getR2Url("branding/broadway/images/portrait-poster/3.webp") },
-          { id: "bwc-port-4", src: getR2Url("branding/broadway/images/portrait-poster/4.webp") },
+          {
+            id: "bwc-port-1",
+            src: getR2Url("branding/broadway/images/poster_design/1.webp"),
+          },
+          {
+            id: "bwc-port-2",
+            src: getR2Url("branding/broadway/images/poster_design/2.webp"),
+          },
+          {
+            id: "bwc-port-3",
+            src: getR2Url("branding/broadway/images/poster_design/3.webp"),
+          },
+          {
+            id: "bwc-port-4",
+            src: getR2Url("branding/broadway/images/poster_design/4.webp"),
+          },
+          {
+            id: "bwc-port-5",
+            src: getR2Url("branding/broadway/images/poster_design/5.webp"),
+          },
+          {
+            id: "bwc-port-6",
+            src: getR2Url("branding/broadway/images/poster_design/6.webp"),
+          },
+          {
+            id: "bwc-port-7",
+            src: getR2Url("branding/broadway/images/poster_design/7.webp"),
+          },
+          {
+            id: "bwc-port-8",
+            src: getR2Url("branding/broadway/images/poster_design/8.webp"),
+          },
+          {
+            id: "bwc-port-9",
+            src: getR2Url("branding/broadway/images/poster_design/9.webp"),
+          },
+          {
+            id: "bwc-port-10",
+            src: getR2Url("branding/broadway/images/poster_design/10.webp"),
+          },
+          {
+            id: "bwc-port-11",
+            src: getR2Url("branding/broadway/images/poster_design/11.webp"),
+          },
+          {
+            id: "bwc-port-12",
+            src: getR2Url("branding/broadway/images/poster_design/12.webp"),
+          },
+          {
+            id: "bwc-port-13",
+            src: getR2Url("branding/broadway/images/poster_design/13.webp"),
+          },
+          {
+            id: "bwc-port-14",
+            src: getR2Url("branding/broadway/images/poster_design/14.webp"),
+          },
+          {
+            id: "bwc-port-15",
+            src: getR2Url("branding/broadway/images/poster_design/15.webp"),
+          },
+          {
+            id: "bwc-port-16",
+            src: getR2Url("branding/broadway/images/poster_design/16.webp"),
+          },
+          {
+            id: "bwc-port-17",
+            src: getR2Url("branding/broadway/images/poster_design/17.webp"),
+          },
+          {
+            id: "bwc-port-18",
+            src: getR2Url("branding/broadway/images/poster_design/18.webp"),
+          },
+          {
+            id: "bwc-port-19",
+            src: getR2Url("branding/broadway/images/poster_design/19.webp"),
+          },
+          {
+            id: "bwc-port-20",
+            src: getR2Url("branding/broadway/images/poster_design/20.webp"),
+          },
         ],
       },
     ],
@@ -86,7 +213,8 @@ export const BRANDS = [
     slug: "the-crimson",
     title: "The Crimson Restobar",
     sectionTitle: "NIGHTLIFE & MIXOLOGY",
-    headline: "Electrifying nightlife and cocktail visual storytelling with bespoke Parisian flair.",
+    headline:
+      "Electrifying nightlife and cocktail visual storytelling with bespoke Parisian flair.",
     category: "Parisian Jazz Bar / Vintage Glamour / Signature Cocktails",
     logo: getR2Url("branding/covers/2.webp"),
     banner: getR2Url("branding/banners/Banners-02.webp"),
@@ -156,7 +284,8 @@ export const BRANDS = [
     slug: "giggles-and-twirls",
     title: "Giggles & Twirls",
     sectionTitle: "LUXURY LINEN COUTURE",
-    headline: "Elegance and playful comfort tailored for modern luxury linen fashion.",
+    headline:
+      "Elegance and playful comfort tailored for modern luxury linen fashion.",
     category: "Luxury Linen Wear / Sustainable Fashion / Women & Kids",
     logo: getR2Url("branding/covers/3.webp"),
     banner: getR2Url("branding/banners/Banners-03.webp"),
@@ -219,7 +348,8 @@ export const BRANDS = [
     slug: "aarthi-grand-cineplex",
     title: "Aarthi Grand Cineplex (AGC)",
     sectionTitle: "4K BARCO LASER EXPERIENCE",
-    headline: "Creating an electrifying visual language for high-definition cinematic experiences.",
+    headline:
+      "Creating an electrifying visual language for high-definition cinematic experiences.",
     category: "Multiplex Cinema / Dolby Atmos / Premium Movie Experience",
     logo: getR2Url("branding/covers/4.webp"),
     banner: getR2Url("branding/banners/Banners-04.webp"),
@@ -270,7 +400,9 @@ export const BRANDS = [
     videos: [
       {
         id: "agc-vid-1",
-        src: getR2Url("career-highlights/videos/Thaai Kelavi Promotion Reel.mp4"),
+        src: getR2Url(
+          "career-highlights/videos/Thaai Kelavi Promotion Reel.mp4",
+        ),
         title: "Theatrical Premiere & Movie Promotion Reel",
         tag: "Vertical Video Reel",
         aspect: "vertical",
@@ -282,7 +414,8 @@ export const BRANDS = [
     slug: "thats-y-food",
     title: "That's Y Food & On The Go",
     sectionTitle: "ARTISANAL GASTRONOMY",
-    headline: "Crafting appetizing aesthetics and rich culinary visual storytelling.",
+    headline:
+      "Crafting appetizing aesthetics and rich culinary visual storytelling.",
     category: "Café & Restaurant / Culinary Experience / Hospitality",
     logo: getR2Url("branding/covers/5.webp"),
     banner: getR2Url("branding/banners/Banners-05.webp"),
@@ -345,8 +478,10 @@ export const BRANDS = [
     slug: "the-long-story",
     title: "The Long Story - Spirits & Spice",
     sectionTitle: "SPIRITS & SPICE AMBIENCE",
-    headline: "Crafting bespoke narrative and ambient aesthetics for fine spirits & gourmet dining.",
-    category: "Multi-Cuisine Restaurant / Contemporary Dining / Premium Ambience",
+    headline:
+      "Crafting bespoke narrative and ambient aesthetics for fine spirits & gourmet dining.",
+    category:
+      "Multi-Cuisine Restaurant / Contemporary Dining / Premium Ambience",
     logo: getR2Url("branding/covers/6.webp"),
     banner: getR2Url("branding/banners/Banners-06.webp"),
     src: getR2Url("branding/covers/6.webp"),
@@ -408,8 +543,10 @@ export const BRANDS = [
     slug: "pavizham-jewellers",
     title: "Pavizham Jewellers",
     sectionTitle: "BRIDAL HERITAGE & CRAFTSMANSHIP",
-    headline: "Timeless craftsmanship in handcrafted gold, solitaire diamonds, and bridal heritage.",
-    category: "Heritage Jewellery / Fine Gold & Diamonds / Timeless Craftsmanship",
+    headline:
+      "Timeless craftsmanship in handcrafted gold, solitaire diamonds, and bridal heritage.",
+    category:
+      "Heritage Jewellery / Fine Gold & Diamonds / Timeless Craftsmanship",
     logo: getR2Url("branding/covers/7.webp"),
     banner: getR2Url("branding/banners/Banners-07.webp"),
     src: getR2Url("branding/covers/7.webp"),
@@ -469,8 +606,10 @@ export const BRANDS = [
     slug: "new-city-developers",
     title: "New City Developers",
     sectionTitle: "ARCHITECTURAL VISION & LUXURY LIVING",
-    headline: "Building architectural landmarks with precision, engineering trust, and modern aesthetics.",
-    category: "Residential Construction / Home Building / Reconstruction Services",
+    headline:
+      "Building architectural landmarks with precision, engineering trust, and modern aesthetics.",
+    category:
+      "Residential Construction / Home Building / Reconstruction Services",
     logo: getR2Url("branding/covers/8.webp"),
     banner: getR2Url("branding/banners/Banners-08.webp"),
     src: getR2Url("branding/covers/8.webp"),
@@ -531,7 +670,8 @@ export const BRANDS = [
     slug: "sunbeam-international-school",
     title: "Sunbeam International School",
     sectionTitle: "CAMPUS & ACADEMIC EXCELLENCE",
-    headline: "Inspiring future minds with vibrant educational identity & campus visuals.",
+    headline:
+      "Inspiring future minds with vibrant educational identity & campus visuals.",
     category: "CBSE Education / Kids Learning / Holistic Development",
     logo: getR2Url("branding/covers/9.webp"),
     banner: getR2Url("branding/banners/Banners-09.webp"),
@@ -594,7 +734,8 @@ export const BRANDS = [
     slug: "newrish-pharmaceuticals",
     title: "Newrish Pharmaceuticals",
     sectionTitle: "HEALTHCARE INNOVATION & ETHICAL WELLNESS",
-    headline: "Pioneering healthcare excellence with trustworthy and authoritative pharmaceutical branding.",
+    headline:
+      "Pioneering healthcare excellence with trustworthy and authoritative pharmaceutical branding.",
     category: "Pharmaceuticals / Healthcare Products / Pharma Distribution",
     logo: getR2Url("branding/covers/10.webp"),
     banner: getR2Url("branding/banners/Banners-10.webp"),

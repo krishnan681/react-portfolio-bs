@@ -13,14 +13,25 @@ import {
   Eye,
 } from "lucide-react";
 import { IMAGES_DATA, IMAGE_THEMES } from "../../data/visualCreationsData";
+import ImageWithSkeleton from "../../components/Common/ImageWithSkeleton";
+import EmptyState from "../../components/Common/EmptyState";
+import { safeStorage } from "../../utils/storage";
 import "./ImagesPage.css";
 
 export default function ImagesPage() {
-  const [activeTheme, setActiveTheme] = useState("all");
-  const [viewMode, setViewMode] = useState("bento");
+  const [activeTheme, setActiveTheme] = useState(() => safeStorage.get("images_theme", "all"));
+  const [viewMode, setViewMode] = useState(() => safeStorage.get("images_view_mode", "bento"));
   const [activeImageIndex, setActiveImageIndex] = useState(null);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const filmstripRef = useRef(null);
+
+  useEffect(() => {
+    safeStorage.set("images_theme", activeTheme);
+  }, [activeTheme]);
+
+  useEffect(() => {
+    safeStorage.set("images_view_mode", viewMode);
+  }, [viewMode]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -170,112 +181,138 @@ export default function ImagesPage() {
 
       {/* GALLERY SHOWCASE DISPLAY */}
       <section className="gallery-showcase-container">
-        {/* MODE 1: BENTO GRID */}
-        {viewMode === "bento" && (
-          <div className="bento-gallery-grid">
-            {filteredImages.map((img, idx) => (
-              <article
-                key={img.id}
-                className={`bento-card ${img.aspect} ${img.span || ""}`}
-                onClick={() => setActiveImageIndex(idx)}
-              >
-                <div className="card-media-wrap">
-                  <img src={img.src} alt={img.title} loading="lazy" decoding="async" />
-                  <div className="card-overlay">
-                    <div className="card-top-tags">
-                      <span className="aspect-badge">{img.sizeLabel}</span>
-                      <span className="year-badge">{img.year}</span>
+        {filteredImages.length === 0 ? (
+          <EmptyState
+            title="No Visuals Found"
+            message="There are no creative designs matching the selected theme filter."
+            actionText="Show All Visuals"
+            onAction={() => setActiveTheme("all")}
+          />
+        ) : (
+          <>
+            {/* MODE 1: BENTO GRID */}
+            {viewMode === "bento" && (
+              <div className="bento-gallery-grid">
+                {filteredImages.map((img, idx) => (
+                  <article
+                    key={img.id}
+                    className={`bento-card ${img.aspect} ${img.span || ""}`}
+                    onClick={() => setActiveImageIndex(idx)}
+                  >
+                    <div className="card-media-wrap">
+                      <ImageWithSkeleton
+                        src={img.src}
+                        alt={img.title}
+                        objectFit="contain"
+                        wrapperClassName="bento-skeleton-wrap"
+                      />
+                      <div className="card-overlay">
+                        <div className="card-top-tags">
+                          <span className="aspect-badge">{img.sizeLabel}</span>
+                          <span className="year-badge">{img.year}</span>
+                        </div>
+                        <div className="card-bottom-info">
+                          <span className="card-category">{img.category}</span>
+                          <h3 className="card-title">{img.title}</h3>
+                          <p className="card-client">{img.client}</p>
+                        </div>
+                        <button type="button" className="quick-preview-btn">
+                          <Maximize2 size={16} />
+                        </button>
+                      </div>
                     </div>
-                    <div className="card-bottom-info">
-                      <span className="card-category">{img.category}</span>
-                      <h3 className="card-title">{img.title}</h3>
-                      <p className="card-client">{img.client}</p>
-                    </div>
-                    <button type="button" className="quick-preview-btn">
-                      <Maximize2 size={16} />
+                  </article>
+                ))}
+              </div>
+            )}
+
+            {/* MODE 2: HORIZONTAL FILMSTRIP CAROUSEL (ZERO VERTICAL SCROLL FATIGUE) */}
+            {viewMode === "filmstrip" && (
+              <div className="filmstrip-showcase-wrap">
+                <div className="filmstrip-nav-controls">
+                  <span className="filmstrip-hint">
+                    <Sparkles size={14} /> Swipe or scroll horizontally to explore collection
+                  </span>
+                  <div className="filmstrip-arrows">
+                    <button
+                      type="button"
+                      className="filmstrip-arrow-btn"
+                      onClick={() => handleCarouselScroll("prev")}
+                    >
+                      <ChevronLeft size={18} />
+                    </button>
+                    <button
+                      type="button"
+                      className="filmstrip-arrow-btn"
+                      onClick={() => handleCarouselScroll("next")}
+                    >
+                      <ChevronRight size={18} />
                     </button>
                   </div>
                 </div>
-              </article>
-            ))}
-          </div>
-        )}
 
-        {/* MODE 2: HORIZONTAL FILMSTRIP CAROUSEL (ZERO VERTICAL SCROLL FATIGUE) */}
-        {viewMode === "filmstrip" && (
-          <div className="filmstrip-showcase-wrap">
-            <div className="filmstrip-nav-controls">
-              <span className="filmstrip-hint">
-                <Sparkles size={14} /> Swipe or scroll horizontally to explore collection
-              </span>
-              <div className="filmstrip-arrows">
-                <button
-                  type="button"
-                  className="filmstrip-arrow-btn"
-                  onClick={() => handleCarouselScroll("prev")}
-                >
-                  <ChevronLeft size={18} />
-                </button>
-                <button
-                  type="button"
-                  className="filmstrip-arrow-btn"
-                  onClick={() => handleCarouselScroll("next")}
-                >
-                  <ChevronRight size={18} />
-                </button>
-              </div>
-            </div>
-
-            <div className="filmstrip-track" ref={filmstripRef}>
-              {filteredImages.map((img, idx) => (
-                <article
-                  key={img.id}
-                  className={`filmstrip-card ${img.aspect}`}
-                  onClick={() => setActiveImageIndex(idx)}
-                >
-                  <div className="filmstrip-media">
-                    <img src={img.src} alt={img.title} loading="lazy" decoding="async" />
-                    <div className="filmstrip-hover-curtain">
-                      <Eye size={22} />
-                      <span>Inspect Artwork</span>
-                    </div>
-                  </div>
-                  <div className="filmstrip-caption">
-                    <div className="filmstrip-meta">
-                      <span className="meta-tag">{img.category}</span>
-                      <span className="meta-size">{img.sizeLabel}</span>
-                    </div>
-                    <h4>{img.title}</h4>
-                    <p>{img.client}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* MODE 3: MASONRY GRID */}
-        {viewMode === "masonry" && (
-          <div className="masonry-gallery-grid">
-            {filteredImages.map((img, idx) => (
-              <article
-                key={img.id}
-                className="masonry-card"
-                onClick={() => setActiveImageIndex(idx)}
-              >
-                <div className="masonry-media-wrap">
-                  <img src={img.src} alt={img.title} loading="lazy" decoding="async" />
-                  <div className="masonry-overlay">
-                    <span className="masonry-aspect-pill">{img.sizeLabel}</span>
-                    <div className="masonry-text">
-                      <span className="masonry-sub">{img.category}</span>
-                      <h4>{img.title}</h4>
-                    </div>
-                  </div>
+                <div className="filmstrip-track" ref={filmstripRef}>
+                  {filteredImages.map((img, idx) => (
+                    <article
+                      key={img.id}
+                      className={`filmstrip-card ${img.aspect}`}
+                      onClick={() => setActiveImageIndex(idx)}
+                    >
+                      <div className="filmstrip-media">
+                        <ImageWithSkeleton
+                          src={img.src}
+                          alt={img.title}
+                          objectFit="contain"
+                          wrapperClassName="filmstrip-skeleton-wrap"
+                        />
+                        <div className="filmstrip-hover-curtain">
+                          <Eye size={22} />
+                          <span>Inspect Artwork</span>
+                        </div>
+                      </div>
+                      <div className="filmstrip-caption">
+                        <div className="filmstrip-meta">
+                          <span className="meta-tag">{img.category}</span>
+                          <span className="meta-size">{img.sizeLabel}</span>
+                        </div>
+                        <h4>{img.title}</h4>
+                        <p>{img.client}</p>
+                      </div>
+                    </article>
+                  ))}
                 </div>
-              </article>
-            ))}
-          </div>
+              </div>
+            )}
+
+            {/* MODE 3: MASONRY GRID */}
+            {viewMode === "masonry" && (
+              <div className="masonry-gallery-grid">
+                {filteredImages.map((img, idx) => (
+                  <article
+                    key={img.id}
+                    className="masonry-card"
+                    onClick={() => setActiveImageIndex(idx)}
+                  >
+                    <div className="masonry-media-wrap">
+                      <ImageWithSkeleton
+                        src={img.src}
+                        alt={img.title}
+                        objectFit="contain"
+                        wrapperClassName="masonry-skeleton-wrap"
+                      />
+                      <div className="masonry-overlay">
+                        <span className="masonry-aspect-pill">{img.sizeLabel}</span>
+                        <div className="masonry-text">
+                          <span className="masonry-sub">{img.category}</span>
+                          <h4>{img.title}</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
+          </>
         )}
       </section>
 

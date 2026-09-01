@@ -19,6 +19,8 @@ import Contact from "./components/Contact/Contact";
 import ProjectPage from "./pages/ProjectPage/ProjectPage";
 import ImagesPage from "./pages/VisualCreations/ImagesPage";
 import VideosPage from "./pages/VisualCreations/VideosPage";
+import ErrorBoundary from "./components/Common/ErrorBoundary";
+import NetworkStatus from "./components/Common/NetworkStatus";
 
 function Home() {
   return (
@@ -57,16 +59,19 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/images" element={<ImagesPage />} />
-        <Route path="/visual-creations/images" element={<ImagesPage />} />
-        <Route path="/videos" element={<VideosPage />} />
-        <Route path="/visual-creations/videos" element={<VideosPage />} />
-        <Route path="/branding/:slug" element={<ProjectPage />} />
-      </Routes>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <NetworkStatus />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/images" element={<ImagesPage />} />
+          <Route path="/visual-creations/images" element={<ImagesPage />} />
+          <Route path="/videos" element={<VideosPage />} />
+          <Route path="/visual-creations/videos" element={<VideosPage />} />
+          <Route path="/branding/:slug" element={<ProjectPage />} />
+        </Routes>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 
