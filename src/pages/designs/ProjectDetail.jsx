@@ -190,6 +190,146 @@ function PortraitPostersGrid({
 }
 
 /* =========================================================
+   3. PORTRAIT ROWS GALLERY (Custom Multi-Row Distribution with Load More)
+   Tailored for curated brand showcases like The Crimson & Giggles & Twirls
+========================================================= */
+function PortraitRowsGallery({
+  items,
+  onSelectImage,
+  categoryTitle,
+  rowDistribution = [5, 4],
+  initialRows = null,
+  initialCount = null,
+  stepRows = 1,
+}) {
+  // Split items into designated row groupings
+  const rows = useMemo(() => {
+    let currentIndex = 0;
+    const computedRows = [];
+
+    for (const count of rowDistribution) {
+      if (currentIndex >= items.length) break;
+      computedRows.push(items.slice(currentIndex, currentIndex + count));
+      currentIndex += count;
+    }
+
+    if (currentIndex < items.length) {
+      computedRows.push(items.slice(currentIndex));
+    }
+
+    return computedRows;
+  }, [items, rowDistribution]);
+
+  // Determine initial visible rows
+  const defaultVisibleRows = useMemo(() => {
+    if (initialRows != null) return initialRows;
+    if (initialCount != null) {
+      let acc = 0;
+      for (let i = 0; i < rows.length; i++) {
+        acc += rows[i].length;
+        if (acc >= initialCount) return i + 1;
+      }
+      return rows.length;
+    }
+    return rows.length;
+  }, [initialRows, initialCount, rows]);
+
+  const [visibleRowsCount, setVisibleRowsCount] = useState(defaultVisibleRows);
+
+  const visibleRows = rows.slice(0, visibleRowsCount);
+  const totalVisibleItems = visibleRows.reduce((sum, r) => sum + r.length, 0);
+  const hasMore = visibleRowsCount < rows.length;
+  const remainingCount = items.length - totalVisibleItems;
+
+  const handleLoadMore = () => {
+    setVisibleRowsCount((prev) => Math.min(prev + stepRows, rows.length));
+  };
+
+  return (
+    <div className="portrait-rows-wrapper">
+      {visibleRows.map((rowItems, rowIdx) => {
+        const isNewlyRevealed = rowIdx >= defaultVisibleRows;
+        return (
+          <div
+            key={`portrait-row-${rowIdx}`}
+            className={`portrait-row-grid portrait-row-${rowItems.length}-items ${
+              isNewlyRevealed ? "is-revealed" : ""
+            }`}
+          >
+            {rowItems.map((item, itemIdx) => {
+              const globalIdx = items.findIndex(
+                (i) => (i.id && item.id && i.id === item.id) || i.src === item.src
+              );
+              const itemNumber = String(
+                (globalIdx >= 0 ? globalIdx : itemIdx) + 1
+              ).padStart(2, "0");
+
+              return (
+                <article
+                  key={item.id || `portrait-row-item-${rowIdx}-${itemIdx}`}
+                  className="portrait-row-card is-revealed"
+                  onClick={() => onSelectImage(item)}
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      onSelectImage(item);
+                    }
+                  }}
+                >
+                  <div className="portrait-row-thumb">
+                    <ImageWithSkeleton
+                      src={item.src}
+                      alt={`${categoryTitle} - ${item.title || `Visual ${itemNumber}`}`}
+                      className="portrait-row-img"
+                      wrapperClassName="portrait-row-img-wrap"
+                    />
+
+                    <div className="portrait-row-vignette" />
+
+                    <div className="portrait-row-badge">
+                      <Sparkles size={12} />
+                      <span>{itemNumber}</span>
+                    </div>
+
+                    <div className="portrait-row-hover-scrim">
+                      <div className="portrait-row-zoom-btn">
+                        <Maximize2 size={15} />
+                        <span>{item.tag || "View Visual"}</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        );
+      })}
+
+      {hasMore && (
+        <div className="staggered-load-more-container">
+          <button
+            type="button"
+            className="staggered-load-more-btn"
+            onClick={handleLoadMore}
+            aria-label={`Load more ${categoryTitle} designs`}
+          >
+            <Plus size={16} />
+            <span>Load More Designs</span>
+            <span className="staggered-load-count-badge">
+              +{Math.min(rows[visibleRowsCount]?.length || 6, remainingCount)}
+            </span>
+          </button>
+          <p className="staggered-load-status-text">
+            Showing {totalVisibleItems} of {items.length} designs
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* =========================================================
    MAIN PROJECT DETAIL COMPONENT
 ========================================================= */
 export default function ProjectDetail({ data }) {
@@ -378,6 +518,9 @@ export default function ProjectDetail({ data }) {
             const catVideos = category.videos || [];
             if (catImages.length === 0 && catVideos.length === 0) return null;
 
+            const isPortraitRowsLayout =
+              category.layout === "portrait-5-4" ||
+              category.layout === "portrait-rows";
             const isPortraitLayout =
               category.layout === "portrait" || category.id === "portrait-poster";
 
@@ -398,9 +541,19 @@ export default function ProjectDetail({ data }) {
                   )}
                 </div>
 
-                {/* Render Portrait Posters Grid or Staggered Square Grid */}
+                {/* Render Custom Portrait Rows, Portrait Posters Grid, or Staggered Grid */}
                 {catImages.length > 0 &&
-                  (isPortraitLayout ? (
+                  (isPortraitRowsLayout ? (
+                    <PortraitRowsGallery
+                      items={catImages}
+                      onSelectImage={(item) => setSelectedImage(item)}
+                      categoryTitle={category.title}
+                      rowDistribution={category.rowDistribution || [5, 4]}
+                      initialRows={category.initialRows}
+                      initialCount={category.initialCount}
+                      stepRows={category.stepRows || 1}
+                    />
+                  ) : isPortraitLayout ? (
                     <PortraitPostersGrid
                       items={catImages}
                       onSelectImage={(item) => setSelectedImage(item)}
@@ -479,14 +632,35 @@ export default function ProjectDetail({ data }) {
               <h2 className="section-heading">Visual Showcase</h2>
             </div>
 
-            {/* Staggered Grid Gallery */}
-            <StaggeredGridGallery
-              items={imagesList}
-              onSelectImage={(item) => setSelectedImage(item)}
-              categoryTitle={project.title}
-              initialCount={project.initialCount || 8}
-              step={project.step || 6}
-            />
+            {/* Layout Tactic Dispatcher */}
+            {project.layout === "portrait-5-4" ||
+            project.layout === "portrait-rows" ? (
+              <PortraitRowsGallery
+                items={imagesList}
+                onSelectImage={(item) => setSelectedImage(item)}
+                categoryTitle={project.title}
+                rowDistribution={project.rowDistribution || [5, 4]}
+                initialRows={project.initialRows}
+                initialCount={project.initialCount}
+                stepRows={project.stepRows || 1}
+              />
+            ) : project.layout === "portrait" ? (
+              <PortraitPostersGrid
+                items={imagesList}
+                onSelectImage={(item) => setSelectedImage(item)}
+                categoryTitle={project.title}
+                initialCount={project.initialCount || 8}
+                step={project.step || 4}
+              />
+            ) : (
+              <StaggeredGridGallery
+                items={imagesList}
+                onSelectImage={(item) => setSelectedImage(item)}
+                categoryTitle={project.title}
+                initialCount={project.initialCount || 8}
+                step={project.step || 6}
+              />
+            )}
           </section>
         )}
 

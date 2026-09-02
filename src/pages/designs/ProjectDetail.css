@@ -835,6 +835,191 @@
 }
 
 /* =========================================================
+   PORTRAIT ROWS GALLERY (Custom 5 + 4 Row Distribution)
+   Curated Luxury Layout Strategy
+========================================================= */
+
+.portrait-rows-wrapper {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto 36px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2.2vw, 28px);
+}
+
+.portrait-row-grid {
+  display: grid;
+  align-items: stretch;
+  gap: clamp(14px, 1.8vw, 24px);
+  width: 100%;
+}
+
+/* Row with 6 items (Desktop 6 columns) */
+.portrait-row-6-items {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+/* Row with 5 items (Desktop 5 columns) */
+.portrait-row-5-items {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* Row with 4 items (Centered under 5 items with matching card width) */
+.portrait-row-4-items {
+  grid-template-columns: repeat(4, 1fr);
+  width: calc(80% - 0.2 * clamp(14px, 1.8vw, 24px));
+  margin: 0 auto;
+}
+
+.portrait-row-card {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  outline: none;
+}
+
+.portrait-row-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--project-card-bg);
+  border: 1.5px solid var(--project-border);
+  box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.35);
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.3, 1),
+              box-shadow 0.4s ease,
+              border-color 0.35s ease;
+}
+
+.portrait-row-card:hover .portrait-row-thumb,
+.portrait-row-card:focus-visible .portrait-row-thumb {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.45), 0 0 22px rgba(212, 167, 106, 0.3);
+  border-color: var(--project-accent);
+}
+
+.portrait-row-img-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.portrait-row-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.65s cubic-bezier(0.2, 0.7, 0.3, 1), filter 0.35s ease;
+}
+
+.portrait-row-card:hover .portrait-row-img,
+.portrait-row-card:focus-visible .portrait-row-img {
+  transform: scale(1.05);
+  filter: brightness(1.02) saturate(1.05);
+}
+
+.portrait-row-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 55%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+  pointer-events: none;
+}
+
+.portrait-row-badge {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.68);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+}
+
+.portrait-row-card:hover .portrait-row-badge,
+.portrait-row-card:focus-visible .portrait-row-badge {
+  background: var(--project-accent);
+  border-color: var(--project-accent);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.portrait-row-hover-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 25, 58, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 3;
+}
+
+.portrait-row-card:hover .portrait-row-hover-scrim,
+.portrait-row-card:focus-visible .portrait-row-hover-scrim {
+  opacity: 1;
+  visibility: visible;
+}
+
+.portrait-row-zoom-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: #ffffff;
+  color: #04193a;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transform: translateY(6px);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.portrait-row-card:hover .portrait-row-zoom-btn,
+.portrait-row-card:focus-visible .portrait-row-zoom-btn {
+  transform: translateY(0);
+}
+
+.portrait-row-card.is-revealed {
+  animation: portraitRowCardEntrance 0.55s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+@keyframes portraitRowCardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================================================
    CATEGORY-LEVEL VERTICAL VIDEO REELS
 ========================================================= */
 
@@ -1107,6 +1292,23 @@
    RESPONSIVE DESIGN (Tablets & Mobile)
 ========================================================= */
 
+@media (max-width: 1280px) {
+  .portrait-row-6-items {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .portrait-row-6-items,
+  .portrait-row-5-items,
+  .portrait-row-4-items {
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    gap: 16px;
+  }
+}
+
 @media (max-width: 900px) {
   .staggered-custom-gallery {
     grid-template-columns: repeat(2, 1fr);
@@ -1176,6 +1378,16 @@
   }
 }
 
+@media (max-width: 680px) {
+  .portrait-row-6-items,
+  .portrait-row-5-items,
+  .portrait-row-4-items {
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    gap: 12px;
+  }
+}
+
 @media (max-width: 560px) {
   .staggered-custom-gallery {
     grid-template-columns: 1fr;
@@ -1232,6 +1444,14 @@
   }
 
   .portrait-poster-badge {
+    left: 8px;
+    bottom: 8px;
+    padding: 3px 8px;
+    font-size: 0.66rem;
+    gap: 4px;
+  }
+
+  .portrait-row-badge {
     left: 8px;
     bottom: 8px;
     padding: 3px 8px;
