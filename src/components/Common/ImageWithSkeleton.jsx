@@ -12,6 +12,7 @@ export default function ImageWithSkeleton({
   aspectRatio,
   objectFit,
   onClick,
+  onLoad,
   ...props
 }) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -76,7 +77,10 @@ export default function ImageWithSkeleton({
           }}
           loading="lazy"
           decoding="async"
-          onLoad={() => setIsLoaded(true)}
+          onLoad={(e) => {
+            setIsLoaded(true);
+            if (onLoad) onLoad(e);
+          }}
           onError={() => {
             setHasError(true);
             setIsLoaded(false);

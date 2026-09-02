@@ -65,27 +65,100 @@ export const BRANDS = [
             src: getR2Url("branding/broadway/images/imax/8.webp"),
           },
         ],
+        videos: [
+          {
+            id: "bwc-imax-vid-1",
+            src: getR2Url("branding/broadway/videos/imax/1.mp4"),
+            title: "Broadway IMAX with Laser Vertical Promo Reel",
+            tag: "Vertical Video Reel",
+            aspect: "vertical",
+          },
+          {
+            id: "bwc-imax-vid-2",
+            src: getR2Url("branding/broadway/videos/imax/2.mp4"),
+            title: "Broadway IMAX with Laser Vertical Promo Reel",
+            tag: "Vertical Video Reel",
+            aspect: "vertical",
+          },
+         
+        ],
       },
       {
         id: "poster",
-        title: "Special Menu Designs ",
-        // subtext: "Blockbuster premiere key art, commemorative releases, and campaign posters.",
+        title: "Special Menu Designs",
+        subtext: "Concession menu boards, digital displays, and appetizing promotional visuals.",
+        initialCount: 8,
+        step: 6,
         images: [
           {
             id: "bwc-post-1",
-            src: getR2Url("branding/broadway/images/poster/1.webp"),
+            src: getR2Url("branding/broadway/images/menu_designs/1.webp"),
+            aspect: "portrait",
           },
           {
             id: "bwc-post-2",
-            src: getR2Url("branding/broadway/images/poster/2.webp"),
+            src: getR2Url("branding/broadway/images/menu_designs/2.webp"),
+            aspect: "portrait",
           },
           {
             id: "bwc-post-3",
-            src: getR2Url("branding/broadway/images/poster/3.webp"),
+            src: getR2Url("branding/broadway/images/menu_designs/3.webp"),
+            aspect: "landscape",
           },
           {
             id: "bwc-post-4",
-            src: getR2Url("branding/broadway/images/poster/4.webp"),
+            src: getR2Url("branding/broadway/images/menu_designs/4.webp"),
+            aspect: "landscape",
+          },
+          {
+            id: "bwc-post-5",
+            src: getR2Url("branding/broadway/images/menu_designs/5.webp"),
+            aspect: "landscape",
+          },
+          {
+            id: "bwc-post-6",
+            src: getR2Url("branding/broadway/images/menu_designs/6.webp"),
+            aspect: "landscape",
+          },
+          {
+            id: "bwc-post-7",
+            src: getR2Url("branding/broadway/images/menu_designs/7.webp"),
+            aspect: "landscape",
+          },
+          {
+            id: "bwc-post-8",
+            src: getR2Url("branding/broadway/images/menu_designs/8.webp"),
+            aspect: "landscape",
+          },
+          {
+            id: "bwc-post-9",
+            src: getR2Url("branding/broadway/images/menu_designs/9.webp"),
+            aspect: "landscape",
+          },
+          {
+            id: "bwc-post-10",
+            src: getR2Url("branding/broadway/images/menu_designs/10.webp"),
+            aspect: "landscape",
+          },
+          {
+            id: "bwc-post-11",
+            src: getR2Url("branding/broadway/images/menu_designs/11.webp"),
+            aspect: "landscape",
+          },
+          {
+            id: "bwc-post-12",
+            src: getR2Url("branding/broadway/images/menu_designs/12.webp"),
+            aspect: "portrait",
+          },
+          {
+            id: "bwc-post-13",
+            src: getR2Url("branding/broadway/images/menu_designs/13.webp"),
+            aspect: "landscape",
+          },
+          {
+            id: "bwc-post-14",
+            src: getR2Url("branding/broadway/images/menu_designs/14.webp"),
+            aspect: "landscape",
           },
         ],
       },
@@ -199,12 +272,6 @@ export const BRANDS = [
             src: getR2Url("branding/broadway/images/poster_design/20.webp"),
           },
         ],
-      },
-    ],
-    videos: [
-      {
-        id: "bwc-vid-1",
-        src: getR2Url("branding/broadway/videos/1.mp4"),
       },
     ],
   },

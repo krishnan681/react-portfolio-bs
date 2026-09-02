@@ -21,30 +21,87 @@ import { safeStorage } from "../../utils/storage";
 import "./ProjectDetail.css";
 
 /* =========================================================
-   1. STAGGERED GRID GALLERY (Square Wave Grid)
+   1. STAGGERED / ADAPTIVE CUSTOM GRID GALLERY
+   Supports mixed aspect ratios (landscape/portrait) and
+   progressive batched loading with "Load More" button.
 ========================================================= */
-function StaggeredGridGallery({ items, onSelectImage, categoryTitle }) {
+function StaggeredGridGallery({
+  items,
+  onSelectImage,
+  categoryTitle,
+  initialCount = 8,
+  step = 6,
+}) {
+  const [visibleCount, setVisibleCount] = useState(initialCount);
+  const [detectedAspects, setDetectedAspects] = useState({});
+
+  const hasMore = visibleCount < items.length;
+  const visibleItems = items.slice(0, visibleCount);
+  const remainingCount = items.length - visibleCount;
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + step, items.length));
+  };
+
+  const handleImageLoad = (id, e) => {
+    const { naturalWidth, naturalHeight } = e.target;
+    if (naturalWidth && naturalHeight) {
+      const orientation =
+        naturalWidth > naturalHeight * 1.15 ? "landscape" : "portrait";
+      setDetectedAspects((prev) =>
+        prev[id] === orientation ? prev : { ...prev, [id]: orientation }
+      );
+    }
+  };
+
   return (
-    <div className="staggered-custom-gallery">
-      {items.map((item, idx) => {
-        const itemNumber = String(idx + 1).padStart(2, "0");
-        return (
-          <figure
-            key={item.id || `gallery-item-${idx}`}
-            className="staggered-custom-item"
-            onClick={() => onSelectImage(item)}
-            tabIndex={0}
+    <div className="staggered-custom-wrapper">
+      <div className="staggered-custom-gallery">
+        {visibleItems.map((item, idx) => {
+          const itemNumber = String(idx + 1).padStart(2, "0");
+          const isNewlyRevealed = idx >= initialCount;
+          const orientation =
+            item.aspect || detectedAspects[item.id || idx] || "portrait";
+
+          return (
+            <figure
+              key={item.id || `gallery-item-${idx}`}
+              className={`staggered-custom-item is-${orientation} ${isNewlyRevealed ? "is-revealed" : ""}`}
+              onClick={() => onSelectImage(item)}
+              tabIndex={0}
+            >
+              <ImageWithSkeleton
+                src={item.src}
+                alt={`${categoryTitle} Visual ${idx + 1}`}
+                className="staggered-custom-img"
+                wrapperClassName="staggered-custom-img-wrap"
+                onLoad={(e) => handleImageLoad(item.id || idx, e)}
+              />
+              <span className="staggered-custom-tag">{itemNumber}</span>
+            </figure>
+          );
+        })}
+      </div>
+
+      {hasMore && (
+        <div className="staggered-load-more-container">
+          <button
+            type="button"
+            className="staggered-load-more-btn"
+            onClick={handleLoadMore}
+            aria-label={`Load more ${categoryTitle} designs`}
           >
-            <ImageWithSkeleton
-              src={item.src}
-              alt={`${categoryTitle} Visual ${idx + 1}`}
-              className="staggered-custom-img"
-              wrapperClassName="staggered-custom-img-wrap"
-            />
-            <span className="staggered-custom-tag">{itemNumber}</span>
-          </figure>
-        );
-      })}
+            <Plus size={16} />
+            <span>Load More Designs</span>
+            <span className="staggered-load-count-badge">
+              +{Math.min(step, remainingCount)}
+            </span>
+          </button>
+          <p className="staggered-load-status-text">
+            Showing {visibleItems.length} of {items.length} designs
+          </p>
+        </div>
+      )}
     </div>
   );
 }
@@ -318,7 +375,8 @@ export default function ProjectDetail({ data }) {
         {hasCategories &&
           project.categories.map((category) => {
             const catImages = category.images || [];
-            if (catImages.length === 0) return null;
+            const catVideos = category.videos || [];
+            if (catImages.length === 0 && catVideos.length === 0) return null;
 
             const isPortraitLayout =
               category.layout === "portrait" || category.id === "portrait-poster";
@@ -341,20 +399,70 @@ export default function ProjectDetail({ data }) {
                 </div>
 
                 {/* Render Portrait Posters Grid or Staggered Square Grid */}
-                {isPortraitLayout ? (
-                  <PortraitPostersGrid
-                    items={catImages}
-                    onSelectImage={(item) => setSelectedImage(item)}
-                    categoryTitle={category.title}
-                    initialCount={category.initialCount || 8}
-                    step={category.step || 4}
-                  />
-                ) : (
-                  <StaggeredGridGallery
-                    items={catImages}
-                    onSelectImage={(item) => setSelectedImage(item)}
-                    categoryTitle={category.title}
-                  />
+                {catImages.length > 0 &&
+                  (isPortraitLayout ? (
+                    <PortraitPostersGrid
+                      items={catImages}
+                      onSelectImage={(item) => setSelectedImage(item)}
+                      categoryTitle={category.title}
+                      initialCount={category.initialCount || 8}
+                      step={category.step || 4}
+                    />
+                  ) : (
+                    <StaggeredGridGallery
+                      items={catImages}
+                      onSelectImage={(item) => setSelectedImage(item)}
+                      categoryTitle={category.title}
+                      initialCount={category.initialCount || 8}
+                      step={category.step || 6}
+                    />
+                  ))}
+
+                {/* Render Category Motion / Vertical Video Reels if present */}
+                {catVideos.length > 0 && (
+                  <div className="category-videos-block">
+                    <div className="category-videos-header">
+                      <div className="category-video-subbadge">
+                        <Film size={13} />
+                        <span>Motion Experience</span>
+                      </div>
+                      <h3 className="category-video-heading">Vertical Video Reel</h3>
+                    </div>
+
+                    <div className="category-vertical-videos-grid">
+                      {catVideos.map((vid, vidIdx) => (
+                        <article
+                          key={vid.id || `cat-vid-${vidIdx}`}
+                          className="category-vertical-video-card"
+                          onClick={() => setSelectedVideo(vid)}
+                          tabIndex={0}
+                        >
+                          <div className="vertical-video-thumb">
+                            <video
+                              src={vid.src}
+                              poster={vid.poster}
+                              preload="metadata"
+                              playsInline
+                              muted
+                              loop
+                              autoPlay
+                              className="vertical-video-media"
+                            />
+
+                            <div className="video-play-badge">
+                              <Play size={18} fill="#ffffff" />
+                            </div>
+
+                            <div className="video-hover-scrim">
+                              <span className="video-action-pill">
+                                <Play size={14} fill="currentColor" /> Play Reel
+                              </span>
+                            </div>
+                          </div>
+                        </article>
+                      ))}
+                    </div>
+                  </div>
                 )}
               </section>
             );
@@ -376,6 +484,8 @@ export default function ProjectDetail({ data }) {
               items={imagesList}
               onSelectImage={(item) => setSelectedImage(item)}
               categoryTitle={project.title}
+              initialCount={project.initialCount || 8}
+              step={project.step || 6}
             />
           </section>
         )}
