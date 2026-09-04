@@ -78,11 +78,11 @@
 .hero-eyebrow {
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   gap: 10px;
   position: relative;
   top: clamp(30px, 8vw, 130px);
-  left: 0;
+  left: 220px;
   margin-bottom: 22px;
   width: 100%;
   padding-left: 0;

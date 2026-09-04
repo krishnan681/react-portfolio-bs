@@ -21,7 +21,7 @@
 
 /* ── Eyebrow ─────────────────────────────────────────── */
 .contact-header {
-  margin-bottom: clamp(24px, 3.5vw, 40px);
+  margin-bottom: clamp(36px, 5.5vw, 65px);
 }
 
 .eyebrow {
@@ -102,87 +102,7 @@
   margin: 0;
 }
 
-/* ── CTA Banner Card ─────────────────────────────────── */
-.contact-cta-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
-  padding: clamp(28px, 4vw, 44px) clamp(24px, 4vw, 48px);
-  margin: clamp(28px, 4vw, 44px) 0 clamp(40px, 5vw, 65px);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.55) 100%);
-  backdrop-filter: blur(28px) saturate(190%);
-  -webkit-backdrop-filter: blur(28px) saturate(190%);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  border-radius: 32px;
-  box-shadow:
-    0 20px 50px rgba(4, 25, 58, 0.08),
-    inset 0 1.5px 1px rgba(255, 255, 255, 0.95);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
 
-.contact-cta-card:hover {
-  transform: translateY(-4px);
-  border-color: #ffffff;
-  box-shadow:
-    0 28px 65px rgba(4, 25, 58, 0.12),
-    inset 0 1.5px 1px rgba(255, 255, 255, 1);
-}
-
-.cta-badge {
-  display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  color: #0284c7;
-  margin-bottom: 10px;
-}
-
-.cta-title {
-  font-size: clamp(1.4rem, 2.4vw, 1.85rem);
-  font-weight: 800;
-  color: #04193a;
-  margin: 0 0 8px 0;
-  letter-spacing: -0.5px;
-}
-
-.cta-desc {
-  font-size: 0.98rem;
-  color: #64748b;
-  margin: 0;
-}
-
-.cta-primary-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 36px;
-  background: #04193a;
-  color: #ffffff;
-  border-radius: 999px;
-  font-size: 1.05rem;
-  font-weight: 700;
-  text-decoration: none;
-  box-shadow: 0 8px 24px rgba(4, 25, 58, 0.25);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.cta-primary-btn:hover {
-  background: #0284c7;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(2, 132, 199, 0.35);
-  color: #ffffff;
-}
-
-.cta-arrow {
-  transition: transform 0.3s ease;
-}
-
-.cta-primary-btn:hover .cta-arrow {
-  transform: translate(3px, -3px);
-}
 
 /* ── Footer Container ────────────────────────────────── */
 .footer-container {
@@ -405,10 +325,6 @@
 }
 
 @media (max-width: 992px) {
-  .contact-cta-card {
-    padding: 28px 30px;
-  }
-
   .footer-grid {
     grid-template-columns: 1fr 1fr;
     gap: 36px;
@@ -424,20 +340,6 @@
   .contact-main-heading {
     font-size: 2.2rem;
     letter-spacing: -1px;
-  }
-
-  .contact-cta-card {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 24px 20px;
-    border-radius: 24px;
-    gap: 20px;
-  }
-
-  .cta-primary-btn {
-    width: 100%;
-    justify-content: center;
-    padding: 14px 24px;
   }
 
   .footer-grid {
@@ -475,49 +377,10 @@
   .contact-main-heading {
     font-size: 1.85rem;
   }
-
-  .contact-subheading {
-    font-size: 0.92rem;
-    line-height: 1.65;
-  }
-
-  .contact-cta-card {
-    padding: 22px 18px;
-  }
-
-  .cta-title {
-    font-size: 1.3rem;
-  }
-
-  .cta-desc {
-    font-size: 0.88rem;
-  }
-
-  .brand-name {
-    font-size: 1.3rem;
-  }
-
-  .brand-tagline {
-    font-size: 0.88rem;
-  }
-
-  .contact-info-item {
-    font-size: 0.86rem;
-  }
-
-  .social-pill {
-    padding: 8px 14px;
-    font-size: 0.82rem;
-  }
 }
 
 @media (max-width: 360px) {
   .contact-main-heading {
     font-size: 1.6rem;
-  }
-
-  .cta-primary-btn {
-    font-size: 0.95rem;
-    padding: 12px 18px;
   }
 }

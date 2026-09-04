@@ -99,7 +99,7 @@
 .project-detail-page[data-variant="editorial"] .project-headline-title,
 .project-detail-page[data-variant="editorial"] .section-heading {
   font-family: var(--hero-serif, 'Fraunces', Georgia, serif);
-  font-weight: 700;
+  /* font-weight: 700; */
   letter-spacing: -0.02em;
 }
 
@@ -352,7 +352,6 @@
 
 .section-heading {
   font-size: clamp(1.6rem, 3vw, 2.3rem);
-  font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--project-text);
   margin: 0;

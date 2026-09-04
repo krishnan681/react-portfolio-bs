@@ -3,7 +3,6 @@ import {
   Mail,
   Phone,
   MapPin,
-  ArrowUpRight,
   Globe,
   Heart,
 } from "lucide-react";
@@ -19,7 +18,6 @@ export default function Contact() {
     { label: "Branding", href: "#branding" },
     { label: "Visual Creations", href: "#visual" },
     { label: "Tools", href: "#tools" },
-    { label: "Color Palettes", href: "#fonts-colors" },
   ];
 
   return (
@@ -46,26 +44,6 @@ export default function Contact() {
               Whether you have a new brand identity in mind, need creative visual direction,
               or want to collaborate on high-impact motion graphics — my inbox is always open.
             </p>
-          </div>
-        </div>
-
-        {/* ================= CTA BANNER ================= */}
-        <div className="contact-cta-card" data-aos="fade-up" data-aos-delay="100">
-          <div className="cta-content">
-            <div className="cta-badge">AVAILABLE FOR FREELANCE &amp; COLLABORATIONS</div>
-            <h3 className="cta-title">Have a project or opportunity?</h3>
-            <p className="cta-desc">Feel free to reach out directly via email or phone call.</p>
-          </div>
-
-          <div className="cta-action">
-            <a
-              href="mailto:Barath@gmail.com"
-              className="cta-primary-btn"
-              aria-label="Send email to Barath"
-            >
-              <span>Say Hello</span>
-              <ArrowUpRight size={20} className="cta-arrow" />
-            </a>
           </div>
         </div>
 

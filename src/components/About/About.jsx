@@ -79,29 +79,36 @@ function StatCounter({ target, suffix = "", label, decimals = 0 }) {
   );
 }
 
-// Word by Word Animation Component
-function AnimatedWordText({ text, highlightWords = [], startDelay = 0, isRevealed }) {
-  const words = text.split(" ");
+// Word by Word Animation Component with Multi-Line Support
+function AnimatedWordText({ lines = [], highlightWords = [], startDelay = 0, isRevealed, lineClassName = "" }) {
+  let globalWordIndex = 0;
 
   return (
-    <span className="animated-words-container">
-      {words.map((word, index) => {
-        // Clean punctuation for highlight check
-        const cleanWord = word.replace(/[^a-zA-Z&]/g, "");
-        const isHighlight = highlightWords.includes(cleanWord) || highlightWords.includes(word);
-        const delay = startDelay + index * 32;
-
+    <div className="animated-lines-container">
+      {lines.map((lineText, lineIdx) => {
+        const words = lineText.split(" ");
         return (
-          <span
-            key={index}
-            className={`word-span ${isRevealed ? "revealed" : ""} ${isHighlight ? "highlight-word" : ""}`}
-            style={{ transitionDelay: `${delay}ms` }}
-          >
-            {word}&nbsp;
+          <span key={lineIdx} className={`text-line ${lineClassName}`}>
+            {words.map((word) => {
+              const currentIdx = globalWordIndex++;
+              const cleanWord = word.replace(/[^a-zA-Z&]/g, "");
+              const isHighlight = highlightWords.includes(cleanWord) || highlightWords.includes(word);
+              const delay = startDelay + currentIdx * 32;
+
+              return (
+                <span
+                  key={currentIdx}
+                  className={`word-span ${isRevealed ? "revealed" : ""} ${isHighlight ? "highlight-word" : ""}`}
+                  style={{ transitionDelay: `${delay}ms` }}
+                >
+                  {word}&nbsp;
+                </span>
+              );
+            })}
           </span>
         );
       })}
-    </span>
+    </div>
   );
 }
 
@@ -127,8 +134,15 @@ export default function About() {
     return () => observer.disconnect();
   }, []);
 
-  const leadText = "I'm a passionate Graphic Designer & Video Editor dedicated to crafting motion graphics, promotional videos, and compelling visual storytelling.";
-  const bodyText = "Skilled in graphic design, motion design, video editing, color grading, and post-production workflows, I deliver high-impact creative solutions that strengthen brand identity and drive audience engagement.";
+  const leadLines = [
+    "I'm a passionate Graphic Designer & Video Editor",
+    "dedicated to crafting motion graphics, promotional videos, and compelling visual storytelling."
+  ];
+
+  const bodyLines = [
+    "Skilled in graphic design, motion design, video editing, color grading, and post-production workflows,",
+    "I deliver high-impact creative solutions that strengthen brand identity and drive audience engagement."
+  ];
 
   return (
     <section className="about sc_py" id="about" ref={sectionRef}>
@@ -148,28 +162,35 @@ export default function About() {
           </div>
 
           <div className={`experience-badge scroll-block ${isRevealed ? "revealed" : ""}`}>
-            <span className="exp-num">2+</span>
-            <span className="exp-text">Years of Creative Experience</span>
+            <span className="exp-badge-pill">
+              <span className="exp-badge-dot"></span>
+              <span className="exp-num">2+</span>
+              <span className="exp-unit">YEARS</span>
+            </span>
+            <span className="exp-divider"></span>
+            <span className="exp-text">Creative Experience</span>
           </div>
 
-          {/* Centered Bio Paragraphs with Word-by-Word Animation */}
+          {/* Centered Bio Paragraphs with Word-by-Word Animation in 2 Lines */}
           <div className="about-text-content">
-            <p className="lead-text">
+            <div className="lead-text">
               <AnimatedWordText
-                text={leadText}
+                lines={leadLines}
                 highlightWords={["Graphic", "Designer", "&", "Video", "Editor"]}
                 startDelay={200}
                 isRevealed={isRevealed}
+                lineClassName="lead-line"
               />
-            </p>
-            <p className="body-text">
+            </div>
+            <div className="body-text">
               <AnimatedWordText
-                text={bodyText}
+                lines={bodyLines}
                 highlightWords={[]}
                 startDelay={650}
                 isRevealed={isRevealed}
+                lineClassName="body-line"
               />
-            </p>
+            </div>
           </div>
 
           {/* Centered Stats */}

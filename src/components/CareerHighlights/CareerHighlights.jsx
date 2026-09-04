@@ -158,11 +158,16 @@ export default function CareerHighlights() {
   );
 
   /* =====================================
-      Duplicate for Infinite Slider
+      Duplicate for Infinite Slider (4 sets)
   ====================================== */
 
   const infiniteVideos = useMemo(
-    () => [...sliderVideos, ...sliderVideos],
+    () => [
+      ...sliderVideos,
+      ...sliderVideos,
+      ...sliderVideos,
+      ...sliderVideos,
+    ],
     [sliderVideos],
   );
 
@@ -193,14 +198,93 @@ export default function CareerHighlights() {
   );
 
   const sliderRef = useRef(null);
+  const isPausedRef = useRef(false);
+  const animationFrameRef = useRef(null);
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    // Set initial position centered around middle set
+    const setupInitialPosition = () => {
+      if (slider && slider.scrollWidth > 0) {
+        const singleSetWidth = slider.scrollWidth / 4;
+        if (slider.scrollLeft === 0) {
+          slider.scrollLeft = singleSetWidth;
+        }
+      }
+    };
+
+    setupInitialPosition();
+    const timer = setTimeout(setupInitialPosition, 250);
+
+    // Continuous smooth auto-scroll loop
+    const step = () => {
+      if (!isPausedRef.current && slider) {
+        const singleSetWidth = slider.scrollWidth / 4;
+        if (singleSetWidth > 0) {
+          slider.scrollLeft += 0.7;
+
+          if (slider.scrollLeft >= singleSetWidth * 2.5) {
+            slider.scrollLeft -= singleSetWidth;
+          } else if (slider.scrollLeft <= 20) {
+            slider.scrollLeft += singleSetWidth;
+          }
+        }
+      }
+      animationFrameRef.current = requestAnimationFrame(step);
+    };
+
+    animationFrameRef.current = requestAnimationFrame(step);
+
+    const handleScrollWrap = () => {
+      if (!slider) return;
+      const singleSetWidth = slider.scrollWidth / 4;
+      if (singleSetWidth <= 0) return;
+
+      if (slider.scrollLeft <= 20) {
+        slider.scrollLeft += singleSetWidth;
+      } else if (slider.scrollLeft >= singleSetWidth * 3) {
+        slider.scrollLeft -= singleSetWidth;
+      }
+    };
+
+    slider.addEventListener("scroll", handleScrollWrap, { passive: true });
+
+    return () => {
+      clearTimeout(timer);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+      slider.removeEventListener("scroll", handleScrollWrap);
+    };
+  }, [infiniteVideos]);
 
   const scrollSlider = (direction) => {
     if (sliderRef.current) {
-      const scrollAmount = 360;
-      sliderRef.current.scrollBy({
+      const slider = sliderRef.current;
+      const singleSetWidth = slider.scrollWidth / 4;
+      const card = slider.querySelector(".video-card");
+      const cardWidth = card ? card.offsetWidth + 24 : 344;
+      const scrollAmount = cardWidth;
+
+      isPausedRef.current = true;
+
+      // Ensure buffer space before scrolling left
+      if (direction === "left" && slider.scrollLeft <= cardWidth + 20) {
+        slider.scrollLeft += singleSetWidth;
+      } else if (direction === "right" && slider.scrollLeft >= singleSetWidth * 2.5) {
+        slider.scrollLeft -= singleSetWidth;
+      }
+
+      slider.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
       });
+
+      setTimeout(() => {
+        isPausedRef.current = false;
+      }, 1500);
     }
   };
 
@@ -252,7 +336,13 @@ export default function CareerHighlights() {
             Infinite Video Slider with Arrow Controls
         ====================================== */}
 
-        <div className="video-slider-wrap">
+        <div
+          className="video-slider-wrap"
+          onMouseEnter={() => { isPausedRef.current = true; }}
+          onMouseLeave={() => { isPausedRef.current = false; }}
+          onTouchStart={() => { isPausedRef.current = true; }}
+          onTouchEnd={() => { isPausedRef.current = false; }}
+        >
           <button
             type="button"
             className="video-slider-arrow left"

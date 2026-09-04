@@ -94,13 +94,8 @@
   display: flex;
   width: max-content;
   gap: clamp(16px, 2vw, 28px);
-  animation: marquee 34s linear infinite;
   padding: 0 clamp(20px, 4vw, 50px);
-}
-
-.video-slider-wrap:hover .slider-track,
-.video-slider:hover .slider-track {
-  animation-play-state: paused;
+  will-change: scroll-position;
 }
 
 .video-row {
@@ -234,19 +229,7 @@
   border-bottom: 10px solid transparent;
 }
 
-/*=========================
-    MARQUEE ANIMATION
-==========================*/
 
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-50%);
-  }
-}
 /*=========================================
             GALLERY IMAGES (4 IMAGES)
 =========================================*/
@@ -799,7 +782,7 @@
 
   border-radius: 50%;
 
-  background: rgba(4, 25, 58, 0.08);
+   
   color: #04193a;
 
   font-size: 26px;

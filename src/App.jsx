@@ -13,7 +13,6 @@ import CareerHighlights from "./components/CareerHighlights/CareerHighlights";
 import Branding from "./components/Branding/Branding";
 import VisualCreations from "./components/VisualCreations/VisualCreations";
 import Tools from "./components/Tools/Tools";
-import FontsColors from "./components/FontsColors/FontsColors";
 import Contact from "./components/Contact/Contact";
 
 import ProjectPage from "./pages/ProjectPage/ProjectPage";
@@ -36,8 +35,6 @@ function Home() {
           <Branding />
           <VisualCreations />
           <Tools />
-          {/* <InstagramPosts /> */}
-          <FontsColors />
           <Contact />
         </div>
       </main>

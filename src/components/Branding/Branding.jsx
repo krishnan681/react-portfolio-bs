@@ -177,9 +177,9 @@ export default function Branding() {
         {/* ================= DESCRIPTION ================= */}
         <div className="BC-heading text-center" data-aos="fade-up" data-aos-delay="100">
           <p>
-            Creative work delivered across diverse industries — entertainment, retail,
+            Creative work delivered across diverse industries entertainment, retail,
             <br />
-            hospitality, and healthcare — showcasing versatile design and content expertise.
+            hospitality, and healthcare showcasing versatile design and content expertise.
           </p>
         </div>
 
