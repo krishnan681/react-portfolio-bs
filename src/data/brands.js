@@ -13,11 +13,12 @@ export const BRANDS = [
     banner: getR2Url("branding/banners/Banners-01.webp"),
     src: getR2Url("branding/covers/1.webp"),
     color: "#C49A6C",
+    cardBg: "#04193a",
+    cardTextColor: "#c49150",
     designVariant: "cinematic",
     description:
       "Broadway Cinemas, Coimbatore is a premium multiplex featuring South India's first IMAX with Laser and Tamil Nadu's first EPIQ for an unmatched big-screen experience. HyperX and Vivid deliver enhanced visuals, vibrant colors, and immersive Dolby Atmos sound.",
-    details:
-      "The creative direction focused on building an immersive brand identity, collectible IMAX cards, digital menu boards, motion graphics reels, and large-format LED displays for blockbuster movie premieres.",
+    details: "",
     deliverables: [
       "Social Media Campaigns",
       "IMAX Collectible Cards",
@@ -286,18 +287,13 @@ export const BRANDS = [
     banner: getR2Url("branding/banners/Banners-02.webp"),
     src: getR2Url("branding/covers/2.webp"),
     color: "#D4A76A",
+    cardBg: "#880809",
+    cardTextColor: "#c49150",
     designVariant: "editorial",
     description:
       "The Crimson is a premium restobar in Broadway Square, Coimbatore, known for its stylish ambience, handcrafted cocktails, multi-cuisine menu, and vibrant dining experience.",
-    details:
-      "Developed high-energy visual assets, neon-infused social media creative, cocktail lookbooks, DJ night promotional posters, and ambient lounge graphics.",
-    deliverables: [
-      "Social Media Creatives",
-      "Cocktail Menu Cards",
-      "Nightlife Event Posters",
-      "Digital Ads & Reels",
-      "VIP Lounge Signage",
-    ],
+    details: "",
+    deliverables: ["Social media contents"],
     layout: "portrait-5-4",
     initialCount: 9,
     images: [
@@ -394,18 +390,13 @@ export const BRANDS = [
     banner: getR2Url("branding/banners/Banners-03.webp"),
     src: getR2Url("branding/covers/3.webp"),
     color: "#88A28D",
+    cardBg: "#e7f4ff",
+    cardTextColor: "#39586e",
     designVariant: "editorial",
     description:
       "Giggles & Twirls is a premium fashion brand offering luxury linen clothing for women and kids, combining elegant designs, breathable fabrics, and everyday comfort.",
-    details:
-      "Curated pastel-toned catalog lookbooks, e-commerce banners, Instagram story templates, apparel tags, and seasonal product launch campaigns.",
-    deliverables: [
-      "Social Media Creatives",
-      "E-Commerce Banners",
-      "Lookbook Design",
-      "Apparel Tags & Packaging",
-      "Product Video Showcase",
-    ],
+    details: "",
+    deliverables: ["Social media contents", "Website banner"],
     layout: "portrait-rows",
     rowDistribution: [6, 6, 6, 6],
     initialRows: 2,
@@ -658,18 +649,13 @@ export const BRANDS = [
     banner: getR2Url("branding/banners/Banners-04.webp"),
     src: getR2Url("branding/covers/4.webp"),
     color: "#0A2E8C",
+    cardBg: "#09219b",
+    cardTextColor: "#c49150",
     designVariant: "cinematic",
     description:
       "Aarthi Grand Cineplex (AGC) is a premium multiplex in Dindigul, offering 4K Barco Laser projection, Dolby Atmos sound, modern interiors, and comfortable seating for a high-quality movie experience.",
-    details:
-      "The creative direction focused on building engaging visual communication for digital platforms, high-energy teaser reels, social media campaigns, and vibrant LED display boards across the multiplex.",
-    deliverables: [
-      "Social Media Campaigns",
-      "LED Wall Designs",
-      "Movie Posters & Key Visuals",
-      "Theatrical Video Production",
-      "Premiere Night Collaterals",
-    ],
+    details: "",
+    deliverables: ["Social media contents", "Led wall designs"],
     images: [
       {
         id: "agc-img-1",
@@ -792,9 +778,7 @@ export const BRANDS = [
       },
       {
         id: "agc-img-18",
-        src: getR2Url(
-          "branding/aarthi_grand_cineplex/images/18.webpbranding/aarthi_grand_cineplex/images/18.webp",
-        ),
+        src: getR2Url("branding/aarthi_grand_cineplex/images/18.webp"),
         title: "Digital Display & Box Office Kiosk Art",
         tag: "Display Graphics",
         aspect: "portrait",
@@ -906,17 +890,16 @@ export const BRANDS = [
     banner: getR2Url("branding/banners/Banners-05.webp"),
     src: getR2Url("branding/covers/5.webp"),
     color: "#C25424",
+    cardBg: "#efe8e0",
+    cardTextColor: "#24211f",
     designVariant: "showcase",
     description:
-      "That's Y Food — A premium multi-cuisine restaurant known for global flavors and fine dining. On the Go (OTG) — A casual café and restaurant serving quick meals, beverages, and comfort food. Café Totaram & Toto Tree — Artisanal hospitality in Coimbatore.",
-    details:
-      "Produced mouth-watering visual campaigns, food photography directions, short promotional reels, artisanal menu placards, and seasonal festival collaterals.",
+      "That's Y Food – A premium multi-cuisine restaurant known for global flavors and fine dining. On the Go (OTG) – A casual café and restaurant serving quick meals, beverages, and comfort food. Café Totaram – A cozy café at Race Course, Coimbatore, popular for fusion food, desserts, coffee, and baked treats in a relaxed ambience.",
+    details: "",
     deliverables: [
-      "Social Media Contents",
-      "Food Video Shoots",
-      "Placards & Menu Cards",
-      "Promotional Festival Campaigns",
-      "Restaurant Brand Collaterals",
+      "Social media contents",
+      "Video shoot",
+      "Pla cards",
     ],
     images: [
       {
@@ -1125,11 +1108,12 @@ export const BRANDS = [
     banner: getR2Url("branding/banners/Banners-06.webp"),
     src: getR2Url("branding/covers/6.webp"),
     color: "#122B22",
+    cardBg: "#e1e1dd",
+    cardTextColor: "#133d20",
     designVariant: "cinematic",
     description:
       "The Long Story — Spirits & Spice is an upscale resto-lounge offering signature mixology, gourmet gastronomy, and refined nightlife storytelling with curated ambient aesthetics.",
-    details:
-      "Developed sophisticated brand identity collaterals, craft cocktail menus, ambient lighting themes, and digital social media reels.",
+    details: "",
     deliverables: [
       "Brand Identity System",
       "Cocktail & Dining Menu",
@@ -1182,16 +1166,15 @@ export const BRANDS = [
     banner: getR2Url("branding/banners/Banners-07.webp"),
     src: getR2Url("branding/covers/7.webp"),
     color: "#8A131A",
+    cardBg: "#f6efe5",
+    cardTextColor: "#4b0000",
     designVariant: "editorial",
     description:
       "Pavizham Jewellers is a trusted jewellery brand in Coimbatore, offering gold, diamond, platinum, and silver jewellery with quality craftsmanship and elegant designs.",
-    details:
-      "Directed high-end jewelry photoshoot concepts, festival bridal campaigns, newspaper advertisements, and digital social media carousels.",
+    details: "",
     deliverables: [
-      "Social Media Campaigns",
-      "Jewelry Product Photography",
-      "Festival Print Ads",
-      "Bridal Catalog & Lookbooks",
+      "Social media contents",
+      "Jewelry product shoot",
     ],
     images: [
       {
@@ -1295,18 +1278,13 @@ export const BRANDS = [
     banner: getR2Url("branding/banners/Banners-08.webp"),
     src: getR2Url("branding/covers/8.webp"),
     color: "#1E242B",
+    cardBg: "#e5d4c0",
+    cardTextColor: "#032259",
     designVariant: "minimal",
     description:
       "New City Developers is a construction company specializing in residential construction, home renovation, and redevelopment, delivering quality craftsmanship and modern living spaces.",
-    details:
-      "Formulated architectural visualization posters, site hoardings, luxury brochure layouts, 3D floor plan graphics, and investor pitch deck presentations.",
-    deliverables: [
-      "Social Media Creatives",
-      "Project Brochures",
-      "Site Hoardings & Billboards",
-      "3D Render Graphics",
-      "Investor Pitch Decks",
-    ],
+    details: "",
+    deliverables: ["Social media contents"],
     images: [
       {
         id: "ncd-img-1",
@@ -1373,17 +1351,16 @@ export const BRANDS = [
     banner: getR2Url("branding/banners/Banners-09.webp"),
     src: getR2Url("branding/covers/9.webp"),
     color: "#0284C7",
+    cardBg: "#faf9f6",
+    cardTextColor: "#204050",
     designVariant: "showcase",
     description:
-      "Sunbeam International School (ICSE) is a premier educational institution focused on holistic academic excellence, creative innovation, and character building.",
-    details:
-      "Designed vibrant admission campaigns, school prospectus, annual day creative themes, student achievement posters, and digital parent engagement visuals.",
+      "Sunbeam International School provides world-class education with a focus on academic excellence and holistic development, while Kids Castle offers a nurturing early learning environment that builds a strong foundation for young learners.",
+    details: "",
     deliverables: [
-      "Annual Admission Campaigns",
-      "Prospectus & Info Brochures",
-      "Social Media Creatives",
-      "Annual Day Visual Identity",
-      "Campus Video Highlights",
+      "Social media contents",
+      "Prints card",
+      "Menu works",
     ],
     images: [
       {
@@ -1437,11 +1414,12 @@ export const BRANDS = [
     banner: getR2Url("branding/banners/Banners-10.webp"),
     src: getR2Url("branding/covers/10.webp"),
     color: "#0E6B88",
+    cardBg: "#ffffff",
+    cardTextColor: "#1C6AA0",
     designVariant: "minimal",
     description:
       "Newrish Pharmaceuticals Private Limited is dedicated to advancing healthcare and wellness through high-quality pharmaceutical formulations and ethical medical innovations.",
-    details:
-      "Crafted corporate branding guidelines, pharmaceutical packaging mockups, medical symposium backdrops, product monographs, and health awareness carousels.",
+    details: "",
     deliverables: [
       "Corporate Identity System",
       "Product Packaging Mockups",

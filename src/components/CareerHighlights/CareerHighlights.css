@@ -40,7 +40,6 @@
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  scroll-behavior: smooth;
   padding: 16px 0 24px;
 }
 
@@ -146,26 +145,52 @@
 }
 
 /*=========================
-      PROFILE ICON
+      AVATAR LIST / GROUP
 ==========================*/
 
-.video-icon {
+.video-avatar-group {
   position: absolute;
   top: 18px;
   left: 18px;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
   z-index: 5;
-  border: 3px solid #fff;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
+.video-avatar-item,
+.video-icon {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #ffffff;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+.video-avatar-group .video-avatar-item:not(:first-child) {
+  margin-left: -16px;
+}
+
+.video-avatar-group .video-avatar-item:hover {
+  transform: scale(1.15) translateY(-2px);
+  z-index: 10 !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+
+.video-avatar-item img,
 .video-icon img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  background: #ffffff;
+  display: block;
 }
 
 /*=========================
@@ -872,6 +897,21 @@
     border-radius: 20px;
   }
 
+  .video-avatar-group {
+    top: 14px;
+    left: 14px;
+  }
+
+  .video-avatar-item,
+  .video-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .video-avatar-group .video-avatar-item:not(:first-child) {
+    margin-left: -14px;
+  }
+
   .video-title {
     font-size: 17px;
 
@@ -945,12 +985,20 @@
     max-width: 140px;
   }
 
-  .video-icon {
-    width: 42px;
-    height: 42px;
-
+  .video-avatar-group {
     top: 12px;
     left: 12px;
+  }
+
+  .video-avatar-item,
+  .video-icon {
+    width: 36px;
+    height: 36px;
+    border-width: 2px;
+  }
+
+  .video-avatar-group .video-avatar-item:not(:first-child) {
+    margin-left: -12px;
   }
 
   .play-btn {

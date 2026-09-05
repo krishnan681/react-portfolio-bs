@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft,
@@ -6,52 +6,51 @@ import {
   Maximize2,
   ChevronLeft,
   ChevronRight,
-  LayoutGrid,
-  SlidersHorizontal,
-  Layers,
+  ChevronUp,
+  Plus,
   X,
-  Eye,
 } from "lucide-react";
-import { IMAGES_DATA, IMAGE_THEMES } from "../../data/visualCreationsData";
+import { IMAGES_DATA } from "../../data/visualCreationsData";
 import ImageWithSkeleton from "../../components/Common/ImageWithSkeleton";
 import EmptyState from "../../components/Common/EmptyState";
-import { safeStorage } from "../../utils/storage";
 import "./ImagesPage.css";
 
 export default function ImagesPage() {
-  const [activeTheme, setActiveTheme] = useState(() => safeStorage.get("images_theme", "all"));
-  const [viewMode, setViewMode] = useState(() => safeStorage.get("images_view_mode", "bento"));
+  const INITIAL_COUNT = 4;
+  const STEP = 4;
+  const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
   const [activeImageIndex, setActiveImageIndex] = useState(null);
-  const [carouselIndex, setCarouselIndex] = useState(0);
-  const filmstripRef = useRef(null);
-
-  useEffect(() => {
-    safeStorage.set("images_theme", activeTheme);
-  }, [activeTheme]);
-
-  useEffect(() => {
-    safeStorage.set("images_view_mode", viewMode);
-  }, [viewMode]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  const filteredImages = useMemo(() => {
-    if (activeTheme === "all") return IMAGES_DATA;
-    return IMAGES_DATA.filter((item) => item.theme === activeTheme);
-  }, [activeTheme]);
+  const hasMore = visibleCount < IMAGES_DATA.length;
+  const isExpanded = visibleCount > INITIAL_COUNT;
+  const visibleImages = IMAGES_DATA.slice(0, visibleCount);
+  const remainingCount = IMAGES_DATA.length - visibleCount;
 
-  const selectedImage = activeImageIndex !== null ? filteredImages[activeImageIndex] : null;
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + STEP, IMAGES_DATA.length));
+  };
+
+  const handleViewLess = () => {
+    setVisibleCount(INITIAL_COUNT);
+  };
+
+  const selectedImage =
+    activeImageIndex !== null ? IMAGES_DATA[activeImageIndex] : null;
 
   const handleNextImage = () => {
     if (activeImageIndex === null) return;
-    setActiveImageIndex((prev) => (prev + 1) % filteredImages.length);
+    setActiveImageIndex((prev) => (prev + 1) % IMAGES_DATA.length);
   };
 
   const handlePrevImage = () => {
     if (activeImageIndex === null) return;
-    setActiveImageIndex((prev) => (prev - 1 + filteredImages.length) % filteredImages.length);
+    setActiveImageIndex(
+      (prev) => (prev - 1 + IMAGES_DATA.length) % IMAGES_DATA.length
+    );
   };
 
   useEffect(() => {
@@ -63,16 +62,7 @@ export default function ImagesPage() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [activeImageIndex, filteredImages]);
-
-  const handleCarouselScroll = (direction) => {
-    if (!filmstripRef.current) return;
-    const scrollAmount = 380;
-    filmstripRef.current.scrollBy({
-      left: direction === "next" ? scrollAmount : -scrollAmount,
-      behavior: "smooth",
-    });
-  };
+  }, [activeImageIndex]);
 
   return (
     <main className="images-page">
@@ -95,221 +85,98 @@ export default function ImagesPage() {
         <div className="gallery-hero-content">
           <span className="gallery-eyebrow">
             <Sparkles size={14} />
-            Art Direction & Graphic Systems
+            Visual Creations
           </span>
-          <h1 className="gallery-hero-title">Visual Creations & Imagery</h1>
+          <h1 className="gallery-hero-title">Graphic & Visual Showcase</h1>
           <p className="gallery-hero-desc">
-            A curated anthology of branding collaterals, typography posters, advertising key visuals, and digital compositions crafted with bespoke scales and thematic resonance.
+            A curated gallery of branding collaterals, digital key visuals, posters, and creative artworks.
           </p>
 
           <div className="gallery-stats-bar">
             <div className="stat-pill">
-              <strong>{filteredImages.length}</strong>
+              <strong>{IMAGES_DATA.length}</strong>
               <span>Pieces</span>
             </div>
             <div className="stat-pill">
-              <strong>5</strong>
-              <span>Disciplines</span>
+              <strong>High Definition</strong>
+              <span>Render</span>
             </div>
-            <div className="stat-pill">
-              <strong>Adaptive</strong>
-              <span>Aspect Ratios</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TOOLBAR CONTROLS */}
-      <section className="gallery-toolbar-section">
-        <div className="gallery-toolbar-inner">
-          {/* THEME FILTERS */}
-          <div className="gallery-filter-tabs">
-            {IMAGE_THEMES.map((theme) => {
-              const count =
-                theme.id === "all"
-                  ? IMAGES_DATA.length
-                  : IMAGES_DATA.filter((i) => i.theme === theme.id).length;
-              return (
-                <button
-                  key={theme.id}
-                  type="button"
-                  className={`filter-tab-btn ${activeTheme === theme.id ? "is-active" : ""}`}
-                  onClick={() => {
-                    setActiveTheme(theme.id);
-                    setActiveImageIndex(null);
-                  }}
-                >
-                  <span>{theme.label}</span>
-                  <span className="tab-count">{count}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* VIEW SWITCHER */}
-          <div className="gallery-view-switcher">
-            <button
-              type="button"
-              className={`view-mode-btn ${viewMode === "bento" ? "active" : ""}`}
-              onClick={() => setViewMode("bento")}
-              title="Curated Bento Showcase"
-            >
-              <LayoutGrid size={16} />
-              <span>Bento Grid</span>
-            </button>
-            <button
-              type="button"
-              className={`view-mode-btn ${viewMode === "filmstrip" ? "active" : ""}`}
-              onClick={() => setViewMode("filmstrip")}
-              title="Horizontal Filmstrip Carousel"
-            >
-              <Layers size={16} />
-              <span>Filmstrip</span>
-            </button>
-            <button
-              type="button"
-              className={`view-mode-btn ${viewMode === "masonry" ? "active" : ""}`}
-              onClick={() => setViewMode("masonry")}
-              title="Compact Masonry"
-            >
-              <SlidersHorizontal size={16} />
-              <span>Masonry</span>
-            </button>
           </div>
         </div>
       </section>
 
       {/* GALLERY SHOWCASE DISPLAY */}
       <section className="gallery-showcase-container">
-        {filteredImages.length === 0 ? (
+        {IMAGES_DATA.length === 0 ? (
           <EmptyState
             title="No Visuals Found"
-            message="There are no creative designs matching the selected theme filter."
-            actionText="Show All Visuals"
-            onAction={() => setActiveTheme("all")}
+            message="There are no creative designs currently available."
+            actionText="Back to Home"
+            onAction={() => window.location.href = "/"}
           />
         ) : (
           <>
-            {/* MODE 1: BENTO GRID */}
-            {viewMode === "bento" && (
-              <div className="bento-gallery-grid">
-                {filteredImages.map((img, idx) => (
+            <div className="images-gallery-grid">
+              {visibleImages.map((img, idx) => {
+                const numStr = String(idx + 1).padStart(2, "0");
+                return (
                   <article
                     key={img.id}
-                    className={`bento-card ${img.aspect} ${img.span || ""}`}
+                    className="image-card-item"
                     onClick={() => setActiveImageIndex(idx)}
                   >
-                    <div className="card-media-wrap">
+                    <div className="image-card-media-wrap">
                       <ImageWithSkeleton
                         src={img.src}
-                        alt={img.title}
-                        objectFit="contain"
-                        wrapperClassName="bento-skeleton-wrap"
+                        alt={`Visual Creation ${numStr}`}
+                        className="image-card-img"
+                        wrapperClassName="image-card-skeleton-wrap"
                       />
-                      <div className="card-overlay">
-                        <div className="card-top-tags">
-                          <span className="aspect-badge">{img.sizeLabel}</span>
-                          <span className="year-badge">{img.year}</span>
-                        </div>
-                        <div className="card-bottom-info">
-                          <span className="card-category">{img.category}</span>
-                          <h3 className="card-title">{img.title}</h3>
-                          <p className="card-client">{img.client}</p>
-                        </div>
-                        <button type="button" className="quick-preview-btn">
+                      <div className="image-card-vignette" />
+                      <span className="image-card-badge">#{numStr}</span>
+                      <div className="image-card-hover-scrim">
+                        <div className="image-card-zoom-pill">
                           <Maximize2 size={16} />
-                        </button>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            )}
-
-            {/* MODE 2: HORIZONTAL FILMSTRIP CAROUSEL (ZERO VERTICAL SCROLL FATIGUE) */}
-            {viewMode === "filmstrip" && (
-              <div className="filmstrip-showcase-wrap">
-                <div className="filmstrip-nav-controls">
-                  <span className="filmstrip-hint">
-                    <Sparkles size={14} /> Swipe or scroll horizontally to explore collection
-                  </span>
-                  <div className="filmstrip-arrows">
-                    <button
-                      type="button"
-                      className="filmstrip-arrow-btn"
-                      onClick={() => handleCarouselScroll("prev")}
-                    >
-                      <ChevronLeft size={18} />
-                    </button>
-                    <button
-                      type="button"
-                      className="filmstrip-arrow-btn"
-                      onClick={() => handleCarouselScroll("next")}
-                    >
-                      <ChevronRight size={18} />
-                    </button>
-                  </div>
-                </div>
-
-                <div className="filmstrip-track" ref={filmstripRef}>
-                  {filteredImages.map((img, idx) => (
-                    <article
-                      key={img.id}
-                      className={`filmstrip-card ${img.aspect}`}
-                      onClick={() => setActiveImageIndex(idx)}
-                    >
-                      <div className="filmstrip-media">
-                        <ImageWithSkeleton
-                          src={img.src}
-                          alt={img.title}
-                          objectFit="contain"
-                          wrapperClassName="filmstrip-skeleton-wrap"
-                        />
-                        <div className="filmstrip-hover-curtain">
-                          <Eye size={22} />
-                          <span>Inspect Artwork</span>
-                        </div>
-                      </div>
-                      <div className="filmstrip-caption">
-                        <div className="filmstrip-meta">
-                          <span className="meta-tag">{img.category}</span>
-                          <span className="meta-size">{img.sizeLabel}</span>
-                        </div>
-                        <h4>{img.title}</h4>
-                        <p>{img.client}</p>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* MODE 3: MASONRY GRID */}
-            {viewMode === "masonry" && (
-              <div className="masonry-gallery-grid">
-                {filteredImages.map((img, idx) => (
-                  <article
-                    key={img.id}
-                    className="masonry-card"
-                    onClick={() => setActiveImageIndex(idx)}
-                  >
-                    <div className="masonry-media-wrap">
-                      <ImageWithSkeleton
-                        src={img.src}
-                        alt={img.title}
-                        objectFit="contain"
-                        wrapperClassName="masonry-skeleton-wrap"
-                      />
-                      <div className="masonry-overlay">
-                        <span className="masonry-aspect-pill">{img.sizeLabel}</span>
-                        <div className="masonry-text">
-                          <span className="masonry-sub">{img.category}</span>
-                          <h4>{img.title}</h4>
+                          <span>View Fullscreen</span>
                         </div>
                       </div>
                     </div>
                   </article>
-                ))}
+                );
+              })}
+            </div>
+
+            {/* LOAD MORE / VIEW LESS ACTION CONTROLS */}
+            {(hasMore || isExpanded) && (
+              <div className="gallery-load-controls">
+                <div className="gallery-btn-group">
+                  {hasMore && (
+                    <button
+                      type="button"
+                      className="gallery-load-btn load-more-btn"
+                      onClick={handleLoadMore}
+                    >
+                      <Plus size={16} />
+                      <span>Load More</span>
+                      <span className="gallery-count-badge">
+                        +{Math.min(STEP, remainingCount)}
+                      </span>
+                    </button>
+                  )}
+                  {isExpanded && (
+                    <button
+                      type="button"
+                      className="gallery-load-btn view-less-btn"
+                      onClick={handleViewLess}
+                    >
+                      <ChevronUp size={16} />
+                      <span>View Less</span>
+                    </button>
+                  )}
+                </div>
+                <p className="gallery-status-text">
+                  Showing {visibleImages.length} of {IMAGES_DATA.length} visuals
+                </p>
               </div>
             )}
           </>
@@ -321,7 +188,7 @@ export default function ImagesPage() {
         <div className="bottom-bar-inner">
           <Link to="/" className="back-home-button">
             <ArrowLeft size={16} />
-            <span>Return to Portfolio Home</span>
+            <span>Return to Home</span>
           </Link>
           <Link to="/videos" className="next-showcase-button">
             <span>Explore Videos Showcase</span>
@@ -332,74 +199,50 @@ export default function ImagesPage() {
 
       {/* FULLSCREEN LIGHTBOX MODAL */}
       {selectedImage && (
-        <div className="gallery-lightbox-overlay" onClick={() => setActiveImageIndex(null)}>
-          <div className="gallery-lightbox-dialog" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="gallery-lightbox-overlay"
+          onClick={() => setActiveImageIndex(null)}
+        >
+          <div
+            className="gallery-lightbox-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               type="button"
               className="lightbox-close-btn"
               onClick={() => setActiveImageIndex(null)}
+              aria-label="Close Preview"
             >
-              <X size={20} />
+              <X size={22} />
             </button>
 
             <button
               type="button"
               className="lightbox-nav-btn prev-btn"
               onClick={handlePrevImage}
-              aria-label="Previous image"
+              aria-label="Previous visual"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={26} />
             </button>
 
             <button
               type="button"
               className="lightbox-nav-btn next-btn"
               onClick={handleNextImage}
-              aria-label="Next image"
+              aria-label="Next visual"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={26} />
             </button>
 
-            <div className="lightbox-content-grid">
-              <div className="lightbox-image-stage">
-                <img src={selectedImage.src} alt={selectedImage.title} />
-              </div>
-
-              <div className="lightbox-details-panel">
-                <div className="lightbox-details-header">
-                  <span className="lightbox-category-tag">{selectedImage.category}</span>
-                  <span className="lightbox-index-badge">
-                    {activeImageIndex + 1} / {filteredImages.length}
-                  </span>
-                </div>
-
-                <h2 className="lightbox-title">{selectedImage.title}</h2>
-                <p className="lightbox-desc">{selectedImage.description}</p>
-
-                <div className="lightbox-info-table">
-                  <div className="info-row">
-                    <span className="info-label">Client</span>
-                    <span className="info-value">{selectedImage.client}</span>
-                  </div>
-                  <div className="info-row">
-                    <span className="info-label">Format / Aspect</span>
-                    <span className="info-value">{selectedImage.sizeLabel}</span>
-                  </div>
-                  <div className="info-row">
-                    <span className="info-label">Year</span>
-                    <span className="info-value">{selectedImage.year}</span>
-                  </div>
-                </div>
-
-                {selectedImage.tags && (
-                  <div className="lightbox-tags-list">
-                    {selectedImage.tags.map((tag, tIdx) => (
-                      <span key={tIdx} className="lightbox-tag-pill">
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
+            <div className="lightbox-image-stage">
+              <img
+                src={selectedImage.src}
+                alt={`Visual Preview ${activeImageIndex + 1}`}
+                className="lightbox-stage-img"
+              />
+              <div className="lightbox-counter-pill">
+                {String(activeImageIndex + 1).padStart(2, "0")} /{" "}
+                {String(IMAGES_DATA.length).padStart(2, "0")}
               </div>
             </div>
           </div>

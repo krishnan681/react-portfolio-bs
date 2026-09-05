@@ -1,17 +1,12 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { ArrowUpRight, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { BRANDS } from "../../data/brands";
-import ImageWithSkeleton from "../Common/ImageWithSkeleton";
 import "./Branding.css";
-
-const AUTOPLAY_DELAY = 3800; // 3.8s autoplay delay
 
 export default function Branding() {
   const navigate = useNavigate();
   const [active, setActive] = useState(0);
-  const isPaused = useRef(false);
-  const timerRef = useRef(null);
   const dragInfo = useRef({ startX: 0, startY: 0, isDragging: false });
 
   const total = BRANDS.length;
@@ -27,49 +22,11 @@ export default function Branding() {
   const prev = useCallback(() => goTo(active - 1), [active, goTo]);
   const next = useCallback(() => goTo(active + 1), [active, goTo]);
 
-  // ── Autoplay ──────────────────────────────────────────
-  const startAutoplay = useCallback(() => {
-    stopAutoplay();
-    timerRef.current = setInterval(() => {
-      if (!isPaused.current) {
-        setActive((prevIdx) => (prevIdx + 1) % total);
-      }
-    }, AUTOPLAY_DELAY);
-  }, [total]);
-
-  const stopAutoplay = () => {
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-      timerRef.current = null;
-    }
-  };
-
-  const pause = () => {
-    isPaused.current = true;
-  };
-
-  const resume = () => {
-    isPaused.current = false;
-  };
-
-  useEffect(() => {
-    startAutoplay();
-    return stopAutoplay;
-  }, [startAutoplay]);
-
   // ── Keyboard Navigation ──────────────────────────────
   useEffect(() => {
     const onKey = (e) => {
-      if (e.key === "ArrowLeft") {
-        pause();
-        prev();
-        setTimeout(resume, AUTOPLAY_DELAY);
-      }
-      if (e.key === "ArrowRight") {
-        pause();
-        next();
-        setTimeout(resume, AUTOPLAY_DELAY);
-      }
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -82,9 +39,9 @@ export default function Branding() {
     if (offset < -total / 2) offset += total;
 
     const abs = Math.abs(offset);
-    const translateX = offset * 62; // Percentage offset
-    const rotateY = offset * -6;    // Subtle 3D tilt
-    const scale = abs === 0 ? 1 : Math.max(0.68, 1 - abs * 0.16);
+    const translateX = offset * 70; // Percentage offset for narrower cards
+    const rotateY = offset * -5;    // Subtle 3D tilt
+    const scale = abs === 0 ? 1 : Math.max(0.72, 1 - abs * 0.14);
     const zIndex = 100 - abs;
     const opacity = abs > 2 ? 0 : Math.max(0, 1 - abs * 0.25);
 
@@ -103,23 +60,17 @@ export default function Branding() {
 
   const handlePrev = (e) => {
     e.stopPropagation();
-    pause();
     prev();
-    setTimeout(resume, AUTOPLAY_DELAY);
   };
 
   const handleNext = (e) => {
     e.stopPropagation();
-    pause();
     next();
-    setTimeout(resume, AUTOPLAY_DELAY);
   };
 
   const handleDot = (e, i) => {
     e.stopPropagation();
-    pause();
     goTo(i);
-    setTimeout(resume, AUTOPLAY_DELAY);
   };
 
   // Drag handling without swallowing clicks
@@ -129,7 +80,6 @@ export default function Branding() {
       startY: e.clientY,
       isDragging: false,
     };
-    pause();
   };
 
   const handlePointerMove = (e) => {
@@ -146,7 +96,6 @@ export default function Branding() {
       if (deltaX > 0) prev();
       else next();
     }
-    setTimeout(resume, AUTOPLAY_DELAY);
   };
 
   const handleCardClick = (e, index, slug) => {
@@ -159,9 +108,7 @@ export default function Branding() {
     if (index === active) {
       navigate(`/branding/${slug}`);
     } else {
-      pause();
       goTo(index);
-      setTimeout(resume, AUTOPLAY_DELAY);
     }
   };
 
@@ -186,8 +133,6 @@ export default function Branding() {
         {/* ================= 3D COVERFLOW STAGE ================= */}
         <div
           className="branding-cf-stage"
-          onMouseEnter={pause}
-          onMouseLeave={resume}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
@@ -201,37 +146,26 @@ export default function Branding() {
                   className={`branding-cf-slide ${isActive ? "is-active" : ""}`}
                   style={{
                     ...getSlideStyle(i),
-                    "--brand-accent": brand.color || "#0284c7",
+                    "--card-bg": brand.cardBg || "#ffffff",
+                    "--card-text": brand.cardTextColor || "#04193a",
+                    "--brand-accent": brand.cardTextColor || brand.color || "#0284c7",
                   }}
                   onClick={(e) => handleCardClick(e, i, brand.slug)}
                 >
-                  {/* Full-bleed Brand Cover / Logo Media */}
-                  <div className="branding-cf-image-wrap">
-                    <ImageWithSkeleton
+                  {/* Main Showcase Poster Frame */}
+                  <div className="branding-cf-poster-frame">
+                    <img
                       src={brand.src || brand.logo}
-                      alt={`${brand.title} Cover`}
-                      wrapperClassName="w-100 h-100"
+                      alt={`${brand.title} Poster`}
+                      loading="lazy"
+                      decoding="async"
+                      className="branding-cf-poster-img"
                     />
                   </div>
 
-                  {/* Top Floating Badges */}
-                  <div className="branding-cf-top-bar">
-                    <div className="branding-cf-tag">
-                      <Sparkles size={12} />
-                      <span>{brand.category?.split("/")[0] || "Branding"}</span>
-                    </div>
-                    <span className="branding-cf-index">{brand.id || `0${i + 1}`}</span>
-                  </div>
-
-                  {/* Glassmorphic Bottom Overlay */}
-                  <div className="branding-cf-glass-overlay">
-                    <div className="branding-cf-meta">
-                      <span className="branding-cf-cat-label">{brand.category}</span>
-                      <h3 className="branding-cf-title">{brand.title}</h3>
-                      <p className="branding-cf-desc">
-                        {brand.headline || brand.description}
-                      </p>
-                    </div>
+                  {/* Clean Bottom Area: Title & Action CTA */}
+                  <div className="branding-cf-bottom">
+                    <h3 className="branding-cf-title">{brand.title}</h3>
 
                     <div className="branding-cf-footer-action">
                       {isActive ? (
@@ -240,7 +174,7 @@ export default function Branding() {
                           className="branding-cf-cta-link"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          <span>View Case Study</span>
+                          <span>View My Works</span>
                           <div className="branding-cf-arrow-circle">
                             <ArrowUpRight size={16} />
                           </div>

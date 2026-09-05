@@ -11,6 +11,7 @@ import {
   Layers,
   Clapperboard,
   Plus,
+  ChevronUp,
 } from "lucide-react";
 import { BRANDS } from "../../data/brands";
 import ImageModal from "../../components/Modals/ImageModal";
@@ -23,7 +24,7 @@ import "./ProjectDetail.css";
 /* =========================================================
    1. STAGGERED / ADAPTIVE CUSTOM GRID GALLERY
    Supports mixed aspect ratios (landscape/portrait) and
-   progressive batched loading with "Load More" button.
+   progressive batched loading with "Load More" & "View Less" buttons.
 ========================================================= */
 function StaggeredGridGallery({
   items,
@@ -36,11 +37,16 @@ function StaggeredGridGallery({
   const [detectedAspects, setDetectedAspects] = useState({});
 
   const hasMore = visibleCount < items.length;
+  const isExpanded = visibleCount > initialCount;
   const visibleItems = items.slice(0, visibleCount);
   const remainingCount = items.length - visibleCount;
 
   const handleLoadMore = () => {
     setVisibleCount((prev) => Math.min(prev + step, items.length));
+  };
+
+  const handleViewLess = () => {
+    setVisibleCount(initialCount);
   };
 
   const handleImageLoad = (id, e) => {
@@ -83,20 +89,35 @@ function StaggeredGridGallery({
         })}
       </div>
 
-      {hasMore && (
+      {(hasMore || isExpanded) && (
         <div className="staggered-load-more-container">
-          <button
-            type="button"
-            className="staggered-load-more-btn"
-            onClick={handleLoadMore}
-            aria-label={`Load more ${categoryTitle} designs`}
-          >
-            <Plus size={16} />
-            <span>Load More Designs</span>
-            <span className="staggered-load-count-badge">
-              +{Math.min(step, remainingCount)}
-            </span>
-          </button>
+          <div className="staggered-btn-group">
+            {hasMore && (
+              <button
+                type="button"
+                className="staggered-load-more-btn"
+                onClick={handleLoadMore}
+                aria-label={`Load more ${categoryTitle} designs`}
+              >
+                <Plus size={16} />
+                <span>Load More Designs</span>
+                <span className="staggered-load-count-badge">
+                  +{Math.min(step, remainingCount)}
+                </span>
+              </button>
+            )}
+            {isExpanded && (
+              <button
+                type="button"
+                className="staggered-view-less-btn"
+                onClick={handleViewLess}
+                aria-label={`View less ${categoryTitle} designs`}
+              >
+                <ChevronUp size={16} />
+                <span>View Less</span>
+              </button>
+            )}
+          </div>
           <p className="staggered-load-status-text">
             Showing {visibleItems.length} of {items.length} designs
           </p>
@@ -108,7 +129,7 @@ function StaggeredGridGallery({
 
 /* =========================================================
    2. PORTRAIT POSTERS GALLERY (2:3 Cinema Poster Cards)
-   With progressive batched loading (Load More) and lazy loading
+   With progressive batched loading (Load More & View Less) and lazy loading
 ========================================================= */
 function PortraitPostersGrid({
   items,
@@ -120,11 +141,16 @@ function PortraitPostersGrid({
   const [visibleCount, setVisibleCount] = useState(initialCount);
 
   const hasMore = visibleCount < items.length;
+  const isExpanded = visibleCount > initialCount;
   const visibleItems = items.slice(0, visibleCount);
   const remainingCount = items.length - visibleCount;
 
   const handleLoadMore = () => {
     setVisibleCount((prev) => Math.min(prev + step, items.length));
+  };
+
+  const handleViewLess = () => {
+    setVisibleCount(initialCount);
   };
 
   return (
@@ -166,20 +192,35 @@ function PortraitPostersGrid({
         })}
       </div>
 
-      {hasMore && (
+      {(hasMore || isExpanded) && (
         <div className="portrait-load-more-container">
-          <button
-            type="button"
-            className="portrait-load-more-btn"
-            onClick={handleLoadMore}
-            aria-label={`Load more ${categoryTitle} posters`}
-          >
-            <Plus size={16} />
-            <span>Load More Posters</span>
-            <span className="portrait-load-count-badge">
-              +{Math.min(step, remainingCount)}
-            </span>
-          </button>
+          <div className="portrait-btn-group">
+            {hasMore && (
+              <button
+                type="button"
+                className="portrait-load-more-btn"
+                onClick={handleLoadMore}
+                aria-label={`Load more ${categoryTitle} posters`}
+              >
+                <Plus size={16} />
+                <span>Load More Posters</span>
+                <span className="portrait-load-count-badge">
+                  +{Math.min(step, remainingCount)}
+                </span>
+              </button>
+            )}
+            {isExpanded && (
+              <button
+                type="button"
+                className="portrait-view-less-btn"
+                onClick={handleViewLess}
+                aria-label={`View less ${categoryTitle} posters`}
+              >
+                <ChevronUp size={16} />
+                <span>View Less</span>
+              </button>
+            )}
+          </div>
           <p className="portrait-load-status-text">
             Showing {visibleItems.length} of {items.length} posters
           </p>
@@ -190,7 +231,7 @@ function PortraitPostersGrid({
 }
 
 /* =========================================================
-   3. PORTRAIT ROWS GALLERY (Custom Multi-Row Distribution with Load More)
+   3. PORTRAIT ROWS GALLERY (Custom Multi-Row Distribution with Load More & View Less)
    Tailored for curated brand showcases like The Crimson & Giggles & Twirls
 ========================================================= */
 function PortraitRowsGallery({
@@ -239,10 +280,15 @@ function PortraitRowsGallery({
   const visibleRows = rows.slice(0, visibleRowsCount);
   const totalVisibleItems = visibleRows.reduce((sum, r) => sum + r.length, 0);
   const hasMore = visibleRowsCount < rows.length;
+  const isExpanded = visibleRowsCount > defaultVisibleRows;
   const remainingCount = items.length - totalVisibleItems;
 
   const handleLoadMore = () => {
     setVisibleRowsCount((prev) => Math.min(prev + stepRows, rows.length));
+  };
+
+  const handleViewLess = () => {
+    setVisibleRowsCount(defaultVisibleRows);
   };
 
   return (
@@ -306,20 +352,35 @@ function PortraitRowsGallery({
         );
       })}
 
-      {hasMore && (
+      {(hasMore || isExpanded) && (
         <div className="staggered-load-more-container">
-          <button
-            type="button"
-            className="staggered-load-more-btn"
-            onClick={handleLoadMore}
-            aria-label={`Load more ${categoryTitle} designs`}
-          >
-            <Plus size={16} />
-            <span>Load More Designs</span>
-            <span className="staggered-load-count-badge">
-              +{Math.min(rows[visibleRowsCount]?.length || 6, remainingCount)}
-            </span>
-          </button>
+          <div className="staggered-btn-group">
+            {hasMore && (
+              <button
+                type="button"
+                className="staggered-load-more-btn"
+                onClick={handleLoadMore}
+                aria-label={`Load more ${categoryTitle} designs`}
+              >
+                <Plus size={16} />
+                <span>Load More Designs</span>
+                <span className="staggered-load-count-badge">
+                  +{Math.min(rows[visibleRowsCount]?.length || 6, remainingCount)}
+                </span>
+              </button>
+            )}
+            {isExpanded && (
+              <button
+                type="button"
+                className="staggered-view-less-btn"
+                onClick={handleViewLess}
+                aria-label={`View less ${categoryTitle} designs`}
+              >
+                <ChevronUp size={16} />
+                <span>View Less</span>
+              </button>
+            )}
+          </div>
           <p className="staggered-load-status-text">
             Showing {totalVisibleItems} of {items.length} designs
           </p>
@@ -433,7 +494,9 @@ export default function ProjectDetail({ data }) {
       className="project-detail-page"
       data-variant={project.designVariant || "showcase"}
       style={{
-        "--project-accent": project.color || "#0284c7",
+        "--project-bg": project.cardBg || "#04193a",
+        "--project-text": project.cardTextColor || "#c49150",
+        "--project-accent": project.cardTextColor || project.color || "#c49150",
       }}
     >
       {/* ================= TOP FLOATING NAVIGATION ================= */}
@@ -443,11 +506,6 @@ export default function ProjectDetail({ data }) {
             <ArrowLeft size={15} />
             <span>Back</span>
           </Link>
-          <div className="project-badge-pill">
-            <span className="badge-num">Project {project.id || "01"}</span>
-            <span className="badge-dot" />
-            <span className="badge-title">{project.title}</span>
-          </div>
         </div>
       </nav>
 
@@ -468,18 +526,6 @@ export default function ProjectDetail({ data }) {
       <div className="project-content-container">
         {/* Project Header Info */}
         <header className="project-header-info">
-          {project.logo && (
-            <div className="project-logo-wrap">
-              <img
-                src={project.logo}
-                className="project-company-logo"
-                alt={`${project.title} Logo`}
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          )}
-
           {project.category && (
             <div className="project-category-tag">
               <Sparkles size={14} />
@@ -487,9 +533,7 @@ export default function ProjectDetail({ data }) {
             </div>
           )}
 
-          <h1 className="project-headline-title">
-            {project.headline || project.title}
-          </h1>
+          <h1 className="project-headline-title">{project.title}</h1>
 
           {project.description && (
             <p className="project-lead-p">{project.description}</p>
@@ -499,14 +543,13 @@ export default function ProjectDetail({ data }) {
             <p className="project-details-p">{project.details}</p>
           )}
 
-          {/* Deliverables tags */}
+          {/* Deliverables in single line */}
           {project.deliverables && project.deliverables.length > 0 && (
-            <div className="project-tags-wrap">
-              {project.deliverables.map((tag, idx) => (
-                <span key={idx} className="project-tag-item">
-                  {tag}
-                </span>
-              ))}
+            <div className="project-deliverables-line">
+              <span className="deliverables-label">Deliverables:</span>
+              <span className="deliverables-items">
+                {project.deliverables.join(" • ")}
+              </span>
             </div>
           )}
         </header>

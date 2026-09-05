@@ -123,46 +123,40 @@ export default function CareerHighlights() {
     () => [
       {
         id: 1,
-        title: "Stray Kids Promotion (Final Out)",
+        title: "In Collaboration With: IMAX India",
         video: IMAX,
-        icon: profileIcon1,
+        icons: [profileIcon1],
       },
-
       {
         id: 2,
-        title: "F1",
+        title: "In Collaboration With: Warner Bros. India",
         video: F1,
-        icon: profileIcon2,
+        icons: [profileIcon2],
       },
-
       {
         id: 5,
-        title: "Thaai Kelavi Promotion Reel",
+        title: "In Collaboration With: SK Productions & EPIQ Cinemas",
         video: epiqandsk,
-        icon: profileIcon5,
-      },
-      {
-        id: 6,
-        title: "Thaai Kelavi Promotion Reel",
-        video: epiqandsk,
-        icon: profileIcon6,
+        icons: [profileIcon5, profileIcon6],
       },
       {
         id: 8,
-        title: "Parvatha",
+        title: "In Collaboration With: Paarvathaa Entertainments",
         video: Parvatha,
-        icon: profileIcon8,
+        icons: [profileIcon8],
       },
     ],
     [],
   );
 
   /* =====================================
-      Duplicate for Infinite Slider (4 sets)
+      Duplicate for Infinite Slider (6 sets)
   ====================================== */
 
   const infiniteVideos = useMemo(
     () => [
+      ...sliderVideos,
+      ...sliderVideos,
       ...sliderVideos,
       ...sliderVideos,
       ...sliderVideos,
@@ -199,39 +193,60 @@ export default function CareerHighlights() {
 
   const sliderRef = useRef(null);
   const isPausedRef = useRef(false);
+  const pauseTimeoutRef = useRef(null);
   const animationFrameRef = useRef(null);
 
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;
 
-    // Set initial position centered around middle set
+    let lastTime = performance.now();
+
+    const getMetrics = () => {
+      const cards = slider.querySelectorAll(".video-card");
+      const n = sliderVideos.length;
+      if (cards.length >= n * 3 && cards[0] && cards[n] && cards[n * 2]) {
+        const setWidth = cards[n].offsetLeft - cards[0].offsetLeft;
+        const startOffset = cards[n * 2].offsetLeft;
+        return { setWidth, startOffset };
+      }
+      return null;
+    };
+
     const setupInitialPosition = () => {
-      if (slider && slider.scrollWidth > 0) {
-        const singleSetWidth = slider.scrollWidth / 4;
+      if (!slider) return;
+      const metrics = getMetrics();
+      if (metrics && metrics.setWidth > 0) {
         if (slider.scrollLeft === 0) {
-          slider.scrollLeft = singleSetWidth;
+          slider.scrollLeft = metrics.startOffset;
         }
       }
     };
 
     setupInitialPosition();
-    const timer = setTimeout(setupInitialPosition, 250);
+    const timer = setTimeout(setupInitialPosition, 100);
 
     // Continuous smooth auto-scroll loop
-    const step = () => {
-      if (!isPausedRef.current && slider) {
-        const singleSetWidth = slider.scrollWidth / 4;
-        if (singleSetWidth > 0) {
-          slider.scrollLeft += 0.7;
+    const step = (now) => {
+      const dt = Math.min((now - lastTime) / 1000, 0.1);
+      lastTime = now;
 
-          if (slider.scrollLeft >= singleSetWidth * 2.5) {
-            slider.scrollLeft -= singleSetWidth;
-          } else if (slider.scrollLeft <= 20) {
-            slider.scrollLeft += singleSetWidth;
+      if (!isPausedRef.current && slider) {
+        const metrics = getMetrics();
+        if (metrics && metrics.setWidth > 0) {
+          const { setWidth, startOffset } = metrics;
+          const speed = 50; // pixels per second continuous scrolling
+          slider.scrollLeft += speed * dt;
+
+          // Seamless loop wrap
+          if (slider.scrollLeft >= startOffset + setWidth * 2) {
+            slider.scrollLeft -= setWidth * 2;
+          } else if (slider.scrollLeft <= startOffset - setWidth) {
+            slider.scrollLeft += setWidth * 2;
           }
         }
       }
+
       animationFrameRef.current = requestAnimationFrame(step);
     };
 
@@ -239,13 +254,14 @@ export default function CareerHighlights() {
 
     const handleScrollWrap = () => {
       if (!slider) return;
-      const singleSetWidth = slider.scrollWidth / 4;
-      if (singleSetWidth <= 0) return;
+      const metrics = getMetrics();
+      if (!metrics || metrics.setWidth <= 0) return;
+      const { setWidth, startOffset } = metrics;
 
-      if (slider.scrollLeft <= 20) {
-        slider.scrollLeft += singleSetWidth;
-      } else if (slider.scrollLeft >= singleSetWidth * 3) {
-        slider.scrollLeft -= singleSetWidth;
+      if (slider.scrollLeft >= startOffset + setWidth * 2.5) {
+        slider.scrollLeft -= setWidth * 2;
+      } else if (slider.scrollLeft <= startOffset - setWidth * 1.5) {
+        slider.scrollLeft += setWidth * 2;
       }
     };
 
@@ -253,38 +269,46 @@ export default function CareerHighlights() {
 
     return () => {
       clearTimeout(timer);
+      if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
       slider.removeEventListener("scroll", handleScrollWrap);
     };
-  }, [infiniteVideos]);
+  }, [infiniteVideos, sliderVideos.length]);
 
   const scrollSlider = (direction) => {
     if (sliderRef.current) {
       const slider = sliderRef.current;
-      const singleSetWidth = slider.scrollWidth / 4;
-      const card = slider.querySelector(".video-card");
+      const cards = slider.querySelectorAll(".video-card");
+      const n = sliderVideos.length;
+      const card = cards[0];
       const cardWidth = card ? card.offsetWidth + 24 : 344;
-      const scrollAmount = cardWidth;
+      const setWidth = cards.length >= n * 2 && cards[n]
+        ? cards[n].offsetLeft - cards[0].offsetLeft
+        : cardWidth * n;
+      const startOffset = cards.length >= n * 3 && cards[n * 2]
+        ? cards[n * 2].offsetLeft
+        : setWidth * 2;
 
       isPausedRef.current = true;
 
-      // Ensure buffer space before scrolling left
-      if (direction === "left" && slider.scrollLeft <= cardWidth + 20) {
-        slider.scrollLeft += singleSetWidth;
-      } else if (direction === "right" && slider.scrollLeft >= singleSetWidth * 2.5) {
-        slider.scrollLeft -= singleSetWidth;
+      // Ensure position is within safe middle range before scrolling
+      if (direction === "left" && slider.scrollLeft <= startOffset - setWidth * 0.5) {
+        slider.scrollLeft += setWidth * 2;
+      } else if (direction === "right" && slider.scrollLeft >= startOffset + setWidth * 2) {
+        slider.scrollLeft -= setWidth * 2;
       }
 
       slider.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
+        left: direction === "left" ? -cardWidth : cardWidth,
         behavior: "smooth",
       });
 
-      setTimeout(() => {
+      if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
+      pauseTimeoutRef.current = setTimeout(() => {
         isPausedRef.current = false;
-      }, 1500);
+      }, 2000);
     }
   };
 
@@ -341,7 +365,12 @@ export default function CareerHighlights() {
           onMouseEnter={() => { isPausedRef.current = true; }}
           onMouseLeave={() => { isPausedRef.current = false; }}
           onTouchStart={() => { isPausedRef.current = true; }}
-          onTouchEnd={() => { isPausedRef.current = false; }}
+          onTouchEnd={() => {
+            if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
+            pauseTimeoutRef.current = setTimeout(() => {
+              isPausedRef.current = false;
+            }, 1500);
+          }}
         >
           <button
             type="button"
@@ -367,15 +396,23 @@ export default function CareerHighlights() {
                     }
                   }}
                 >
-                  {/* Profile Icon */}
-                  <div className="video-icon">
-                    <img
-                      src={item.icon}
-                      alt=""
-                      loading="lazy"
-                      decoding="async"
-                      style={{ objectFit: "contain", background: "white" }}
-                    />
+                  {/* Profile Icons / Avatar Group */}
+                  <div className="video-avatar-group">
+                    {(item.icons || (item.icon ? [item.icon] : [])).map((iconSrc, iconIdx) => (
+                      <div
+                        className="video-avatar-item"
+                        key={iconIdx}
+                        style={{ zIndex: (item.icons?.length || 1) - iconIdx }}
+                        title="Production House"
+                      >
+                        <img
+                          src={iconSrc}
+                          alt="Production House"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
+                    ))}
                   </div>
 
                   {/* Video Preview Frame */}

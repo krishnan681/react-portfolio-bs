@@ -1,56 +1,137 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft,
   Sparkles,
   Play,
-  Maximize2,
-  ChevronLeft,
-  ChevronRight,
-  Tv,
   Film,
-  Smartphone,
-  X,
-  Volume2,
-  VolumeX,
+  ChevronRight,
+  ChevronUp,
+  Plus,
+  Layers,
 } from "lucide-react";
-import { VIDEOS_DATA, VIDEO_THEMES } from "../../data/visualCreationsData";
+import { VIDEO_SECTIONS } from "../../data/visualCreationsData";
+import VideoModal from "../../components/Modals/VideoModal";
 import "./VideosPage.css";
 
+/* =========================================================
+   VIDEO FOLDER SECTION COMPONENT (2 Rows Initial + Load More)
+========================================================= */
+function VideoFolderSection({ section, sIdx, onSelectVideo }) {
+  const INITIAL_COUNT = 8; // 2 rows (4 columns grid)
+  const STEP = 8;
+  const videos = section.videos || [];
+  const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
+
+  const hasMore = visibleCount < videos.length;
+  const isExpanded = visibleCount > INITIAL_COUNT;
+  const visibleVideos = videos.slice(0, visibleCount);
+  const remainingCount = videos.length - visibleCount;
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + STEP, videos.length));
+  };
+
+  const handleViewLess = () => {
+    setVisibleCount(INITIAL_COUNT);
+  };
+
+  return (
+    <section className="video-folder-section">
+      <div className="video-section-header">
+        <div className="video-section-badge">
+          <Layers size={14} />
+          <span>Folder 0{sIdx + 1}</span>
+        </div>
+        <h2 className="video-section-title">{section.title}</h2>
+      </div>
+
+      <div className="video-gallery-grid">
+        {visibleVideos.map((vid, vIdx) => {
+          const numStr = String(vIdx + 1).padStart(2, "0");
+          return (
+            <article
+              key={vid.id || `vid-${sIdx}-${vIdx}`}
+              className="video-card-item"
+              onClick={() => onSelectVideo(vid)}
+            >
+              <div className="video-card-thumb">
+                <video
+                  src={vid.src}
+                  preload="metadata"
+                  playsInline
+                  muted
+                  loop
+                  autoPlay
+                  className="video-card-media"
+                />
+                <div className="video-card-vignette" />
+                <span className="video-card-badge">#{numStr}</span>
+
+                <div className="video-card-play-btn">
+                  <Play size={18} fill="#ffffff" />
+                </div>
+
+                <div className="video-card-hover-scrim">
+                  <div className="video-card-action-pill">
+                    <Play size={14} fill="currentColor" />
+                    <span>Play Reel</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      {/* LOAD MORE / VIEW LESS CONTROLS */}
+      {(hasMore || isExpanded) && (
+        <div className="video-load-controls">
+          <div className="video-btn-group">
+            {hasMore && (
+              <button
+                type="button"
+                className="video-load-btn load-more-btn"
+                onClick={handleLoadMore}
+              >
+                <Plus size={16} />
+                <span>Load More Videos</span>
+                <span className="video-count-badge">
+                  +{Math.min(STEP, remainingCount)}
+                </span>
+              </button>
+            )}
+            {isExpanded && (
+              <button
+                type="button"
+                className="video-load-btn view-less-btn"
+                onClick={handleViewLess}
+              >
+                <ChevronUp size={16} />
+                <span>View Less</span>
+              </button>
+            )}
+          </div>
+          <p className="video-status-text">
+            Showing {visibleVideos.length} of {videos.length} videos
+          </p>
+        </div>
+      )}
+    </section>
+  );
+}
+
 export default function VideosPage() {
-  const [activeTheme, setActiveTheme] = useState("all");
-  const [spotlightVideo, setSpotlightVideo] = useState(VIDEOS_DATA[0]);
-  const [modalVideo, setModalVideo] = useState(null);
-  const [isSpotlightMuted, setIsSpotlightMuted] = useState(true);
-  const reelsTrackRef = useRef(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  const filteredVideos = useMemo(() => {
-    if (activeTheme === "all") return VIDEOS_DATA;
-    return VIDEOS_DATA.filter((item) => item.theme === activeTheme);
-  }, [activeTheme]);
-
-  const verticalReels = useMemo(() => {
-    return VIDEOS_DATA.filter((v) => v.aspect === "vertical");
-  }, []);
-
-  const motionShowcase = useMemo(() => {
-    if (activeTheme === "reels") return [];
-    if (activeTheme === "all") return VIDEOS_DATA.filter((v) => v.aspect !== "vertical");
-    return filteredVideos.filter((v) => v.aspect !== "vertical");
-  }, [activeTheme, filteredVideos]);
-
-  const handleReelsScroll = (dir) => {
-    if (!reelsTrackRef.current) return;
-    const scrollAmount = 280;
-    reelsTrackRef.current.scrollBy({
-      left: dir === "next" ? scrollAmount : -scrollAmount,
-      behavior: "smooth",
-    });
-  };
+  const totalVideos = VIDEO_SECTIONS.reduce(
+    (acc, sec) => acc + (sec.videos?.length || 0),
+    0
+  );
 
   return (
     <main className="videos-page">
@@ -63,7 +144,7 @@ export default function VideosPage() {
           </Link>
           <div className="video-header-badge">
             <Sparkles size={13} className="badge-sparkle" />
-            <span>Visual Creations / Motion & Videos</span>
+            <span>Visual Creations / Videos</span>
           </div>
         </div>
       </header>
@@ -73,287 +154,59 @@ export default function VideosPage() {
         <div className="video-hero-content">
           <span className="video-eyebrow">
             <Film size={14} />
-            Motion Design & Video Production
+            Visual Creations
           </span>
-          <h1 className="video-hero-title">Cinematic Motion & Video Works</h1>
+          <h1 className="video-hero-title">Motion & Video Showcase</h1>
           <p className="video-hero-desc">
-            Commercial trailers, 3D motion graphics, brand identity teasers, and high-energy 9:16 vertical reels crafted with dynamic pacing and color grading.
+            A curated showcase of commercial edits, 3D motion graphics, brand teasers, and vertical video reels.
           </p>
-        </div>
-      </section>
 
-      {/* STAGE 1: FEATURED CINEMA THEATRE (Eliminates endless scrolling by putting playback right in view) */}
-      <section className="cinema-theatre-section">
-        <div className="cinema-theatre-container">
-          <div className="theatre-stage-grid">
-            {/* MAIN STAGE PLAYER */}
-            <div className="theatre-main-player">
-              <div className="theatre-video-wrap">
-                <video
-                  key={spotlightVideo.id}
-                  src={spotlightVideo.src}
-                  poster={spotlightVideo.poster}
-                  autoPlay
-                  loop
-                  muted={isSpotlightMuted}
-                  playsInline
-                  controls
-                />
-                <button
-                  type="button"
-                  className="theatre-sound-toggle"
-                  onClick={() => setIsSpotlightMuted(!isSpotlightMuted)}
-                  title={isSpotlightMuted ? "Unmute sound" : "Mute sound"}
-                >
-                  {isSpotlightMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
-                </button>
-              </div>
-
-              <div className="theatre-video-meta">
-                <div className="theatre-meta-left">
-                  <div className="theatre-tags-row">
-                    <span className="theatre-tag">{spotlightVideo.category}</span>
-                    <span className="theatre-format-badge">{spotlightVideo.sizeLabel}</span>
-                    <span className="theatre-duration-badge">{spotlightVideo.duration}</span>
-                  </div>
-                  <h2 className="theatre-title">{spotlightVideo.title}</h2>
-                  <p className="theatre-desc">{spotlightVideo.description}</p>
-                </div>
-                <div className="theatre-meta-right">
-                  <button
-                    type="button"
-                    className="theatre-fullscreen-btn"
-                    onClick={() => setModalVideo(spotlightVideo)}
-                  >
-                    <Maximize2 size={16} />
-                    <span>Watch Fullscreen</span>
-                  </button>
-                </div>
-              </div>
+          <div className="video-stats-bar">
+            <div className="stat-pill">
+              <strong>{totalVideos}</strong>
+              <span>Reels & Videos</span>
             </div>
-
-            {/* QUICK PLAYLIST QUEUE */}
-            <aside className="theatre-queue-panel">
-              <div className="queue-header">
-                <Tv size={16} />
-                <span>Featured Motion Queue ({VIDEOS_DATA.length})</span>
-              </div>
-              <div className="queue-list">
-                {VIDEOS_DATA.map((video) => {
-                  const isActive = spotlightVideo.id === video.id;
-                  return (
-                    <div
-                      key={video.id}
-                      className={`queue-item ${isActive ? "is-active" : ""}`}
-                      onClick={() => setSpotlightVideo(video)}
-                    >
-                      <div className="queue-thumb">
-                        <img src={video.poster} alt={video.title} />
-                        <div className="queue-play-indicator">
-                          <Play size={12} fill="#ffffff" />
-                        </div>
-                        <span className="queue-dur">{video.duration}</span>
-                      </div>
-                      <div className="queue-info">
-                        <h4>{video.title}</h4>
-                        <div className="queue-sub">
-                          <span>{video.client}</span>
-                          <span className="queue-aspect-pill">{video.sizeLabel}</span>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </aside>
+            <div className="stat-pill">
+              <strong>2</strong>
+              <span>Collections</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* FILTER CONTROLS */}
-      <section className="video-filter-section">
-        <div className="video-filter-inner">
-          <div className="video-theme-tabs">
-            {VIDEO_THEMES.map((theme) => {
-              const count =
-                theme.id === "all"
-                  ? VIDEOS_DATA.length
-                  : VIDEOS_DATA.filter((v) => v.theme === theme.id).length;
-              return (
-                <button
-                  key={theme.id}
-                  type="button"
-                  className={`video-tab-btn ${activeTheme === theme.id ? "is-active" : ""}`}
-                  onClick={() => setActiveTheme(theme.id)}
-                >
-                  <span>{theme.label}</span>
-                  <span className="tab-counter">{count}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      {/* VIDEO FOLDER SECTIONS */}
+      <div className="video-sections-container">
+        {VIDEO_SECTIONS.map((section, sIdx) => (
+          <VideoFolderSection
+            key={section.id || sIdx}
+            section={section}
+            sIdx={sIdx}
+            onSelectVideo={setSelectedVideo}
+          />
+        ))}
+      </div>
 
-      {/* STAGE 2: 9:16 VERTICAL REELS SHOWCASE (Horizontal Snap Carousel) */}
-      {(activeTheme === "all" || activeTheme === "reels") && (
-        <section className="reels-showcase-section">
-          <div className="reels-section-header">
-            <div className="reels-title-wrap">
-              <span className="reels-eyebrow">
-                <Smartphone size={14} />
-                Mobile First Experience
-              </span>
-              <h3>9:16 Vertical Video Reels & Shorts</h3>
-            </div>
-            <div className="reels-nav-arrows">
-              <button
-                type="button"
-                className="reels-arrow-btn"
-                onClick={() => handleReelsScroll("prev")}
-                aria-label="Previous reels"
-              >
-                <ChevronLeft size={18} />
-              </button>
-              <button
-                type="button"
-                className="reels-arrow-btn"
-                onClick={() => handleReelsScroll("next")}
-                aria-label="Next reels"
-              >
-                <ChevronRight size={18} />
-              </button>
-            </div>
-          </div>
-
-          <div className="reels-horizontal-track" ref={reelsTrackRef}>
-            {verticalReels.map((reel) => (
-              <article
-                key={reel.id}
-                className="reel-card"
-                onClick={() => setModalVideo(reel)}
-              >
-                <div className="reel-media-box">
-                  <img src={reel.poster} alt={reel.title} className="reel-poster" />
-                  <div className="reel-play-overlay">
-                    <div className="reel-play-icon">
-                      <Play size={20} fill="#ffffff" />
-                    </div>
-                  </div>
-                  <span className="reel-aspect-tag">9:16 Vertical</span>
-                  <span className="reel-time-badge">{reel.duration}</span>
-                </div>
-                <div className="reel-caption">
-                  <h4>{reel.title}</h4>
-                  <p>{reel.client}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* STAGE 3: 16:9 WIDESCREEN MOTION & COMMERCIALS BENTO */}
-      {motionShowcase.length > 0 && (
-        <section className="motion-bento-section">
-          <div className="motion-section-header">
-            <h3>Widescreen Commercials & 3D Motion</h3>
-            <span className="motion-subtitle">
-              Interactive video cards with hover preview and adaptive dimensions
-            </span>
-          </div>
-
-          <div className="motion-cards-grid">
-            {motionShowcase.map((video) => (
-              <article
-                key={video.id}
-                className="motion-card"
-                onClick={() => setModalVideo(video)}
-              >
-                <div className="motion-video-container">
-                  <img src={video.poster} alt={video.title} className="motion-fallback-img" />
-                  <video
-                    src={video.src}
-                    muted
-                    loop
-                    playsInline
-                    onMouseEnter={(e) => e.currentTarget.play()}
-                    onMouseLeave={(e) => e.currentTarget.pause()}
-                  />
-                  <div className="motion-overlay-badge">
-                    <span className="format-chip">{video.formatTag}</span>
-                    <span className="duration-chip">{video.duration}</span>
-                  </div>
-                  <div className="motion-hover-play">
-                    <Play size={24} fill="#ffffff" />
-                  </div>
-                </div>
-
-                <div className="motion-card-body">
-                  <div className="motion-card-meta">
-                    <span className="motion-card-cat">{video.category}</span>
-                    <span className="motion-card-year">{video.year}</span>
-                  </div>
-                  <h4 className="motion-card-title">{video.title}</h4>
-                  <p className="motion-card-desc">{video.description}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* BOTTOM ACTION BAR */}
+      {/* BOTTOM NAVIGATION */}
       <footer className="video-bottom-bar">
-        <div className="video-bottom-inner">
-          <Link to="/" className="video-back-home">
+        <div className="bottom-bar-inner">
+          <Link to="/" className="back-home-button">
             <ArrowLeft size={16} />
-            <span>Return to Portfolio Home</span>
+            <span>Return to Home</span>
           </Link>
-          <Link to="/images" className="video-next-images">
-            <span>Explore Images Gallery</span>
+          <Link to="/images" className="next-showcase-button">
+            <span>Explore Images Showcase</span>
             <ChevronRight size={16} />
           </Link>
         </div>
       </footer>
 
-      {/* FULLSCREEN VIDEO LIGHTBOX MODAL */}
-      {modalVideo && (
-        <div className="video-modal-overlay" onClick={() => setModalVideo(null)}>
-          <div className="video-modal-dialog" onClick={(e) => e.stopPropagation()}>
-            <button
-              type="button"
-              className="video-modal-close"
-              onClick={() => setModalVideo(null)}
-            >
-              <X size={20} />
-            </button>
-
-            <div className="video-modal-player-wrap">
-              <video
-                src={modalVideo.src}
-                poster={modalVideo.poster}
-                controls
-                autoPlay
-                playsInline
-              />
-            </div>
-
-            <div className="video-modal-footer">
-              <div>
-                <span className="modal-cat-tag">{modalVideo.category} • {modalVideo.sizeLabel}</span>
-                <h3 className="modal-video-title">{modalVideo.title}</h3>
-                <p className="modal-video-desc">{modalVideo.description}</p>
-              </div>
-              <div className="modal-tags">
-                {modalVideo.tags?.map((t, idx) => (
-                  <span key={idx} className="modal-tag-pill">#{t}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* FULLSCREEN VIDEO MODAL */}
+      <VideoModal
+        isOpen={Boolean(selectedVideo)}
+        onClose={() => setSelectedVideo(null)}
+        src={selectedVideo?.src}
+        title="Visual Creation Video"
+      />
     </main>
   );
 }
