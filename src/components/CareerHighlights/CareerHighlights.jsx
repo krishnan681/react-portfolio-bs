@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState, useEffect } from "react";
 import "./CareerHighlights.css";
+import { ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
 
 import { getR2Url } from "../../config/r2";
 
@@ -16,7 +17,7 @@ const profileIcon8 = getR2Url("production-house-icons/parvatha.webp");
 const CHimg1 = getR2Url("career-highlights/images/1.webp");
 const CHimg2 = getR2Url("career-highlights/images/2.webp");
 const CHimg3 = getR2Url("career-highlights/images/3.webp");
-const CHimg4 = getR2Url("career-highlights/images/4.webp ");
+const CHimg4 = getR2Url("career-highlights/images/4.webp");
 
 /* Videos */
 const IMAX = getR2Url("career-highlights/videos/Stray Kids Promotion.mp4");
@@ -378,7 +379,7 @@ export default function CareerHighlights() {
             onClick={() => scrollSlider("left")}
             aria-label="Previous videos"
           >
-            <i className="fa-solid fa-chevron-left"></i>
+            <ChevronLeft size={22} />
           </button>
 
           <div className="video-slider" ref={sliderRef}>
@@ -452,7 +453,7 @@ export default function CareerHighlights() {
             onClick={() => scrollSlider("right")}
             aria-label="Next videos"
           >
-            <i className="fa-solid fa-chevron-right"></i>
+            <ChevronRight size={22} />
           </button>
         </div>
 
@@ -485,7 +486,7 @@ export default function CareerHighlights() {
               >
                 <img src={image} alt={`Gallery Image ${index + 1}`} loading="lazy" decoding="async" />
                 <div className="gallery-hover-overlay">
-                  <i className="fa-solid fa-expand"></i>
+                  <Maximize2 size={20} />
                 </div>
               </div>
             </div>

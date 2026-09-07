@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import "./About.css";
-import skyBandSvg from "../../assets/sky-band.svg";
+import { getR2Url } from "../../config/r2";
+
+const skyBandSvg = getR2Url("profile/sky-band.svg");
 
 function StatCounter({ target, suffix = "", label, decimals = 0 }) {
   const [count, setCount] = useState(0);

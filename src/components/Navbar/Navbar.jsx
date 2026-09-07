@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./Navbar.css";
-import avatarImg from "../../assets/images/BS.webp";
+import { getR2Url } from "../../config/r2";
+
+const avatarImg = getR2Url("profile/BS.webp");
 
 const SECTIONS = [
   { id: "about", label: "About", href: "#about" },

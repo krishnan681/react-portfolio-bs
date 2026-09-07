@@ -1,4 +1,5 @@
 import "./CreativeExpertise.css";
+import { Sparkles, Type, Palette, Share2, Camera, Clapperboard } from "lucide-react";
 
 export default function CreativeExpertise() {
   return (
@@ -17,7 +18,6 @@ export default function CreativeExpertise() {
 
         <div className="row g-4">
           {/* Left Card */}
-
           <div className="col-lg-6" data-aos="fade-up" data-aos-delay="150">
             <div className="expertise-card">
               <div className="card-top">
@@ -38,7 +38,7 @@ export default function CreativeExpertise() {
                 <div className="count">01</div>
 
                 <div className="icon">
-                  <i className="fa-solid fa-wand-magic-sparkles"></i>
+                  <Sparkles size={22} />
                 </div>
 
                 <div className="content">
@@ -51,7 +51,7 @@ export default function CreativeExpertise() {
                 <div className="count">02</div>
 
                 <div className="icon">
-                  <i className="fa-solid fa-font"></i>
+                  <Type size={22} />
                 </div>
 
                 <div className="content">
@@ -66,7 +66,7 @@ export default function CreativeExpertise() {
                 <div className="count">03</div>
 
                 <div className="icon">
-                  <i className="fa-solid fa-palette"></i>
+                  <Palette size={22} />
                 </div>
 
                 <div className="content">
@@ -80,7 +80,6 @@ export default function CreativeExpertise() {
           </div>
 
           {/* Right Card */}
-
           <div className="col-lg-6" data-aos="fade-up" data-aos-delay="250">
             <div className="expertise-card">
               <div className="card-top">
@@ -101,7 +100,7 @@ export default function CreativeExpertise() {
                 <div className="count">01</div>
 
                 <div className="icon">
-                  <i className="fa-solid fa-share-nodes"></i>
+                  <Share2 size={22} />
                 </div>
 
                 <div className="content">
@@ -116,7 +115,7 @@ export default function CreativeExpertise() {
                 <div className="count">02</div>
 
                 <div className="icon">
-                  <i className="fa-solid fa-camera"></i>
+                  <Camera size={22} />
                 </div>
 
                 <div className="content">
@@ -131,7 +130,7 @@ export default function CreativeExpertise() {
                 <div className="count">03</div>
 
                 <div className="icon">
-                  <i className="fa-solid fa-clapperboard"></i>
+                  <Clapperboard size={22} />
                 </div>
 
                 <div className="content">
