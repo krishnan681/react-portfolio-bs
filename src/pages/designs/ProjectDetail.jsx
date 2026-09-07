@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   ArrowRight,
@@ -394,9 +394,19 @@ function PortraitRowsGallery({
    MAIN PROJECT DETAIL COMPONENT
 ========================================================= */
 export default function ProjectDetail({ data }) {
+  const navigate = useNavigate();
   const { slug } = useParams();
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
+
+  const handleBackToBranding = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (window.history.length > 2) {
+      navigate(-1);
+    } else {
+      navigate("/#branding");
+    }
+  };
 
   // Scroll to top on slug / route change
   useEffect(() => {
@@ -474,10 +484,14 @@ export default function ProjectDetail({ data }) {
           <p className="not-found-desc">
             The branding showcase you are looking for does not exist or has been moved.
           </p>
-          <Link to="/" className="project-back-btn primary">
+          <button
+            type="button"
+            onClick={handleBackToBranding}
+            className="project-back-btn primary"
+          >
             <ArrowLeft size={16} />
             <span>Back to All Projects</span>
-          </Link>
+          </button>
         </div>
       </main>
     );
@@ -502,10 +516,15 @@ export default function ProjectDetail({ data }) {
       {/* ================= TOP FLOATING NAVIGATION ================= */}
       <nav className="project-top-nav">
         <div className="project-top-nav-inner">
-          <Link to="/" className="project-back-btn" aria-label="Back to portfolio">
+          <button
+            type="button"
+            onClick={handleBackToBranding}
+            className="project-back-btn"
+            aria-label="Back to portfolio"
+          >
             <ArrowLeft size={15} />
             <span>Back</span>
-          </Link>
+          </button>
         </div>
       </nav>
 
@@ -760,7 +779,7 @@ export default function ProjectDetail({ data }) {
             title="Curating Project Visuals"
             message={`Assets for ${project.title} are currently being prepared for high-definition showcase.`}
             actionText="Browse All Projects"
-            onAction={() => window.location.href = "/"}
+            onAction={handleBackToBranding}
           />
         )}
 
@@ -779,10 +798,15 @@ export default function ProjectDetail({ data }) {
             </Link>
           )}
 
-          <Link to="/" className="project-nav-link back-home">
+          <button
+            type="button"
+            onClick={handleBackToBranding}
+            className="project-nav-link back-home"
+            aria-label="Back to all projects"
+          >
             <Sparkles size={14} />
             <span>All Projects</span>
-          </Link>
+          </button>
 
           {nextProject && (
             <Link

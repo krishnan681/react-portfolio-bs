@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   Sparkles,
@@ -37,65 +37,69 @@ function VideoFolderSection({ section, sIdx, onSelectVideo }) {
   };
 
   return (
-    <section className="video-folder-section">
-      <div className="video-section-header">
-        <div className="video-section-badge">
+    <section
+      key={section.id || sIdx}
+      className="video-folder-group"
+      data-aos="fade-up"
+      data-aos-delay={sIdx * 80}
+    >
+      <div className="folder-header-row">
+        <div className="folder-title-pill">
           <Layers size={14} />
-          <span>Folder 0{sIdx + 1}</span>
+          <h2 className="folder-title">{section.title}</h2>
         </div>
-        <h2 className="video-section-title">{section.title}</h2>
+        <span className="folder-badge-total">
+          {videos.length} {videos.length === 1 ? "Video" : "Videos"}
+        </span>
       </div>
 
-      <div className="video-gallery-grid">
-        {visibleVideos.map((vid, vIdx) => {
-          const numStr = String(vIdx + 1).padStart(2, "0");
-          return (
-            <article
-              key={vid.id || `vid-${sIdx}-${vIdx}`}
-              className="video-card-item"
-              onClick={() => onSelectVideo(vid)}
-            >
-              <div className="video-card-thumb">
-                <video
-                  src={vid.src}
-                  preload="metadata"
-                  playsInline
-                  muted
-                  loop
-                  autoPlay
-                  className="video-card-media"
-                />
-                <div className="video-card-vignette" />
-                <span className="video-card-badge">#{numStr}</span>
+      <div className="video-folder-grid">
+        {visibleVideos.map((item, idx) => (
+          <article
+            key={item.id || `video-${sIdx}-${idx}`}
+            className="video-card-vertical"
+            onClick={() => onSelectVideo(item)}
+            tabIndex={0}
+          >
+            <div className="video-thumb-container">
+              <video
+                src={item.src}
+                poster={item.poster}
+                preload="metadata"
+                playsInline
+                muted
+                loop
+                autoPlay
+                className="video-thumb-media"
+              />
 
-                <div className="video-card-play-btn">
-                  <Play size={18} fill="#ffffff" />
-                </div>
-
-                <div className="video-card-hover-scrim">
-                  <div className="video-card-action-pill">
-                    <Play size={14} fill="currentColor" />
-                    <span>Play Reel</span>
-                  </div>
-                </div>
+              <div className="video-play-center-btn" aria-hidden="true">
+                <Play size={20} fill="#ffffff" />
               </div>
-            </article>
-          );
-        })}
+
+              <div className="video-card-scrim">
+                <span className="video-scrim-action">
+                  <Play size={13} fill="currentColor" /> Watch Video
+                </span>
+              </div>
+            </div>
+          </article>
+        ))}
       </div>
 
-      {/* LOAD MORE / VIEW LESS CONTROLS */}
+      {/* LOAD MORE / VIEW LESS ACTION CONTROLS */}
       {(hasMore || isExpanded) && (
-        <div className="video-load-controls">
+        <div className="video-folder-load-controls">
           <div className="video-btn-group">
             {hasMore && (
               <button
                 type="button"
                 className="video-load-btn load-more-btn"
                 onClick={handleLoadMore}
+                aria-label={`Load more videos for ${section.title}`}
               >
                 <Plus size={16} />
-                <span>Load More Videos</span>
+                <span>Load More</span>
                 <span className="video-count-badge">
                   +{Math.min(STEP, remainingCount)}
                 </span>
@@ -106,15 +110,13 @@ function VideoFolderSection({ section, sIdx, onSelectVideo }) {
                 type="button"
                 className="video-load-btn view-less-btn"
                 onClick={handleViewLess}
+                aria-label={`View less videos for ${section.title}`}
               >
                 <ChevronUp size={16} />
                 <span>View Less</span>
               </button>
             )}
           </div>
-          <p className="video-status-text">
-            Showing {visibleVideos.length} of {videos.length} videos
-          </p>
         </div>
       )}
     </section>
@@ -122,7 +124,17 @@ function VideoFolderSection({ section, sIdx, onSelectVideo }) {
 }
 
 export default function VideosPage() {
+  const navigate = useNavigate();
   const [selectedVideo, setSelectedVideo] = useState(null);
+
+  const handleBackToVisuals = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (window.history.length > 2) {
+      navigate(-1);
+    } else {
+      navigate("/#visual");
+    }
+  };
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -133,10 +145,15 @@ export default function VideosPage() {
       {/* TOP NAV */}
       <header className="video-header-nav">
         <div className="video-header-container">
-          <Link to="/" className="video-back-link">
+          <button
+            type="button"
+            onClick={handleBackToVisuals}
+            className="video-back-link"
+            aria-label="Back to portfolio"
+          >
             <ArrowLeft size={16} />
             <span>Back to Portfolio</span>
-          </Link>
+          </button>
           <div className="video-header-badge">
             <Sparkles size={13} className="badge-sparkle" />
             <span>Visual Creations / Videos</span>
@@ -173,10 +190,15 @@ export default function VideosPage() {
       {/* BOTTOM NAVIGATION */}
       <footer className="video-bottom-bar">
         <div className="bottom-bar-inner">
-          <Link to="/" className="back-home-button">
+          <button
+            type="button"
+            onClick={handleBackToVisuals}
+            className="back-home-button"
+            aria-label="Return to portfolio"
+          >
             <ArrowLeft size={16} />
-            <span>Return to Home</span>
-          </Link>
+            <span>Return to Visuals</span>
+          </button>
           <Link to="/images" className="next-showcase-button">
             <span>Explore Images Showcase</span>
             <ChevronRight size={16} />

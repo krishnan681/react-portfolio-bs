@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
 /**
- * Custom Hook for tracking network connectivity status
- * Returns { isOnline, isReconnected }
+ * Custom Hook for tracking network connectivity & speed status
+ * Returns { isOnline, isSlowConnection, showReconnectedAlert }
  */
 export function useNetworkStatus() {
   const [isOnline, setIsOnline] = useState(() => {
@@ -10,6 +10,7 @@ export function useNetworkStatus() {
       ? navigator.onLine
       : true;
   });
+  const [isSlowConnection, setIsSlowConnection] = useState(false);
   const [wasOffline, setWasOffline] = useState(false);
   const [showReconnectedAlert, setShowReconnectedAlert] = useState(false);
 
@@ -29,14 +30,31 @@ export function useNetworkStatus() {
       setShowReconnectedAlert(false);
     };
 
+    const checkConnectionSpeed = () => {
+      if (typeof navigator !== "undefined" && navigator.connection) {
+        const { effectiveType, saveData } = navigator.connection;
+        const slow = effectiveType === "2g" || effectiveType === "slow-2g" || saveData;
+        setIsSlowConnection(Boolean(slow));
+      }
+    };
+
+    checkConnectionSpeed();
+
     window.addEventListener("online", handleOnline);
     window.addEventListener("offline", handleOffline);
+
+    if (typeof navigator !== "undefined" && navigator.connection) {
+      navigator.connection.addEventListener("change", checkConnectionSpeed);
+    }
 
     return () => {
       window.removeEventListener("online", handleOnline);
       window.removeEventListener("offline", handleOffline);
+      if (typeof navigator !== "undefined" && navigator.connection) {
+        navigator.connection.removeEventListener("change", checkConnectionSpeed);
+      }
     };
   }, [wasOffline]);
 
-  return { isOnline, showReconnectedAlert };
+  return { isOnline, isSlowConnection, showReconnectedAlert };
 }

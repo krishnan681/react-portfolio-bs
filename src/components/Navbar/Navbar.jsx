@@ -16,31 +16,90 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState("hero");
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
-  const handleScroll = useCallback(() => {
-    const scrollPos = window.scrollY + 200;
-    const heroHeight = window.innerHeight * 0.65;
-    setIsScrolled(window.scrollY > heroHeight);
+  const updateActiveSection = useCallback(() => {
+    const scrollY = window.scrollY;
+    const viewportHeight = window.innerHeight;
+    const heroHeight = viewportHeight * 0.5;
 
-    let current = "hero";
-    for (let i = SECTIONS.length - 1; i >= 0; i--) {
+    setIsScrolled(scrollY > heroHeight);
+
+    // If at the very top (Hero section)
+    if (scrollY <= heroHeight * 0.7) {
+      setActiveSection("hero");
+      return;
+    }
+
+    // If near the bottom of the page, activate Contact
+    const isAtPageBottom =
+      window.innerHeight + scrollY >=
+      document.documentElement.scrollHeight - 80;
+
+    if (isAtPageBottom) {
+      setActiveSection("contact");
+      return;
+    }
+
+    // Focal point in viewport (40% from top)
+    const focalPoint = viewportHeight * 0.40;
+    let current = null;
+
+    for (let i = 0; i < SECTIONS.length; i++) {
       const el = document.getElementById(SECTIONS[i].id);
       if (el) {
-        const top = el.offsetTop;
-        if (scrollPos >= top) {
+        const rect = el.getBoundingClientRect();
+        // Check if focal point lies inside section bounds
+        if (rect.top <= focalPoint && rect.bottom > focalPoint) {
           current = SECTIONS[i].id;
           break;
         }
       }
     }
-    setActiveSection(current);
+
+    // Fallback: choose section with largest visible area in viewport
+    if (!current) {
+      let maxVisibleHeight = 0;
+      let bestSection = "hero";
+
+      for (const sec of SECTIONS) {
+        const el = document.getElementById(sec.id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          const visibleTop = Math.max(0, rect.top);
+          const visibleBottom = Math.min(viewportHeight, rect.bottom);
+          const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+
+          if (visibleHeight > maxVisibleHeight) {
+            maxVisibleHeight = visibleHeight;
+            bestSection = sec.id;
+          }
+        }
+      }
+      current = bestSection;
+    }
+
+    if (current) {
+      setActiveSection(current);
+    }
   }, []);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+
+    let unbindLenis;
+    if (window.__lenis) {
+      window.__lenis.on("scroll", updateActiveSection);
+      unbindLenis = () => window.__lenis.off("scroll", updateActiveSection);
+    }
+
+    updateActiveSection();
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      if (unbindLenis) unbindLenis();
+    };
+  }, [updateActiveSection]);
 
   // Close mobile menu on resize to desktop
   useEffect(() => {
@@ -54,11 +113,25 @@ export default function Navbar() {
   }, []);
 
   const handleNavClick = (e, href) => {
-    e.preventDefault();
+    if (e && e.preventDefault) e.preventDefault();
     setMenuOpen(false);
+
+    if (href === "#hero" || href === "#" || href === "/") {
+      if (window.__lenis) {
+        window.__lenis.scrollTo(0, { duration: 1.2 });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      return;
+    }
+
     const target = document.querySelector(href);
     if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
+      if (window.__lenis) {
+        window.__lenis.scrollTo(target, { offset: -30, duration: 1.2 });
+      } else {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
@@ -81,14 +154,17 @@ export default function Navbar() {
       <header
         className={`navbar-capsule-wrapper ${
           isCompactMode ? "capsule-compact" : "capsule-expanded"
-        }`}
+        } ${isHovered && isCompactMode ? "capsule-hover-expanded" : ""}`}
         id="navbar"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Left: Avatar Photo */}
+        {/* Left: Avatar Photo (Touch/Click takes home) */}
         <a
           href="#hero"
           className="nav-avatar-link"
           onClick={(e) => handleNavClick(e, "#hero")}
+          onTouchEnd={(e) => handleNavClick(e, "#hero")}
           aria-label="Go to home section"
         >
           <img
@@ -98,7 +174,7 @@ export default function Navbar() {
           />
         </a>
 
-        {/* Center Desktop Mode 1: All Section Links (Expanded when at Hero) */}
+        {/* Center Desktop Mode 1: All Section Links (Expanded when at Hero or when Hovered) */}
         <nav className="nav-links-desktop">
           {SECTIONS.filter((s) => s.id !== "contact").map((link) => (
             <a

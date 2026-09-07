@@ -76,6 +76,8 @@
   border-radius: 999px;
   background: #ffffff;
   border: 1px solid rgba(4, 25, 58, 0.12);
+  cursor: pointer;
+  font-family: inherit;
   transition: all 0.25s ease;
   box-shadow: 0 4px 12px rgba(4, 25, 58, 0.04);
 }
@@ -462,9 +464,9 @@
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: rgba(4, 25, 58, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(4, 25, 58, 0.78);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -602,3 +604,63 @@
     gap: 14px;
   }
 }
+
+/* =========================================================
+   BOTTOM NAVIGATION BAR
+========================================================= */
+.gallery-bottom-bar {
+  max-width: 1400px;
+  margin: 40px auto 0;
+  padding: 30px 24px 0;
+  border-top: 1px solid rgba(4, 25, 58, 0.08);
+}
+
+.bottom-bar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.back-home-button,
+.next-showcase-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.back-home-button {
+  background: #ffffff;
+  color: #04193a;
+  border: 1px solid rgba(4, 25, 58, 0.12);
+  box-shadow: 0 4px 12px rgba(4, 25, 58, 0.04);
+}
+
+.back-home-button:hover {
+  background: #04193a;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.next-showcase-button {
+  background: #0284c7;
+  color: #ffffff;
+  border: 1px solid #0284c7;
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.25);
+}
+
+.next-showcase-button:hover {
+  background: #0369a1;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.35);
+}
+

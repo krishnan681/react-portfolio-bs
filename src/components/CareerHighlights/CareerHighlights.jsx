@@ -344,7 +344,7 @@ export default function CareerHighlights() {
             </div>
 
             <div className="production-house-images">
-              <img src={profileIcon1} alt="Production House" loading="lazy" decoding="async" />
+              <img src={profileIcon1} alt="Production House" loading="lazy" decoding="async" style={{objectFit:"contain"}} />
               <img src={profileIcon2} alt="Production House" loading="lazy" decoding="async" />
               <img src={profileIcon3} alt="Production House" loading="lazy" decoding="async" />
               <img src={profileIcon4} alt="Production House" loading="lazy" decoding="async" />

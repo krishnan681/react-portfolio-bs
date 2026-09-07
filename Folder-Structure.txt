@@ -1,234 +1,15 @@
  
+├── 📁 api/
+│   └── 📄 contact.js
 ├── 📁 public/
 ├── 📁 src/
 │   ├── 📁 assets/
 │   │   ├── 📁 fonts/
+│   │   │   ├── 📄 DELIRIUM NCV.ttf
+│   │   │   ├── 📄 DELIRIUM NEON NCV.ttf
+│   │   │   ├── 📄 PersonalUseEULA_DELIRIUM_NCV.txt
 │   │   │   └── 📄 priestacy.regular.otf
 │   │   ├── 📁 images/
-│   │   │   ├── 📁 Branding-cards/
-│   │   │   │   ├── 📁 agc/
-│   │   │   │   │   ├── 📁 img/
-│   │   │   │   │   └── 📁 vid/
-│   │   │   │   │       ├── 🎬 2024 Best Movies.mp4
-│   │   │   │   │       ├── 🎬 AMARAN TRIBUTE AGC.mp4
-│   │   │   │   │       ├── 🎬 Benz AGC.mp4
-│   │   │   │   │       ├── 🎬 Jailer 2 Trailer.mp4
-│   │   │   │   │       ├── 🎬 KANGUVA PROMOTION.mp4
-│   │   │   │   │       ├── 🎬 Rajini Birthday.mp4
-│   │   │   │   │       ├── 🎬 Rajini Mashup.mp4
-│   │   │   │   │       ├── 🎬 Rajini Tribute.mp4
-│   │   │   │   │       ├── 🎬 STR Thug Life AGC.mp4
-│   │   │   │   │       ├── 🎬 Siva Karthikeyan Birthday AGC Reel (re-worked).mp4
-│   │   │   │   │       ├── 🎬 Valentine's Day AGC Reel.mp4
-│   │   │   │   │       └── 🎬 Vidamuyarchi AGC Reel.mp4
-│   │   │   │   ├── 📁 broadway/
-│   │   │   │   │   ├── 📁 img/
-│   │   │   │   │   │   ├── 📁 Poster/
-│   │   │   │   │   │   │   ├── 📁 AGS/
-│   │   │   │   │   │   │   │   ├── 🖼️ GOAT 1 DAYS TO GO.png
-│   │   │   │   │   │   │   │   ├── 🖼️ goat 5 days to go.png
-│   │   │   │   │   │   │   │   └── 🖼️ goat 7 days to go.png
-│   │   │   │   │   │   │   ├── 🖼️ 2025 Award Season's Cover image sample-11.jpg
-│   │   │   │   │   │   │   ├── 🖼️ Avatar Fire & Ash Imax Poster.png
-│   │   │   │   │   │   │   ├── 🖼️ Avengers dooms day-03.jpg
-│   │   │   │   │   │   │   ├── 🖼️ Baahubali Characters-02.jpg
-│   │   │   │   │   │   │   ├── 🖼️ Baahubali Characters-07.jpg
-│   │   │   │   │   │   │   ├── 🖼️ Baahubali Characters-12.jpg
-│   │   │   │   │   │   │   ├── 🖼️ Bookings open design.jpg
-│   │   │   │   │   │   │   ├── 🖼️ Dune Imax Poster.png
-│   │   │   │   │   │   │   ├── 🖼️ HYPER X-11.jpg
-│   │   │   │   │   │   │   ├── 🖼️ IMG-20260718-WA0023.jpg.jpeg
-│   │   │   │   │   │   │   ├── 🖼️ Karuppu Running Divine Blockbuster-01.jpg
-│   │   │   │   │   │   │   ├── 🖼️ LIK X HyperX-01.jpg
-│   │   │   │   │   │   │   ├── 🖼️ Lokah Movie Post 01-01.png
-│   │   │   │   │   │   │   ├── 🖼️ Mankatha Promotion (Campa)-04.jpg
-│   │   │   │   │   │   │   ├── 🖼️ Michael IMAX Poster.png
-│   │   │   │   │   │   │   ├── 🖼️ Parasakthi Bookings Open Now Poster (2).png
-│   │   │   │   │   │   │   ├── 🖼️ Peddi Paid Preview BWC-02.jpg
-│   │   │   │   │   │   │   ├── 🖼️ Prohibition design-01.jpg
-│   │   │   │   │   │   │   ├── 🖼️ Project Hail Mary x Hyper X theme-02.jpg
-│   │   │   │   │   │   │   ├── 🖼️ SaveClip.App_476278448_17947949606929297_6999360031033424682_n.jpg.webp
-│   │   │   │   │   │   │   ├── 🖼️ SaveClip.App_514928143_17964688064929297_3399431844656155121_n.jpg.webp
-│   │   │   │   │   │   │   ├── 🖼️ SaveClip.App_518316036_17966071556929297_2338947605964915124_n.jpg.webp
-│   │   │   │   │   │   │   ├── 🖼️ SaveClip.App_748597435_18009264797929297_5076459251627799410_n.jpg.jpeg
-│   │   │   │   │   │   │   ├── 🖼️ SaveClip.App_759803402_18010788122929297_6003615509860688549_n.jpg.jpeg
-│   │   │   │   │   │   │   ├── 🖼️ Spider-Man  Brand New Day Cover Design-10.jpg
-│   │   │   │   │   │   │   ├── 🖼️ TOY STORY PIXEL DESIGN-02.jpg
-│   │   │   │   │   │   │   ├── 🖼️ TOY STORY PIXEL DESIGN-04.jpg
-│   │   │   │   │   │   │   ├── 🖼️ TOY STORY PIXEL DESIGN-05.jpg
-│   │   │   │   │   │   │   ├── 🖼️ TOY STORY PIXEL DESIGN-06.jpg
-│   │   │   │   │   │   │   └── 🖼️ The IMAX Poster.png
-│   │   │   │   │   │   ├── 📁 imax/
-│   │   │   │   │   │   │   ├── 📁 vid/
-│   │   │   │   │   │   │   │   ├── 🎬 SaveInsta.to_AQMXiZfLw5zyECImqlu7HH2iwxpIoM3poGK1J9OfTxIOVU04ud9o8rnTRdWDxW9CWQm94e8jcX3NT_4mPR-icNEWnjI9196kQk2HSpg.mp4
-│   │   │   │   │   │   │   │   └── 🎬 Top Gun Maverick Bookings Open (Final Out 24).mp4
-│   │   │   │   │   │   │   ├── 🖼️ avengers-dooms-day-with-logo-03.jpg
-│   │   │   │   │   │   │   ├── 🖼️ re-release-sm-posts-04.jpg
-│   │   │   │   │   │   │   ├── 🖼️ re-release-sm-posts-05.jpg
-│   │   │   │   │   │   │   ├── 🖼️ re-release-sm-posts-06.jpg
-│   │   │   │   │   │   │   ├── 🖼️ re-release-sm-posts-07.jpg
-│   │   │   │   │   │   │   ├── 🖼️ the-odyssey-x-avatar.jpg
-│   │   │   │   │   │   │   └── 🖼️ trailer-for-imax-v1.jpg
-│   │   │   │   │   │   ├── 📁 menu design/
-│   │   │   │   │   │   │   ├── 🖼️ Avatar Menu-03.jpg
-│   │   │   │   │   │   │   ├── 🖼️ Avatar Menu-04.jpg
-│   │   │   │   │   │   │   ├── 🖼️ Broadway Cinemas Menu March 2026-19.jpg
-│   │   │   │   │   │   │   ├── 🖼️ Broadway Cinemas Menu March 2026-20.jpg
-│   │   │   │   │   │   │   ├── 🖼️ Coolie Special Gold Rush-01.png
-│   │   │   │   │   │   │   ├── 🖼️ Coolie Special Gold Rush-02.png
-│   │   │   │   │   │   │   ├── 🖼️ Demonslayer Menu.jpg
-│   │   │   │   │   │   │   ├── 🖼️ Dhurandhaar Menu.png
-│   │   │   │   │   │   │   ├── 🖼️ Fantastic Four Menu.jpg
-│   │   │   │   │   │   │   ├── 🖼️ Michael Special Chocolate Truffle Cake with Badge-01 copy.jpg
-│   │   │   │   │   │   │   ├── 🖼️ Navi Burger-01.png
-│   │   │   │   │   │   │   ├── 🖼️ Summer Specials IG 2_Menu.jpg
-│   │   │   │   │   │   │   ├── 🖼️ Tron Ares - Red Velvet Cheese Cake-12.jpg
-│   │   │   │   │   │   │   ├── 🖼️ Valentine Special 2026-03.png
-│   │   │   │   │   │   │   └── 🖼️ Valentine Special 2026.png
-│   │   │   │   │   │   └── 📁 portrait poster/
-│   │   │   │   │   │       ├── 🖼️ (Marty Supreme)A RATED.png
-│   │   │   │   │   │       ├── 🖼️ Mankatha Re-Release OG-02.jpg
-│   │   │   │   │   │       ├── 🖼️ Padayappa (re-release)-02.jpg
-│   │   │   │   │   │       └── 🖼️ Thalapathi-01.jpg
-│   │   │   │   │   └── 📁 vid/
-│   │   │   │   │       ├── 📁 GOAT/
-│   │   │   │   │       │   ├── 🎬 4-days-to-go-goat.mp4
-│   │   │   │   │       │   ├── 🎬 goat-4days-to-go.mp4
-│   │   │   │   │       │   ├── 🎬 goat-agc-1-day-to-go.mp4
-│   │   │   │   │       │   ├── 🎬 goat-bookings-open.mp4
-│   │   │   │   │       │   ├── 🎬 goat-reworked.mp4
-│   │   │   │   │       │   └── 🎬 goat.mp4
-│   │   │   │   │       ├── 📁 review/
-│   │   │   │   │       │   ├── 🎬 deadpool-wolverine24.mp4
-│   │   │   │   │       │   ├── 🎬 goat-review.mp4
-│   │   │   │   │       │   ├── 🎬 lik-x-bwc-promotion-reel.mp4
-│   │   │   │   │       │   ├── 🎬 lubber-pandhu-team.mp4
-│   │   │   │   │       │   ├── 🎬 moana-review24.mp4
-│   │   │   │   │       │   ├── 🎬 pechi-team1.mp4
-│   │   │   │   │       │   ├── 🎬 siva-kumar-sir-broadway-1.mp4
-│   │   │   │   │       │   └── 🎬 sweet-heart-team24.mp4
-│   │   │   │   │       ├── 🎬 aan-paavam-pollathathu-promotional-reel.mp4
-│   │   │   │   │       ├── 🎬 akhanda-2-promotional-reel.mp4
-│   │   │   │   │       ├── 🎬 baahubali-promotion-reel-bwc.mp4
-│   │   │   │   │       ├── 🎬 bwc-valentiens-day-reel.mp4
-│   │   │   │   │       ├── 🎬 cinema-is-life-bwc.mp4
-│   │   │   │   │       ├── 🎬 dhurandhar-x-rasputin.mp4
-│   │   │   │   │       ├── 🎬 dude-promotional-reel-bwc.mp4
-│   │   │   │   │       ├── 🎬 edgar-wright-moives-promotion-bwc.mp4
-│   │   │   │   │       ├── 🎬 karuppu-promotion-reel.mp4
-│   │   │   │   │       ├── 🎬 kh-x-rk-reunion-bwc-reel.mp4
-│   │   │   │   │       ├── 🎬 lokah-promotion-reel.mp4
-│   │   │   │   │       ├── 🎬 love-oh-love-team.mp4
-│   │   │   │   │       ├── 🎬 michael-promotion-1.mp4
-│   │   │   │   │       ├── 🎬 michael-promotion.mp4
-│   │   │   │   │       ├── 🎬 project-hail-mary-promotion-final-out.mp4
-│   │   │   │   │       ├── 🎬 project-hail-mary.mp4
-│   │   │   │   │       ├── 🎬 stray-kids-promotion.mp4
-│   │   │   │   │       ├── 🎬 suriya-x-sk.mp4
-│   │   │   │   │       ├── 🎬 thaai-kelavi-promotion-reel.mp4
-│   │   │   │   │       ├── 🎬 top-gun-maverick-bookings-open.mp4
-│   │   │   │   │       ├── 🎬 valentines-day-bwc-reel.mp4
-│   │   │   │   │       ├── 🎬 vidamuyarchi-bw.mp4
-│   │   │   │   │       ├── 🎬 with-love-promotion.mp4
-│   │   │   │   │       ├── 🎬 youth-promotion-bwc.mp4
-│   │   │   │   │       └── 🎬 zootopia-2-promotional-reel.mp4
-│   │   │   │   ├── 📁 cafes/
-│   │   │   │   │   ├── 📁 img/
-│   │   │   │   │   │   ├── 🖼️ 2scene0.png
-│   │   │   │   │   │   ├── 🖼️ Cinnamon Roll Poster-06.jpg
-│   │   │   │   │   │   ├── 🖼️ Coffee Mocha (Final Out 24)-11.jpg
-│   │   │   │   │   │   ├── 🖼️ Coffee Mocha (Final Out 24)-13.jpg
-│   │   │   │   │   │   ├── 🖼️ Drinks Poster-04.jpg
-│   │   │   │   │   │   ├── 🖼️ Ferrro Cake-09.jpg
-│   │   │   │   │   │   ├── 🖼️ Lassie.png
-│   │   │   │   │   │   ├── 🖼️ Launch Invitation's-02.jpg
-│   │   │   │   │   │   ├── 🖼️ Launch Invite-Re worked-02.jpg
-│   │   │   │   │   │   ├── 🖼️ Lemonaid Poster-11.jpg
-│   │   │   │   │   │   ├── 🖼️ Mango Almond Cake-02.jpg
-│   │   │   │   │   │   ├── 🖼️ Meetha Poster-01.jpg
-│   │   │   │   │   │   ├── 🖼️ Nietzsche Salad Poster-02.jpg
-│   │   │   │   │   │   ├── 🖼️ Price Hike Poster-01.jpg
-│   │   │   │   │   │   ├── 🖼️ Pumkin Borani Poster-01.jpg
-│   │   │   │   │   │   ├── 🖼️ Roasted Bell Pepper Soup.png
-│   │   │   │   │   │   ├── 🖼️ SM Poster-08.jpg
-│   │   │   │   │   │   ├── 🖼️ Supper Theatre Banner (Final Out)-02.jpg
-│   │   │   │   │   │   ├── 🖼️ The Art of Dum-09.jpg
-│   │   │   │   │   │   ├── 🖼️ Water Melon Punch New out-06.jpg
-│   │   │   │   │   │   └── 🖼️ White Devil Poster (2)-09.jpg
-│   │   │   │   │   └── 📁 vid/
-│   │   │   │   │       ├── 🎬 Ambience-Reel (Final Out 24).mp4
-│   │   │   │   │       ├── 🎬 Chocolate-Brookie VID.mp4
-│   │   │   │   │       ├── 🎬 Cookie-Heart Reel (re-worked) 2.mp4
-│   │   │   │   │       ├── 🎬 Cycle-Cookie.mp4
-│   │   │   │   │       ├── 🎬 Earthament-x OTG Final Out.mp4
-│   │   │   │   │       ├── 🎬 Medley-vegetarian pizza Reel.mp4
-│   │   │   │   │       ├── 🎬 Spicy-Chicken Vepudu Reel.mp4
-│   │   │   │   │       ├── 🎬 TYF-2ND Reel.mp4
-│   │   │   │   │       └── 🎬 TYF-Event Thank You Reel.mp4
-│   │   │   │   ├── 📁 crimson/
-│   │   │   │   │   ├── 📁 img/
-│   │   │   │   │   │   ├── 🖼️ A Wes Anderson Drink.png
-│   │   │   │   │   │   ├── 🖼️ Breakfast at Tiffany's.png
-│   │   │   │   │   │   ├── 🖼️ Crazy Rich Lychee.png
-│   │   │   │   │   │   ├── 🖼️ Editor’s Choice.png
-│   │   │   │   │   │   ├── 🖼️ Inception.png
-│   │   │   │   │   │   ├── 🖼️ La La Land.png
-│   │   │   │   │   │   ├── 🖼️ Pianist.png
-│   │   │   │   │   │   ├── 🖼️ Sweet Life.png
-│   │   │   │   │   │   └── 🖼️ The offbeat 2.png
-│   │   │   │   │   └── 📁 vid/
-│   │   │   │   │       ├── 🎬 Crimson Halloween.mp4
-│   │   │   │   │       ├── 🎬 Crimson Ves Andreson Out updated.mp4
-│   │   │   │   │       └── 🎬 Crimson_Bartender_out_V3_Updated.mp4
-│   │   │   │   ├── 📁 giggles&twirls/
-│   │   │   │   │   ├── 📁 img/
-│   │   │   │   │   │   └── 🖼️ GT Post-02.png
-│   │   │   │   │   └── 📁 vid/
-│   │   │   │   │       ├── 🎬 G&T Pant Co-ords.mp4
-│   │   │   │   │       ├── 🎬 Giggles & Twrils Green Dress.mp4
-│   │   │   │   │       ├── 🎬 Giggles & Twrils Orange Dress.mp4
-│   │   │   │   │       ├── 🎬 Giggles & Twrils Yellow Dress.mp4
-│   │   │   │   │       ├── 🎬 Grey Dress.mp4
-│   │   │   │   │       ├── 🎬 Indigo Dreams.mp4
-│   │   │   │   │       ├── 🎬 Lover's Whisper Giggles & Twrils.mp4
-│   │   │   │   │       ├── 🎬 Red Dress - Lady In Rouge Dress Final Out.mp4
-│   │   │   │   │       └── 🎬 Rustle & Rue.mp4
-│   │   │   │   ├── 📁 long-story/
-│   │   │   │   │   └── 📁 vid/
-│   │   │   │   │       ├── 🎬 Long-Story-Reel.mp4
-│   │   │   │   │       ├── 🎬 TLS-Launch-Reel.mp4
-│   │   │   │   │       ├── 🎬 TLS-Sing-Along-Music-Show.mp4
-│   │   │   │   │       └── 🎬 The-Long-Story-Launch-Reel.mp4
-│   │   │   │   ├── 📁 new-city-developers/
-│   │   │   │   │   ├── 📁 img/
-│   │   │   │   │   │   ├── 🖼️ NCD 01 (1).jpg
-│   │   │   │   │   │   ├── 🖼️ NCD 01 (1).png
-│   │   │   │   │   │   ├── 🖼️ NCD 01 (2).jpg
-│   │   │   │   │   │   ├── 🖼️ NCD 01 (3).jpg
-│   │   │   │   │   │   ├── 🖼️ NCD 01 (4).jpg
-│   │   │   │   │   │   └── 🖼️ NCD 01 (5).jpg
-│   │   │   │   │   └── 📁 vid/
-│   │   │   │   ├── 📁 newrish/
-│   │   │   │   │   ├── 🖼️ International Womens Day-02-01.jpg
-│   │   │   │   │   ├── 🖼️ World Earth Day-01.jpg
-│   │   │   │   │   ├── 🖼️ World Lung Cancer Day-02.jpg
-│   │   │   │   │   └── 🖼️ World Obesity Day-02.jpg
-│   │   │   │   ├── 📁 pavizham-jewellers/
-│   │   │   │   │   ├── 📁 img/
-│   │   │   │   │   │   ├── 🖼️ Pavizham 2.png
-│   │   │   │   │   │   ├── 🖼️ Pavizham Grid-21(1).jpg
-│   │   │   │   │   │   ├── 🖼️ Pavizham Grid-25.jpg
-│   │   │   │   │   │   ├── 🖼️ Pavizham Jewellery.png
-│   │   │   │   │   │   ├── 🖼️ Pavizham Jewellery0908.png
-│   │   │   │   │   │   ├── 🖼️ Pavizham Jewellery0970 1.png
-│   │   │   │   │   │   ├── 🖼️ pavizham extended 2 .jpg
-│   │   │   │   │   │   └── 🖼️ stone bangle.jpg
-│   │   │   │   │   └── 📁 vid/
-│   │   │   │   │       ├── 🎬 PAVIZHAM BTS_4.mp4
-│   │   │   │   │       ├── 🎬 Pavizham Compressed.mp4
-│   │   │   │   │       ├── 🎬 Pavizham Reels 3.mp4
-│   │   │   │   │       └── 🎬 Pavizham Traditonal reels 2.mp4
-│   │   │   │   └── 📁 sentosa/
 │   │   │   ├── 📁 Brands/
 │   │   │   │   ├── 🖼️ 1.webp
 │   │   │   │   ├── 🖼️ 10.webp
@@ -241,16 +22,16 @@
 │   │   │   │   ├── 🖼️ 8.webp
 │   │   │   │   └── 🖼️ 9.webp
 │   │   │   ├── 📁 BrandsBanner/
-│   │   │   │   ├── 🖼️ Banners-01.jpg
-│   │   │   │   ├── 🖼️ Banners-02.jpg
-│   │   │   │   ├── 🖼️ Banners-03.jpg
-│   │   │   │   ├── 🖼️ Banners-04.jpg
-│   │   │   │   ├── 🖼️ Banners-05.jpg
-│   │   │   │   ├── 🖼️ Banners-06.jpg
-│   │   │   │   ├── 🖼️ Banners-07.jpg
-│   │   │   │   ├── 🖼️ Banners-08.jpg
-│   │   │   │   ├── 🖼️ Banners-09.jpg
-│   │   │   │   └── 🖼️ Banners-10.jpg
+│   │   │   │   ├── 🖼️ Banners-01.webp
+│   │   │   │   ├── 🖼️ Banners-02.webp
+│   │   │   │   ├── 🖼️ Banners-03.webp
+│   │   │   │   ├── 🖼️ Banners-04.webp
+│   │   │   │   ├── 🖼️ Banners-05.webp
+│   │   │   │   ├── 🖼️ Banners-06.webp
+│   │   │   │   ├── 🖼️ Banners-07.webp
+│   │   │   │   ├── 🖼️ Banners-08.webp
+│   │   │   │   ├── 🖼️ Banners-09.webp
+│   │   │   │   └── 🖼️ Banners-10.webp
 │   │   │   ├── 📁 CH/
 │   │   │   │   ├── 🖼️ 1.webp
 │   │   │   │   ├── 🖼️ 2.webp
@@ -275,6 +56,12 @@
 │   │   │   │   ├── 🖼️ 5.png
 │   │   │   │   ├── 🖼️ 6.png
 │   │   │   │   └── 🖼️ 7.png
+│   │   │   ├── 📁 hero/
+│   │   │   │   ├── 🖼️ barath-portrait-cutout.png
+│   │   │   │   ├── 🖼️ barath-portrait.png
+│   │   │   │   ├── 🖼️ brush-splash.png
+│   │   │   │   ├── 🖼️ hero-composite-artwork.png
+│   │   │   │   └── 🖼️ hero-notepad-ideas.png
 │   │   │   ├── 📁 icons/
 │   │   │   │   ├── 🖼️ ags.webp
 │   │   │   │   ├── 🖼️ dream.webp
@@ -285,16 +72,13 @@
 │   │   │   │   ├── 🖼️ uni.webp
 │   │   │   │   └── 🖼️ wb.webp
 │   │   │   ├── 🖼️ BS.webp
-│   │   │   └── 🖼️ about.webp
-│   │   └── 📁 videos/
-│   │       ├── 📁 C-H/
-│   │       │   ├── 🎬 F1.mp4
-│   │       │   ├── 🎬 Stray Kids Promotion.mp4
-│   │       │   ├── 🎬 Thaai Kelavi Promotion Reel.mp4
-│   │       │   ├── 🎬 Youth.mp4
-│   │       │   ├── 🎬 gandt.mp4
-│   │       │   └── 🎬 hyperx.mp4
-│   │       └── 📁 achievement/
+│   │   │   ├── 🖼️ about.webp
+│   │   │   ├── 🖼️ sky.jpeg
+│   │   │   └── 🖼️ sky.jpg
+│   │   ├── 🖼️ background removed gif.gif
+│   │   ├── 🖼️ imgNoiseTexture.png
+│   │   ├── 🖼️ sky-band.svg
+│   │   └── 🖼️ sky3.webp
 │   ├── 📁 components/
 │   │   ├── 📁 About/
 │   │   │   ├── 🎨 About.css
@@ -308,7 +92,13 @@
 │   │   │   ├── 🎨 CareerHighlights.css
 │   │   │   └── 📄 CareerHighlights.jsx
 │   │   ├── 📁 Common/
+│   │   │   ├── 🎨 EmptyState.css
+│   │   │   ├── 📄 EmptyState.jsx
+│   │   │   ├── 🎨 ErrorBoundary.css
+│   │   │   ├── 📄 ErrorBoundary.jsx
 │   │   │   ├── 📄 ImageWithSkeleton.jsx
+│   │   │   ├── 🎨 NetworkStatus.css
+│   │   │   ├── 📄 NetworkStatus.jsx
 │   │   │   └── 🎨 Skeleton.css
 │   │   ├── 📁 Contact/
 │   │   │   ├── 🎨 Contact.css
@@ -316,18 +106,14 @@
 │   │   ├── 📁 CreativeExpertise/
 │   │   │   ├── 🎨 CreativeExpertise.css
 │   │   │   └── 📄 CreativeExpertise.jsx
-│   │   ├── 📁 FontsColors/
-│   │   │   ├── 🎨 FontsColors.css
-│   │   │   └── 📄 FontsColors.jsx
 │   │   ├── 📁 Footer/
 │   │   │   ├── 🎨 Footer.css
 │   │   │   └── 📄 Footer.jsx
 │   │   ├── 📁 Hero/
 │   │   │   ├── 🎨 Hero.css
-│   │   │   └── 📄 Hero.jsx
-│   │   ├── 📁 InstagramPosts/
-│   │   │   ├── 🎨 InstagramPosts.css
-│   │   │   └── 📄 InstagramPosts.jsx
+│   │   │   ├── 📄 Hero.jsx
+│   │   │   ├── 🎨 HeroOld.css
+│   │   │   └── 📄 HeroOld.jsx
 │   │   ├── 📁 Modals/
 │   │   │   ├── 📄 ImageModal.jsx
 │   │   │   ├── 🎨 Modal.css
@@ -346,6 +132,8 @@
 │   ├── 📁 data/
 │   │   ├── 📄 brands.js
 │   │   └── 📄 visualCreationsData.js
+│   ├── 📁 hooks/
+│   │   └── 📄 useNetworkStatus.js
 │   ├── 📁 pages/
 │   │   ├── 📁 ProjectPage/
 │   │   │   ├── 🎨 ProjectPage.css
@@ -367,13 +155,17 @@
 │   │       ├── 📄 ProjectDetail.jsx
 │   │       ├── 📄 ThatsYFoodDesign.jsx
 │   │       └── 📄 TheCrimsonDesign.jsx
+│   ├── 📁 services/
+│   │   └── 📄 contactService.js
 │   ├── 📁 styles/
 │   │   └── 🎨 fonts.css
+│   ├── 📁 utils/
+│   │   ├── 📄 security.js
+│   │   └── 📄 storage.js
 │   ├── 🎨 App.css
 │   ├── 📄 App.jsx
 │   ├── 🎨 index.css
 │   └── 📄 main.jsx
-├── ⚙️ .env.example
 ├── ⚙️ .gitignore
 ├── 📄 Folder-Structure.txt
 ├── 📝 README.md

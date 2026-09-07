@@ -1,4 +1,4 @@
-:root {
+ :root {
   --hero-from: #8ec5fc;
   --hero-to: #4387dc;
   --hero-ivory: #fffdf2;
@@ -78,14 +78,18 @@
 .hero-eyebrow {
   display: flex;
   align-items: center;
-  /* justify-content: center; */
+  justify-content: center;
   gap: 10px;
   position: relative;
   top: clamp(30px, 8vw, 130px);
-  left: 220px;
+  right: 30%;
   margin-bottom: 22px;
   width: 100%;
   padding-left: 0;
+
+  @media screen and (max-width: 640px) {
+    right: 120px;
+  }
 }
 
 .eyebrow-dot {

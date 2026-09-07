@@ -76,6 +76,8 @@
   border-radius: 999px;
   background: #ffffff;
   border: 1px solid rgba(4, 25, 58, 0.12);
+  cursor: pointer;
+  font-family: inherit;
   transition: all 0.25s ease;
   box-shadow: 0 4px 12px rgba(4, 25, 58, 0.04);
 }
@@ -481,9 +483,11 @@
   gap: 8px;
   padding: 12px 24px;
   border-radius: 9999px;
+  font-family: inherit;
   font-size: 0.88rem;
   font-weight: 700;
   text-decoration: none;
+  cursor: pointer;
   transition: all 0.25s ease;
 }
 

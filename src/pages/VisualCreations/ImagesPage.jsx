@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   Sparkles,
@@ -16,10 +16,20 @@ import EmptyState from "../../components/Common/EmptyState";
 import "./ImagesPage.css";
 
 export default function ImagesPage() {
+  const navigate = useNavigate();
   const INITIAL_COUNT = 4;
   const STEP = 4;
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
   const [activeImageIndex, setActiveImageIndex] = useState(null);
+
+  const handleBackToVisuals = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (window.history.length > 2) {
+      navigate(-1);
+    } else {
+      navigate("/#visual");
+    }
+  };
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -69,10 +79,15 @@ export default function ImagesPage() {
       {/* TOP HEADER / NAV */}
       <header className="gallery-header-nav">
         <div className="gallery-header-container">
-          <Link to="/" className="gallery-back-link">
+          <button
+            type="button"
+            onClick={handleBackToVisuals}
+            className="gallery-back-link"
+            aria-label="Back to portfolio"
+          >
             <ArrowLeft size={16} />
             <span>Back to Portfolio</span>
-          </Link>
+          </button>
           <div className="gallery-header-badge">
             <Sparkles size={13} className="badge-sparkle" />
             <span>Visual Creations / Images</span>
@@ -101,8 +116,8 @@ export default function ImagesPage() {
           <EmptyState
             title="No Visuals Found"
             message="There are no creative designs currently available."
-            actionText="Back to Home"
-            onAction={() => window.location.href = "/"}
+            actionText="Back to Visuals"
+            onAction={handleBackToVisuals}
           />
         ) : (
           <>
@@ -176,10 +191,15 @@ export default function ImagesPage() {
       {/* BOTTOM CTA BAR */}
       <footer className="gallery-bottom-bar">
         <div className="bottom-bar-inner">
-          <Link to="/" className="back-home-button">
+          <button
+            type="button"
+            onClick={handleBackToVisuals}
+            className="back-home-button"
+            aria-label="Return to portfolio"
+          >
             <ArrowLeft size={16} />
-            <span>Return to Home</span>
-          </Link>
+            <span>Return to Visuals</span>
+          </button>
           <Link to="/videos" className="next-showcase-button">
             <span>Explore Videos Showcase</span>
             <ChevronRight size={16} />

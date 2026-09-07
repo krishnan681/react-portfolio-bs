@@ -4,7 +4,7 @@
 
 .contact-section {
   position: relative;
-  padding: clamp(50px, 6vw, 75px) 0 30px;
+  padding: clamp(50px, 6vw, 85px) 0 30px;
   background: transparent;
   color: #04193a;
   overflow-x: clip;
@@ -21,7 +21,7 @@
 
 /* ── Eyebrow ─────────────────────────────────────────── */
 .contact-header {
-  margin-bottom: clamp(36px, 5.5vw, 65px);
+  margin-bottom: clamp(36px, 5vw, 60px);
 }
 
 .eyebrow {
@@ -65,7 +65,7 @@
   background: linear-gradient(to right, rgba(2, 132, 199, 0.35), transparent);
 }
 
-.eyebrow-text {
+.contactpageeybrow{
   font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 2px;
@@ -84,7 +84,7 @@
   line-height: 1.15;
   letter-spacing: -1.5px;
   color: #04193a;
-  margin: 0 0 20px 0;
+  margin: 0 0 16px 0;
 }
 
 .gradient-highlight {
@@ -95,25 +95,27 @@
 }
 
 .contact-subheading {
-  font-size: clamp(1rem, 1.3vw, 1.15rem);
-  line-height: 1.8;
+  font-size: clamp(0.98rem, 1.25vw, 1.12rem);
+  line-height: 1.75;
   color: #596780;
   max-width: 680px;
   margin: 0;
 }
 
-
-
-/* ── Footer Container ────────────────────────────────── */
+/* =========================================================
+   FOOTER GRID (3 BALANCED COLUMNS)
+========================================================= */
 .footer-container {
   position: relative;
+  border-top: 1px solid rgba(4, 25, 58, 0.08);
+  padding-top: 45px;
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1.3fr 1.3fr;
+  grid-template-columns: 1.8fr 1.1fr 1.3fr;
   gap: 48px;
-  margin-bottom: 50px;
+  margin-bottom: 45px;
 }
 
 .footer-col {
@@ -152,10 +154,10 @@
 }
 
 .brand-tagline {
-  font-size: 0.94rem;
+  font-size: 0.92rem;
   line-height: 1.7;
   color: #596780;
-  margin: 0 0 18px 0;
+  margin: 0 0 16px 0;
   max-width: 380px;
 }
 
@@ -193,14 +195,14 @@
   transform: translateX(4px);
 }
 
-/* Contact List */
+/* Contact Info Column */
 .contact-info-list {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 .contact-info-item {
@@ -237,45 +239,28 @@
   color: #ffffff;
 }
 
-/* Social Column */
-.social-desc {
-  font-size: 0.9rem;
-  color: #64748b;
-  margin: 0 0 16px 0;
-  line-height: 1.5;
+.copy-action-row {
+  margin-top: 4px;
 }
 
-.social-pill-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.social-pill {
+.footer-copy-btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 9px 16px;
+  gap: 8px;
+  padding: 6px 14px;
   border-radius: 999px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.45) 100%);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  color: #04193a;
-  text-decoration: none;
-  font-size: 0.88rem;
-  font-weight: 600;
-  box-shadow: 0 4px 12px rgba(4, 25, 58, 0.04);
-  transition: all 0.25s ease;
-  width: fit-content;
+  background: rgba(2, 132, 199, 0.08);
+  border: 1px solid rgba(2, 132, 199, 0.2);
+  color: #0284c7;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.social-pill:hover {
-  background: #04193a;
+.footer-copy-btn:hover {
+  background: #0284c7;
   color: #ffffff;
-  border-color: #04193a;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(4, 25, 58, 0.18);
 }
 
 /* Divider */
@@ -283,56 +268,34 @@
   border: none;
   height: 1px;
   background: rgba(4, 25, 58, 0.08);
-  margin: 0 0 30px 0;
+  margin: 0 0 25px 0;
 }
 
 /* Bottom Bar */
 .footer-bottom-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
   gap: 16px;
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   color: #64748b;
+  padding-top: 4px;
 }
 
 .copyright-text {
   margin: 0;
-}
-
-.credits-text {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.85rem;
-}
-
-.heart-icon {
-  color: #ef4444;
-  fill: #ef4444;
+  text-align: center;
 }
 
 /* =========================================================
    RESPONSIVE BREAKPOINTS (MOBILE, TABLET, DESKTOP)
 ========================================================= */
 
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
   .footer-grid {
-    grid-template-columns: 1.8fr 1fr 1.2fr 1.2fr;
-    gap: 36px;
-  }
-}
-
-@media (max-width: 992px) {
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 36px;
-  }
-
-  .brand-col {
-    grid-column: span 2;
-    max-width: 600px;
+    grid-template-columns: 1.5fr 1fr 1.2fr;
+    gap: 32px;
   }
 }
 
@@ -344,43 +307,27 @@
 
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .brand-col {
-    grid-column: span 1;
-  }
-
-  .social-pill-group {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px;
+    gap: 30px;
   }
 
   .footer-bottom-bar {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 12px;
+    gap: 10px;
   }
 }
 
 @media (max-width: 480px) {
   .contact-section {
-    padding: 60px 0 25px;
+    padding: 45px 0 20px;
   }
 
-  .eyebrow-text {
+  .contactpageeybrow {
     font-size: 0.74rem;
   }
 
   .contact-main-heading {
     font-size: 1.85rem;
-  }
-}
-
-@media (max-width: 360px) {
-  .contact-main-heading {
-    font-size: 1.6rem;
   }
 }

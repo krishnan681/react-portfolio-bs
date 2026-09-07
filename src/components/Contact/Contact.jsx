@@ -1,24 +1,34 @@
 import { useState } from "react";
+import { Mail, Phone, MapPin, Copy, Check } from "lucide-react";
 import {
-  Mail,
-  Phone,
-  MapPin,
-  Globe,
-  Heart,
-} from "lucide-react";
+  CONTACT_CONFIG,
+  copyToClipboard,
+  getMailtoLink,
+} from "../../services/contactService";
 import "./Contact.css";
+
+const NAV_LINKS = [
+  { label: "About", href: "#about" },
+  { label: "Creative Expertise", href: "#creative-expertise" },
+  { label: "Career Highlights", href: "#career" },
+  { label: "Branding", href: "#branding" },
+  { label: "Visual Creations", href: "#visual" },
+  { label: "Tools", href: "#tools" },
+];
 
 export default function Contact() {
   const [year] = useState(() => new Date().getFullYear());
+  const [copied, setCopied] = useState(false);
 
-  const NAV_LINKS = [
-    { label: "About", href: "#about" },
-    { label: "Creative Expertise", href: "#creative-expertise" },
-    { label: "Career Highlights", href: "#career" },
-    { label: "Branding", href: "#branding" },
-    { label: "Visual Creations", href: "#visual" },
-    { label: "Tools", href: "#tools" },
-  ];
+  // Copy Email Handler with visual feedback
+  const handleCopyEmail = async (e) => {
+    if (e) e.preventDefault();
+    const success = await copyToClipboard(CONTACT_CONFIG.email);
+    if (success) {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2600);
+    }
+  };
 
   return (
     <section id="contact" className="contact-section">
@@ -32,20 +42,25 @@ export default function Contact() {
               <span></span>
             </div>
             <div className="rule"></div>
-            <span className="eyebrow-text">GET IN TOUCH</span>
+            <span className="contactpageeybrow">GET IN TOUCH</span>
           </div>
 
           <div className="contact-title-group">
             <h2 className="contact-main-heading">
               Let's create something <br />
-              <span className="gradient-highlight">extraordinary</span> together.
+              <span className="gradient-highlight">extraordinary</span>{" "}
+              together.
             </h2>
-            
+            <p className="contact-subheading">
+              Have an upcoming project, commercial video edit, or creative
+              branding vision? Feel free to reach out directly via email or
+              call.
+            </p>
           </div>
         </div>
 
-        {/* ================= FOOTER GRID ================= */}
-        <footer className="footer-container">
+        {/* ================= FOOTER GRID (3 BALANCED COLUMNS) ================= */}
+        <footer className="footer-container" data-aos="fade-up">
           <div className="footer-grid">
             {/* Column 1: Brand & Philosophy */}
             <div className="footer-col brand-col">
@@ -53,9 +68,13 @@ export default function Contact() {
                 <span className="brand-dot">✦</span>
                 <span className="brand-name">BARATH</span>
               </div>
-            
+              <p className="brand-tagline">
+                Video Editor &amp; Graphic Designer crafting high-impact visual
+                narratives, motion graphics, and distinctive brand identities.
+              </p>
               <div className="brand-quote">
-                "Design can be art. Design can be aesthetics. Design is so simple, that's why it is so complicated."
+                "Design can be art. Design can be aesthetics. Design is so
+                simple, that's why it is so complicated."
               </div>
             </div>
 
@@ -69,7 +88,17 @@ export default function Contact() {
                       href={link.href}
                       onClick={(e) => {
                         e.preventDefault();
-                        document.querySelector(link.href)?.scrollIntoView({ behavior: "smooth" });
+                        const target = document.querySelector(link.href);
+                        if (target) {
+                          if (window.__lenis) {
+                            window.__lenis.scrollTo(target, {
+                              offset: -30,
+                              duration: 1.2,
+                            });
+                          } else {
+                            target.scrollIntoView({ behavior: "smooth" });
+                          }
+                        }
                       }}
                     >
                       {link.label}
@@ -79,24 +108,32 @@ export default function Contact() {
               </ul>
             </div>
 
-            {/* Column 3: Contact Info & Direct Links */}
+            {/* Column 3: Contact Channels & Location */}
             <div className="footer-col contact-col">
-              <h4 className="col-title">Contact</h4>
+              <h4 className="col-title">Get in Touch</h4>
               <ul className="contact-info-list">
                 <li>
-                  <a href="mailto:Barath@gmail.com" className="contact-info-item">
+                  <a
+                    href={getMailtoLink({
+                      subject: "Project Inquiry - Barath Sachwin Portfolio",
+                    })}
+                    className="contact-info-item"
+                  >
                     <div className="contact-icon-box">
                       <Mail size={16} />
                     </div>
-                    <span>Barath@gmail.com</span>
+                    <span>{CONTACT_CONFIG.email}</span>
                   </a>
                 </li>
                 <li>
-                  <a href="tel:+911234567890" className="contact-info-item">
+                  <a
+                    href={`tel:${CONTACT_CONFIG.rawPhone}`}
+                    className="contact-info-item"
+                  >
                     <div className="contact-icon-box">
                       <Phone size={16} />
                     </div>
-                    <span>+91 12345 67890</span>
+                    <span>{CONTACT_CONFIG.phone}</span>
                   </a>
                 </li>
                 <li>
@@ -104,58 +141,20 @@ export default function Contact() {
                     <div className="contact-icon-box">
                       <MapPin size={16} />
                     </div>
-                    <span>Coimbatore, Tamil Nadu, India</span>
+                    <span>{CONTACT_CONFIG.location}</span>
                   </div>
                 </li>
+                <li className="copy-action-row">
+                  <button
+                    type="button"
+                    onClick={handleCopyEmail}
+                    className="footer-copy-btn"
+                  >
+                    {copied ? <Check size={14} /> : <Copy size={14} />}
+                    <span>{copied ? "Copied!" : "Copy Email"}</span>
+                  </button>
+                </li>
               </ul>
-            </div>
-
-            {/* Column 4: Social Profiles */}
-            <div className="footer-col social-col">
-              <h4 className="col-title">Connect</h4>
-              <p className="social-desc">Follow my journey across social media &amp; design platforms:</p>
-              <div className="social-pill-group">
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-pill"
-                  aria-label="Instagram"
-                >
-                  <i className="fa-brands fa-instagram"></i>
-                  <span>Instagram</span>
-                </a>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-pill"
-                  aria-label="LinkedIn"
-                >
-                  <i className="fa-brands fa-linkedin-in"></i>
-                  <span>LinkedIn</span>
-                </a>
-                <a
-                  href="https://behance.net"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-pill"
-                  aria-label="Behance"
-                >
-                  <i className="fa-brands fa-behance"></i>
-                  <span>Behance</span>
-                </a>
-                <a
-                  href="https://dribbble.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-pill"
-                  aria-label="Dribbble"
-                >
-                  <i className="fa-brands fa-dribbble"></i>
-                  <span>Dribbble</span>
-                </a>
-              </div>
             </div>
           </div>
 
@@ -164,9 +163,9 @@ export default function Contact() {
           {/* ================= BOTTOM BAR ================= */}
           <div className="footer-bottom-bar">
             <p className="copyright-text">
-              &copy; {year} <strong>Barath</strong>. All rights reserved.
+              &copy; {year} <strong>Barath Sachwin</strong>. All rights
+              reserved.
             </p>
-           
           </div>
         </footer>
       </div>

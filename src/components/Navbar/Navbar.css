@@ -112,6 +112,34 @@
   pointer-events: auto;
 }
 
+/* Hover on Compact State -> Smoothly Expand & Reveal All Nav Links (Desktop) */
+@media (min-width: 841px) {
+  .navbar-capsule-wrapper.capsule-compact:hover,
+  .navbar-capsule-wrapper.capsule-compact.capsule-hover-expanded {
+    max-width: min(95%, 880px);
+    gap: clamp(12px, 1.8vw, 24px);
+    background: var(--nav-capsule-bg);
+    box-shadow:
+      0 18px 45px rgba(4, 25, 58, 0.16),
+      inset 0 1.5px 2px rgba(255, 255, 255, 0.95);
+  }
+
+  .navbar-capsule-wrapper.capsule-compact:hover .nav-links-desktop,
+  .navbar-capsule-wrapper.capsule-compact.capsule-hover-expanded .nav-links-desktop {
+    opacity: 1;
+    max-width: 650px;
+    pointer-events: auto;
+  }
+
+  .navbar-capsule-wrapper.capsule-compact:hover .nav-active-pill,
+  .navbar-capsule-wrapper.capsule-compact.capsule-hover-expanded .nav-active-pill {
+    opacity: 0;
+    max-width: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+}
+
 /* Left: Avatar Photo */
 .nav-avatar-link {
   display: flex;
