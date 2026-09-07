@@ -18,8 +18,8 @@ import "./VideosPage.css";
    VIDEO FOLDER SECTION COMPONENT (2 Rows Initial + Load More)
 ========================================================= */
 function VideoFolderSection({ section, sIdx, onSelectVideo }) {
-  const INITIAL_COUNT = 8; // 2 rows (4 columns grid)
-  const STEP = 8;
+  const INITIAL_COUNT = 4; // 1 row (4 columns grid)
+  const STEP = 4;
   const videos = section.videos || [];
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
@@ -128,11 +128,6 @@ export default function VideosPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  const totalVideos = VIDEO_SECTIONS.reduce(
-    (acc, sec) => acc + (sec.videos?.length || 0),
-    0
-  );
-
   return (
     <main className="videos-page">
       {/* TOP NAV */}
@@ -160,17 +155,6 @@ export default function VideosPage() {
           <p className="video-hero-desc">
             A curated showcase of commercial edits, 3D motion graphics, brand teasers, and vertical video reels.
           </p>
-
-          <div className="video-stats-bar">
-            <div className="stat-pill">
-              <strong>{totalVideos}</strong>
-              <span>Reels & Videos</span>
-            </div>
-            <div className="stat-pill">
-              <strong>2</strong>
-              <span>Collections</span>
-            </div>
-          </div>
         </div>
       </section>
 

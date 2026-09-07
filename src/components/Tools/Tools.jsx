@@ -4,12 +4,11 @@ import "./Tools.css";
 import { getR2Url } from "../../config/r2";
 
 const TOOLS = [
-  { id: "tool-1", name: "Premiere Pro", src: getR2Url("tools/1.png"), delay: "0s" },
-  { id: "tool-2", name: "After Effects", src: getR2Url("tools/2.png"), delay: "0.2s" },
-  { id: "tool-3", name: "Photoshop", src: getR2Url("tools/3.png"), delay: "0.4s" },
-  { id: "tool-4", name: "Illustrator", src: getR2Url("tools/4.png"), delay: "0.1s" },
-  { id: "tool-5", name: "DaVinci Resolve", src: getR2Url("tools/5.png"), delay: "0.3s" },
-  { id: "tool-6", name: "Lightroom", src: getR2Url("tools/6.png"), delay: "0.5s" },
+  { id: "tool-1", name: "After Effects", src: getR2Url("tools/images/1.png"), delay: "0s" },
+  { id: "tool-2", name: "Illustrator", src: getR2Url("tools/images/2.png"), delay: "0.2s" },
+  { id: "tool-3", name: "Premiere Pro", src: getR2Url("tools/images/3.png"), delay: "0.4s" },
+  { id: "tool-4", name: "Photoshop", src: getR2Url("tools/images/4.png"), delay: "0.1s" },
+  { id: "tool-5", name: "CorelDraw", src: getR2Url("tools/images/5.png"), delay: "0.3s" },
 ];
 
 export default function Tools() {
@@ -54,6 +53,8 @@ export default function Tools() {
                       decoding="async"
                     />
                   </div>
+
+                  <span className="tool-name">{tool.name}</span>
                 </li>
               ))}
             </ul>

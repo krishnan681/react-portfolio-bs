@@ -92,16 +92,6 @@ export default function ImagesPage() {
             A curated gallery of branding collaterals, digital key visuals, posters, and creative artworks.
           </p>
 
-          <div className="gallery-stats-bar">
-            <div className="stat-pill">
-              <strong>{IMAGES_DATA.length}</strong>
-              <span>Pieces</span>
-            </div>
-            <div className="stat-pill">
-              <strong>High Definition</strong>
-              <span>Render</span>
-            </div>
-          </div>
         </div>
       </section>
 

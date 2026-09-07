@@ -145,6 +145,23 @@
   transform: rotate(4deg);
 }
 
+/* Tool Label Below Icon */
+.tool-name {
+  margin-top: 9px;
+  font-size: clamp(0.72rem, 0.9vw, 0.82rem);
+  font-weight: 600;
+  color: #1e293b;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  text-align: center;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.toolbarItem.is-hovered .tool-name {
+  color: #0284c7;
+  font-weight: 700;
+}
+
 /* ===================== RESPONSIVE ===================== */
 
 @media (max-width: 768px) {

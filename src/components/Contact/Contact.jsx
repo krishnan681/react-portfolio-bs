@@ -40,10 +40,7 @@ export default function Contact() {
               Let's create something <br />
               <span className="gradient-highlight">extraordinary</span> together.
             </h2>
-            <p className="contact-subheading">
-              Whether you have a new brand identity in mind, need creative visual direction,
-              or want to collaborate on high-impact motion graphics — my inbox is always open.
-            </p>
+            
           </div>
         </div>
 
@@ -56,10 +53,7 @@ export default function Contact() {
                 <span className="brand-dot">✦</span>
                 <span className="brand-name">BARATH</span>
               </div>
-              <p className="brand-tagline">
-                Creative Designer &amp; Visual Storyteller crafting timeless brand identities,
-                cinematic motion graphics, and premium digital experiences.
-              </p>
+            
               <div className="brand-quote">
                 "Design can be art. Design can be aesthetics. Design is so simple, that's why it is so complicated."
               </div>
@@ -172,11 +166,7 @@ export default function Contact() {
             <p className="copyright-text">
               &copy; {year} <strong>Barath</strong>. All rights reserved.
             </p>
-            <div className="credits-text">
-              <span>Crafted with</span>
-              <Heart size={14} className="heart-icon" />
-              <span>&amp; Modern Aesthetics</span>
-            </div>
+           
           </div>
         </footer>
       </div>
