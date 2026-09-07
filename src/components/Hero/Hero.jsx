@@ -16,6 +16,7 @@ const ROLES = [
 export default function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [prevIndex, setPrevIndex] = useState(null);
+  const [isHeroVisible, setIsHeroVisible] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -26,10 +27,34 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, [currentIndex]);
 
+  useEffect(() => {
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          const threshold = window.innerHeight * 1.05;
+          const visible = window.scrollY < threshold;
+          setIsHeroVisible(visible);
+          ticking = false;
+        });
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
       {/* Fixed Hero Section Background */}
-      <div className="hero-fixed-background">
+      <div
+        className="hero-fixed-background"
+        style={{
+          visibility: isHeroVisible ? "visible" : "hidden",
+          pointerEvents: isHeroVisible ? "auto" : "none",
+        }}
+      >
         <section className="hero" id="hero">
           {/* Main Content Area */}
           <div className="hero-content">

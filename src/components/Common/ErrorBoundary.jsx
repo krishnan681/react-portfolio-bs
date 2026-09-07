@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { AlertTriangle, RotateCcw, Home } from "lucide-react";
+import { RotateCcw, ArrowLeft, Sparkles, Terminal } from "lucide-react";
 import "./ErrorBoundary.css";
 
 export default class ErrorBoundary extends Component {
@@ -18,27 +18,7 @@ export default class ErrorBoundary extends Component {
 
   componentDidCatch(error, errorInfo) {
     this.setState({ errorInfo });
-    
-    // Structured Crash Reporting Logging
-    const crashReport = {
-      timestamp: new Date().toISOString(),
-      url: typeof window !== "undefined" ? window.location.href : "unknown",
-      userAgent: typeof navigator !== "undefined" ? navigator.userAgent : "unknown",
-      errorMessage: error?.message || "Unknown error",
-      errorStack: error?.stack,
-      componentStack: errorInfo?.componentStack,
-    };
-
-    console.error("[CRASH REPORT]", crashReport);
-
-    // Optional: send to telemetry service (e.g. Sentry / custom endpoint)
-    if (typeof window !== "undefined" && window.__reportCrash) {
-      try {
-        window.__reportCrash(crashReport);
-      } catch (e) {
-        console.warn("Crash reporting handler failed:", e);
-      }
-    }
+    console.error("[STUDIO ERROR]", error, errorInfo);
   }
 
   handleReload = () => {
@@ -53,44 +33,75 @@ export default class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <main className="error-boundary-screen" role="alert">
-          <div className="error-boundary-card">
-            <div className="error-boundary-icon-wrap">
-              <AlertTriangle size={36} className="error-boundary-icon" />
+        <main className="studio-error-screen" role="alert">
+          {/* Ambient Lighting Orbs */}
+          <div className="studio-error-orb orb-1" aria-hidden="true" />
+          <div className="studio-error-orb orb-2" aria-hidden="true" />
+
+          {/* Background Ambient Text */}
+          <div className="studio-error-bg-text" aria-hidden="true">
+            REFRESH
+          </div>
+
+          <div className="studio-error-canvas">
+            {/* Editorial Status Badge */}
+            <div className="studio-error-badge">
+              <span className="studio-error-pulse-dot" />
+              <span className="studio-error-badge-text">CREATIVE PAUSE</span>
+              <span className="studio-error-badge-code">00 / INTERRUPT</span>
             </div>
 
-            <h1 className="error-boundary-title">Something went wrong</h1>
-            <p className="error-boundary-message">
-              An unexpected display glitch occurred while rendering this showcase view.
+            {/* Main Editorial Headline */}
+            <h1 className="studio-error-headline">
+              A Moment of <span className="highlight-text">Refinement.</span>
+            </h1>
+
+            {/* Descriptive Body */}
+            <p className="studio-error-desc">
+              The visual canvas encountered an unexpected glitch during rendering. 
+              Let’s reload the gallery to restore the full visual experience.
             </p>
 
-            {process.env.NODE_ENV !== "production" && this.state.error && (
-              <details className="error-boundary-details">
-                <summary>Technical Details</summary>
-                <pre>{this.state.error.toString()}</pre>
-                <pre>{this.state.errorInfo?.componentStack}</pre>
-              </details>
-            )}
-
-            <div className="error-boundary-actions">
+            {/* Action Buttons */}
+            <div className="studio-error-actions">
               <button
                 type="button"
-                className="error-boundary-btn primary"
+                className="studio-btn-primary"
                 onClick={this.handleReload}
               >
-                <RotateCcw size={15} />
-                <span>Reload View</span>
+                <RotateCcw size={16} className="btn-icon" />
+                <span>Reload Showcase</span>
               </button>
 
               <button
                 type="button"
-                className="error-boundary-btn secondary"
+                className="studio-btn-secondary"
                 onClick={this.handleReset}
               >
-                <Home size={15} />
-                <span>Return to Portfolio</span>
+                <ArrowLeft size={16} className="btn-icon" />
+                <span>Back to Home</span>
               </button>
             </div>
+
+            {/* Technical Diagnostics (Clean Developer Drawer) */}
+            {this.state.error && (
+              <details className="studio-error-diagnostics">
+                <summary className="studio-diagnostics-summary">
+                  <Terminal size={14} />
+                  <span>Developer Diagnostics</span>
+                </summary>
+                <div className="studio-diagnostics-body">
+                  <p className="diagnostics-error-name">
+                    {this.state.error.toString()}
+                  </p>
+                  {this.state.errorInfo?.componentStack && (
+                    <pre className="diagnostics-stack">
+                      {this.state.errorInfo.componentStack}
+                    </pre>
+                  )}
+                </div>
+              </details>
+            )}
           </div>
         </main>
       );

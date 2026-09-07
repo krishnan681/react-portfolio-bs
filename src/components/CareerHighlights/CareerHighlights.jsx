@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState, useEffect } from "react";
 import "./CareerHighlights.css";
-import { ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, Maximize2, Play } from "lucide-react";
 
 import { getR2Url } from "../../config/r2";
 
@@ -151,14 +151,11 @@ export default function CareerHighlights() {
   );
 
   /* =====================================
-      Duplicate for Infinite Slider (6 sets)
+      Duplicate for Infinite Slider (3 sets for smooth infinite loop)
   ====================================== */
 
   const infiniteVideos = useMemo(
     () => [
-      ...sliderVideos,
-      ...sliderVideos,
-      ...sliderVideos,
       ...sliderVideos,
       ...sliderVideos,
       ...sliderVideos,
@@ -196,6 +193,7 @@ export default function CareerHighlights() {
   const isPausedRef = useRef(false);
   const pauseTimeoutRef = useRef(null);
   const animationFrameRef = useRef(null);
+  const metricsRef = useRef({ setWidth: 0, startOffset: 0 });
 
   useEffect(() => {
     const slider = sliderRef.current;
@@ -203,47 +201,40 @@ export default function CareerHighlights() {
 
     let lastTime = performance.now();
 
-    const getMetrics = () => {
+    const computeMetrics = () => {
+      if (!slider) return;
       const cards = slider.querySelectorAll(".video-card");
       const n = sliderVideos.length;
       if (cards.length >= n * 3 && cards[0] && cards[n] && cards[n * 2]) {
         const setWidth = cards[n].offsetLeft - cards[0].offsetLeft;
-        const startOffset = cards[n * 2].offsetLeft;
-        return { setWidth, startOffset };
-      }
-      return null;
-    };
-
-    const setupInitialPosition = () => {
-      if (!slider) return;
-      const metrics = getMetrics();
-      if (metrics && metrics.setWidth > 0) {
-        if (slider.scrollLeft === 0) {
-          slider.scrollLeft = metrics.startOffset;
+        const startOffset = cards[n].offsetLeft;
+        metricsRef.current = { setWidth, startOffset };
+        if (slider.scrollLeft === 0 && startOffset > 0) {
+          slider.scrollLeft = startOffset;
         }
       }
     };
 
-    setupInitialPosition();
-    const timer = setTimeout(setupInitialPosition, 100);
+    computeMetrics();
+    const timer = setTimeout(computeMetrics, 150);
+    window.addEventListener("resize", computeMetrics, { passive: true });
 
-    // Continuous smooth auto-scroll loop
+    // High performance auto-scroll loop with CACHED metrics (Zero layout thrashing)
     const step = (now) => {
       const dt = Math.min((now - lastTime) / 1000, 0.1);
       lastTime = now;
 
       if (!isPausedRef.current && slider) {
-        const metrics = getMetrics();
-        if (metrics && metrics.setWidth > 0) {
-          const { setWidth, startOffset } = metrics;
-          const speed = 50; // pixels per second continuous scrolling
+        const { setWidth, startOffset } = metricsRef.current;
+        if (setWidth > 0) {
+          const speed = 45; // Smooth pixels per second
           slider.scrollLeft += speed * dt;
 
           // Seamless loop wrap
-          if (slider.scrollLeft >= startOffset + setWidth * 2) {
-            slider.scrollLeft -= setWidth * 2;
+          if (slider.scrollLeft >= startOffset + setWidth) {
+            slider.scrollLeft -= setWidth;
           } else if (slider.scrollLeft <= startOffset - setWidth) {
-            slider.scrollLeft += setWidth * 2;
+            slider.scrollLeft += setWidth;
           }
         }
       }
@@ -255,14 +246,13 @@ export default function CareerHighlights() {
 
     const handleScrollWrap = () => {
       if (!slider) return;
-      const metrics = getMetrics();
-      if (!metrics || metrics.setWidth <= 0) return;
-      const { setWidth, startOffset } = metrics;
+      const { setWidth, startOffset } = metricsRef.current;
+      if (setWidth <= 0) return;
 
-      if (slider.scrollLeft >= startOffset + setWidth * 2.5) {
-        slider.scrollLeft -= setWidth * 2;
-      } else if (slider.scrollLeft <= startOffset - setWidth * 1.5) {
-        slider.scrollLeft += setWidth * 2;
+      if (slider.scrollLeft >= startOffset + setWidth * 1.5) {
+        slider.scrollLeft -= setWidth;
+      } else if (slider.scrollLeft <= startOffset - setWidth * 0.5) {
+        slider.scrollLeft += setWidth;
       }
     };
 
@@ -270,6 +260,7 @@ export default function CareerHighlights() {
 
     return () => {
       clearTimeout(timer);
+      window.removeEventListener("resize", computeMetrics);
       if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
@@ -424,7 +415,7 @@ export default function CareerHighlights() {
                       defaultMuted
                       loop
                       playsInline
-                      preload="auto"
+                      preload="metadata"
                       onLoadedMetadata={(e) => {
                         e.target.muted = true;
                         e.target.play().catch(() => {});
@@ -520,12 +511,11 @@ export default function CareerHighlights() {
               >
                 <div className="highlight-video">
                   <video
-                    // autoPlay
                     muted
                     defaultMuted
                     loop
                     playsInline
-                    preload="auto"
+                    preload="metadata"
                     onLoadedMetadata={(e) => {
                       e.target.muted = true;
                       e.target.play().catch(() => {});
@@ -536,7 +526,7 @@ export default function CareerHighlights() {
                 </div>
                 <div className="highlight-play-overlay">
                   <div className="play-icon-circle">
-                    <i className="fa-solid fa-play"></i>
+                    <Play size={18} fill="#ffffff" stroke="#ffffff" />
                   </div>
                 </div>
               </div>

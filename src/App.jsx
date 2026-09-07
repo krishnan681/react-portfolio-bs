@@ -34,21 +34,31 @@ function PageLoadingFallback() {
         alignItems: "center",
         justifyContent: "center",
         gap: "16px",
-        background: "#04193a",
-        color: "#c49150",
+        background:
+          "radial-gradient(circle at 50% 30%, aliceblue 0%, #d9f2ff 60%, #b8e6ff 100%)",
+        color: "#04193a",
+        fontFamily: "'Poppins', sans-serif",
       }}
     >
       <div
         style={{
           width: "44px",
           height: "44px",
-          border: "3px solid rgba(196, 145, 80, 0.2)",
-          borderTopColor: "#c49150",
+          border: "3px solid rgba(27, 78, 245, 0.18)",
+          borderTopColor: "#1b4ef5",
           borderRadius: "50%",
           animation: "spin 0.8s linear infinite",
         }}
       />
-      <span style={{ fontSize: "0.85rem", letterSpacing: "2px", textTransform: "uppercase", fontWeight: 700 }}>
+      <span
+        style={{
+          fontSize: "0.88rem",
+          letterSpacing: "2px",
+          textTransform: "uppercase",
+          fontWeight: 700,
+          color: "#04193a",
+        }}
+      >
         Loading Showcase...
       </span>
       <style>{`
@@ -127,11 +137,6 @@ function App() {
       rafId = requestAnimationFrame(raf);
     }
     rafId = requestAnimationFrame(raf);
-
-    // Refresh AOS on Lenis scroll
-    lenis.on("scroll", () => {
-      AOS.refresh();
-    });
 
     return () => {
       cancelAnimationFrame(rafId);

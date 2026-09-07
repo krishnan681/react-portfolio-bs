@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import "./Navbar.css";
 import { getR2Url } from "../../config/r2";
 
@@ -86,22 +86,26 @@ export default function Navbar() {
     }
   }, []);
 
-  useEffect(() => {
-    window.addEventListener("scroll", updateActiveSection, { passive: true });
+  const tickingRef = useRef(false);
 
-    let unbindLenis;
-    if (window.__lenis) {
-      window.__lenis.on("scroll", updateActiveSection);
-      unbindLenis = () => window.__lenis.off("scroll", updateActiveSection);
+  const handleScroll = useCallback(() => {
+    if (!tickingRef.current) {
+      tickingRef.current = true;
+      requestAnimationFrame(() => {
+        updateActiveSection();
+        tickingRef.current = false;
+      });
     }
+  }, [updateActiveSection]);
 
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
     updateActiveSection();
 
     return () => {
-      window.removeEventListener("scroll", updateActiveSection);
-      if (unbindLenis) unbindLenis();
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, [updateActiveSection]);
+  }, [handleScroll, updateActiveSection]);
 
   // Close mobile menu on resize to desktop
   useEffect(() => {
