@@ -271,7 +271,7 @@
   z-index: 1;
 }
 
-.hero-gif-slot {
+/* .hero-gif-slot {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -282,6 +282,20 @@
   max-width: clamp(140px, 22vw, 420px);
   flex-shrink: 0;
   user-select: none;
+} */
+
+.hero-gif-slot {
+    vertical-align: middle;
+    user-select: none;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    max-width: clamp(140px, 22vw, 420px);
+    height: clamp(70px, 20vw, 380px);
+    display: inline-flex;
+    position: relative;
+    z-index: -1;
 }
 
 .hero-gif-image {
