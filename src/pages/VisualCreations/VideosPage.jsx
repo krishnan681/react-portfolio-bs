@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
@@ -15,10 +15,95 @@ import VideoModal from "../../components/Modals/VideoModal";
 import "./VideosPage.css";
 
 /* =========================================================
-   VIDEO FOLDER SECTION COMPONENT (2 Rows Initial + Load More)
+   INDIVIDUAL VIDEO CARD COMPONENT
+   Optimized preview: Loads metadata, smooth hover/touch playback,
+   instant modal launcher on click.
+========================================================= */
+function VideoCardItem({ item, index, onSelectVideo }) {
+  const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handleMouseEnter = () => {
+    if (videoRef.current) {
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => setIsPlaying(true))
+          .catch(() => {});
+      }
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  const handleClick = () => {
+    onSelectVideo(item);
+  };
+
+  const numStr = String(index + 1).padStart(2, "0");
+
+  return (
+    <article
+      className="video-card-item"
+      onClick={handleClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      tabIndex={0}
+      role="button"
+      aria-label={`Play Video ${numStr}`}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleClick();
+        }
+      }}
+    >
+      <div className="video-card-thumb">
+        <video
+          ref={videoRef}
+          src={item.src}
+          preload="metadata"
+          playsInline
+          muted
+          loop
+          className="video-card-media"
+        />
+
+        <div className="video-card-vignette" />
+
+        {/* Index Tag Badge */}
+        <span className="video-card-badge">#{numStr}</span>
+
+        {/* Center Play Button with Glow */}
+        <div
+          className={`video-card-play-btn ${isPlaying ? "is-active" : ""}`}
+          aria-hidden="true"
+        >
+          <Play size={20} fill="#ffffff" stroke="#ffffff" />
+        </div>
+
+        {/* Hover / Tap Scrim Overlay */}
+        <div className="video-card-hover-scrim">
+          <div className="video-card-action-pill">
+            <Play size={14} fill="currentColor" />
+            <span>Watch Fullscreen</span>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+/* =========================================================
+   VIDEO FOLDER SECTION COMPONENT (1 Row Initial + Load More)
 ========================================================= */
 function VideoFolderSection({ section, sIdx, onSelectVideo }) {
-  const INITIAL_COUNT = 4; // 1 row (4 columns grid)
+  const INITIAL_COUNT = 4; // 1 row on 4-col desktop
   const STEP = 4;
   const videos = section.videos || [];
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
@@ -39,57 +124,42 @@ function VideoFolderSection({ section, sIdx, onSelectVideo }) {
   return (
     <section
       key={section.id || sIdx}
-      className="video-folder-group"
+      className="video-folder-section"
       data-aos="fade-up"
       data-aos-delay={sIdx * 80}
     >
-      <div className="folder-header-row">
-        <div className="folder-title-pill">
-          <Layers size={14} />
-          <h2 className="folder-title">{section.title}</h2>
+      {/* Folder Header */}
+      <div className="video-section-header">
+        <div className="video-section-title-wrap">
+          <div className="video-section-badge">
+            <Layers size={13} />
+            <span>Folder {String(sIdx + 1).padStart(2, "0")}</span>
+          </div>
+          <h2 className="video-section-title">{section.title}</h2>
         </div>
-        <span className="folder-badge-total">
-          {videos.length} {videos.length === 1 ? "Video" : "Videos"}
-        </span>
+        <div className="video-section-count-badge">
+          <span className="count-num">{videos.length}</span>
+          <span className="count-label">
+            {videos.length === 1 ? "Video" : "Videos"}
+          </span>
+        </div>
       </div>
 
-      <div className="video-folder-grid">
+      {/* Video Cards Grid */}
+      <div className="video-gallery-grid">
         {visibleVideos.map((item, idx) => (
-          <article
+          <VideoCardItem
             key={item.id || `video-${sIdx}-${idx}`}
-            className="video-card-vertical"
-            onClick={() => onSelectVideo(item)}
-            tabIndex={0}
-          >
-            <div className="video-thumb-container">
-              <video
-                src={item.src}
-                poster={item.poster}
-                preload="metadata"
-                playsInline
-                muted
-                loop
-                autoPlay
-                className="video-thumb-media"
-              />
-
-              <div className="video-play-center-btn" aria-hidden="true">
-                <Play size={20} fill="#ffffff" />
-              </div>
-
-              <div className="video-card-scrim">
-                <span className="video-scrim-action">
-                  <Play size={13} fill="currentColor" /> Watch Video
-                </span>
-              </div>
-            </div>
-          </article>
+            item={item}
+            index={idx}
+            onSelectVideo={onSelectVideo}
+          />
         ))}
       </div>
 
-      {/* LOAD MORE / VIEW LESS ACTION CONTROLS */}
+      {/* Load More / View Less Action Controls */}
       {(hasMore || isExpanded) && (
-        <div className="video-folder-load-controls">
+        <div className="video-load-controls">
           <div className="video-btn-group">
             {hasMore && (
               <button
@@ -117,12 +187,18 @@ function VideoFolderSection({ section, sIdx, onSelectVideo }) {
               </button>
             )}
           </div>
+          <p className="video-status-text">
+            Showing {visibleVideos.length} of {videos.length} videos
+          </p>
         </div>
       )}
     </section>
   );
 }
 
+/* =========================================================
+   MAIN VIDEOS PAGE COMPONENT
+========================================================= */
 export default function VideosPage() {
   const navigate = useNavigate();
   const [selectedVideo, setSelectedVideo] = useState(null);
@@ -142,7 +218,7 @@ export default function VideosPage() {
 
   return (
     <main className="videos-page">
-      {/* TOP NAV */}
+      {/* Top Header Navigation */}
       <header className="video-header-nav">
         <div className="video-header-container">
           <button
@@ -161,7 +237,7 @@ export default function VideosPage() {
         </div>
       </header>
 
-      {/* HERO SECTION */}
+      {/* Hero Showcase Introduction */}
       <section className="video-hero-section">
         <div className="video-hero-content">
           <span className="video-eyebrow">
@@ -175,7 +251,7 @@ export default function VideosPage() {
         </div>
       </section>
 
-      {/* VIDEO FOLDER SECTIONS */}
+      {/* Video Folder Sections */}
       <div className="video-sections-container">
         {VIDEO_SECTIONS.map((section, sIdx) => (
           <VideoFolderSection
@@ -187,7 +263,7 @@ export default function VideosPage() {
         ))}
       </div>
 
-      {/* BOTTOM NAVIGATION */}
+      {/* Bottom Navigation Footer */}
       <footer className="video-bottom-bar">
         <div className="bottom-bar-inner">
           <button
@@ -206,7 +282,7 @@ export default function VideosPage() {
         </div>
       </footer>
 
-      {/* FULLSCREEN VIDEO MODAL */}
+      {/* Fullscreen Video Modal */}
       <VideoModal
         isOpen={Boolean(selectedVideo)}
         onClose={() => setSelectedVideo(null)}

@@ -185,9 +185,7 @@ export default function Branding() {
                           className="branding-cf-cta-link-btn"
                           onClick={(e) => {
                             e.stopPropagation();
-                            pause();
                             goTo(i);
-                            setTimeout(resume, AUTOPLAY_DELAY);
                           }}
                         >
                           <span>Select Project</span>
