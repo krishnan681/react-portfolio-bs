@@ -26,8 +26,12 @@
 }
 
 @keyframes backdropFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* =========================================================
@@ -125,14 +129,16 @@
   }
 
   .navbar-capsule-wrapper.capsule-compact:hover .nav-links-desktop,
-  .navbar-capsule-wrapper.capsule-compact.capsule-hover-expanded .nav-links-desktop {
+  .navbar-capsule-wrapper.capsule-compact.capsule-hover-expanded
+    .nav-links-desktop {
     opacity: 1;
     max-width: 650px;
     pointer-events: auto;
   }
 
   .navbar-capsule-wrapper.capsule-compact:hover .nav-active-pill,
-  .navbar-capsule-wrapper.capsule-compact.capsule-hover-expanded .nav-active-pill {
+  .navbar-capsule-wrapper.capsule-compact.capsule-hover-expanded
+    .nav-active-pill {
     opacity: 0;
     max-width: 0;
     pointer-events: none;
@@ -180,7 +186,7 @@
 }
 
 .nav-link-item {
-  font-family: var(--hero-sans, 'Poppins', -apple-system, sans-serif);
+  font-family: var(--hero-sans, "Poppins", -apple-system, sans-serif);
   font-size: clamp(13px, 1vw, 15px);
   font-weight: 500;
   color: var(--nav-link-color);
@@ -188,7 +194,9 @@
   letter-spacing: -0.15px;
   position: relative;
   white-space: nowrap;
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .nav-link-item:hover,
@@ -217,8 +225,12 @@
   background: rgba(255, 255, 255, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 9999px;
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 2px 8px rgba(4, 25, 58, 0.05);
-  transition: background 0.2s ease, transform 0.2s ease;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.9),
+    0 2px 8px rgba(4, 25, 58, 0.05);
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .nav-active-link:hover {
@@ -227,7 +239,7 @@
 }
 
 .nav-active-text {
-  font-family: var(--hero-sans, 'Poppins', -apple-system, sans-serif);
+  font-family: var(--hero-sans, "Poppins", -apple-system, sans-serif);
   font-size: 15px;
   font-weight: 600;
   color: #04193a;
@@ -257,7 +269,7 @@
   background: var(--nav-yellow);
   color: #04193a;
   border-radius: 9999px;
-  font-family: var(--hero-sans, 'Poppins', -apple-system, sans-serif);
+  font-family: var(--hero-sans, "Poppins", -apple-system, sans-serif);
   font-size: 14.5px;
   font-weight: 700;
   letter-spacing: -0.1px;
@@ -271,7 +283,7 @@
 .nav-mail-icon {
   width: 15px;
   height: 15px;
-  fill: #04193a;
+  fill: #ffd026;
   display: block;
 }
 

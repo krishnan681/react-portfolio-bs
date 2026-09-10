@@ -554,6 +554,10 @@ export default function ProjectDetail({ data }) {
 
           <h1 className="project-headline-title">{project.title}</h1>
 
+          {project.headline && (
+            <p className="project-headline-lead">{project.headline}</p>
+          )}
+
           {project.description && (
             <p className="project-lead-p">{project.description}</p>
           )}

@@ -1,0 +1,144 @@
+/* ===========================================
+   CURVED / STRAIGHT LOOP MARQUEE COMPONENT
+=========================================== */
+
+.curved-loop-jacket {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  background: #04193a;
+  border-top: 1px solid rgba(27, 78, 245, 0.25);
+  border-bottom: 1px solid rgba(27, 78, 245, 0.25);
+  box-shadow: 0 4px 20px rgba(4, 25, 58, 0.12);
+  z-index: 15;
+}
+
+/* Straight line ribbon ticker mode */
+.curved-loop-jacket.straight-loop-jacket {
+  min-height: 56px;
+  height: 64px;
+  padding: 0;
+  background: linear-gradient(90deg, #04193a 0%, #082452 50%, #04193a 100%);
+}
+
+/* Curved mode override if height needs to be larger */
+.curved-loop-jacket:not(.straight-loop-jacket) {
+  min-height: 220px;
+  padding: 20px 0;
+}
+
+.curved-loop-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  display: block;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+.curved-loop-text {
+  font-family: 'Bowlby One', 'Clash Grotesk', 'Inter', -apple-system, sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  fill: #ffffff;
+  dominant-baseline: central;
+  alignment-baseline: central;
+  white-space: pre;
+  text-rendering: optimizeLegibility;
+}
+
+/* Custom highlight styling for the loop between Hero and About */
+.hero-about-loop-text {
+  fill: #ffffff;
+  font-family: 'Bowlby One', 'Inter', sans-serif;
+  letter-spacing: 3px;
+  font-size: 24px;
+}
+
+.hero-about-loop-banner {
+  background: linear-gradient(90deg, #04193a 0%, #0b2d64 50%, #04193a 100%);
+  position: relative;
+}
+
+.hero-about-loop-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #38bdf8, #1b4ef5, #ffd026, transparent);
+}
+
+.hero-about-loop-banner::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffd026, #1b4ef5, #38bdf8, transparent);
+}
+
+/* Hover effect */
+.curved-loop-jacket:hover .curved-loop-text {
+  fill: #f0f7ff;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 992px) {
+  .curved-loop-jacket.straight-loop-jacket {
+    height: 56px;
+    min-height: 50px;
+  }
+  .curved-loop-text,
+  .hero-about-loop-text {
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+}
+
+@media (max-width: 768px) {
+  .curved-loop-jacket.straight-loop-jacket {
+    height: 48px;
+    min-height: 44px;
+  }
+  .curved-loop-text,
+  .hero-about-loop-text {
+    font-size: 16px;
+    letter-spacing: 1.5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .curved-loop-jacket.straight-loop-jacket {
+    height: 42px;
+    min-height: 40px;
+  }
+  .curved-loop-text,
+  .hero-about-loop-text {
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+}
+
+@media (max-width: 360px) {
+  .curved-loop-jacket.straight-loop-jacket {
+    height: 38px;
+    min-height: 36px;
+  }
+  .curved-loop-text,
+  .hero-about-loop-text {
+    font-size: 12px;
+    letter-spacing: 0.8px;
+  }
+}

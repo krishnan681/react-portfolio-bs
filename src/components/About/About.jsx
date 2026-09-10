@@ -1,8 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import "./About.css";
-import { getR2Url } from "../../config/r2";
-
-const skyBandSvg = getR2Url("profile/sky-band.svg");
+import { SpecularCard } from "../SpecularButton";
 
 function StatCounter({ target, suffix = "", label, decimals = 0 }) {
   const [count, setCount] = useState(0);
@@ -74,10 +72,18 @@ function StatCounter({ target, suffix = "", label, decimals = 0 }) {
       : Math.round(count) + suffix;
 
   return (
-    <div className="stat" ref={ref}>
-      <b>{formattedValue}</b>
-      <span>{label}</span>
-    </div>
+    <SpecularCard
+      radius={16}
+      lineColor="#1b4ef5"
+      baseColor="#38bdf8"
+      intensity={1}
+      className="stat-specular-item"
+    >
+      <div className="stat" ref={ref}>
+        <b>{formattedValue}</b>
+        <span>{label}</span>
+      </div>
+    </SpecularCard>
   );
 }
 
@@ -148,11 +154,6 @@ export default function About() {
 
   return (
     <section className="about sc_py" id="about" ref={sectionRef}>
-      {/* Custom Shape Divider on Top with sky-band.svg */}
-      <div className="custom-shape-divider-top-1788027072" aria-hidden="true">
-        <img src={skyBandSvg} alt="" className="skyband-divider-img" />
-      </div>
-
       <div className="container">
         <div className="about-center-wrapper">
           {/* Hey Title with Bounce Animation */}

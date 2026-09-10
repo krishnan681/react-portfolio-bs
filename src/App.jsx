@@ -1,6 +1,6 @@
 import { useEffect, lazy, Suspense } from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Lenis from "lenis";
@@ -15,9 +15,12 @@ import Branding from "./components/Branding/Branding";
 import VisualCreations from "./components/VisualCreations/VisualCreations";
 import Tools from "./components/Tools/Tools";
 import Contact from "./components/Contact/Contact";
+import ClickSpark from "./components/ClickSpark/ClickSpark";
+import CurvedLoop from "./components/CurvedLoop/CurvedLoop";
 
 import ErrorBoundary from "./components/Common/ErrorBoundary";
 import NetworkStatus from "./components/Common/NetworkStatus";
+import PageLoader from "./components/Common/PageLoader";
 
 // Code-split route-level lazy loading for sub-pages
 const ProjectPage = lazy(() => import("./pages/ProjectPage/ProjectPage"));
@@ -25,54 +28,14 @@ const ImagesPage = lazy(() => import("./pages/VisualCreations/ImagesPage"));
 const VideosPage = lazy(() => import("./pages/VisualCreations/VideosPage"));
 
 function PageLoadingFallback() {
-  return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "16px",
-        background:
-          "radial-gradient(circle at 50% 30%, aliceblue 0%, #d9f2ff 60%, #b8e6ff 100%)",
-        color: "#04193a",
-        fontFamily: "'Poppins', sans-serif",
-      }}
-    >
-      <div
-        style={{
-          width: "44px",
-          height: "44px",
-          border: "3px solid rgba(27, 78, 245, 0.18)",
-          borderTopColor: "#1b4ef5",
-          borderRadius: "50%",
-          animation: "spin 0.8s linear infinite",
-        }}
-      />
-      <span
-        style={{
-          fontSize: "0.88rem",
-          letterSpacing: "2px",
-          textTransform: "uppercase",
-          fontWeight: 700,
-          color: "#04193a",
-        }}
-      >
-        Loading Showcase...
-      </span>
-      <style>{`
-        @keyframes spin {
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
-    </div>
-  );
+  return <PageLoader text="Loading Showcase..." />;
 }
 
 function Home() {
+  const location = useLocation();
+
   useEffect(() => {
-    const hash = window.location.hash;
+    const hash = location.hash || window.location.hash;
     if (hash) {
       const targetId = hash.replace("#", "");
       const timer = setTimeout(() => {
@@ -84,10 +47,10 @@ function Home() {
             targetEl.scrollIntoView({ behavior: "smooth" });
           }
         }
-      }, 140);
+      }, 160);
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [location.hash]);
 
   return (
     <>
@@ -96,6 +59,14 @@ function Home() {
       <main>
         <Hero />
         <div className="content-layers">
+          <CurvedLoop
+            marqueeText="✦ VIDEO EDITOR ✦ GRAPHIC DESIGNER ✦ MOTION GRAPHICS ✦ VISUAL STORYTELLER ✦ BRAND STRATEGIST ✦ 3D MOTION ✦"
+            speed={2}
+            curveAmount={0}
+            direction="left"
+            interactive={true}
+            className="hero-about-loop-text"
+          />
           <About />
           <CreativeExpertise />
           <CareerHighlights />
@@ -147,19 +118,27 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <BrowserRouter>
-        <NetworkStatus />
-        <Suspense fallback={<PageLoadingFallback />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/images" element={<ImagesPage />} />
-            <Route path="/visual-creations/images" element={<ImagesPage />} />
-            <Route path="/videos" element={<VideosPage />} />
-            <Route path="/visual-creations/videos" element={<VideosPage />} />
-            <Route path="/branding/:slug" element={<ProjectPage />} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
+      <ClickSpark
+        sparkColor="#1b4ef5"
+        sparkSize={10}
+        sparkRadius={18}
+        sparkCount={8}
+        duration={400}
+      >
+        <BrowserRouter>
+          <NetworkStatus />
+          <Suspense fallback={<PageLoadingFallback />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/images" element={<ImagesPage />} />
+              <Route path="/visual-creations/images" element={<ImagesPage />} />
+              <Route path="/videos" element={<VideosPage />} />
+              <Route path="/visual-creations/videos" element={<VideosPage />} />
+              <Route path="/branding/:slug" element={<ProjectPage />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </ClickSpark>
     </ErrorBoundary>
   );
 }

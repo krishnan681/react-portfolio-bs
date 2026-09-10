@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Tools.css";
-
 import { getR2Url } from "../../config/r2";
+import { SpecularCard } from "../SpecularButton";
 
 const TOOLS = [
   { id: "tool-1", name: "After Effects", src: getR2Url("tools/images/1.png"), delay: "0s" },
@@ -24,40 +24,49 @@ export default function Tools() {
 
         <div className="TE-heading text-center" data-aos="fade-up" data-aos-delay="100">
           <p>
-            The ability to conceptualize, design, and produce visually engaging content that communicates a brand's message and resonates with target audiences.
+            <span>Mastery across industry-standard creative software and post-production suites</span>
+            <span>delivering high-impact visual design, color grading, and dynamic motion graphics.</span>
           </p>
         </div>
 
         <div className="toolbar-wrapper">
           <div className="dock-container">
-            <ul className="toolbar">
-              {TOOLS.map((tool, i) => (
-                <li
-                  key={tool.id}
-                  className={`toolbarItem ${hoveredIdx === i ? "is-hovered" : ""}`}
-                  style={{ animationDelay: tool.delay }}
-                  onMouseEnter={() => setHoveredIdx(i)}
-                  onMouseLeave={() => setHoveredIdx(null)}
-                >
-                  {/* Floating Tooltip badge */}
-                  <div className="tool-tooltip">
-                    <span>{tool.name}</span>
-                  </div>
+            <SpecularCard
+              radius={16}
+              lineColor="#1b4ef5"
+              baseColor="#38bdf8"
+              intensity={1.1}
+              className="tools-specular-wrap"
+            >
+              <ul className="toolbar">
+                {TOOLS.map((tool, i) => (
+                  <li
+                    key={tool.id}
+                    className={`toolbarItem ${hoveredIdx === i ? "is-hovered" : ""}`}
+                    style={{ animationDelay: tool.delay }}
+                    onMouseEnter={() => setHoveredIdx(i)}
+                    onMouseLeave={() => setHoveredIdx(null)}
+                  >
+                    {/* Floating Tooltip badge */}
+                    <div className="tool-tooltip">
+                      <span>{tool.name}</span>
+                    </div>
 
-                  <div className="tool-icon-box">
-                    <img
-                      className="toolbarImg"
-                      src={tool.src}
-                      alt={tool.name}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
+                    <div className="tool-icon-box">
+                      <img
+                        className="toolbarImg"
+                        src={tool.src}
+                        alt={tool.name}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
 
-                  <span className="tool-name">{tool.name}</span>
-                </li>
-              ))}
-            </ul>
+                    <span className="tool-name">{tool.name}</span>
+                  </li>
+                ))}
+              </ul>
+            </SpecularCard>
           </div>
         </div>
       </div>

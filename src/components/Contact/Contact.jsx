@@ -6,6 +6,7 @@ import {
   getMailtoLink,
 } from "../../services/contactService";
 import "./Contact.css";
+import { SpecularButton } from "../SpecularButton";
 
 const NAV_LINKS = [
   { label: "About", href: "#about" },
@@ -145,14 +146,18 @@ export default function Contact() {
                   </div>
                 </li>
                 <li className="copy-action-row">
-                  <button
-                    type="button"
+                  <SpecularButton
+                    size="sm"
+                    radius={12}
+                    lineColor="#38bdf8"
+                    baseColor="#1b4ef5"
+                    intensity={1}
                     onClick={handleCopyEmail}
                     className="footer-copy-btn"
                   >
                     {copied ? <Check size={14} /> : <Copy size={14} />}
                     <span>{copied ? "Copied!" : "Copy Email"}</span>
-                  </button>
+                  </SpecularButton>
                 </li>
               </ul>
             </div>

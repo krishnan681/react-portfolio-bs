@@ -4,81 +4,11 @@
 ├── 📁 public/
 ├── 📁 src/
 │   ├── 📁 assets/
-│   │   ├── 📁 fonts/
-│   │   │   ├── 📄 DELIRIUM NCV.ttf
-│   │   │   ├── 📄 DELIRIUM NEON NCV.ttf
-│   │   │   ├── 📄 PersonalUseEULA_DELIRIUM_NCV.txt
-│   │   │   └── 📄 priestacy.regular.otf
-│   │   ├── 📁 images/
-│   │   │   ├── 📁 Brands/
-│   │   │   │   ├── 🖼️ 1.webp
-│   │   │   │   ├── 🖼️ 10.webp
-│   │   │   │   ├── 🖼️ 2.webp
-│   │   │   │   ├── 🖼️ 3.webp
-│   │   │   │   ├── 🖼️ 4.webp
-│   │   │   │   ├── 🖼️ 5.webp
-│   │   │   │   ├── 🖼️ 6.webp
-│   │   │   │   ├── 🖼️ 7.webp
-│   │   │   │   ├── 🖼️ 8.webp
-│   │   │   │   └── 🖼️ 9.webp
-│   │   │   ├── 📁 BrandsBanner/
-│   │   │   │   ├── 🖼️ Banners-01.webp
-│   │   │   │   ├── 🖼️ Banners-02.webp
-│   │   │   │   ├── 🖼️ Banners-03.webp
-│   │   │   │   ├── 🖼️ Banners-04.webp
-│   │   │   │   ├── 🖼️ Banners-05.webp
-│   │   │   │   ├── 🖼️ Banners-06.webp
-│   │   │   │   ├── 🖼️ Banners-07.webp
-│   │   │   │   ├── 🖼️ Banners-08.webp
-│   │   │   │   ├── 🖼️ Banners-09.webp
-│   │   │   │   └── 🖼️ Banners-10.webp
-│   │   │   ├── 📁 CH/
-│   │   │   │   ├── 🖼️ 1.webp
-│   │   │   │   ├── 🖼️ 2.webp
-│   │   │   │   ├── 🖼️ 3.webp
-│   │   │   │   └── 🖼️ 4.webp
-│   │   │   ├── 📁 Insta/
-│   │   │   │   ├── 🖼️ 1.jpg
-│   │   │   │   ├── 🖼️ 10.jpg
-│   │   │   │   ├── 🖼️ 2.jpg
-│   │   │   │   ├── 🖼️ 3.jpg
-│   │   │   │   ├── 🖼️ 4.jpg
-│   │   │   │   ├── 🖼️ 5.jpg
-│   │   │   │   ├── 🖼️ 6.jpg
-│   │   │   │   ├── 🖼️ 7.jpg
-│   │   │   │   ├── 🖼️ 8.jpg
-│   │   │   │   └── 🖼️ 9.jpg
-│   │   │   ├── 📁 Tools/
-│   │   │   │   ├── 🖼️ 1.png
-│   │   │   │   ├── 🖼️ 2.png
-│   │   │   │   ├── 🖼️ 3.png
-│   │   │   │   ├── 🖼️ 4.png
-│   │   │   │   ├── 🖼️ 5.png
-│   │   │   │   ├── 🖼️ 6.png
-│   │   │   │   └── 🖼️ 7.png
-│   │   │   ├── 📁 hero/
-│   │   │   │   ├── 🖼️ barath-portrait-cutout.png
-│   │   │   │   ├── 🖼️ barath-portrait.png
-│   │   │   │   ├── 🖼️ brush-splash.png
-│   │   │   │   ├── 🖼️ hero-composite-artwork.png
-│   │   │   │   └── 🖼️ hero-notepad-ideas.png
-│   │   │   ├── 📁 icons/
-│   │   │   │   ├── 🖼️ ags.webp
-│   │   │   │   ├── 🖼️ dream.webp
-│   │   │   │   ├── 🖼️ epiq.webp
-│   │   │   │   ├── 🖼️ imax.webp
-│   │   │   │   ├── 🖼️ parvatha.webp
-│   │   │   │   ├── 🖼️ sk.webp
-│   │   │   │   ├── 🖼️ uni.webp
-│   │   │   │   └── 🖼️ wb.webp
-│   │   │   ├── 🖼️ BS.webp
-│   │   │   ├── 🖼️ about.webp
-│   │   │   ├── 🖼️ sky.jpeg
-│   │   │   └── 🖼️ sky.jpg
-│   │   ├── 🖼️ background removed gif.gif
-│   │   ├── 🖼️ imgNoiseTexture.png
-│   │   ├── 🖼️ sky-band.svg
-│   │   └── 🖼️ sky3.webp
+│   │   └── 📁 fonts/
+│   │       ├── 📄 DELIRIUM NCV.ttf
+│   │       ├── 📄 DELIRIUM NEON NCV.ttf
+│   │       ├── 📄 PersonalUseEULA_DELIRIUM_NCV.txt
+│   │       └── 📄 priestacy.regular.otf
 │   ├── 📁 components/
 │   │   ├── 📁 About/
 │   │   │   ├── 🎨 About.css
@@ -176,4 +106,4 @@
 ├── ⚙️ package-lock.json
 ├── ⚙️ package.json
 └── 📄 vite.config.js
- 
+
