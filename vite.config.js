@@ -4,7 +4,15 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  assetsInclude: ['**/*.glb'],
   server: {
+    proxy: {
+      '/r2-proxy': {
+        target: 'https://pub-8ffca6f612d24c94b8bcf7f1e59378ea.r2.dev',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/r2-proxy/, ''),
+      },
+    },
     watch: {
       ignored: ['**/*.mp4', '**/*.mkv', '**/*.mov', '**/node_modules/**'],
     },

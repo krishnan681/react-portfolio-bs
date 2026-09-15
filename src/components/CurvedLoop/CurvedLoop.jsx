@@ -1,230 +1,386 @@
-import { useRef, useEffect, useState, useMemo, useId, useCallback } from 'react';
-import './CurvedLoop.css';
+import {
+  useRef,
+  useEffect,
+  useState,
+  useMemo,
+  useId,
+  useCallback,
+} from "react";
+import "./CurvedLoop.css";
+
+const DEFAULT_ITEMS = [
+  { text: "Content", outline: true },
+  { text: "Ads", outline: false },
+  { text: "Web", outline: true },
+  { text: "Software", outline: false },
+  { text: "AI", outline: true },
+  { text: "Strategy", outline: false },
+];
+
+const SparkleIcon = ({ color = "#ff2a75", size = 16, className = "" }) => (
+  <svg
+    className={`loop-sparkle-icon ${className}`}
+    viewBox="0 0 24 24"
+    width={size}
+    height={size}
+    fill={color}
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <path d="M12 0L14.7 9.3L24 12L14.7 14.7L12 24L9.3 14.7L0 12L9.3 9.3L12 0Z" />
+  </svg>
+);
 
 const CurvedLoop = ({
-  marqueeText = '✦  VIDEO EDITOR  ✦  GRAPHIC DESIGNER  ✦  MOTION GRAPHICS  ✦  VISUAL STORYTELLER  ✦  BRAND STRATEGIST  ✦  3D MOTION',
-  speed = 1.8,
-  className = '',
-  curveAmount = 0, // 0 for straight line, >0 for curved
-  direction = 'left',
+  items = DEFAULT_ITEMS,
+  marqueeText = "",
+  speed = 1.4,
+  className = "",
+  curveAmount = 0, // 0 for straight line ticker, >0 for curved SVG
+  direction = "left",
   interactive = true,
+  sparkleColor = "#ff2a75",
 }) => {
-  // Ensure generous non-breaking space padding between repetitions so words never stick together
-  const text = useMemo(() => {
-    const clean = marqueeText.trim();
-    return `${clean}\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0`;
-  }, [marqueeText]);
-
-  const jacketRef = useRef(null);
-  const measureRef = useRef(null);
-  const textPathRef = useRef(null);
-  const pathRef = useRef(null);
-  
-  const [containerWidth, setContainerWidth] = useState(1440);
-  const [spacing, setSpacing] = useState(0);
-  const [offset, setOffset] = useState(0);
-  
-  const uid = useId();
-  const pathId = `curve-${uid.replace(/[^a-zA-Z0-9-_]/g, '')}`;
+  // Normalize items array
+  const parsedItems = useMemo(() => {
+    if (Array.isArray(items) && items.length > 0) {
+      return items.map((item, idx) => {
+        if (typeof item === "string") {
+          return {
+            text: item,
+            outline: idx % 2 === 0,
+          };
+        }
+        return {
+          text: item.text || "",
+          outline: item.outline !== undefined ? item.outline : idx % 2 === 0,
+        };
+      });
+    }
+    if (marqueeText && typeof marqueeText === "string") {
+      const parts = marqueeText
+        .split(/[•·|,✦*]/)
+        .map((s) => s.trim())
+        .filter(Boolean);
+      if (parts.length > 1) {
+        return parts.map((text, idx) => ({
+          text,
+          outline: idx % 2 === 0,
+        }));
+      }
+    }
+    return DEFAULT_ITEMS;
+  }, [items, marqueeText]);
 
   const isStraight = !curveAmount || curveAmount === 0;
 
-  // Measure text length in real-time
-  const updateMetrics = useCallback(() => {
-    if (jacketRef.current) {
-      const { width } = jacketRef.current.getBoundingClientRect();
-      if (width > 0) {
-        setContainerWidth(Math.round(width));
-      }
-    }
-    if (measureRef.current) {
-      const measured = measureRef.current.getComputedTextLength();
-      if (measured > 0) {
-        // Add safety buffer to prevent any edge clipping
-        setSpacing(Math.ceil(measured));
+  /* =========================================================
+     STRAIGHT TICKER MODE (Ultra-smooth DOM Ribbon)
+  ========================================================= */
+  const tickerJacketRef = useRef(null);
+  const trackRef = useRef(null);
+  const singleSetRef = useRef(null);
+
+  const [cycleWidth, setCycleWidth] = useState(0);
+  const [repeatCount, setRepeatCount] = useState(4);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const offsetRef = useRef(0);
+  const isDraggingRef = useRef(false);
+  const lastXRef = useRef(0);
+  const velRef = useRef(0);
+  const currentSpeedRef = useRef(speed);
+  const directionRef = useRef(direction);
+
+  useEffect(() => {
+    directionRef.current = direction;
+    currentSpeedRef.current = speed;
+  }, [direction, speed]);
+
+  // Measure single set width for seamless infinite looping
+  const measureTicker = useCallback(() => {
+    if (singleSetRef.current && tickerJacketRef.current) {
+      const setW = singleSetRef.current.getBoundingClientRect().width;
+      const containerW = tickerJacketRef.current.getBoundingClientRect().width;
+      if (setW > 0) {
+        setCycleWidth(setW);
+        const needed = Math.max(Math.ceil((containerW * 2.5) / setW) + 2, 4);
+        setRepeatCount(needed);
       }
     }
   }, []);
 
-  // Path definition: Dynamic 1:1 pixel coordinate system
-  const pathD = useMemo(() => {
-    if (isStraight) {
-      const span = Math.max(containerWidth * 3, 3000);
-      return `M -${span / 2},35 L ${span},35`;
-    }
-    return `M-100,40 Q500,${40 + curveAmount} 1540,40`;
-  }, [isStraight, containerWidth, curveAmount]);
-
-  const viewBox = useMemo(() => {
-    return isStraight ? `0 0 ${containerWidth} 70` : '0 0 1440 120';
-  }, [isStraight, containerWidth]);
-
-  const dragRef = useRef(false);
-  const lastXRef = useRef(0);
-  const dirRef = useRef(direction);
-  const velRef = useRef(0);
-
-  // Compute how many repetitions are needed to fill the screen seamlessly
-  const totalText = useMemo(() => {
-    if (!spacing || spacing <= 0) return text;
-    const count = Math.max(Math.ceil((containerWidth * 3) / spacing) + 3, 3);
-    return Array(count).fill(text).join('');
-  }, [text, spacing, containerWidth]);
-
-  const ready = spacing > 0 && containerWidth > 0;
-
   useEffect(() => {
-    dirRef.current = direction;
-  }, [direction]);
+    if (!isStraight) return;
+    measureTicker();
 
-  // Handle Resize and Font Loading
-  useEffect(() => {
-    updateMetrics();
-
-    // Re-measure after custom web fonts load
     if (document.fonts) {
-      document.fonts.ready.then(() => {
-        updateMetrics();
-      });
+      document.fonts.ready.then(measureTicker);
     }
 
-    const jacketEl = jacketRef.current;
+    const jacketEl = tickerJacketRef.current;
     if (!jacketEl) return;
 
-    let resizeTimer;
-    const handleResize = () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        updateMetrics();
-      }, 50);
-    };
-
-    const ro = new ResizeObserver(handleResize);
+    const ro = new ResizeObserver(() => {
+      measureTicker();
+    });
     ro.observe(jacketEl);
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", measureTicker);
 
     return () => {
       ro.disconnect();
-      window.removeEventListener('resize', handleResize);
-      clearTimeout(resizeTimer);
+      window.removeEventListener("resize", measureTicker);
     };
-  }, [updateMetrics, text, className]);
+  }, [isStraight, measureTicker, parsedItems]);
 
-  // Set initial startOffset
+  // Straight Ticker RAF animation loop with inertia & drag
   useEffect(() => {
-    if (!spacing) return;
-    if (textPathRef.current) {
-      const initial = -spacing;
-      textPathRef.current.setAttribute('startOffset', `${initial}px`);
-      setOffset(initial);
-    }
-  }, [spacing]);
+    if (!isStraight) return;
+    let animId;
 
-  // Infinite Animation Loop
-  useEffect(() => {
-    if (!spacing || !ready) return;
-    let frame = 0;
     const step = () => {
-      if (!dragRef.current && textPathRef.current) {
-        const delta = dirRef.current === 'right' ? speed : -speed;
-        const currentOffset = parseFloat(textPathRef.current.getAttribute('startOffset') || '0');
-        let newOffset = currentOffset + delta;
+      if (cycleWidth > 0 && trackRef.current) {
+        if (isDraggingRef.current) {
+          // Handled in pointermove
+        } else {
+          // Inertia damping
+          if (Math.abs(velRef.current) > 0.05) {
+            offsetRef.current += velRef.current;
+            velRef.current *= 0.94;
+          } else {
+            velRef.current = 0;
+            const dirFactor = directionRef.current === "right" ? 1 : -1;
+            const effectiveSpeed = isHovered
+              ? currentSpeedRef.current * 0.4
+              : currentSpeedRef.current;
+            offsetRef.current += dirFactor * effectiveSpeed;
+          }
 
-        const wrapPoint = spacing;
-        if (newOffset <= -wrapPoint) newOffset += wrapPoint;
-        if (newOffset > 0) newOffset -= wrapPoint;
+          // Modulo wrap
+          if (offsetRef.current <= -cycleWidth) {
+            offsetRef.current += cycleWidth;
+          } else if (offsetRef.current > 0) {
+            offsetRef.current -= cycleWidth;
+          }
 
-        textPathRef.current.setAttribute('startOffset', `${newOffset}px`);
-        setOffset(newOffset);
+          trackRef.current.style.transform = `translate3d(${offsetRef.current}px, 0, 0)`;
+        }
       }
-      frame = requestAnimationFrame(step);
+      animId = requestAnimationFrame(step);
     };
-    frame = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(frame);
-  }, [spacing, speed, ready]);
 
-  // Pointer Drag Handlers
-  const onPointerDown = (e) => {
+    animId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animId);
+  }, [isStraight, cycleWidth, isHovered]);
+
+  // Pointer drag events for straight ticker
+  const handlePointerDown = (e) => {
     if (!interactive) return;
-    dragRef.current = true;
+    isDraggingRef.current = true;
     lastXRef.current = e.clientX;
     velRef.current = 0;
     try {
-      e.target.setPointerCapture(e.pointerId);
+      e.currentTarget.setPointerCapture(e.pointerId);
     } catch {
-      // Fallback if not supported
+      // fallback
     }
   };
 
-  const onPointerMove = (e) => {
-    if (!interactive || !dragRef.current || !textPathRef.current) return;
+  const handlePointerMove = (e) => {
+    if (!interactive || !isDraggingRef.current || !trackRef.current) return;
     const dx = e.clientX - lastXRef.current;
     lastXRef.current = e.clientX;
     velRef.current = dx;
+    offsetRef.current += dx;
 
-    const currentOffset = parseFloat(textPathRef.current.getAttribute('startOffset') || '0');
-    let newOffset = currentOffset + dx;
+    if (cycleWidth > 0) {
+      if (offsetRef.current <= -cycleWidth) {
+        offsetRef.current += cycleWidth;
+      } else if (offsetRef.current > 0) {
+        offsetRef.current -= cycleWidth;
+      }
+    }
 
-    const wrapPoint = spacing;
-    if (newOffset <= -wrapPoint) newOffset += wrapPoint;
-    if (newOffset > 0) newOffset -= wrapPoint;
-
-    textPathRef.current.setAttribute('startOffset', `${newOffset}px`);
-    setOffset(newOffset);
+    trackRef.current.style.transform = `translate3d(${offsetRef.current}px, 0, 0)`;
   };
 
-  const endDrag = () => {
+  const handlePointerUp = (e) => {
     if (!interactive) return;
-    dragRef.current = false;
-    if (Math.abs(velRef.current) > 0.5) {
-      dirRef.current = velRef.current > 0 ? 'right' : 'left';
+    isDraggingRef.current = false;
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    } catch {
+      // fallback
     }
   };
 
-  const cursorStyle = interactive ? (dragRef.current ? 'grabbing' : 'grab') : 'auto';
+  /* =========================================================
+     CURVED SVG MODE (Fallback if curveAmount > 0)
+  ========================================================= */
+  const jacketRef = useRef(null);
+  const textPathRef = useRef(null);
+  const measureSvgRef = useRef(null);
+  const [svgSpacing, setSvgSpacing] = useState(0);
+  const [svgOffset, setSvgOffset] = useState(0);
+  const [svgContainerWidth, setSvgContainerWidth] = useState(1440);
+
+  const uid = useId();
+  const pathId = `curve-${uid.replace(/[^a-zA-Z0-9-_]/g, "")}`;
+
+  const pathD = useMemo(() => {
+    return `M-100,40 Q500,${40 + curveAmount} 1540,40`;
+  }, [curveAmount]);
+
+  const rawFullText = useMemo(() => {
+    return parsedItems.map((item) => `${item.text} ✦ `).join("");
+  }, [parsedItems]);
+
+  const updateSvgMetrics = useCallback(() => {
+    if (jacketRef.current) {
+      const { width } = jacketRef.current.getBoundingClientRect();
+      if (width > 0) setSvgContainerWidth(Math.round(width));
+    }
+    if (measureSvgRef.current) {
+      const measured = measureSvgRef.current.getComputedTextLength();
+      if (measured > 0) setSvgSpacing(Math.ceil(measured));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isStraight) return;
+    updateSvgMetrics();
+    const handleResize = () => updateSvgMetrics();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isStraight, updateSvgMetrics]);
+
+  useEffect(() => {
+    if (isStraight || !svgSpacing) return;
+    let frameId;
+    const step = () => {
+      if (textPathRef.current) {
+        const delta = directionRef.current === "right" ? speed : -speed;
+        const cur = parseFloat(
+          textPathRef.current.getAttribute("startOffset") || "0"
+        );
+        let next = cur + delta;
+        if (next <= -svgSpacing) next += svgSpacing;
+        if (next > 0) next -= svgSpacing;
+        textPathRef.current.setAttribute("startOffset", `${next}px`);
+        setSvgOffset(next);
+      }
+      frameId = requestAnimationFrame(step);
+    };
+    frameId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frameId);
+  }, [isStraight, svgSpacing, speed]);
+
+  /* =========================================================
+     RENDER: Straight Ticker (Matches Reference Image)
+  ========================================================= */
+  if (isStraight) {
+    return (
+      <div
+        ref={tickerJacketRef}
+        className={`curved-loop-jacket straight-loop-jacket ${className}`}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        role="region"
+        aria-label="Interactive Highlights Marquee"
+        style={{
+          cursor: interactive
+            ? isDraggingRef.current
+              ? "grabbing"
+              : "grab"
+            : "default",
+        }}
+      >
+        <div ref={trackRef} className="curved-loop-track">
+          {/* Measurement Set */}
+          <div ref={singleSetRef} className="curved-loop-set" aria-hidden="false">
+            {parsedItems.map((item, idx) => (
+              <span
+                key={`measure-${idx}`}
+                className={`loop-item ${
+                  item.outline ? "loop-item-outline" : "loop-item-solid"
+                }`}
+              >
+                <span className="loop-word">{item.text}</span>
+                <span className="loop-sparkle-wrapper">
+                  <SparkleIcon color={sparkleColor} />
+                </span>
+              </span>
+            ))}
+          </div>
+
+          {/* Repeated Sets for seamless infinite looping */}
+          {Array.from({ length: repeatCount }).map((_, setIdx) => (
+            <div
+              key={`set-${setIdx}`}
+              className="curved-loop-set"
+              aria-hidden="true"
+            >
+              {parsedItems.map((item, idx) => (
+                <span
+                  key={`item-${setIdx}-${idx}`}
+                  className={`loop-item ${
+                    item.outline ? "loop-item-outline" : "loop-item-solid"
+                  }`}
+                >
+                  <span className="loop-word">{item.text}</span>
+                  <span className="loop-sparkle-wrapper">
+                    <SparkleIcon color={sparkleColor} />
+                  </span>
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  /* =========================================================
+     RENDER: Curved SVG Mode
+  ========================================================= */
+  const totalSvgText = svgSpacing
+    ? Array(Math.max(Math.ceil((svgContainerWidth * 3) / svgSpacing) + 3, 3))
+        .fill(rawFullText)
+        .join("")
+    : rawFullText;
 
   return (
     <div
       ref={jacketRef}
-      className={`curved-loop-jacket ${isStraight ? 'straight-loop-jacket' : ''}`}
-      style={{ visibility: ready ? 'visible' : 'hidden', cursor: cursorStyle }}
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={endDrag}
-      onPointerLeave={endDrag}
+      className={`curved-loop-jacket ${className}`}
       role="region"
-      aria-label="Scrolling Highlights Banner"
+      aria-label="Curved Highlights Banner"
     >
-      <svg
-        className="curved-loop-svg"
-        viewBox={viewBox}
-        preserveAspectRatio={isStraight ? 'xMidYMid slice' : 'none'}
-      >
+      <svg className="curved-loop-svg" viewBox="0 0 1440 120" preserveAspectRatio="none">
         <text
-          ref={measureRef}
+          ref={measureSvgRef}
           xmlSpace="preserve"
-          className={`curved-loop-text ${className}`}
-          style={{
-            visibility: 'hidden',
-            opacity: 0,
-            position: 'absolute',
-            pointerEvents: 'none',
-          }}
+          className="curved-loop-text"
+          style={{ visibility: "hidden", opacity: 0, position: "absolute" }}
         >
-          {text}
+          {rawFullText}
         </text>
         <defs>
-          <path ref={pathRef} id={pathId} d={pathD} fill="none" stroke="transparent" />
+          <path id={pathId} d={pathD} fill="none" stroke="transparent" />
         </defs>
-        {ready && (
-          <text xmlSpace="preserve" className={`curved-loop-text ${className}`}>
+        {svgSpacing > 0 && (
+          <text xmlSpace="preserve" className="curved-loop-text">
             <textPath
               ref={textPathRef}
               href={`#${pathId}`}
-              startOffset={`${offset}px`}
+              startOffset={`${svgOffset}px`}
               xmlSpace="preserve"
             >
-              {totalText}
+              {totalSvgText}
             </textPath>
           </text>
         )}

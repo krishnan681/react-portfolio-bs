@@ -881,7 +881,7 @@ export const BRANDS = [
   {
     id: "05",
     slug: "thats-y-food",
-    title: "That's Y Food & On The Go",
+    title: "Cafes and Restaurant",
     sectionTitle: "ARTISANAL GASTRONOMY",
     headline:
       "Crafting appetizing aesthetics and rich culinary visual storytelling.",

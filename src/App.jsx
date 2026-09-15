@@ -60,12 +60,20 @@ function Home() {
         <Hero />
         <div className="content-layers">
           <CurvedLoop
-            marqueeText="✦ VIDEO EDITOR ✦ GRAPHIC DESIGNER ✦ MOTION GRAPHICS ✦ VISUAL STORYTELLER ✦ BRAND STRATEGIST ✦ 3D MOTION ✦"
-            speed={2}
+            items={[
+              "Skilled in motion design",
+              "Video editing",
+              "Visual storytelling",
+              "Videography",
+              "Photography",
+              "Color grading",
+              "Post-production workflows",
+              "Delivering high-impact",
+            ]}
+            speed={1.4}
             curveAmount={0}
             direction="left"
             interactive={true}
-            className="hero-about-loop-text"
           />
           <About />
           <CreativeExpertise />

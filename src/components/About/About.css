@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap");
 
 /* ===========================================
    ROOT VARIABLES
 =========================================== */
 :root {
-  --about-bg: #FFF9F1;
+  --about-bg: #fff9f1;
   --about-text: #04193a;
   --primary-color: #1b4ef5;
 }
@@ -18,7 +18,7 @@
   position: relative;
   z-index: 10;
   overflow: visible;
-  padding: clamp(70px, 9vw, 120px) 0 clamp(60px, 8vw, 100px) 0;
+  padding: clamp(60px, 8vw, 110px) 0 clamp(50px, 7vw, 90px) 0;
   box-shadow: 0 -25px 50px rgba(4, 25, 58, 0.05);
 }
 
@@ -48,8 +48,88 @@
 }
 
 /* ==================== 
-   CENTERED CONTENT WRAPPER
+   2-COLUMN SHOWCASE GRID
 ==================== */
+.about-showcase-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  align-items: flex-start;
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ==================== 
+   LEFT COLUMN: LANYARD
+==================== */
+.about-lanyard-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  width: 100%;
+  margin-top: -4rem;
+  z-index: 10;
+}
+
+.about-lanyard-container {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.lanyard-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: -12px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(27, 78, 245, 0.18);
+  box-shadow: 0 4px 14px rgba(4, 25, 58, 0.05);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #04193a;
+  letter-spacing: 0.2px;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.lanyard-hint-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #1b4ef5;
+  box-shadow: 0 0 6px #1b4ef5;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+/* ==================== 
+   RIGHT COLUMN: CONTENT
+==================== */
+.about-content-col {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+  padding-top: clamp(16px, 2.5vw, 32px);
+  padding-left: clamp(0px, 1.5vw, 24px);
+}
+
+/* Legacy Wrapper Fallback */
 .about-center-wrapper {
   position: relative;
   z-index: 5;
@@ -68,7 +148,9 @@
 .scroll-block {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
@@ -113,17 +195,17 @@
 .hey {
   position: relative;
   width: 380px;
-  height: 160px;
+  height: 150px;
   font-family: "Bowlby One", sans-serif;
   color: #1b4ef5;
   user-select: none;
-  margin: 0 auto 10px auto;
+  margin: 0 0 10px 0;
 }
 
 .letter {
   position: absolute;
   display: block;
-  font-size: 118px;
+  font-size: 110px;
   line-height: 1;
   transform-origin: center bottom;
   opacity: 0;
@@ -132,22 +214,22 @@
 
 /* Initial hidden state — letters invisible until triggered */
 .h {
-  left: 15px;
+  left: 0px;
   top: 24px;
 }
 
 .e {
-  left: 95px;
+  left: 80px;
   top: 10px;
 }
 
 .y {
-  left: 178px;
+  left: 160px;
   top: 24px;
 }
 
 .exclamation {
-  left: 275px;
+  left: 255px;
   top: 4px;
 }
 
@@ -196,16 +278,31 @@
 }
 
 /* After bounce, apply the resting rotation */
-.hey.hey-bounce-in .h { --rest-rotate: -3deg; }
-.hey.hey-bounce-in .e { --rest-rotate: -9deg; }
-.hey.hey-bounce-in .y { --rest-rotate: 14deg; }
-.hey.hey-bounce-in .exclamation { --rest-rotate: 14deg; }
+.hey.hey-bounce-in .h {
+  --rest-rotate: -3deg;
+}
+.hey.hey-bounce-in .e {
+  --rest-rotate: -9deg;
+}
+.hey.hey-bounce-in .y {
+  --rest-rotate: 14deg;
+}
+.hey.hey-bounce-in .exclamation {
+  --rest-rotate: 14deg;
+}
 
 /* Continuous subtle wobble after landing */
 @keyframes letterWobble {
-  0%, 100% { transform: translateY(0) rotate(var(--rest-rotate, 0deg)); }
-  25% { transform: translateY(-4px) rotate(calc(var(--rest-rotate, 0deg) + 2deg)); }
-  75% { transform: translateY(-2px) rotate(calc(var(--rest-rotate, 0deg) - 2deg)); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--rest-rotate, 0deg));
+  }
+  25% {
+    transform: translateY(-4px) rotate(calc(var(--rest-rotate, 0deg) + 2deg));
+  }
+  75% {
+    transform: translateY(-2px) rotate(calc(var(--rest-rotate, 0deg) - 2deg));
+  }
 }
 
 .hey.hey-bounce-in .letter {
@@ -214,23 +311,27 @@
 
 /* Apply wobble after initial bounce completes */
 .hey.hey-bounce-in .h {
-  animation: letterBounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0s forwards,
-             letterWobble 3s ease-in-out 1.2s infinite;
+  animation:
+    letterBounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0s forwards,
+    letterWobble 3s ease-in-out 1.2s infinite;
 }
 
 .hey.hey-bounce-in .e {
-  animation: letterBounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s forwards,
-             letterWobble 3s ease-in-out 1.4s infinite;
+  animation:
+    letterBounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s forwards,
+    letterWobble 3s ease-in-out 1.4s infinite;
 }
 
 .hey.hey-bounce-in .y {
-  animation: letterBounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards,
-             letterWobble 3s ease-in-out 1.6s infinite;
+  animation:
+    letterBounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards,
+    letterWobble 3s ease-in-out 1.6s infinite;
 }
 
 .hey.hey-bounce-in .exclamation {
-  animation: letterBounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards,
-             letterWobble 3s ease-in-out 1.8s infinite;
+  animation:
+    letterBounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards,
+    letterWobble 3s ease-in-out 1.8s infinite;
 }
 
 /* ==================== 
@@ -246,8 +347,10 @@
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(27, 78, 245, 0.22);
-  box-shadow: 0 8px 24px rgba(4, 25, 58, 0.06), 0 2px 6px rgba(27, 78, 245, 0.08);
-  margin-bottom: 28px;
+  box-shadow:
+    0 8px 24px rgba(4, 25, 58, 0.06),
+    0 2px 6px rgba(27, 78, 245, 0.08);
+  margin-bottom: 24px;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -275,6 +378,17 @@
   background: #38bdf8;
   box-shadow: 0 0 8px #38bdf8;
   animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.6;
+  }
 }
 
 .exp-num {
@@ -311,20 +425,20 @@
    TEXT CONTENT (2 LINES)
 ==================== */
 .about-text-content {
-  max-width: 820px;
-  margin-bottom: 36px;
+  max-width: 640px;
+  margin-bottom: 24px;
 }
 
 .animated-lines-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 4px;
 }
 
 .text-line {
   display: block;
-  text-align: center;
+  text-align: left;
 }
 
 .lead-line {
@@ -336,73 +450,86 @@
 }
 
 .about-text-content .lead-text {
-  font-size: clamp(1rem, 1.6vw, 1.45rem);
+  font-size: clamp(1rem, 1.45vw, 1.35rem);
   font-weight: 500;
   line-height: 1.5;
   color: #04193a;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   width: 100%;
 }
 
 .about-text-content .body-text {
-  font-size: clamp(0.78rem, 1.15vw, 1.05rem);
-  line-height: 1.65;
+  font-size: clamp(0.82rem, 1.05vw, 0.98rem);
+  line-height: 1.6;
   color: #55627a;
   margin: 0;
   width: 100%;
 }
 
 /* ==================== 
-   STATS COUNTER
+   STATS SECTION (EDITORIAL LAYOUT - NO CARDS)
 ==================== */
-.stats {
-  display: flex;
-  gap: 20px;
+.about-stats-section {
   width: 100%;
-  max-width: 760px;
-  margin-top: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
+  max-width: 1100px;
+  margin: clamp(48px, 6vw, 76px) auto 0 auto;
+  padding: 0 clamp(12px, 2vw, 24px);
+  position: relative;
+  z-index: 5;
 }
 
-.stat-specular-item {
-  flex: 1 1 calc(33.333% - 20px);
-  min-width: 170px;
-  display: flex;
+.about-stats-grid {
+  display: grid;
+  position: relative;
+  bottom: 80px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 4vw, 56px);
+  width: 100%;
+  justify-items: center;
 }
 
-.stat {
-  padding: 20px 24px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  box-shadow: 0 4px 18px rgba(4, 25, 58, 0.04);
-  width: 100%;
-  text-align: center;
+.about-stat-item {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  text-align: center;
+  width: 100%;
 }
 
-.stat b {
-  font-family: "Clash Grotesk", "Inter", -apple-system, sans-serif;
-  font-size: clamp(2rem, 3.2vw, 2.6rem);
+.about-stat-number {
+  font-family:
+    "Clash Grotesk",
+    "Inter",
+    -apple-system,
+    sans-serif;
+  font-size: clamp(2.8rem, 4.6vw, 4.4rem);
   font-weight: 800;
   color: #04193a;
-  display: block;
-  line-height: 1.1;
-  letter-spacing: -0.5px;
+  line-height: 1;
+  letter-spacing: -1.5px;
+  margin-bottom: clamp(10px, 1.4vw, 16px);
 }
 
-.stat span {
-  font-size: 0.76rem;
-  letter-spacing: 1.5px;
-  color: #64748b;
+.about-stat-line {
+  width: 100%;
+  max-width: 240px;
+  height: 1px;
+  background: rgba(4, 25, 58, 0.14);
+  margin-bottom: clamp(12px, 1.5vw, 18px);
+}
+
+.about-stat-title {
+  font-family:
+    "Inter",
+    -apple-system,
+    sans-serif;
+  font-size: clamp(0.78rem, 1.05vw, 0.95rem);
   font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #55627a;
   text-transform: uppercase;
-  margin-top: 8px;
-  display: block;
+  line-height: 1.4;
+  margin: 0;
 }
 
 /* ==================== 
@@ -414,9 +541,23 @@
   .about {
     padding: clamp(50px, 7vw, 90px) 0 clamp(50px, 7vw, 80px) 0;
   }
-  .about-center-wrapper {
-    max-width: 700px;
-    padding: 0 20px;
+  .about-showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .about-content-col {
+    align-items: center;
+    text-align: center;
+    padding-left: 0;
+  }
+  .hey {
+    margin: 0 auto 10px auto;
+  }
+  .animated-lines-container {
+    align-items: center;
+  }
+  .text-line {
+    text-align: center;
   }
   .custom-shape-divider-bottom-1788027072 {
     bottom: -60px;
@@ -459,22 +600,20 @@
   .exp-text {
     font-size: 0.8rem;
   }
-  .stats {
-    gap: 14px;
+  .about-stats-grid {
+    gap: 24px 16px;
   }
-  .stat-specular-item {
-    flex: 1 1 calc(33.333% - 14px);
-    min-width: 110px;
+  .about-stat-number {
+    font-size: clamp(2.1rem, 5vw, 2.6rem);
+    margin-bottom: 8px;
   }
-  .stat {
-    padding: 16px 12px;
+  .about-stat-line {
+    max-width: 180px;
+    margin-bottom: 10px;
   }
-  .stat b {
-    font-size: 1.7rem;
-  }
-  .stat span {
-    font-size: 0.68rem;
-    letter-spacing: 1px;
+  .about-stat-title {
+    font-size: clamp(0.7rem, 1.8vw, 0.82rem);
+    letter-spacing: 0.8px;
   }
   .custom-shape-divider-bottom-1788027072 {
     bottom: -50px;
@@ -489,8 +628,8 @@
   .about {
     padding: 40px 0;
   }
-  .about-center-wrapper {
-    padding: 0 12px;
+  .about-showcase-grid {
+    gap: 20px;
   }
   .custom-shape-divider-bottom-1788027072 {
     bottom: -40px;
@@ -521,7 +660,7 @@
     font-size: 0.74rem;
   }
   .about-text-content {
-    margin-bottom: 28px;
+    margin-bottom: 24px;
   }
   .about-text-content .lead-text {
     font-size: clamp(0.82rem, 3.4vw, 1.05rem);
@@ -530,30 +669,22 @@
   }
   .about-text-content .body-text {
     font-size: clamp(0.68rem, 2.6vw, 0.85rem);
-    line-height: 1.5;
   }
-  .stats {
-    display: grid;
+  .about-stats-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+    gap: 12px 6px;
   }
-  .stat-specular-item {
-    flex: unset;
-    min-width: unset;
-    width: 100%;
+  .about-stat-number {
+    font-size: clamp(1.4rem, 5.2vw, 1.85rem);
+    margin-bottom: 6px;
   }
-  .stat {
-    padding: 12px 6px;
-    min-width: unset;
-    border-radius: 12px;
+  .about-stat-line {
+    max-width: 100px;
+    margin-bottom: 6px;
   }
-  .stat b {
-    font-size: 1.35rem;
-  }
-  .stat span {
-    font-size: 0.6rem;
-    letter-spacing: 0.5px;
-    margin-top: 5px;
+  .about-stat-title {
+    font-size: clamp(0.55rem, 1.8vw, 0.68rem);
+    letter-spacing: 0.4px;
   }
 }
 
@@ -569,10 +700,13 @@
   .about-text-content .body-text {
     font-size: 0.82rem;
   }
-  .stat b {
-    font-size: 1.15rem;
+  .about-stat-number {
+    font-size: 1.35rem;
   }
-  .stat span {
-    font-size: 0.55rem;
+  .about-stat-line {
+    max-width: 80px;
+  }
+  .about-stat-title {
+    font-size: 0.52rem;
   }
 }

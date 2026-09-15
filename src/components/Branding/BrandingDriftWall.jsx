@@ -43,10 +43,10 @@ export default function BrandingDriftWall() {
             <span>hospitality, and healthcare showcasing versatile design and content expertise.</span>
           </p>
 
-          <div className="drift-interaction-pill">
+          {/* <div className="drift-interaction-pill">
             <Sparkles size={14} className="drift-pill-sparkle" />
             <span>Interactive 3D Drift Wall • Click Any Project to View Case Study</span>
-          </div>
+          </div> */}
         </div>
 
         {/* ================= DRIFT WALL STAGE ================= */}
