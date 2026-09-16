@@ -35,23 +35,23 @@ export const BRANDS = [
         images: [
           {
             id: "bwc-imax-1",
-            src: getR2Url("branding/broadway/images/imax/1.webp"),
+            src: getR2Url("branding/broadway/images/imax/01.webp"),
           },
           {
             id: "bwc-imax-2",
-            src: getR2Url("branding/broadway/images/imax/2.webp"),
+            src: getR2Url("branding/broadway/images/imax/02.webp"),
           },
           {
             id: "bwc-imax-3",
-            src: getR2Url("branding/broadway/images/imax/3.webp"),
+            src: getR2Url("branding/broadway/images/imax/03.webp"),
           },
           {
             id: "bwc-imax-4",
-            src: getR2Url("branding/broadway/images/imax/4.webp"),
+            src: getR2Url("branding/broadway/images/imax/04.webp"),
           },
           {
             id: "bwc-imax-5",
-            src: getR2Url("branding/broadway/images/imax/5.webp"),
+            src: getR2Url("branding/broadway/images/imax/05.webp"),
           },
           {
             id: "bwc-imax-6",
@@ -63,7 +63,35 @@ export const BRANDS = [
           },
           {
             id: "bwc-imax-8",
-            src: getR2Url("branding/broadway/images/imax/8.webp"),
+            src: getR2Url("branding/broadway/images/imax/08.webp"),
+          },
+          {
+            id: "bwc-imax-9",
+            src: getR2Url("branding/broadway/images/imax/9.webp"),
+          },
+          {
+            id: "bwc-imax-10",
+            src: getR2Url("branding/broadway/images/imax/10.webp"),
+          },
+          {
+            id: "bwc-imax-11",
+            src: getR2Url("branding/broadway/images/imax/11.webp"),
+          },
+          {
+            id: "bwc-imax-13",
+            src: getR2Url("branding/broadway/images/imax/13.webp"),
+          },
+          {
+            id: "bwc-imax-14",
+            src: getR2Url("branding/broadway/images/imax/14.webp"),
+          },
+          {
+            id: "bwc-imax-15",
+            src: getR2Url("branding/broadway/images/imax/15.webp"),
+          },
+          {
+            id: "bwc-imax-16",
+            src: getR2Url("branding/broadway/images/imax/16.webp"),
           },
         ],
         videos: [
@@ -170,19 +198,47 @@ export const BRANDS = [
         images: [
           {
             id: "bwc-twm-1",
-            src: getR2Url("branding/broadway/images/this_week_movies/1.png"),
+            src: getR2Url("branding/broadway/images/this_week_movies/01.webp"),
           },
           {
             id: "bwc-twm-2",
-            src: getR2Url("branding/broadway/images/this_week_movies/2.jpg"),
+            src: getR2Url("branding/broadway/images/this_week_movies/02.webp"),
           },
           {
             id: "bwc-twm-3",
-            src: getR2Url("branding/broadway/images/this_week_movies/3.jpg"),
+            src: getR2Url("branding/broadway/images/this_week_movies/03.webp"),
           },
           {
             id: "bwc-twm-4",
-            src: getR2Url("branding/broadway/images/this_week_movies/4.jpg"),
+            src: getR2Url("branding/broadway/images/this_week_movies/04.webp"),
+          },
+          {
+            id: "bwc-twm-5",
+            src: getR2Url("branding/broadway/images/this_week_movies/05.webp"),
+          },
+          {
+            id: "bwc-twm-6",
+            src: getR2Url("branding/broadway/images/this_week_movies/06.webp"),
+          },
+          {
+            id: "bwc-twm-7",
+            src: getR2Url("branding/broadway/images/this_week_movies/07.webp"),
+          },
+          {
+            id: "bwc-twm-8",
+            src: getR2Url("branding/broadway/images/this_week_movies/08.webp"),
+          },
+          {
+            id: "bwc-twm-9",
+            src: getR2Url("branding/broadway/images/this_week_movies/09.webp"),
+          },
+          {
+            id: "bwc-twm-10",
+            src: getR2Url("branding/broadway/images/this_week_movies/10.webp"),
+          },
+          {
+            id: "bwc-twm-11",
+            src: getR2Url("branding/broadway/images/this_week_movies/11.webp"),
           },
         ],
       },
@@ -194,39 +250,41 @@ export const BRANDS = [
         images: [
           {
             id: "bwc-port-1",
-            src: getR2Url("branding/broadway/images/poster_design/1.webp"),
+            src: getR2Url("branding/broadway/images/poster_design/01.webp"),
+            aspect: "landscape",
           },
           {
             id: "bwc-port-2",
-            src: getR2Url("branding/broadway/images/poster_design/2.webp"),
+            src: getR2Url("branding/broadway/images/poster_design/02.webp"),
+            aspect: "landscape",
           },
           {
             id: "bwc-port-3",
-            src: getR2Url("branding/broadway/images/poster_design/3.webp"),
+            src: getR2Url("branding/broadway/images/poster_design/03.webp"),
           },
           {
             id: "bwc-port-4",
-            src: getR2Url("branding/broadway/images/poster_design/4.webp"),
+            src: getR2Url("branding/broadway/images/poster_design/04.webp"),
           },
           {
             id: "bwc-port-5",
-            src: getR2Url("branding/broadway/images/poster_design/5.webp"),
+            src: getR2Url("branding/broadway/images/poster_design/05.webp"),
           },
           {
             id: "bwc-port-6",
-            src: getR2Url("branding/broadway/images/poster_design/6.webp"),
+            src: getR2Url("branding/broadway/images/poster_design/06.webp"),
           },
           {
             id: "bwc-port-7",
-            src: getR2Url("branding/broadway/images/poster_design/7.webp"),
+            src: getR2Url("branding/broadway/images/poster_design/07.webp"),
           },
           {
             id: "bwc-port-8",
-            src: getR2Url("branding/broadway/images/poster_design/8.webp"),
+            src: getR2Url("branding/broadway/images/poster_design/08.webp"),
           },
           {
             id: "bwc-port-9",
-            src: getR2Url("branding/broadway/images/poster_design/9.webp"),
+            src: getR2Url("branding/broadway/images/poster_design/09.webp"),
           },
           {
             id: "bwc-port-10",
@@ -263,14 +321,6 @@ export const BRANDS = [
           {
             id: "bwc-port-18",
             src: getR2Url("branding/broadway/images/poster_design/18.webp"),
-          },
-          {
-            id: "bwc-port-19",
-            src: getR2Url("branding/broadway/images/poster_design/19.webp"),
-          },
-          {
-            id: "bwc-port-20",
-            src: getR2Url("branding/broadway/images/poster_design/20.webp"),
           },
         ],
       },
@@ -896,11 +946,7 @@ export const BRANDS = [
     description:
       "That's Y Food – A premium multi-cuisine restaurant known for global flavors and fine dining. On the Go (OTG) – A casual café and restaurant serving quick meals, beverages, and comfort food. Café Totaram – A cozy café at Race Course, Coimbatore, popular for fusion food, desserts, coffee, and baked treats in a relaxed ambience.",
     details: "",
-    deliverables: [
-      "Social media contents",
-      "Video shoot",
-      "Pla cards",
-    ],
+    deliverables: ["Social media contents", "Video shoot", "Pla cards"],
     images: [
       {
         id: "tyf-img-1",
@@ -1172,10 +1218,7 @@ export const BRANDS = [
     description:
       "Pavizham Jewellers is a trusted jewellery brand in Coimbatore, offering gold, diamond, platinum, and silver jewellery with quality craftsmanship and elegant designs.",
     details: "",
-    deliverables: [
-      "Social media contents",
-      "Jewelry product shoot",
-    ],
+    deliverables: ["Social media contents", "Jewelry product shoot"],
     images: [
       {
         id: "pvz-img-1",
@@ -1357,11 +1400,7 @@ export const BRANDS = [
     description:
       "Sunbeam International School provides world-class education with a focus on academic excellence and holistic development, while Kids Castle offers a nurturing early learning environment that builds a strong foundation for young learners.",
     details: "",
-    deliverables: [
-      "Social media contents",
-      "Prints card",
-      "Menu works",
-    ],
+    deliverables: ["Social media contents", "Prints card", "Menu works"],
     categories: [
       {
         id: "offline-print-works",
@@ -1371,28 +1410,36 @@ export const BRANDS = [
         images: [
           {
             id: "sbm-print-1",
-            src: getR2Url("branding/sunbeam_school/images/offline_print_works/1.webp"),
+            src: getR2Url(
+              "branding/sunbeam_school/images/offline_print_works/1.webp",
+            ),
             title: "Admissions Open Campaign Banner",
             tag: "Admission Banner",
             aspect: "landscape",
           },
           {
             id: "sbm-print-2",
-            src: getR2Url("branding/sunbeam_school/images/offline_print_works/2.webp"),
+            src: getR2Url(
+              "branding/sunbeam_school/images/offline_print_works/2.webp",
+            ),
             title: "3rd Annual & Graduation Day Invitation",
             tag: "Event Collateral",
             aspect: "portrait",
           },
           {
             id: "sbm-print-3",
-            src: getR2Url("branding/sunbeam_school/images/offline_print_works/3.webp"),
+            src: getR2Url(
+              "branding/sunbeam_school/images/offline_print_works/3.webp",
+            ),
             title: "Monthly Lunch & Snacks Menu Cover",
             tag: "Menu Design",
             aspect: "square",
           },
           {
             id: "sbm-print-4",
-            src: getR2Url("branding/sunbeam_school/images/offline_print_works/4.webp"),
+            src: getR2Url(
+              "branding/sunbeam_school/images/offline_print_works/4.webp",
+            ),
             title: "Weekly Dietary Menu Schedule",
             tag: "Menu Design",
             aspect: "square",
@@ -1408,28 +1455,36 @@ export const BRANDS = [
         images: [
           {
             id: "sbm-sm-1",
-            src: getR2Url("branding/sunbeam_school/images/sm_poster_designs/1.webp"),
+            src: getR2Url(
+              "branding/sunbeam_school/images/sm_poster_designs/1.webp",
+            ),
             title: "Eid Mubarak Festive Wishes Creative",
             tag: "Festival Creative",
             aspect: "portrait",
           },
           {
             id: "sbm-sm-2",
-            src: getR2Url("branding/sunbeam_school/images/sm_poster_designs/2.webp"),
+            src: getR2Url(
+              "branding/sunbeam_school/images/sm_poster_designs/2.webp",
+            ),
             title: "Math Isn't Scary Concept Campaign",
             tag: "Concept Creative",
             aspect: "portrait",
           },
           {
             id: "sbm-sm-3",
-            src: getR2Url("branding/sunbeam_school/images/sm_poster_designs/3.webp"),
+            src: getR2Url(
+              "branding/sunbeam_school/images/sm_poster_designs/3.webp",
+            ),
             title: "Happy Father's Day Tribute Poster",
             tag: "Occasion Creative",
             aspect: "portrait",
           },
           {
             id: "sbm-sm-4",
-            src: getR2Url("branding/sunbeam_school/images/sm_poster_designs/4.webp"),
+            src: getR2Url(
+              "branding/sunbeam_school/images/sm_poster_designs/4.webp",
+            ),
             title: "World Environment Day Awareness Campaign",
             tag: "Awareness Campaign",
             aspect: "portrait",
@@ -1492,7 +1547,6 @@ export const BRANDS = [
         tag: "Editorial",
         aspect: "portrait",
       },
-       
     ],
     videos: [], // Project contains only Banner + Images (Testing Requirement 8)
   },
