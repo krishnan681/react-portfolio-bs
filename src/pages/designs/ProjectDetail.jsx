@@ -543,36 +543,34 @@ export default function ProjectDetail({ data }) {
 
       {/* ================= MAIN CONTAINER CONTENT ================= */}
       <div className="project-content-container">
-        {/* Project Header Info */}
-        <header className="project-header-info">
-          {project.category && (
-            <div className="project-category-tag">
-              <Sparkles size={14} />
-              <span>{project.category}</span>
+        {/* Project Header Card */}
+        <header className="project-header-card">
+          <div className="project-header-card-grid">
+            <div className="project-header-col-title">
+              <h1 className="project-headline-title">{project.title}</h1>
             </div>
-          )}
 
-          <h1 className="project-headline-title">{project.title}</h1>
+            <div className="project-header-col-desc">
+              {(project.description || project.headline) && (
+                <p className="project-lead-p">
+                  {project.description || project.headline}
+                </p>
+              )}
+              {project.details && (
+                <p className="project-details-p">{project.details}</p>
+              )}
+            </div>
+          </div>
 
-          {project.headline && (
-            <p className="project-headline-lead">{project.headline}</p>
-          )}
-
-          {project.description && (
-            <p className="project-lead-p">{project.description}</p>
-          )}
-
-          {project.details && (
-            <p className="project-details-p">{project.details}</p>
-          )}
-
-          {/* Deliverables in single line */}
+          {/* Deliverables pill bar */}
           {project.deliverables && project.deliverables.length > 0 && (
-            <div className="project-deliverables-line">
-              <span className="deliverables-label">Deliverables:</span>
-              <span className="deliverables-items">
-                {project.deliverables.join(" • ")}
-              </span>
+            <div className="project-deliverables-pill-wrap">
+              <div className="project-deliverables-line">
+                <span className="deliverables-label">DELIVERABLES :</span>
+                <span className="deliverables-items">
+                  {project.deliverables.join(" • ")}
+                </span>
+              </div>
             </div>
           )}
         </header>

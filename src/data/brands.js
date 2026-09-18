@@ -21,17 +21,16 @@ export const BRANDS = [
     details: "",
     deliverables: [
       "Social Media Campaigns",
-      "IMAX Collectible Cards",
-      "Print Collaterals",
-      "Concession Menu Boards",
+      "IMAX Collectible Cards Print",
       "LED Wall Displays",
+      "Special Menu Design",
       "Vertical Motion Reels",
     ],
     categories: [
       {
         id: "imax",
         title: "IMAX Works",
-        // subtext: "Large-format IMAX with Laser promotional artworks and laser-format key visuals.",
+        subtext: "Large-format IMAX with Laser promotional artworks and laser-format key visuals.",
         images: [
           {
             id: "bwc-imax-1",
@@ -170,6 +169,7 @@ export const BRANDS = [
       {
         id: "this-week-movies",
         title: "This Week Movies",
+        subtext: "Weekly premiere announcements, showtime schedules, and blockbuster spotlights.",
         layout: "portrait",
         images: [
           {
