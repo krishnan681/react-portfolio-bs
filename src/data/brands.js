@@ -35,27 +35,27 @@ export const BRANDS = [
         images: [
           {
             id: "bwc-imax-1",
-            src: getR2Url("branding/broadway/images/imax/01.webp"),
+            src: getR2Url("branding/broadway/images/imax/1.webp"),
           },
           {
             id: "bwc-imax-2",
-            src: getR2Url("branding/broadway/images/imax/02.webp"),
+            src: getR2Url("branding/broadway/images/imax/2.webp"),
           },
           {
             id: "bwc-imax-3",
-            src: getR2Url("branding/broadway/images/imax/03.webp"),
+            src: getR2Url("branding/broadway/images/imax/3.webp"),
           },
           {
             id: "bwc-imax-4",
-            src: getR2Url("branding/broadway/images/imax/04.webp"),
+            src: getR2Url("branding/broadway/images/imax/4.webp"),
           },
           {
             id: "bwc-imax-5",
-            src: getR2Url("branding/broadway/images/imax/05.webp"),
+            src: getR2Url("branding/broadway/images/imax/5.webp"),
           },
           {
             id: "bwc-imax-6",
-            src: getR2Url("branding/broadway/images/imax/6.webp"),
+            src: getR2Url("branding/broadway/images/imax/6.png"),
           },
           {
             id: "bwc-imax-7",
@@ -63,7 +63,7 @@ export const BRANDS = [
           },
           {
             id: "bwc-imax-8",
-            src: getR2Url("branding/broadway/images/imax/08.webp"),
+            src: getR2Url("branding/broadway/images/imax/8.webp"),
           },
           {
             id: "bwc-imax-9",
@@ -88,10 +88,6 @@ export const BRANDS = [
           {
             id: "bwc-imax-15",
             src: getR2Url("branding/broadway/images/imax/15.webp"),
-          },
-          {
-            id: "bwc-imax-16",
-            src: getR2Url("branding/broadway/images/imax/16.webp"),
           },
         ],
         videos: [
@@ -122,12 +118,12 @@ export const BRANDS = [
           {
             id: "bwc-post-1",
             src: getR2Url("branding/broadway/images/menu_designs/1.webp"),
-            aspect: "portrait",
+            aspect: "landscape",
           },
           {
             id: "bwc-post-2",
             src: getR2Url("branding/broadway/images/menu_designs/2.webp"),
-            aspect: "portrait",
+            aspect: "landscape",
           },
           {
             id: "bwc-post-3",
@@ -142,22 +138,22 @@ export const BRANDS = [
           {
             id: "bwc-post-5",
             src: getR2Url("branding/broadway/images/menu_designs/5.webp"),
-            aspect: "landscape",
+            aspect: "portrait",
           },
           {
             id: "bwc-post-6",
             src: getR2Url("branding/broadway/images/menu_designs/6.webp"),
-            aspect: "landscape",
+            aspect: "portrait",
           },
           {
             id: "bwc-post-7",
             src: getR2Url("branding/broadway/images/menu_designs/7.webp"),
-            aspect: "landscape",
+            aspect: "portrait",
           },
           {
             id: "bwc-post-8",
             src: getR2Url("branding/broadway/images/menu_designs/8.webp"),
-            aspect: "landscape",
+            aspect: "portrait",
           },
           {
             id: "bwc-post-9",
@@ -169,26 +165,6 @@ export const BRANDS = [
             src: getR2Url("branding/broadway/images/menu_designs/10.webp"),
             aspect: "landscape",
           },
-          {
-            id: "bwc-post-11",
-            src: getR2Url("branding/broadway/images/menu_designs/11.webp"),
-            aspect: "landscape",
-          },
-          {
-            id: "bwc-post-12",
-            src: getR2Url("branding/broadway/images/menu_designs/12.webp"),
-            aspect: "portrait",
-          },
-          {
-            id: "bwc-post-13",
-            src: getR2Url("branding/broadway/images/menu_designs/13.webp"),
-            aspect: "landscape",
-          },
-          {
-            id: "bwc-post-14",
-            src: getR2Url("branding/broadway/images/menu_designs/14.webp"),
-            aspect: "landscape",
-          },
         ],
       },
       {
@@ -198,39 +174,39 @@ export const BRANDS = [
         images: [
           {
             id: "bwc-twm-1",
-            src: getR2Url("branding/broadway/images/this_week_movies/01.webp"),
+            src: getR2Url("branding/broadway/images/this_week_movies/1.webp"),
           },
           {
             id: "bwc-twm-2",
-            src: getR2Url("branding/broadway/images/this_week_movies/02.webp"),
+            src: getR2Url("branding/broadway/images/this_week_movies/2.webp"),
           },
           {
             id: "bwc-twm-3",
-            src: getR2Url("branding/broadway/images/this_week_movies/03.webp"),
+            src: getR2Url("branding/broadway/images/this_week_movies/3.webp"),
           },
           {
             id: "bwc-twm-4",
-            src: getR2Url("branding/broadway/images/this_week_movies/04.webp"),
+            src: getR2Url("branding/broadway/images/this_week_movies/4.webp"),
           },
           {
             id: "bwc-twm-5",
-            src: getR2Url("branding/broadway/images/this_week_movies/05.webp"),
+            src: getR2Url("branding/broadway/images/this_week_movies/5.webp"),
           },
           {
             id: "bwc-twm-6",
-            src: getR2Url("branding/broadway/images/this_week_movies/06.webp"),
+            src: getR2Url("branding/broadway/images/this_week_movies/6.webp"),
           },
           {
             id: "bwc-twm-7",
-            src: getR2Url("branding/broadway/images/this_week_movies/07.webp"),
+            src: getR2Url("branding/broadway/images/this_week_movies/7.webp"),
           },
           {
             id: "bwc-twm-8",
-            src: getR2Url("branding/broadway/images/this_week_movies/08.webp"),
+            src: getR2Url("branding/broadway/images/this_week_movies/8.webp"),
           },
           {
             id: "bwc-twm-9",
-            src: getR2Url("branding/broadway/images/this_week_movies/09.webp"),
+            src: getR2Url("branding/broadway/images/this_week_movies/9.webp"),
           },
           {
             id: "bwc-twm-10",
@@ -250,41 +226,41 @@ export const BRANDS = [
         images: [
           {
             id: "bwc-port-1",
-            src: getR2Url("branding/broadway/images/poster_design/01.webp"),
+            src: getR2Url("branding/broadway/images/poster_design/1.webp"),
             aspect: "landscape",
           },
           {
             id: "bwc-port-2",
-            src: getR2Url("branding/broadway/images/poster_design/02.webp"),
+            src: getR2Url("branding/broadway/images/poster_design/2.webp"),
             aspect: "landscape",
           },
           {
             id: "bwc-port-3",
-            src: getR2Url("branding/broadway/images/poster_design/03.webp"),
+            src: getR2Url("branding/broadway/images/poster_design/3.webp"),
           },
           {
             id: "bwc-port-4",
-            src: getR2Url("branding/broadway/images/poster_design/04.webp"),
+            src: getR2Url("branding/broadway/images/poster_design/4.webp"),
           },
           {
             id: "bwc-port-5",
-            src: getR2Url("branding/broadway/images/poster_design/05.webp"),
+            src: getR2Url("branding/broadway/images/poster_design/5.webp"),
           },
           {
             id: "bwc-port-6",
-            src: getR2Url("branding/broadway/images/poster_design/06.webp"),
+            src: getR2Url("branding/broadway/images/poster_design/6.webp"),
           },
           {
             id: "bwc-port-7",
-            src: getR2Url("branding/broadway/images/poster_design/07.webp"),
+            src: getR2Url("branding/broadway/images/poster_design/7.webp"),
           },
           {
             id: "bwc-port-8",
-            src: getR2Url("branding/broadway/images/poster_design/08.webp"),
+            src: getR2Url("branding/broadway/images/poster_design/8.webp"),
           },
           {
             id: "bwc-port-9",
-            src: getR2Url("branding/broadway/images/poster_design/09.webp"),
+            src: getR2Url("branding/broadway/images/poster_design/9.webp"),
           },
           {
             id: "bwc-port-10",
