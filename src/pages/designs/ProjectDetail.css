@@ -163,12 +163,13 @@
 
 .project-header-card-grid {
   display: grid;
-  grid-template-columns: minmax(280px, 1.15fr) minmax(320px, 1.7fr);
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.65fr);
   gap: clamp(24px, 4vw, 56px);
   align-items: center;
 }
 
 .project-header-col-title {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -176,18 +177,22 @@
 }
 
 .project-headline-title {
-  font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+  font-size: clamp(2rem, 3.4vw, 3.4rem);
   font-weight: 900;
-  line-height: 1.05;
+  line-height: 1.08;
   letter-spacing: -0.01em;
   text-transform: uppercase;
   color: var(--project-text);
   margin: 0;
   text-align: left;
-  max-width: 440px;
+}
+
+.project-headline-line {
+  display: block;
 }
 
 .project-header-col-desc {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -224,13 +229,9 @@
 }
 
 .project-deliverables-line {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: inline-block;
   text-align: center;
-  gap: 8px 12px;
-  padding: 14px clamp(20px, 3vw, 36px);
+  padding: 12px clamp(24px, 3.5vw, 42px);
   background: color-mix(in srgb, var(--project-text) 10%, rgba(0, 0, 0, 0.45));
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -238,23 +239,35 @@
   border-radius: 9999px;
   max-width: 980px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  line-height: 1.8;
 }
 
 .deliverables-label {
   font-weight: 800;
   text-transform: uppercase;
   font-size: 0.88rem;
-  letter-spacing: 0.08em;
-  color: var(--project-text);
-  white-space: nowrap;
+  letter-spacing: 0.1em;
+  color: var(--project-accent, var(--project-text));
+  margin-right: 8px;
+  display: inline;
 }
 
 .deliverables-items {
   font-weight: 600;
-  font-size: 0.94rem;
-  letter-spacing: 0.01em;
+  font-size: 0.92rem;
+  letter-spacing: 0.015em;
   color: var(--project-text);
-  line-height: 1.5;
+  display: inline;
+}
+
+.deliverables-bullet {
+  color: var(--project-text);
+  opacity: 0.75;
+  margin: 0 5px;
+}
+
+.deliverables-item {
+  white-space: nowrap;
 }
 
 /* =========================================================
@@ -326,14 +339,18 @@
   max-width: 1400px;
   margin: 0 auto 32px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-auto-flow: row dense;
   gap: clamp(16px, 2.2vw, 28px);
-  align-items: stretch;
+  align-items: start;
 }
 
 .staggered-custom-item {
   position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   aspect-ratio: 4 / 5;
   grid-column: span 1;
   border-radius: 18px;
@@ -1023,6 +1040,196 @@
 }
 
 /* =========================================================
+   FEATURED BANNER & COLLATERALS GALLERY (e.g. Sunbeam School Offline Print Works)
+========================================================= */
+.featured-banner-gallery {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto 32px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(18px, 2.4vw, 28px);
+}
+
+/* 1. Hero Campaign Banner */
+.featured-banner-hero-card {
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--project-card-bg);
+  border: 1.5px solid var(--project-border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  margin: 0;
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.3, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease;
+}
+
+.featured-banner-hero-card:hover,
+.featured-banner-hero-card:focus-visible {
+  transform: translateY(-5px);
+  border-color: var(--project-accent);
+  box-shadow: 0 24px 50px -14px rgba(0, 0, 0, 0.55), 0 0 24px rgba(2, 132, 199, 0.25);
+}
+
+.featured-banner-hero-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 7.5;
+  max-height: 520px;
+  overflow: hidden;
+}
+
+.featured-banner-hero-img-wrap {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+.featured-banner-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.65s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.featured-banner-hero-card:hover .featured-banner-hero-img {
+  transform: scale(1.025);
+}
+
+/* 2. Sub-cards Grid (3 columns) */
+.featured-banner-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2.2vw, 28px);
+  align-items: stretch;
+}
+
+.featured-banner-sub-card {
+  position: relative;
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--project-card-bg);
+  border: 1.5px solid var(--project-border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  margin: 0;
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.3, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease;
+}
+
+.featured-banner-sub-card:hover,
+.featured-banner-sub-card:focus-visible {
+  transform: translateY(-5px);
+  border-color: var(--project-accent);
+  box-shadow: 0 24px 50px -14px rgba(0, 0, 0, 0.55), 0 0 24px rgba(2, 132, 199, 0.25);
+}
+
+.featured-banner-sub-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 4.5;
+  overflow: hidden;
+}
+
+.featured-banner-sub-img-wrap {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+.featured-banner-sub-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.65s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.featured-banner-sub-card:hover .featured-banner-sub-img {
+  transform: scale(1.04);
+}
+
+/* Hover Scrim and Zoom Buttons */
+.featured-banner-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 0.5) 100%);
+  pointer-events: none;
+}
+
+.featured-banner-hover-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 25, 58, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 3;
+}
+
+.featured-banner-hero-card:hover .featured-banner-hover-scrim,
+.featured-banner-hero-card:focus-visible .featured-banner-hover-scrim,
+.featured-banner-sub-card:hover .featured-banner-hover-scrim,
+.featured-banner-sub-card:focus-visible .featured-banner-hover-scrim {
+  opacity: 1;
+  visibility: visible;
+}
+
+.featured-banner-zoom-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  background: #ffffff;
+  color: #04193a;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transform: translateY(6px);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.featured-banner-hero-card:hover .featured-banner-zoom-btn,
+.featured-banner-hero-card:focus-visible .featured-banner-zoom-btn,
+.featured-banner-sub-card:hover .featured-banner-zoom-btn,
+.featured-banner-sub-card:focus-visible .featured-banner-zoom-btn {
+  transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+  .featured-banner-hero-thumb {
+    aspect-ratio: 16 / 9;
+  }
+  .featured-banner-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .featured-banner-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
    CATEGORY-LEVEL VERTICAL VIDEO REELS
 ========================================================= */
 
@@ -1390,6 +1597,15 @@
     padding: 10px 18px;
     font-size: 0.86rem;
     border-radius: 20px;
+    line-height: 1.6;
+  }
+
+  .project-headline-line {
+    white-space: normal;
+  }
+
+  .deliverables-item {
+    white-space: normal;
   }
 
   .project-vertical-videos-grid {

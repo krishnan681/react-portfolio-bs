@@ -7,7 +7,7 @@ import "./Branding.css";
 
 export default function Branding() {
   const navigate = useNavigate();
-  const [activeIndex, setActiveIndex] = useState(2);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [cardWidth, setCardWidth] = useState(280);
   const containerRef = useRef(null);
 
@@ -157,7 +157,7 @@ export default function Branding() {
                         }}
                         transition={{ duration: 0.3 }}
                       >
-                        <h3 className="branding-card-title">{item.title}</h3>
+                        <h3 className="branding-card-title">{item.title.replace("\n", " ")}</h3>
                         <p className="branding-card-category">{item.category}</p>
                       </motion.div>
                     </motion.div>

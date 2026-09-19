@@ -30,7 +30,8 @@ export const BRANDS = [
       {
         id: "imax",
         title: "IMAX Works",
-        subtext: "Large-format IMAX with Laser promotional artworks and laser-format key visuals.",
+        subtext:
+          "Large-format IMAX with Laser promotional artworks and laser-format key visuals.",
         images: [
           {
             id: "bwc-imax-1",
@@ -166,10 +167,68 @@ export const BRANDS = [
           },
         ],
       },
+
+      {
+        id: "Hyper X Launch",
+        title: "Hyper X Launch",
+        subtext:
+          "Immersive interior and exterior design concepts for modern cinema architecture.",
+        initialCount: 3,
+        step: 3,
+        images: [
+          {
+            id: "bwc-arch-1",
+            src: getR2Url("branding/broadway/images/hyperxlaunch/1.jpg"),
+            aspect: "portrait",
+          },
+          {
+            id: "bwc-arch-2",
+            src: getR2Url("branding/broadway/images/hyperxlaunch/2.jpg"),
+            aspect: "portrait",
+          },
+          {
+            id: "bwc-arch-3",
+            src: getR2Url("branding/broadway/images/hyperxlaunch/3.jpg"),
+            aspect: "portrait",
+          },
+          {
+            id: "bwc-arch-4",
+            src: getR2Url("branding/broadway/images/hyperxlaunch/4.jpg"),
+            aspect: "portrait",
+          },
+          {
+            id: "bwc-arch-5",
+            src: getR2Url("branding/broadway/images/hyperxlaunch/5.jpg"),
+            aspect: "portrait",
+          },
+          {
+            id: "bwc-arch-6",
+            src: getR2Url("branding/broadway/images/hyperxlaunch/6.jpg"),
+            aspect: "portrait",
+          },
+          {
+            id: "bwc-arch-7",
+            src: getR2Url("branding/broadway/images/hyperxlaunch/7.jpg"),
+            aspect: "portrait",
+          },
+          {
+            id: "bwc-arch-8",
+            src: getR2Url("branding/broadway/images/hyperxlaunch/8.jpg"),
+            aspect: "portrait",
+          },
+          {
+            id: "bwc-arch-9",
+            src: getR2Url("branding/broadway/images/hyperxlaunch/9.jpg"),
+            aspect: "portrait",
+          },
+        ],
+      },
+
       {
         id: "this-week-movies",
         title: "This Week Movies",
-        subtext: "Weekly premiere announcements, showtime schedules, and blockbuster spotlights.",
+        subtext:
+          "Weekly premiere announcements, showtime schedules, and blockbuster spotlights.",
         layout: "portrait",
         images: [
           {
@@ -451,137 +510,137 @@ export const BRANDS = [
       },
       {
         id: "gnt-img-4",
-        src: getR2Url("branding/giggles-and-twirls/images/4.webp"),
+        src: getR2Url("branding/giggles-and-twirls/images/19.webp"),
         title: "Organic Fabric Story Carousel",
         tag: "Fabric Story",
         aspect: "portrait",
       },
       {
         id: "gnt-img-5",
-        src: getR2Url("branding/giggles-and-twirls/images/5.webp"),
+        src: getR2Url("branding/giggles-and-twirls/images/20.webp"),
         title: "Pastel Linen Kids Wear Collection",
         tag: "Kids Collection",
         aspect: "portrait",
       },
       {
         id: "gnt-img-6",
-        src: getR2Url("branding/giggles-and-twirls/images/6.webp"),
+        src: getR2Url("branding/giggles-and-twirls/images/21.webp"),
         title: "Artisanal Weave Fashion Feature",
         tag: "Lookbook",
         aspect: "portrait",
       },
       {
         id: "gnt-img-7",
-        src: getR2Url("branding/giggles-and-twirls/images/7.webp"),
+        src: getR2Url("branding/giggles-and-twirls/images/10.webp"),
         title: "Sustainable Linen Spotlight",
         tag: "Campaign",
         aspect: "portrait",
       },
       {
         id: "gnt-img-8",
-        src: getR2Url("branding/giggles-and-twirls/images/8.webp"),
+        src: getR2Url("branding/giggles-and-twirls/images/11.webp"),
         title: "Modern Linen Silhouette Study",
         tag: "Lookbook",
         aspect: "portrait",
       },
       {
         id: "gnt-img-9",
-        src: getR2Url("branding/giggles-and-twirls/images/9.webp"),
+        src: getR2Url("branding/giggles-and-twirls/images/12.webp"),
         title: "Breathable Daily Essentials Series",
         tag: "Product Spotlight",
         aspect: "portrait",
       },
       {
         id: "gnt-img-10",
-        src: getR2Url("branding/giggles-and-twirls/images/10.webp"),
+        src: getR2Url("branding/giggles-and-twirls/images/13.webp"),
         title: "Soft Linen Loungewear Look",
         tag: "Editorial",
         aspect: "portrait",
       },
       {
         id: "gnt-img-11",
-        src: getR2Url("branding/giggles-and-twirls/images/11.webp"),
+        src: getR2Url("branding/giggles-and-twirls/images/14.webp"),
         title: "Mom & Child Coordinated Couture",
         tag: "Collection",
         aspect: "portrait",
       },
       {
         id: "gnt-img-12",
-        src: getR2Url("branding/giggles-and-twirls/images/12.webp"),
+        src: getR2Url("branding/giggles-and-twirls/images/15.webp"),
         title: "Earth Tone Natural Linen Palette",
         tag: "Color Story",
         aspect: "portrait",
       },
       {
         id: "gnt-img-13",
-        src: getR2Url("branding/giggles-and-twirls/images/13.webp"),
+        src: getR2Url("branding/giggles-and-twirls/images/4.webp"),
         title: "Playful Linen Twirl Dress Feature",
         tag: "Kids Fashion",
         aspect: "portrait",
       },
       {
         id: "gnt-img-14",
-        src: getR2Url("branding/giggles-and-twirls/images/14.webp"),
+        src: getR2Url("branding/giggles-and-twirls/images/5.webp"),
         title: "Minimalist Linen Resort Wear",
         tag: "Resort Series",
         aspect: "portrait",
       },
       {
         id: "gnt-img-15",
-        src: getR2Url("branding/giggles-and-twirls/images/15.webp"),
+        src: getR2Url("branding/giggles-and-twirls/images/6.webp"),
         title: "Handcrafted Detail & Texture Macro",
         tag: "Texture Detail",
         aspect: "portrait",
       },
       {
         id: "gnt-img-16",
-        src: getR2Url("branding/giggles-and-twirls/images/16.webp"),
+        src: getR2Url("branding/giggles-and-twirls/images/7.webp"),
         title: "Breezy Summer Linen Set",
         tag: "Summer Line",
         aspect: "portrait",
       },
       {
         id: "gnt-img-17",
-        src: getR2Url("branding/giggles-and-twirls/images/17.webp"),
+        src: getR2Url("branding/giggles-and-twirls/images/8.webp"),
         title: "Eco-Conscious Fabric Campaign",
         tag: "Campaign",
         aspect: "portrait",
       },
       {
         id: "gnt-img-18",
-        src: getR2Url("branding/giggles-and-twirls/images/18.webp"),
+        src: getR2Url("branding/giggles-and-twirls/images/9.webp"),
         title: "Timeless Pure Linen Elegance",
         tag: "Editorial",
         aspect: "portrait",
       },
       {
         id: "gnt-img-19",
-        src: getR2Url("branding/giggles-and-twirls/images/19.webp"),
+        src: getR2Url("branding/giggles-and-twirls/images/16.webp"),
         title: "Contemporary Minimalist Kids Wardrobe",
         tag: "Kids Wardrobe",
         aspect: "portrait",
       },
       {
         id: "gnt-img-20",
-        src: getR2Url("branding/giggles-and-twirls/images/20.webp"),
+        src: getR2Url("branding/giggles-and-twirls/images/17.webp"),
         title: "Relaxed Fit Linen Tunic Series",
         tag: "Product Spotlight",
         aspect: "portrait",
       },
-      {
-        id: "gnt-img-21",
-        src: getR2Url("branding/giggles-and-twirls/images/21.webp"),
-        title: "Soft Linen Swatch & Color Harmony",
-        tag: "Brand Guide",
-        aspect: "portrait",
-      },
-      {
-        id: "gnt-img-22",
-        src: getR2Url("branding/giggles-and-twirls/images/22.webp"),
-        title: "Playful Movement & Linen Flow",
-        tag: "Lookbook",
-        aspect: "portrait",
-      },
+      // {
+      //   id: "gnt-img-21",
+      //   src: getR2Url("branding/giggles-and-twirls/images/18.webp"),
+      //   title: "Soft Linen Swatch & Color Harmony",
+      //   tag: "Brand Guide",
+      //   aspect: "portrait",
+      // },
+      // {
+      //   id: "gnt-img-22",
+      //   src: getR2Url("branding/giggles-and-twirls/images/22.webp"),
+      //   title: "Playful Movement & Linen Flow",
+      //   tag: "Lookbook",
+      //   aspect: "portrait",
+      // },
       {
         id: "gnt-img-23",
         src: getR2Url("branding/giggles-and-twirls/images/23.webp"),
@@ -911,7 +970,7 @@ export const BRANDS = [
     sectionTitle: "ARTISANAL GASTRONOMY",
     headline:
       "Crafting appetizing aesthetics and rich culinary visual storytelling.",
-    category: "Café & Restaurant / Culinary Experience / Hospitality",
+    category: "Cafe & Restaurant / Culinary Experience / Hospitality",
     logo: getR2Url("branding/covers/5.webp"),
     banner: getR2Url("branding/banners/Banners-05.webp"),
     src: getR2Url("branding/covers/5.webp"),
@@ -920,7 +979,7 @@ export const BRANDS = [
     cardTextColor: "#24211f",
     designVariant: "showcase",
     description:
-      "That's Y Food – A premium multi-cuisine restaurant known for global flavors and fine dining. On the Go (OTG) – A casual café and restaurant serving quick meals, beverages, and comfort food. Café Totaram – A cozy café at Race Course, Coimbatore, popular for fusion food, desserts, coffee, and baked treats in a relaxed ambience.",
+      "That's Y Food – A premium multi-cuisine restaurant known for global flavors and fine dining. On the Go (OTG) – A casual cafe and restaurant serving quick meals, beverages, and comfort food. Cafe Totaram – A cozy Cafe at Race Course, Coimbatore, popular for fusion food, desserts, coffee, and baked treats in a relaxed ambience.",
     details: "",
     deliverables: ["Social media contents", "Video shoot", "Pla cards"],
     images: [
@@ -1015,41 +1074,6 @@ export const BRANDS = [
         tag: "Social Creative",
         aspect: "portrait",
       },
-      {
-        id: "tyf-img-14",
-        src: getR2Url("branding/cafes/images/14.webp"),
-        title: "Festive Dining Showcase Carousel",
-        tag: "Social Creative",
-        aspect: "portrait",
-      },
-      {
-        id: "tyf-img-15",
-        src: getR2Url("branding/cafes/images/15.webp"),
-        title: "Festive Dining Showcase Carousel",
-        tag: "Social Creative",
-        aspect: "portrait",
-      },
-      {
-        id: "tyf-img-16",
-        src: getR2Url("branding/cafes/images/16.webp"),
-        title: "Festive Dining Showcase Carousel",
-        tag: "Social Creative",
-        aspect: "portrait",
-      },
-      {
-        id: "tyf-img-17",
-        src: getR2Url("branding/cafes/images/17.webp"),
-        title: "Festive Dining Showcase Carousel",
-        tag: "Social Creative",
-        aspect: "portrait",
-      },
-      {
-        id: "tyf-img-18",
-        src: getR2Url("branding/cafes/images/18.webp"),
-        title: "Festive Dining Showcase Carousel",
-        tag: "Social Creative",
-        aspect: "portrait",
-      },
     ],
     videos: [
       {
@@ -1120,7 +1144,7 @@ export const BRANDS = [
   {
     id: "06",
     slug: "the-long-story",
-    title: "The Long Story - Spirits & Spice",
+    title: "The Long Story\nSpirits & Spice",
     sectionTitle: "SPIRITS & SPICE AMBIENCE",
     headline:
       "Crafting bespoke narrative and ambient aesthetics for fine spirits & gourmet dining.",
@@ -1134,7 +1158,7 @@ export const BRANDS = [
     cardTextColor: "#133d20",
     designVariant: "cinematic",
     description:
-      "The Long Story — Spirits & Spice is an upscale resto-lounge offering signature mixology, gourmet gastronomy, and refined nightlife storytelling with curated ambient aesthetics.",
+      "The Long Story / Spirits & Spice is an upscale resto-lounge offering signature mixology, gourmet gastronomy, and refined nightlife storytelling with curated ambient aesthetics.",
     details: "",
     deliverables: [
       "Brand Identity System",
@@ -1226,7 +1250,7 @@ export const BRANDS = [
       },
       {
         id: "pvz-img-5",
-        src: getR2Url("branding/pavizham-jewellers/images/5.webp"),
+        src: getR2Url("branding/pavizham-jewellers/images/7.webp"),
         title: "Festive Bridal Catalog Cover",
         tag: "Catalog Design",
         aspect: "portrait",
@@ -1240,18 +1264,18 @@ export const BRANDS = [
       },
       {
         id: "pvz-img-7",
-        src: getR2Url("branding/pavizham-jewellers/images/7.webp"),
+        src: getR2Url("branding/pavizham-jewellers/images/5.webp"),
         title: "Festive Bridal Catalog Cover",
         tag: "Catalog Design",
         aspect: "portrait",
       },
-      {
-        id: "pvz-img-8",
-        src: getR2Url("branding/pavizham-jewellers/images/8.webp"),
-        title: "Festive Bridal Catalog Cover",
-        tag: "Catalog Design",
-        aspect: "portrait",
-      },
+      // {
+      //   id: "pvz-img-8",
+      //   src: getR2Url("branding/pavizham-jewellers/images/8.webp"),
+      //   title: "Festive Bridal Catalog Cover",
+      //   tag: "Catalog Design",
+      //   aspect: "portrait",
+      // },
     ],
     videos: [
       {
@@ -1383,6 +1407,7 @@ export const BRANDS = [
         title: "Offline Print Works",
         subtext:
           "Campus admission banners, event invitations, and dietary menu collaterals.",
+        layout: "featured-banner",
         images: [
           {
             id: "sbm-print-1",
@@ -1480,7 +1505,7 @@ export const BRANDS = [
     logo: getR2Url("branding/covers/10.webp"),
     banner: getR2Url("branding/banners/Banners-10.webp"),
     src: getR2Url("branding/covers/10.webp"),
-    color: "#0E6B88",
+    color: "#e8faffff",
     cardBg: "#ffffff",
     cardTextColor: "#1C6AA0",
     designVariant: "minimal",

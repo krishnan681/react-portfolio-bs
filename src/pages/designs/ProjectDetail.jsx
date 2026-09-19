@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
@@ -83,7 +83,6 @@ function StaggeredGridGallery({
                 wrapperClassName="staggered-custom-img-wrap"
                 onLoad={(e) => handleImageLoad(item.id || idx, e)}
               />
-              <span className="staggered-custom-tag">{itemNumber}</span>
             </figure>
           );
         })}
@@ -174,11 +173,6 @@ function PortraitPostersGrid({
                 />
 
                 <div className="portrait-poster-vignette" />
-
-                <div className="portrait-poster-badge">
-                  <Clapperboard size={13} />
-                  <span>Feature {itemNumber}</span>
-                </div>
 
                 <div className="portrait-poster-hover-scrim">
                   <div className="portrait-poster-zoom-btn">
@@ -333,11 +327,6 @@ function PortraitRowsGallery({
 
                     <div className="portrait-row-vignette" />
 
-                    <div className="portrait-row-badge">
-                      <Sparkles size={12} />
-                      <span>{itemNumber}</span>
-                    </div>
-
                     <div className="portrait-row-hover-scrim">
                       <div className="portrait-row-zoom-btn">
                         <Maximize2 size={15} />
@@ -384,6 +373,93 @@ function PortraitRowsGallery({
           <p className="staggered-load-status-text">
             Showing {totalVisibleItems} of {items.length} designs
           </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* =========================================================
+   4. FEATURED BANNER & COLLATERALS GALLERY
+   Tailored for showcase categories with a hero campaign banner
+   and supporting print collaterals (e.g. Sunbeam School Offline Print Works)
+========================================================= */
+function FeaturedBannerGallery({ items, onSelectImage, categoryTitle }) {
+  if (!items || items.length === 0) return null;
+
+  const [heroItem, ...subItems] = items;
+
+  return (
+    <div className="featured-banner-gallery">
+      {/* 1. Hero Campaign Banner */}
+      {heroItem && (
+        <article
+          className="featured-banner-hero-card"
+          onClick={() => onSelectImage(heroItem)}
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              onSelectImage(heroItem);
+            }
+          }}
+        >
+          <div className="featured-banner-hero-thumb">
+            <ImageWithSkeleton
+              src={heroItem.src}
+              alt={`${categoryTitle} - ${heroItem.title || "Campaign Banner"}`}
+              className="featured-banner-hero-img"
+              wrapperClassName="featured-banner-hero-img-wrap"
+            />
+            <div className="featured-banner-vignette" />
+            <div className="featured-banner-hover-scrim">
+              <div className="featured-banner-zoom-btn">
+                <Maximize2 size={16} />
+                <span>{heroItem.tag || "View Banner"}</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      )}
+
+      {/* 2. Collateral Cards Row */}
+      {subItems.length > 0 && (
+        <div
+          className={`featured-banner-cards-grid featured-banner-cards-${Math.min(
+            subItems.length,
+            3
+          )}`}
+        >
+          {subItems.map((item, idx) => (
+            <article
+              key={item.id || `sub-item-${idx}`}
+              className="featured-banner-sub-card"
+              onClick={() => onSelectImage(item)}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  onSelectImage(item);
+                }
+              }}
+            >
+              <div className="featured-banner-sub-thumb">
+                <ImageWithSkeleton
+                  src={item.src}
+                  alt={`${categoryTitle} - ${item.title || `Collateral ${idx + 1}`}`}
+                  className="featured-banner-sub-img"
+                  wrapperClassName="featured-banner-sub-img-wrap"
+                />
+                <div className="featured-banner-vignette" />
+                <div className="featured-banner-hover-scrim">
+                  <div className="featured-banner-zoom-btn">
+                    <Maximize2 size={15} />
+                    <span>{item.tag || "View Collateral"}</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       )}
     </div>
@@ -547,7 +623,14 @@ export default function ProjectDetail({ data }) {
         <header className="project-header-card">
           <div className="project-header-card-grid">
             <div className="project-header-col-title">
-              <h1 className="project-headline-title">{project.title}</h1>
+              <h1 className="project-headline-title">
+                {project.title.split("\n").map((line, idx) => (
+                  <Fragment key={idx}>
+                    {idx > 0 && <br />}
+                    <span className="project-headline-line">{line}</span>
+                  </Fragment>
+                ))}
+              </h1>
             </div>
 
             <div className="project-header-col-desc">
@@ -568,7 +651,12 @@ export default function ProjectDetail({ data }) {
               <div className="project-deliverables-line">
                 <span className="deliverables-label">DELIVERABLES :</span>
                 <span className="deliverables-items">
-                  {project.deliverables.join(" • ")}
+                  {project.deliverables.map((item, idx) => (
+                    <Fragment key={idx}>
+                      {idx > 0 && <span className="deliverables-bullet"> • </span>}
+                      <span className="deliverables-item">{item}</span>
+                    </Fragment>
+                  ))}
                 </span>
               </div>
             </div>
@@ -582,6 +670,10 @@ export default function ProjectDetail({ data }) {
             const catVideos = category.videos || [];
             if (catImages.length === 0 && catVideos.length === 0) return null;
 
+            const isFeaturedBannerLayout =
+              category.layout === "featured-banner" ||
+              category.layout === "hero-banner" ||
+              category.id === "offline-print-works";
             const isPortraitRowsLayout =
               category.layout === "portrait-5-4" ||
               category.layout === "portrait-rows";
@@ -605,9 +697,15 @@ export default function ProjectDetail({ data }) {
                   )}
                 </div>
 
-                {/* Render Custom Portrait Rows, Portrait Posters Grid, or Staggered Grid */}
+                {/* Render Custom Portrait Rows, Portrait Posters Grid, Featured Banner, or Staggered Grid */}
                 {catImages.length > 0 &&
-                  (isPortraitRowsLayout ? (
+                  (isFeaturedBannerLayout ? (
+                    <FeaturedBannerGallery
+                      items={catImages}
+                      onSelectImage={(item) => setSelectedImage(item)}
+                      categoryTitle={category.title}
+                    />
+                  ) : isPortraitRowsLayout ? (
                     <PortraitRowsGallery
                       items={catImages}
                       onSelectImage={(item) => setSelectedImage(item)}
