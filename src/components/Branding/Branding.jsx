@@ -176,6 +176,7 @@ export default function Branding() {
               className={`branding-control-btn ${activeIndex === 0 ? "disabled" : ""}`}
               aria-label="Previous project"
             >
+              {/* <ChevronLeft size={20} /> */}
               <ChevronLeft size={20} />
             </button>
 

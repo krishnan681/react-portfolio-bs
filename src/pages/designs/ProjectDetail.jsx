@@ -666,6 +666,20 @@ export default function ProjectDetail({ data }) {
       ? BRANDS[currentIndex + 1]
       : BRANDS[0];
 
+  // Preload Next & Previous project banners in background for instant transitions
+  useEffect(() => {
+    if (!project) return;
+    const bannersToPreload = [
+      nextProject?.banner || nextProject?.src,
+      prevProject?.banner || prevProject?.src,
+    ].filter(Boolean);
+
+    bannersToPreload.forEach((bannerUrl) => {
+      const img = new Image();
+      img.src = bannerUrl;
+    });
+  }, [project, nextProject, prevProject]);
+
   // 404 Project Not Found State
   if (!project) {
     return (
@@ -724,10 +738,13 @@ export default function ProjectDetail({ data }) {
       <section className="project-hero-banner-section">
         <div className="project-banner-container">
           <ImageWithSkeleton
+            key={project.slug}
             src={project.banner || project.src}
             className="project-banner-media"
             wrapperClassName="w-100 h-100"
             alt={`${project.title} Banner`}
+            loading="eager"
+            fetchPriority="high"
           />
           <div className="project-banner-vignette" />
         </div>

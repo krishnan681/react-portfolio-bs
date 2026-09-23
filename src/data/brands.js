@@ -130,29 +130,25 @@ export const BRANDS = [
             src: getR2Url("branding/broadway/images/menu_designs/3.webp"),
             aspect: "landscape",
           },
-          {
-            id: "bwc-post-4",
-            src: getR2Url("branding/broadway/images/menu_designs/4.webp"),
-            aspect: "landscape",
-          },
+          
           {
             id: "bwc-post-5",
-            src: getR2Url("branding/broadway/images/menu_designs/5.webp"),
-            aspect: "portrait",
-          },
-          {
-            id: "bwc-post-6",
-            src: getR2Url("branding/broadway/images/menu_designs/6.webp"),
-            aspect: "portrait",
-          },
-          {
-            id: "bwc-post-7",
             src: getR2Url("branding/broadway/images/menu_designs/7.webp"),
             aspect: "portrait",
           },
           {
-            id: "bwc-post-8",
+            id: "bwc-post-6",
             src: getR2Url("branding/broadway/images/menu_designs/8.webp"),
+            aspect: "portrait",
+          },
+          {
+            id: "bwc-post-7",
+            src: getR2Url("branding/broadway/images/menu_designs/5.webp"),
+            aspect: "portrait",
+          },
+          {
+            id: "bwc-post-8",
+            src: getR2Url("branding/broadway/images/menu_designs/6.webp"),
             aspect: "portrait",
           },
           {
@@ -173,8 +169,8 @@ export const BRANDS = [
         title: "Hyper X Launch",
         subtext:
           "Immersive interior and exterior design concepts for modern cinema architecture.",
-        initialCount: 3,
-        step: 3,
+        initialCount: 4,
+        step: 4,
         images: [
           {
             id: "bwc-arch-1",
@@ -476,10 +472,9 @@ export const BRANDS = [
       },
 
       {
-        id: "videos",
+        id: "celebrity-media-works",
         title: "Celebrity & Media Works",
         layout: "portrait",
-         
         videos: [
           {
             id: "bwc-vid-16",
@@ -1303,8 +1298,8 @@ export const BRANDS = [
   {
     id: "06",
     slug: "the-long-story",
-    title: "The Long Story\nSpirits & Spice",
-    sectionTitle: "SPIRITS & SPICE AMBIENCE",
+    title: "The Long Story Spirits & Spice",
+    // sectionTitle: "SPIRITS & SPICE AMBIENCE",
     headline:
       "Crafting bespoke narrative and ambient aesthetics for fine spirits & gourmet dining.",
     category:

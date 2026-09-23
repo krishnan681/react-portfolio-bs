@@ -59,18 +59,18 @@ export default function Hero() {
           {/* Main Content Area */}
           <div className="hero-content">
             <div className="hero-main-typography">
-              {/* Eyebrow greeting */}
-              <div className="hero-eyebrow">
-                <span className="eyebrow-dot" />
-                <span className="eyebrow-text" style={{ color: "whitesmoke" }}>
-                  HI THERE,
-                </span>
-              </div>
-
               {/* Main Headline */}
               <h1 className="hero-editorial-title">
-                {/* Line 1: The Name with vertical badge & letter-by-letter hover animation */}
+                {/* Line 1: Eyebrow + Name with vertical badge & letter-by-letter hover animation */}
                 <div className="title-name-container">
+                  {/* Eyebrow greeting */}
+                  <div className="hero-eyebrow">
+                    <span className="eyebrow-dot" />
+                    <span className="eyebrow-text">
+                      HI THERE,
+                    </span>
+                  </div>
+
                   <div className="hero-vertical-tag" aria-hidden="true">
                     <span>VISUAL,CREATIVE,CINEMATIC</span>
                   </div>
@@ -85,7 +85,7 @@ export default function Hero() {
 
                 {/* Line 2: Background Removed GIF + Rotating Roles & Underline on Same Line */}
                 <span className="title-line-2">
-                  <div className="hero-gif-slot" id="hero-gif-slot">
+                  {/* <div className="hero-gif-slot" id="hero-gif-slot">
                     <img
                       src={heroGif}
                       alt="Animated element"
@@ -93,7 +93,7 @@ export default function Hero() {
                       decoding="async"
                       loading="eager"
                     />
-                  </div>
+                  </div> */}
 
                   {/* Rotating Roles with SVG Underline */}
                   <div className="rotating-text-with-underline">

@@ -73,28 +73,20 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  margin-top: clamp(-40px, -4vh, -10px);
 }
 
 .hero-eyebrow {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 10px;
-  position: relative;
-  top: clamp(30px, 8vw, 130px);
-  right: 30%;
-  margin-bottom: 22px;
-  width: 100%;
-  padding-left: 0;
-
-  @media screen and (max-width: 640px) {
-    right: 120px;
-  }
+  margin-bottom: clamp(8px, 1.2vw, 16px);
+  padding-left: 2px;
 }
 
 .eyebrow-dot {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   background-color: #ffffff;
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
@@ -104,10 +96,10 @@
 
 .eyebrow-text {
   font-family: var(--hero-mono);
-  font-size: clamp(11px, 1.2vw, 15px);
+  font-size: clamp(11px, 1.1vw, 15px);
   font-weight: 700;
-  letter-spacing: 2px;
-  color: #ffffff;
+  letter-spacing: 2.5px;
+  color: rgba(255, 255, 255, 0.95);
   text-transform: uppercase;
 }
 
@@ -118,7 +110,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: clamp(10px, 2vw, 26px);
+  gap: clamp(14px, 2.2vw, 28px);
   font-family: var(--hero-serif);
   font-weight: 700;
   letter-spacing: -1.5px;
@@ -131,15 +123,16 @@
 .title-name-container {
   position: relative;
   display: inline-flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
   max-width: 100%;
 }
 
 .hero-vertical-tag {
   position: absolute;
-  left: clamp(-150px, -9vw, -180px);
-  top: 140%;
+  left: clamp(-160px, -10vw, -120px);
+  top: 58%;
   transform: translateY(-50%) rotate(-90deg);
   transform-origin: center center;
   font-family: var(--hero-mono);
@@ -163,11 +156,11 @@
 }
 
 .title-name {
-  font-size: clamp(34px, 11vw, 150px);
+  font-size: clamp(38px, 10.8vw, 148px);
   color: var(--hero-ivory);
-  position: relative;
-  bottom: -75%;
   white-space: nowrap;
+  letter-spacing: -0.015em;
+  position: static;
 }
 
 .title-line-2 {
@@ -175,24 +168,25 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: clamp(8px, 1.5vw, 16px);
-  font-size: clamp(22px, 6vw, 80px);
+  gap: clamp(10px, 1.8vw, 22px);
+  font-size: clamp(24px, 5.8vw, 76px);
   color: var(--hero-yellow);
-  line-height: 1;
+  line-height: 1.1;
 }
 
 .rotating-text-with-underline {
   position: relative;
   display: inline-flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
 }
 
 .rotator-underline-svg {
   width: 100%;
-  max-width: clamp(160px, 26vw, 320px);
-  height: clamp(9px, 1.5vw, 14px);
-  margin-top: 4px;
+  max-width: clamp(170px, 25vw, 320px);
+  height: clamp(9px, 1.4vw, 15px);
+  margin-top: 6px;
   display: block;
   overflow: visible;
   filter: drop-shadow(0 2px 10px rgba(255, 208, 38, 0.5));
@@ -233,15 +227,15 @@
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   align-items: center;
-  justify-items: start;
+  justify-items: center;
   position: relative;
   vertical-align: middle;
-  text-align: left;
+  text-align: center;
 }
 
 .rotator-slot .rotating-word {
   grid-area: 1 / 1;
-  justify-self: start;
+  justify-self: center;
   color: var(--hero-yellow);
   text-shadow: 0 4px 22px rgba(255, 208, 38, 0.35);
   opacity: 0;
@@ -253,7 +247,7 @@
     filter 0.65s ease;
   white-space: nowrap;
   pointer-events: none;
-  text-align: left;
+  text-align: center;
 }
 
 .rotator-slot .rotating-word.active {
@@ -271,40 +265,27 @@
   z-index: 1;
 }
 
-/* .hero-gif-slot {
-  position: relative;
+.hero-gif-slot {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   vertical-align: middle;
-  height: clamp(70px, 20vw, 380px);
+  height: clamp(40px, 7vw, 90px);
   width: auto;
-  max-width: clamp(140px, 22vw, 420px);
+  max-width: clamp(80px, 14vw, 160px);
+  margin-right: clamp(10px, 1.8vw, 22px);
   flex-shrink: 0;
   user-select: none;
-} */
-
-.hero-gif-slot {
-    vertical-align: middle;
-    user-select: none;
-    flex-shrink: 0;
-    justify-content: center;
-    align-items: center;
-    width: auto;
-    max-width: clamp(140px, 22vw, 420px);
-    height: clamp(70px, 20vw, 380px);
-    display: inline-flex;
-    position: relative;
-    z-index: -1;
+  position: relative;
 }
 
 .hero-gif-image {
-  height: 200%;
+  height: 100%;
   width: auto;
-  max-width: 200%;
+  max-width: 100%;
   object-fit: contain;
   display: block;
-  filter: drop-shadow(0 14px 28px rgba(4, 25, 58, 0.25));
+  filter: drop-shadow(0 10px 20px rgba(4, 25, 58, 0.25));
   transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -344,7 +325,7 @@
   display: block;
 }
 
-/* Breakpoint refinements — same design, safer proportions */
+/* Breakpoint refinements — clean, centered, and balanced */
 @media (max-width: 900px) {
   .hero-vertical-tag {
     display: none;
@@ -355,15 +336,15 @@
 }
 
 @media (max-width: 640px) {
+  .title-name-container {
+    align-items: center;
+  }
   .hero-eyebrow {
     justify-content: center;
-    top: 24px;
+    margin-bottom: 8px;
   }
   .hero-content {
-    padding-top: 48px;
-  }
-  .title-name {
-    bottom: -50%;
+    padding-top: 24px;
   }
   .rotator-underline-svg {
     max-width: 140px;
@@ -372,8 +353,8 @@
 
 @media (max-width: 400px) {
   .hero-gif-slot {
-    height: 56px;
-    max-width: 110px;
+    height: 40px;
+    max-width: 80px;
   }
 }
 

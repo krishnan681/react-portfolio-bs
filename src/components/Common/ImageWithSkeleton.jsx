@@ -13,6 +13,8 @@ export default function ImageWithSkeleton({
   objectFit,
   onClick,
   onLoad,
+  loading = "lazy",
+  fetchPriority,
   ...props
 }) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -21,9 +23,10 @@ export default function ImageWithSkeleton({
   const imgRef = useRef(null);
 
   useEffect(() => {
+    setIsLoaded(false);
+    setHasError(false);
     if (imgRef.current && imgRef.current.complete && imgRef.current.naturalWidth > 0) {
       setIsLoaded(true);
-      setHasError(false);
     }
   }, [src, retryKey]);
 
@@ -66,7 +69,7 @@ export default function ImageWithSkeleton({
       ) : (
         /* Actual Image */
         <img
-          key={retryKey}
+          key={`${src}-${retryKey}`}
           ref={imgRef}
           src={src}
           alt={alt}
@@ -75,7 +78,8 @@ export default function ImageWithSkeleton({
             ...(objectFit ? { objectFit } : {}),
             ...imgStyle,
           }}
-          loading="lazy"
+          loading={loading}
+          fetchpriority={fetchPriority || props.fetchpriority}
           decoding="async"
           onLoad={(e) => {
             setIsLoaded(true);

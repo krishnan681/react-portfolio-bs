@@ -25,14 +25,18 @@
 }
 
 /* =========================================================
-   DESIGN VARIANTS TYPOGRAPHY
+   TYPOGRAPHY (UNIFIED POFFINS FONT FOR ALL BRANDS)
 ========================================================= */
 
-/* Editorial Variant (Serif, High-Fashion, Sophisticated) */
-.project-detail-page[data-variant="editorial"] .project-headline-title,
-.project-detail-page[data-variant="editorial"] .section-heading {
-  font-family: var(--hero-serif, 'Fraunces', Georgia, serif);
-  letter-spacing: -0.02em;
+.project-detail-page,
+.project-headline-title,
+.section-heading,
+.project-lead-p,
+.project-details-p,
+.section-subtext,
+.deliverables-label,
+.deliverables-items {
+  font-family: var(--hero-sans, 'Poppins', -apple-system, sans-serif);
 }
 
 /* =========================================================
@@ -1421,70 +1425,6 @@
   transform: translateY(0);
 }
 
-/* =========================================================
-   BOTTOM PROJECT NAVIGATION
-========================================================= */
-
-.project-footer-navigation {
-  margin-top: 60px;
-  padding-top: 36px;
-  border-top: 1px solid color-mix(in srgb, var(--project-text) 16%, transparent);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.project-nav-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 24px;
-  border-radius: 18px;
-  background: color-mix(in srgb, var(--project-text) 6%, transparent);
-  border: 1px solid color-mix(in srgb, var(--project-text) 18%, transparent);
-  color: var(--project-text);
-  text-decoration: none;
-  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
-}
-
-.project-nav-link:hover {
-  transform: translateY(-2px);
-  background: color-mix(in srgb, var(--project-text) 14%, transparent);
-  border-color: var(--project-text);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-}
-
-.project-nav-link.back-home {
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 12px 20px;
-  border-radius: 9999px;
-}
-
-.nav-link-texts {
-  display: flex;
-  flex-direction: column;
-}
-
-.nav-direction {
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--project-text);
-  opacity: 0.7;
-  font-weight: 700;
-}
-
-.nav-name {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--project-text);
-}
 
 /* =========================================================
    404 PROJECT NOT FOUND STATE
@@ -1761,10 +1701,10 @@
 .project-nav-link {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   color: var(--project-text);
   text-decoration: none;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border-radius: 9999px;
   background: color-mix(in srgb, var(--project-text) 8%, transparent);
   border: 1px solid color-mix(in srgb, var(--project-text) 22%, transparent);
@@ -1772,20 +1712,20 @@
   font-size: 0.88rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition:
+    transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.28s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.project-nav-link:hover {
-  background: var(--project-text);
-  color: var(--project-bg);
-  border-color: var(--project-text);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-}
-
-.project-nav-link.back-home {
-  margin: 0 auto;
-  background: color-mix(in srgb, var(--project-text) 14%, transparent);
+.project-nav-link svg {
+  color: inherit;
+  stroke: currentColor;
+  transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), stroke 0.25s ease, color 0.25s ease;
+  flex-shrink: 0;
 }
 
 .nav-link-texts {
@@ -1797,11 +1737,73 @@
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  opacity: 0.75;
+  color: inherit;
+  opacity: 0.78;
+  font-weight: 700;
+  transition: color 0.25s ease, opacity 0.25s ease;
 }
 
 .nav-name {
-  font-size: 0.92rem;
+  font-size: 0.94rem;
   font-weight: 800;
+  color: inherit;
+  transition: color 0.25s ease;
+}
+
+.project-nav-link.back-home {
+  margin: 0 auto;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: color-mix(in srgb, var(--project-text) 14%, transparent);
+}
+
+.project-nav-link.back-home span {
+  color: inherit;
+  transition: color 0.25s ease;
+}
+
+/* Hover, Focus & Active States — High Contrast, fully viewable text */
+.project-nav-link:hover,
+.project-nav-link:focus-visible {
+  background: var(--project-text);
+  color: var(--project-bg, #04193a);
+  border-color: var(--project-text);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px -4px color-mix(in srgb, var(--project-text) 40%, transparent);
+}
+
+.project-nav-link:hover .nav-direction,
+.project-nav-link:focus-visible .nav-direction {
+  color: var(--project-bg, #04193a);
+  opacity: 0.88;
+}
+
+.project-nav-link:hover .nav-name,
+.project-nav-link:focus-visible .nav-name,
+.project-nav-link:hover span,
+.project-nav-link:focus-visible span {
+  color: var(--project-bg, #04193a);
+}
+
+.project-nav-link:hover svg,
+.project-nav-link:focus-visible svg {
+  color: var(--project-bg, #04193a);
+  stroke: var(--project-bg, #04193a);
+}
+
+.project-nav-link.next:hover svg,
+.project-nav-link.next:focus-visible svg {
+  transform: translateX(5px);
+}
+
+.project-nav-link.prev:hover svg,
+.project-nav-link.prev:focus-visible svg {
+  transform: translateX(-5px);
+}
+
+.project-nav-link:active {
+  transform: translateY(-1px) scale(0.99);
 }
 
