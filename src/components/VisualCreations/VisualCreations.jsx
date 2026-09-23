@@ -200,9 +200,7 @@ export default function VisualCreations() {
                       <h3>Images</h3>
                     </div>
                   </div>
-                  <p className="folder-bottom-text">
-                    Posters, Typography, Branding Identity & 3D Visual Art
-                  </p>
+                   
                   <SpecularButton
                     size="md"
                     radius={999}
@@ -285,9 +283,7 @@ export default function VisualCreations() {
                       <h3>Videos</h3>
                     </div>
                   </div>
-                  <p className="folder-bottom-text">
-                    Commercial Trailers, 3D Motion Graphics, Reels & Shorts
-                  </p>
+               
                   <SpecularButton
                     size="md"
                     radius={999}

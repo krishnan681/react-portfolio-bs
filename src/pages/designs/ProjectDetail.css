@@ -237,9 +237,9 @@
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid color-mix(in srgb, var(--project-text) 18%, transparent);
   border-radius: 9999px;
-  max-width: 980px;
+  max-width: 910px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  line-height: 1.8;
+  /* line-height: 1.8; */
 }
 
 .deliverables-label {
@@ -1275,46 +1275,68 @@
   margin: 0;
 }
 
-.category-vertical-videos-grid {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  flex-wrap: wrap;
+/* =========================================================
+   VERTICAL VIDEO 9:16 GRID (4 Videos in a Row)
+========================================================= */
+
+.vertical-videos-wrapper {
   width: 100%;
 }
 
-.category-vertical-video-card {
+.category-vertical-videos-grid,
+.project-vertical-videos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2.2vw, 28px);
   width: 100%;
-  max-width: 320px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.category-vertical-video-card.is-revealed,
+.project-vertical-video-card.is-revealed {
+  animation: posterCardEntrance 0.55s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.video-load-more-container {
+  margin-top: 32px;
+  margin-bottom: 20px;
+}
+
+/* Gracefully center when there are fewer than 4 videos (e.g. 1-2 featured reels) */
+.category-vertical-videos-grid.is-few-items,
+.project-vertical-videos-grid.is-few-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(16px, 2.2vw, 28px);
+}
+
+.category-vertical-videos-grid.is-few-items .category-vertical-video-card,
+.project-vertical-videos-grid.is-few-items .project-vertical-video-card {
+  width: 100%;
+  max-width: 300px;
+}
+
+.category-vertical-video-card,
+.project-vertical-video-card {
+  width: 100%;
   cursor: pointer;
   outline: none;
 }
 
-.category-vertical-video-card:focus-visible .vertical-video-thumb {
+.category-vertical-video-card:focus-visible .vertical-video-thumb,
+.project-vertical-video-card:focus-visible .vertical-video-thumb {
   border-color: var(--project-accent);
-  box-shadow: 0 0 0 3px rgba(196, 154, 108, 0.4);
-}
-
-/* =========================================================
-   VERTICAL VIDEO 9:16 GRID (Reels Only - No Texts)
-========================================================= */
-
-.project-vertical-videos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
-  width: 100%;
-}
-
-.project-vertical-video-card {
-  cursor: pointer;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--project-accent) 40%, transparent);
 }
 
 .vertical-video-thumb {
   position: relative;
   width: 100%;
   aspect-ratio: 9 / 16;
-  border-radius: 22px;
+  border-radius: 18px;
   overflow: hidden;
   background: #000000;
   border: 1.5px solid color-mix(in srgb, var(--project-text) 20%, transparent);
@@ -1322,6 +1344,7 @@
   transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
+.category-vertical-video-card:hover .vertical-video-thumb,
 .project-vertical-video-card:hover .vertical-video-thumb {
   transform: translateY(-5px);
   border-color: var(--project-text);
@@ -1352,6 +1375,7 @@
   transition: transform 0.25s ease, background 0.25s ease;
 }
 
+.category-vertical-video-card:hover .video-play-badge,
 .project-vertical-video-card:hover .video-play-badge {
   transform: scale(1.1);
   background: var(--project-text);
@@ -1370,6 +1394,7 @@
   transition: all 0.3s ease;
 }
 
+.category-vertical-video-card:hover .video-hover-scrim,
 .project-vertical-video-card:hover .video-hover-scrim {
   opacity: 1;
   visibility: visible;
@@ -1391,6 +1416,7 @@
   transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+.category-vertical-video-card:hover .video-action-pill,
 .project-vertical-video-card:hover .video-action-pill {
   transform: translateY(0);
 }
@@ -1526,6 +1552,12 @@
     width: 100%;
     gap: 16px;
   }
+
+  .category-vertical-videos-grid,
+  .project-vertical-videos-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
 }
 
 @media (max-width: 900px) {
@@ -1608,9 +1640,10 @@
     white-space: normal;
   }
 
+  .category-vertical-videos-grid,
   .project-vertical-videos-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
 
   .project-footer-navigation {
@@ -1668,10 +1701,10 @@
     gap: 12px;
   }
 
+  .category-vertical-videos-grid,
   .project-vertical-videos-grid {
-    grid-template-columns: 1fr;
-    max-width: 320px;
-    margin: 0 auto;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 
   .badge-title {
@@ -1684,6 +1717,12 @@
 
 @media (max-width: 480px) {
   .portrait-posters-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .category-vertical-videos-grid,
+  .project-vertical-videos-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }

@@ -467,6 +467,122 @@ function FeaturedBannerGallery({ items, onSelectImage, categoryTitle }) {
 }
 
 /* =========================================================
+   5. VERTICAL VIDEOS GRID (9:16 Reels with Load More & View Less)
+========================================================= */
+function VerticalVideosGrid({
+  items,
+  onSelectVideo,
+  initialCount = 8,
+  step = 4,
+  label = "Videos",
+}) {
+  const [visibleCount, setVisibleCount] = useState(initialCount);
+
+  const hasMore = visibleCount < items.length;
+  const isExpanded = visibleCount > initialCount;
+  const visibleItems = items.slice(0, visibleCount);
+  const remainingCount = items.length - visibleCount;
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + step, items.length));
+  };
+
+  const handleViewLess = () => {
+    setVisibleCount(initialCount);
+  };
+
+  return (
+    <div className="vertical-videos-wrapper">
+      <div
+        className={`category-vertical-videos-grid ${
+          visibleItems.length < 4 ? "is-few-items" : "has-4-cols"
+        }`}
+      >
+        {visibleItems.map((vid, vidIdx) => {
+          const isNewlyRevealed = vidIdx >= initialCount;
+          return (
+            <article
+              key={vid.id || `video-${vidIdx}`}
+              className={`category-vertical-video-card project-vertical-video-card ${
+                isNewlyRevealed ? "is-revealed" : ""
+              }`}
+              onClick={() => onSelectVideo(vid)}
+              tabIndex={0}
+              role="button"
+              aria-label={`Play ${vid.title || `Video ${vidIdx + 1}`}`}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  onSelectVideo(vid);
+                }
+              }}
+            >
+              <div className="vertical-video-thumb">
+                <video
+                  src={vid.src}
+                  poster={vid.poster}
+                  preload="metadata"
+                  playsInline
+                  muted
+                  loop
+                  autoPlay
+                  className="vertical-video-media"
+                />
+
+                <div className="video-play-badge">
+                  <Play size={18} fill="#ffffff" />
+                </div>
+
+                <div className="video-hover-scrim">
+                  <span className="video-action-pill">
+                    <Play size={14} fill="currentColor" /> Play Reel
+                  </span>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      {(hasMore || isExpanded) && (
+        <div className="portrait-load-more-container video-load-more-container">
+          <div className="portrait-btn-group">
+            {hasMore && (
+              <button
+                type="button"
+                className="portrait-load-more-btn"
+                onClick={handleLoadMore}
+                aria-label={`Load more ${label}`}
+              >
+                <Plus size={16} />
+                <span>Load More {label}</span>
+                <span className="portrait-load-count-badge">
+                  +{Math.min(step, remainingCount)}
+                </span>
+              </button>
+            )}
+            {isExpanded && (
+              <button
+                type="button"
+                className="portrait-view-less-btn"
+                onClick={handleViewLess}
+                aria-label={`View less ${label}`}
+              >
+                <ChevronUp size={16} />
+                <span>View Less</span>
+              </button>
+            )}
+          </div>
+          <p className="portrait-load-status-text">
+            Showing {visibleItems.length} of {items.length} {label.toLowerCase()}
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* =========================================================
    MAIN PROJECT DETAIL COMPONENT
 ========================================================= */
 export default function ProjectDetail({ data }) {
@@ -688,8 +804,16 @@ export default function ProjectDetail({ data }) {
               >
                 <div className="section-title-wrap">
                   <div className="section-title-badge">
-                    <Layers size={14} />
-                    <span>Category</span>
+                    {catImages.length === 0 && catVideos.length > 0 ? (
+                      <Film size={14} />
+                    ) : (
+                      <Layers size={14} />
+                    )}
+                    <span>
+                      {catImages.length === 0 && catVideos.length > 0
+                        ? "Motion"
+                        : "Category"}
+                    </span>
                   </div>
                   <h2 className="section-heading">{category.title}</h2>
                   {category.subtext && (
@@ -736,47 +860,23 @@ export default function ProjectDetail({ data }) {
                 {/* Render Category Motion / Vertical Video Reels if present */}
                 {catVideos.length > 0 && (
                   <div className="category-videos-block">
-                    <div className="category-videos-header">
-                      <div className="category-video-subbadge">
-                        <Film size={13} />
-                        <span>Motion Experience</span>
+                    {catImages.length > 0 && (
+                      <div className="category-videos-header">
+                        <div className="category-video-subbadge">
+                          <Film size={13} />
+                          <span>Motion Experience</span>
+                        </div>
+                        <h3 className="category-video-heading">Vertical Video Reel</h3>
                       </div>
-                      <h3 className="category-video-heading">Vertical Video Reel</h3>
-                    </div>
+                    )}
 
-                    <div className="category-vertical-videos-grid">
-                      {catVideos.map((vid, vidIdx) => (
-                        <article
-                          key={vid.id || `cat-vid-${vidIdx}`}
-                          className="category-vertical-video-card"
-                          onClick={() => setSelectedVideo(vid)}
-                          tabIndex={0}
-                        >
-                          <div className="vertical-video-thumb">
-                            <video
-                              src={vid.src}
-                              poster={vid.poster}
-                              preload="metadata"
-                              playsInline
-                              muted
-                              loop
-                              autoPlay
-                              className="vertical-video-media"
-                            />
-
-                            <div className="video-play-badge">
-                              <Play size={18} fill="#ffffff" />
-                            </div>
-
-                            <div className="video-hover-scrim">
-                              <span className="video-action-pill">
-                                <Play size={14} fill="currentColor" /> Play Reel
-                              </span>
-                            </div>
-                          </div>
-                        </article>
-                      ))}
-                    </div>
+                    <VerticalVideosGrid
+                      items={catVideos}
+                      onSelectVideo={(vid) => setSelectedVideo(vid)}
+                      initialCount={category.initialCount || 8}
+                      step={category.step || 4}
+                      label="Videos"
+                    />
                   </div>
                 )}
               </section>
@@ -838,38 +938,13 @@ export default function ProjectDetail({ data }) {
             </div>
 
             {/* Vertical Video 9:16 Grid (Pure Visuals) */}
-            <div className="project-vertical-videos-grid">
-              {videosList.map((item, idx) => (
-                <article
-                  key={item.id || `vid-${idx}`}
-                  className="project-vertical-video-card"
-                  onClick={() => setSelectedVideo(item)}
-                >
-                  <div className="vertical-video-thumb">
-                    <video
-                      src={item.src}
-                      poster={item.poster}
-                      preload="metadata"
-                      playsInline
-                      muted
-                      loop
-                      autoPlay
-                      className="vertical-video-media"
-                    />
-
-                    <div className="video-play-badge">
-                      <Play size={18} fill="#ffffff" />
-                    </div>
-
-                    <div className="video-hover-scrim">
-                      <span className="video-action-pill">
-                        <Play size={14} fill="currentColor" /> Play Reel
-                      </span>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
+            <VerticalVideosGrid
+              items={videosList}
+              onSelectVideo={(item) => setSelectedVideo(item)}
+              initialCount={project.initialCount || 8}
+              step={project.step || 4}
+              label="Videos"
+            />
           </section>
         )}
 
