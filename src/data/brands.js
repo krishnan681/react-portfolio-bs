@@ -474,6 +474,50 @@ export const BRANDS = [
           },
         ],
       },
+
+      {
+        id: "videos",
+        title: "Celebrity & Media Works",
+        layout: "portrait",
+         
+        videos: [
+          {
+            id: "bwc-vid-16",
+            src: getR2Url("branding/broadway/videos/16.mp4"),
+            title: "Celebrity & Media Works",
+            tag: "Vertical Video Reel",
+            aspect: "vertical",
+          },
+          {
+            id: "bwc-vid-17",
+            src: getR2Url("branding/broadway/videos/17.mp4"),
+            title: "Celebrity & Media Works",
+            tag: "Vertical Video Reel",
+            aspect: "vertical",
+          },
+          {
+            id: "bwc-vid-18",
+            src: getR2Url("branding/broadway/videos/18.mp4"),
+            title: "Celebrity & Media Works",
+            tag: "Vertical Video Reel",
+            aspect: "vertical",
+          },
+          {
+            id: "bwc-vid-19",
+            src: getR2Url("branding/broadway/videos/19.mp4"),
+            title: "Celebrity & Media Works",
+            tag: "Vertical Video Reel",
+            aspect: "vertical",
+          },
+          {
+            id: "bwc-vid-20",
+            src: getR2Url("branding/broadway/videos/20.mp4"),
+            title: "Celebrity & Media Works",
+            tag: "Vertical Video Reel",
+            aspect: "vertical",
+          },
+        ],
+      },
     ],
   },
   {
