@@ -29,9 +29,9 @@ export const BRANDS = [
     categories: [
       {
         id: "imax",
-        title: "IMAX Works",
+        title: "IMAX:",
         subtext:
-          "Large-format IMAX with Laser promotional artworks and laser-format key visuals.",
+          "Created promotional posters and digital creatives for IMAX movie releases at Broadway Cinemas.",
         images: [
           {
             id: "bwc-imax-1",
@@ -109,9 +109,9 @@ export const BRANDS = [
       },
       {
         id: "poster",
-        title: "Special Menu Designs",
+        title: "Special Menu",
         subtext:
-          "Concession menu boards, digital displays, and appetizing promotional visuals.",
+          "Designed movie-inspired visuals that brought Broadway Cinemas’ special menu to life.",
         initialCount: 8,
         step: 6,
         images: [
@@ -130,7 +130,7 @@ export const BRANDS = [
             src: getR2Url("branding/broadway/images/menu_designs/3.webp"),
             aspect: "landscape",
           },
-          
+
           {
             id: "bwc-post-5",
             src: getR2Url("branding/broadway/images/menu_designs/7.webp"),
@@ -166,9 +166,8 @@ export const BRANDS = [
 
       {
         id: "Hyper X Launch",
-        title: "Hyper X Launch",
-        subtext:
-          "Immersive interior and exterior design concepts for modern cinema architecture.",
+        title: "Introducing HYPERX:",
+        subtext: "Showcasing the scale, technology, and experience of HYPERX.",
         initialCount: 4,
         step: 4,
         images: [
@@ -224,7 +223,7 @@ export const BRANDS = [
         id: "this-week-movies",
         title: "This Week Movies",
         subtext:
-          "Weekly premiere announcements, showtime schedules, and blockbuster spotlights.",
+          "Designed promotional posters for weekly movie releases at Broadway Cinemas.",
         layout: "portrait",
         images: [
           {
@@ -277,7 +276,7 @@ export const BRANDS = [
         id: "portrait-poster",
         title: "Poster Design",
         layout: "portrait",
-        subtext: "Iconic cinematic re-release posters and vertical visual art.",
+        subtext: "Designed promotional posters for theatrical movie releases.",
         images: [
           {
             id: "bwc-port-1",
@@ -357,9 +356,9 @@ export const BRANDS = [
       },
       {
         id: "videos",
-        title: "Videos",
+        title: "Theatrical Social Campaigns",
         layout: "portrait",
-        subtext: "Broadway Social media videos.",
+        subtext: "Created engaging video content for movie promotions.",
         initialCount: 8,
         step: 4,
         videos: [
@@ -473,7 +472,9 @@ export const BRANDS = [
 
       {
         id: "celebrity-media-works",
-        title: "Celebrity & Media Works",
+        title: "Celebrites and media works:",
+        subtext:
+          "Captured celebrity visits and transformed them into engaging social content.",
         layout: "portrait",
         videos: [
           {
