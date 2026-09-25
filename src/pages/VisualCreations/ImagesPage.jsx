@@ -17,10 +17,22 @@ import "./ImagesPage.css";
 
 export default function ImagesPage() {
   const navigate = useNavigate();
-  const INITIAL_COUNT = 4;
+  const INITIAL_COUNT = 8;
   const STEP = 4;
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
   const [activeImageIndex, setActiveImageIndex] = useState(null);
+  const [detectedAspects, setDetectedAspects] = useState({});
+
+  const handleImageLoad = (id, e) => {
+    const { naturalWidth, naturalHeight } = e.target;
+    if (naturalWidth && naturalHeight) {
+      const orientation =
+        naturalWidth > naturalHeight * 1.15 ? "landscape" : "portrait";
+      setDetectedAspects((prev) =>
+        prev[id] === orientation ? prev : { ...prev, [id]: orientation }
+      );
+    }
+  };
 
   const handleBackToVisuals = (e) => {
     if (e && e.preventDefault) e.preventDefault();
@@ -98,11 +110,11 @@ export default function ImagesPage() {
       {/* HERO SECTION */}
       <section className="gallery-hero-section">
         <div className="gallery-hero-content">
-          <span className="gallery-eyebrow">
+          {/* <span className="gallery-eyebrow">
             <Sparkles size={14} />
             Visual Creations
-          </span>
-          <h1 className="gallery-hero-title">Graphic & Visual Showcase</h1>
+          </span> */}
+          <h1 className="gallery-hero-title">Visual Showcase</h1>
           <p className="gallery-hero-desc">
             A curated gallery of branding collaterals, digital key visuals, posters, and creative artworks.
           </p>
@@ -124,10 +136,16 @@ export default function ImagesPage() {
             <div className="images-gallery-grid">
               {visibleImages.map((img, idx) => {
                 const numStr = String(idx + 1).padStart(2, "0");
+                const orientation =
+                  img.aspect ||
+                  img.layout ||
+                  detectedAspects[img.id || idx] ||
+                  "portrait";
+
                 return (
                   <article
-                    key={img.id}
-                    className="image-card-item"
+                    key={img.id || idx}
+                    className={`image-card-item is-${orientation}`}
                     onClick={() => setActiveImageIndex(idx)}
                   >
                     <div className="image-card-media-wrap">
@@ -136,9 +154,10 @@ export default function ImagesPage() {
                         alt={`Visual Creation ${numStr}`}
                         className="image-card-img"
                         wrapperClassName="image-card-skeleton-wrap"
+                        onLoad={(e) => handleImageLoad(img.id || idx, e)}
                       />
                       <div className="image-card-vignette" />
-                      <span className="image-card-badge">#{numStr}</span>
+                      {/* <span className="image-card-badge">#{numStr}</span> */}
                       <div className="image-card-hover-scrim">
                         <div className="image-card-zoom-pill">
                           <Maximize2 size={16} />

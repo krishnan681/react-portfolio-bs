@@ -1,31 +1,32 @@
 /* =========================================================
    CONTACT & FOOTER (PORTFOLIO EDITORIAL DESIGN)
-   Matching Reference Layout
+   Full-Bleed Filled Background with Left/Right Edge Alignment
 ========================================================= */
 
 .contact-section {
   position: relative;
-  padding: clamp(60px, 7vw, 100px) 0 clamp(40px, 5vw, 60px);
-  background: transparent;
   width: 100%;
+  background: #ffffff;
+  padding: clamp(60px, 7vw, 95px) 0 clamp(30px, 4vw, 45px);
 }
 
 .contact-section .container {
-  width: min(1320px, 92%);
+  width: 100%;
+  max-width: 100% !important;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 clamp(24px, 5vw, 80px);
   position: relative;
   z-index: 2;
 }
 
-/* ── Portfolio Contact Card Frame ───────────────────────── */
+/* ── Portfolio Contact Card Frame (Unconstrained Full-Width) ── */
 .portfolio-contact-card {
-  /* background: #ffffff; */
-  /* color: #000000; */
-  /* border: 1.5px solid #111111; */
-  border-radius: 20px;
-  padding: clamp(36px, 5vw, 64px) clamp(24px, 5vw, 64px) clamp(20px, 3.5vw, 32px);
-  /* box-shadow: 0 16px 48px -12px rgba(4, 25, 58, 0.08); */
+  width: 100%;
+  background: transparent;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 /* ── Giant PORTFOLIO Title ─────────────────────────────── */
@@ -41,31 +42,40 @@
   font-family: var(--hero-sans, 'Poppins', -apple-system, sans-serif);
 }
 
-/* ── Content Grid (Bio Left, Contact Details Right) ──────── */
+/* ── Content Flex: Bio on Far Left, Contact Info on Far Right ── */
 .contact-content-grid {
-  display: grid;
-  grid-template-columns: 1.35fr 1fr;
-  gap: clamp(24px, 5vw, 64px);
-  align-items: start;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: clamp(32px, 5vw, 64px);
   margin-bottom: clamp(36px, 5vw, 64px);
+  width: 100%;
 }
 
 /* Left Bio Column */
+.contact-col-bio {
+  flex: 1 1 auto;
+  max-width: 600px;
+}
+
 .contact-col-bio p {
   font-size: clamp(1.02rem, 1.35vw, 1.25rem);
   line-height: 1.55;
   font-weight: 600;
   color: #000000;
   margin: 0;
-  max-width: 580px;
   text-align: left;
 }
 
 /* Right Contact Column */
 .contact-col-info {
+  position: relative;
+  top: -20px;
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   text-align: left;
+  min-width: 260px;
 }
 
 .contact-info-heading {
@@ -136,7 +146,7 @@
   border: none;
   height: 1px;
   background: #111111;
-  opacity: 0.4;
+  opacity: 0.25;
   margin: 0 0 clamp(16px, 2.5vw, 24px) 0;
   width: 100%;
 }
@@ -159,14 +169,17 @@
 
 /* ── Responsive Breakpoints ─────────────────────────────── */
 @media (max-width: 860px) {
+  .contact-section .container {
+    padding: 0 20px;
+  }
+
   .contact-content-grid {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     gap: 28px;
   }
 
-  .portfolio-contact-card {
-    padding: 32px 20px 20px;
-    border-radius: 16px;
+  .contact-col-bio {
+    max-width: 100%;
   }
 
   .contact-hero-title {
@@ -177,4 +190,10 @@
   .contact-col-bio p {
     font-size: 1.05rem;
   }
+}
+
+.contact-detail-item{
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }

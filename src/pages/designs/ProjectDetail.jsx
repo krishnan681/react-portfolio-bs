@@ -494,7 +494,7 @@ function VerticalVideosGrid({
   return (
     <div className="vertical-videos-wrapper">
       <div
-        className={`category-vertical-videos-grid ${
+        className={`category-vertical-videos-grid project-vertical-videos-grid ${
           visibleItems.length < 4 ? "is-few-items" : "has-4-cols"
         }`}
       >
@@ -822,14 +822,13 @@ export default function ProjectDetail({ data }) {
                 <div className="section-title-wrap">
                   <div className="section-title-badge">
                     {catImages.length === 0 && catVideos.length > 0 ? (
-                      <Film size={14} />
+                      <Film size={1} />
                     ) : (
-                      <Layers size={14} />
+                      <Layers size={1} />
                     )}
                     <span>
                       {catImages.length === 0 && catVideos.length > 0
-                        ? "Motion"
-                        : "Category"}
+          }
                     </span>
                   </div>
                   <h2 className="section-heading">{category.title}</h2>
@@ -880,10 +879,10 @@ export default function ProjectDetail({ data }) {
                     {catImages.length > 0 && (
                       <div className="category-videos-header">
                         <div className="category-video-subbadge">
-                          <Film size={13} />
-                          <span>Motion Experience</span>
+                          {/* <Film size={13} /> */}
+                          <span>IMAX Social Media Campaigns:</span>
                         </div>
-                        <h3 className="category-video-heading">Vertical Video Reel</h3>
+                        <h3 className="category-video-heading">Crafted engaging promotional videos for IMAX movie releases, bringing the cinematic experience to life.</h3>
                       </div>
                     )}
 
@@ -905,8 +904,8 @@ export default function ProjectDetail({ data }) {
           <section className="project-media-section project-images-section">
             <div className="section-title-wrap">
               <div className="section-title-badge">
-                <ImageIcon size={15} />
-                <span>Gallery</span>
+                {/* <ImageIcon size={15} /> */}
+                {/* <span>Gallery</span> */}
               </div>
               <h2 className="section-heading">Visual Showcase</h2>
             </div>
@@ -948,8 +947,8 @@ export default function ProjectDetail({ data }) {
           <section className="project-media-section project-videos-section">
             <div className="section-title-wrap">
               <div className="section-title-badge">
-                <Film size={15} />
-                <span>Motion</span>
+                {/* <Film size={15} /> */}
+                {/* <span>Motion</span> */}
               </div>
               <h2 className="section-heading">Vertical Video Reels</h2>
             </div>

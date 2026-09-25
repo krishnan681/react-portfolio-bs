@@ -77,7 +77,7 @@ function VideoCardItem({ item, index, onSelectVideo }) {
         <div className="video-card-vignette" />
 
         {/* Index Tag Badge */}
-        <span className="video-card-badge">#{numStr}</span>
+        {/* <span className="video-card-badge">#{numStr}</span> */}
 
         {/* Center Play Button with Glow */}
         <div
@@ -131,10 +131,10 @@ function VideoFolderSection({ section, sIdx, onSelectVideo }) {
       {/* Folder Header */}
       <div className="video-section-header">
         <div className="video-section-title-wrap">
-          <div className="video-section-badge">
+          {/* <div className="video-section-badge">
             <Layers size={13} />
             <span>Folder {String(sIdx + 1).padStart(2, "0")}</span>
-          </div>
+          </div> */}
           <h2 className="video-section-title">{section.title}</h2>
         </div>
         <div className="video-section-count-badge">
@@ -240,10 +240,10 @@ export default function VideosPage() {
       {/* Hero Showcase Introduction */}
       <section className="video-hero-section">
         <div className="video-hero-content">
-          <span className="video-eyebrow">
+          {/* <span className="video-eyebrow">
             <Film size={14} />
             Visual Creations
-          </span>
+          </span> */}
           <h1 className="video-hero-title">Motion & Video Showcase</h1>
           <p className="video-hero-desc">
             A curated showcase of commercial edits, 3D motion graphics, brand teasers, and vertical video reels.

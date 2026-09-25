@@ -195,12 +195,18 @@
 .images-gallery-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-auto-flow: row dense;
   gap: clamp(16px, 2.2vw, 28px);
   align-items: start;
 }
 
 .image-card-item {
   position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  grid-column: span 1;
   border-radius: 18px;
   overflow: hidden;
   background: #ffffff;
@@ -210,6 +216,33 @@
   transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.3, 1),
               box-shadow 0.4s ease,
               border-color 0.35s ease;
+}
+
+/* Landscape orientation: Span 2 columns with 16:9 cinematic widescreen ratio */
+.image-card-item.is-landscape {
+  grid-column: span 2;
+}
+
+.image-card-item.is-landscape .image-card-media-wrap {
+  aspect-ratio: 16 / 9;
+}
+
+/* Portrait orientation: Span 1 column with 4:5 vertical poster ratio */
+.image-card-item.is-portrait {
+  grid-column: span 1;
+}
+
+.image-card-item.is-portrait .image-card-media-wrap {
+  aspect-ratio: 4 / 5;
+}
+
+/* Square orientation: Span 1 column with 1:1 ratio */
+.image-card-item.is-square {
+  grid-column: span 1;
+}
+
+.image-card-item.is-square .image-card-media-wrap {
+  aspect-ratio: 1 / 1;
 }
 
 .image-card-item:hover {
@@ -582,12 +615,22 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
+  .image-card-item.is-landscape {
+    grid-column: span 2;
+  }
 }
 
 @media (max-width: 800px) {
   .images-gallery-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
+  }
+  .image-card-item.is-landscape {
+    grid-column: span 2;
+  }
+  .image-card-item.is-portrait,
+  .image-card-item.is-square {
+    grid-column: span 1;
   }
   .lightbox-nav-btn {
     width: 42px;
@@ -602,6 +645,12 @@
   .images-gallery-grid {
     grid-template-columns: 1fr;
     gap: 14px;
+  }
+  .image-card-item,
+  .image-card-item.is-landscape,
+  .image-card-item.is-portrait,
+  .image-card-item.is-square {
+    grid-column: span 1;
   }
 }
 

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { CONTACT_CONFIG } from "../../services/contactService";
 import "./Contact.css";
 
+import { Mail, Phone, MapPin } from "lucide-react";
+
 export default function Contact() {
   const [year] = useState(() => new Date().getFullYear());
 
@@ -25,27 +27,39 @@ export default function Contact() {
           <div className="contact-content-grid">
             <div className="contact-col-bio">
               <p>
-                Video Editor &amp; Graphic Designer focused on visual storytelling,
-                motion graphics, cinematic editing, and creative brand design.
+                Video Editor &amp; Graphic Designer focused on visual
+                storytelling, motion graphics, cinematic editing, and creative
+                brand design.
               </p>
             </div>
 
             <div className="contact-col-info">
               <h3 className="contact-info-heading">CONTACT:</h3>
               <div className="contact-details-list">
-                <a
-                  href={`mailto:${CONTACT_CONFIG.email}`}
-                  className="contact-link"
-                >
-                  {CONTACT_CONFIG.email}
-                </a>
-                <a
-                  href={`tel:${CONTACT_CONFIG.rawPhone}`}
-                  className="contact-link"
-                >
-                  {CONTACT_CONFIG.phone}
-                </a>
-                <span className="contact-location">{CONTACT_CONFIG.location}</span>
+                <div  className="contact-detail-item">
+                  <Mail />
+                  <a
+                    href={`mailto:${CONTACT_CONFIG.email}`}
+                    className="contact-link"
+                  >
+                    {CONTACT_CONFIG.email}
+                  </a>
+                </div>
+                <div className="contact-detail-item" >
+                  <Phone />
+                  <a
+                    href={`tel:${CONTACT_CONFIG.rawPhone}`}
+                    className="contact-link"
+                  >
+                    {CONTACT_CONFIG.phone}
+                  </a>
+                </div>
+                <div className="contact-detail-item">
+                  <MapPin />
+                  <span className="contact-location">
+                    {CONTACT_CONFIG.location}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -58,7 +72,7 @@ export default function Contact() {
               className="contact-back-btn"
               aria-label="Back to top"
             >
-              BACK TO
+              Take me up
             </button>
           </div>
 
