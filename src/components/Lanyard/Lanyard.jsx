@@ -34,23 +34,28 @@ const CARD_SCALE = 5;
 //    - Decrease (e.g. 0.8, 1.0)  -> Makes the black strap SHORTER
 const STRAP_LENGTH = 0.25;
 
-// 3. STRAP_TOP_Y: Anchor height where the strap enters the top of the screen (default: 4.2)
+// 3. STRAP_TOP_Y: Anchor height where the strap enters the top of the screen (default: 4.0)
 //    ⚠️ NOTE: Keep this around 4.0 - 4.3 so the strap starts right at the top border of the canvas!
-const STRAP_TOP_Y = 3.1;
+const STRAP_TOP_Y = 4.0;
 
 // 4. CAMERA SETTINGS: Default camera position and FOV
 const DEFAULT_CAMERA_POSITION = [0, 0, 18];
 const DEFAULT_FOV = 25;
 // ============================================================================
 
+import about1Webp from "../../assets/profile/about1.webp";
+
 // UV coordinates on the card model texture atlas
 // Front face = left half of atlas (0 to 0.5), Back face = right half of atlas (0.5 to 1.0)
 const FRONT_UV_RECT = { x: 0, y: 0, w: 0.5, h: 0.755 };
 const BACK_UV_RECT = { x: 0.5, y: 0, w: 0.5, h: 0.757 };
 
-// Proxy helper to bypass browser canvas CORS restrictions during development
+// Proxy helper to bypass browser canvas CORS restrictions during development and in production
 function resolveCanvasImageUrl(url) {
   if (!url || typeof url !== "string") return url;
+  if (url.includes("about1.webp")) {
+    return about1Webp;
+  }
   if (import.meta.env.DEV && url.includes("r2.dev")) {
     try {
       const parsed = new URL(url);
@@ -68,7 +73,7 @@ function Band({
   isMobile = false,
   frontImage = null,
   backImage = null,
-  imageFit = "cover",
+  imageFit = "contain",
   lanyardImage = null,
   lanyardWidth = 1.2,
   strapLength = STRAP_LENGTH,
@@ -116,7 +121,11 @@ function Band({
     };
     img.onerror = () => {
       console.warn("Could not load front image:", frontImage);
-      if (!isCancelled) setLoadedFront(null);
+      if (resolvedSrc !== about1Webp) {
+        img.src = about1Webp;
+      } else if (!isCancelled) {
+        setLoadedFront(null);
+      }
     };
     img.src = resolvedSrc;
     return () => {
@@ -241,30 +250,39 @@ function Band({
   const [dragged, drag] = useState(false);
   const [hovered, hover] = useState(false);
 
-  // Dynamic clamp and collider dimensions calculated proportionally to cardScale geometry
-  const { clampLocalY, colliderHalfW, colliderHalfH } = useMemo(() => {
-    let topY = 1.08;
+  // Dynamic clamp, clip and collider dimensions calculated proportionally to cardScale geometry
+  const { clampLocalY, colliderHalfW, colliderHalfH, colliderCenterY } = useMemo(() => {
+    let topY = 1.205;
     let halfW = 0.4 * (cardScale / 2.25);
     let halfH = 1.125 * (cardScale / 2.25);
+    let centerY = 0.52 * cardScale;
 
-    if (nodes.clamp?.geometry) {
+    // Anchor point for the lanyard strap: connects to the top horizontal bar of the metal clip
+    if (nodes.clip?.geometry) {
+      nodes.clip.geometry.computeBoundingBox();
+      const b = nodes.clip.geometry.boundingBox;
+      // Top bar of the clip has outer rim at b.max.y (1.229) and inner rim at 1.181; center is ~1.205
+      topY = b.max.y - 0.024;
+    } else if (nodes.clamp?.geometry) {
       nodes.clamp.geometry.computeBoundingBox();
       const b = nodes.clamp.geometry.boundingBox;
-      // Exact slot/opening in clamp ring where the strap loops through
-      topY = (b.max.y + b.min.y) / 2;
+      topY = b.max.y;
     }
+
     if (nodes.card?.geometry) {
       nodes.card.geometry.computeBoundingBox();
       const b = nodes.card.geometry.boundingBox;
       halfW = ((b.max.x - b.min.x) / 2) * cardScale;
       halfH = ((b.max.y - b.min.y) / 2) * cardScale;
+      centerY = ((b.max.y + b.min.y) / 2) * cardScale;
     }
     return {
       clampLocalY: topY * cardScale,
       colliderHalfW: halfW,
       colliderHalfH: halfH,
+      colliderCenterY: centerY,
     };
-  }, [nodes.clamp, nodes.card, cardScale]);
+  }, [nodes.clip, nodes.clamp, nodes.card, cardScale]);
 
   useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], strapLength]);
   useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], strapLength]);
@@ -363,7 +381,10 @@ function Band({
           type={dragged ? "kinematicPosition" : "dynamic"}
         >
           {/* Card Physical Collider automatically scaled with card */}
-          <CuboidCollider args={[colliderHalfW, colliderHalfH, 0.015]} />
+          <CuboidCollider
+            position={[0, colliderCenterY, 0]}
+            args={[colliderHalfW, colliderHalfH, 0.015]}
+          />
 
           {/* Card 3D Mesh Group — Suspended seamlessly with zero gap */}
           <group
@@ -445,10 +466,15 @@ export default function Lanyard({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const mobileCardScale = isMobile ? cardScale * 0.84 : cardScale;
+
   return (
     <div className="lanyard-wrapper">
       <Canvas
-        camera={{ position: position, fov: fov }}
+        camera={{
+          position: isMobile ? [0, -0.65, 21] : position,
+          fov: isMobile ? 28 : fov,
+        }}
         dpr={[1, isMobile ? 1.5 : 2]}
         gl={{ alpha: transparent }}
         onCreated={({ gl }) =>
@@ -458,12 +484,12 @@ export default function Lanyard({
         <ambientLight intensity={Math.PI} />
         <Suspense fallback={null}>
           <Physics
-            key={`${cardScale}-${strapLength}-${strapTopY}`}
+            key={`${mobileCardScale}-${strapLength}-${strapTopY}`}
             gravity={gravity}
             timeStep={isMobile ? 1 / 30 : 1 / 60}
           >
             <Band
-              key={`${cardScale}-${strapLength}-${strapTopY}`}
+              key={`${mobileCardScale}-${strapLength}-${strapTopY}`}
               isMobile={isMobile}
               frontImage={frontImage}
               backImage={backImage}
@@ -472,7 +498,7 @@ export default function Lanyard({
               lanyardWidth={lanyardWidth}
               strapLength={strapLength}
               strapTopY={strapTopY}
-              cardScale={cardScale}
+              cardScale={mobileCardScale}
             />
           </Physics>
           <Environment blur={0.75}>

@@ -78,6 +78,7 @@
 .about-lanyard-container {
   position: relative;
   width: 100%;
+  
   max-width: 480px;
   display: flex;
   flex-direction: column;
@@ -582,6 +583,16 @@
   }
   .about-text-content .body-text {
     font-size: 0.95rem;
+    width: 100%;
+  }
+  .about-text-content .body-line {
+    white-space: wrap;
+    display: flex;
+    width: 100%;
+    text-align: center;
+    font-size: clamp(0.5rem, 2.15vw, 0.74rem);
+    letter-spacing: -0.015em;
+    line-height: 1.5;
   }
   .experience-badge {
     padding: 5px 14px 5px 6px;
@@ -600,7 +611,12 @@
   .exp-text {
     font-size: 0.8rem;
   }
+  .about-stats-section {
+    margin-top: 28px;
+  }
   .about-stats-grid {
+    position: static;
+    bottom: auto;
     gap: 24px 16px;
   }
   .about-stat-number {
@@ -668,9 +684,26 @@
     margin-bottom: 12px;
   }
   .about-text-content .body-text {
-    font-size: clamp(0.68rem, 2.6vw, 0.85rem);
+    font-size: clamp(0.5rem, 2.1vw, 0.72rem);
+    width: 100%;
+    max-width: 100%;
+  }
+  .about-text-content .body-line {
+    white-space: nowrap;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: clamp(0.46rem, 2.05vw, 0.68rem);
+    letter-spacing: -0.015em;
+    line-height: 1.45;
+  }
+  .about-stats-section {
+    margin: 2px auto 0 auto;
+    padding: 0 10px;
   }
   .about-stats-grid {
+    position: static;
+    bottom: auto;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px 6px;
   }
@@ -698,7 +731,10 @@
     font-size: 0.96rem;
   }
   .about-text-content .body-text {
-    font-size: 0.82rem;
+    font-size: 0.52rem;
+  }
+  .about-text-content .body-line {
+    font-size: 0.45rem;
   }
   .about-stat-number {
     font-size: 1.35rem;

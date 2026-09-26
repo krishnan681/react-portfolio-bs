@@ -127,7 +127,7 @@
   color: #000000;
   background: transparent;
   border: 1.5px solid #000000;
-  border-radius: 0;
+  border-radius: 5px;
   padding: 8px 24px;
   cursor: pointer;
   transition: all 0.25s ease;
@@ -175,11 +175,19 @@
 
   .contact-content-grid {
     flex-direction: column;
-    gap: 28px;
+    gap: 42px;
   }
 
   .contact-col-bio {
     max-width: 100%;
+  }
+
+  .contact-col-info {
+    position: static;
+    top: 0;
+    margin-top: 8px;
+    min-width: 0;
+    width: 100%;
   }
 
   .contact-hero-title {
@@ -189,6 +197,18 @@
 
   .contact-col-bio p {
     font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-content-grid {
+    gap: 36px;
+  }
+
+  .contact-col-info {
+    position: static;
+    top: 0;
+    margin-top: 6px;
   }
 }
 

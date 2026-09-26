@@ -146,6 +146,7 @@ ul {
 .CE-heading,
 .CH-heading,
 .BC-heading,
+.VC-heading,
 .section-heading,
 .TE-heading,
 .fc-heading {
@@ -160,6 +161,7 @@ ul {
 .CE-heading p,
 .CH-heading p,
 .BC-heading p,
+.VC-heading p,
 .section-heading p,
 .TE-heading p,
 .fc-description {
@@ -177,6 +179,7 @@ ul {
 .CE-heading p span,
 .CH-heading p span,
 .BC-heading p span,
+.VC-heading p span,
 .section-heading p span,
 .TE-heading p span,
 .fc-description span {
@@ -187,14 +190,40 @@ ul {
 }
 
 @media (max-width: 768px) {
+  .CE-heading,
+  .CH-heading,
+  .BC-heading,
+  .VC-heading,
+  .section-heading,
+  .TE-heading,
+  .fc-heading {
+    padding: 0 4px;
+    margin-bottom: 22px;
+  }
+
   .CE-heading p,
   .CH-heading p,
   .BC-heading p,
+  .VC-heading p,
   .section-heading p,
   .TE-heading p,
   .fc-description {
-    font-size: clamp(0.72rem, 2.4vw, 0.88rem);
+    font-size: clamp(0.56rem, 2.25vw, 0.78rem);
     line-height: 1.5;
+    letter-spacing: -0.015em;
+  }
+
+  .CE-heading p span,
+  .CH-heading p span,
+  .BC-heading p span,
+  .VC-heading p span,
+  .section-heading p span,
+  .TE-heading p span,
+  .fc-description span {
+    display: block;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
   }
 }
 
@@ -202,11 +231,13 @@ ul {
   .CE-heading p,
   .CH-heading p,
   .BC-heading p,
+  .VC-heading p,
   .section-heading p,
   .TE-heading p,
   .fc-description {
-    font-size: clamp(0.64rem, 2.7vw, 0.76rem);
+    font-size: clamp(0.5rem, 2.2vw, 0.74rem);
     line-height: 1.45;
+    letter-spacing: -0.015em;
   }
 }
 
@@ -324,3 +355,4 @@ ul {
 }
 
 
+ 

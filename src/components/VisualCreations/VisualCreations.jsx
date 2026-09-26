@@ -124,13 +124,13 @@ export default function VisualCreations() {
 
       <div className="container">
         <div
-          className="section-heading text-center"
+          className="VC-heading section-heading text-center"
           data-aos="fade-up"
           data-aos-delay="100"
         >
           <p>
-            <span>Explore my collection of creative works across image designs and cinematic motion graphics</span>
-            <span>curated through two dedicated interactive folders. Click each folder to enter the showcase.</span>
+            <span>Explore creative works across image designs and cinematic motion graphics,</span>
+            <span>curated in interactive folders. Click each folder to enter the showcase.</span>
           </p>
         </div>
 

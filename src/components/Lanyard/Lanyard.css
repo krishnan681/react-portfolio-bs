@@ -42,12 +42,12 @@
 
 @media (max-width: 768px) {
   .lanyard-wrapper {
-    height: 400px;
+    height: 460px;
   }
 }
 
 @media (max-width: 480px) {
   .lanyard-wrapper {
-    height: 340px;
+    height: 450px;
   }
 }

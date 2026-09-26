@@ -1,9 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import Lanyard from "../Lanyard/Lanyard";
-import { getR2Url } from "../../config/r2";
+import aboutProfileImg from "../../assets/profile/about1.webp";
 import "./About.css";
-
-const aboutProfileImg = getR2Url("profile/about1.webp");
 
 function StatCounter({
   target,
@@ -162,7 +160,7 @@ export default function About() {
   ];
 
   const bodyLines = [
-    "Skilled in graphic design, motion design, video editing, color grading, and post-production workflows,",
+    "Skilled in graphic design, motion design, video editing, color grading, and post-production workflows.",
     "I deliver high-impact creative solutions that strengthen brand identity and drive audience engagement.",
   ];
 
