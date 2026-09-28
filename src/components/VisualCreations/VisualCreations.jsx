@@ -4,8 +4,6 @@ import {
   ArrowUpRight,
   Images,
   Video,
-  Sparkles,
-  Search,
   FileImage,
   Film,
   Layers,

@@ -47,8 +47,8 @@ import about1Webp from "../../assets/profile/about1.webp";
 
 // UV coordinates on the card model texture atlas
 // Front face = left half of atlas (0 to 0.5), Back face = right half of atlas (0.5 to 1.0)
-const FRONT_UV_RECT = { x: 0, y: 0, w: 0.5, h: 0.755 };
-const BACK_UV_RECT = { x: 0.5, y: 0, w: 0.5, h: 0.757 };
+const FRONT_UV_RECT = { x: 0, y: 0, w: 0.5, h: 0.758 };
+const BACK_UV_RECT = { x: 0.5, y: 0, w: 0.5, h: 0.758 };
 
 // Proxy helper to bypass browser canvas CORS restrictions during development and in production
 function resolveCanvasImageUrl(url) {
@@ -176,7 +176,7 @@ function Band({
       }
     }
 
-    // 1. WIPE FRONT FACE (Removes all default reactbits artwork from front)
+    // 1. WIPE FRONT FACE (Sleek dark acrylic badge holder frame)
     const fx = FRONT_UV_RECT.x * W;
     const fy = FRONT_UV_RECT.y * H;
     const fw = FRONT_UV_RECT.w * W;
@@ -185,11 +185,11 @@ function Band({
     ctx.beginPath();
     ctx.rect(fx, fy, fw, fh);
     ctx.clip();
-    ctx.fillStyle = "#04193a";
+    ctx.fillStyle = "#11202e"; // Matching dark acrylic badge frame
     ctx.fillRect(fx, fy, fw, fh);
     ctx.restore();
 
-    // 2. WIPE BACK FACE (Removes all default reactbits name & artwork from back)
+    // 2. WIPE BACK FACE (Matching clean dark badge back)
     const bx = BACK_UV_RECT.x * W;
     const by = BACK_UV_RECT.y * H;
     const bw = BACK_UV_RECT.w * W;
@@ -198,37 +198,72 @@ function Band({
     ctx.beginPath();
     ctx.rect(bx, by, bw, bh);
     ctx.clip();
-    ctx.fillStyle = "#04193a";
+    ctx.fillStyle = "#11202e";
     ctx.fillRect(bx, by, bw, bh);
     ctx.restore();
 
-    const drawFitted = (img, rect) => {
+    const drawBadgeFace = (img, rect) => {
       if (!img || !img.width || !img.height) return;
-      const rx = rect.x * W;
-      const ry = rect.y * H;
-      const rw = rect.w * W;
-      const rh = rect.h * H;
-      const pick = imageFit === "contain" ? Math.min : Math.max;
-      const scale = pick(rw / img.width, rh / img.height);
-      const dw = img.width * scale;
-      const dh = img.height * scale;
-      const dx = rx + (rw - dw) / 2;
-      const dy = ry + (rh - dh) / 2;
+      const baseRx = rect.x * W;
+      const baseRy = rect.y * H;
+      const baseRw = rect.w * W;
+      const baseRh = rect.h * H;
 
+      // Safe inner margins so text and photo breathe cleanly away from the 3D card bevel/edges
+      const padX = baseRw * 0.045; // ~46px margin left and right
+      const padY = baseRh * 0.035; // ~54px margin top and bottom
+      const rx = baseRx + padX;
+      const ry = baseRy + padY;
+      const rw = baseRw - padX * 2;
+      const rh = baseRh - padY * 2;
+      const radius = 22;
+
+      // 1. Draw subtle outer acrylic bevel/rim around inner badge
       ctx.save();
       ctx.beginPath();
-      ctx.rect(rx, ry, rw, rh);
+      if (ctx.roundRect) {
+        ctx.roundRect(rx - 2, ry - 2, rw + 4, rh + 4, radius + 2);
+      } else {
+        ctx.rect(rx - 2, ry - 2, rw + 4, rh + 4);
+      }
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.16)";
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+      ctx.restore();
+
+      // 2. Clip and draw ID card with smooth rounded corners inside badge holder
+      ctx.save();
+      ctx.beginPath();
+      if (ctx.roundRect) {
+        ctx.roundRect(rx, ry, rw, rh, radius);
+      } else {
+        ctx.rect(rx, ry, rw, rh);
+      }
       ctx.clip();
+
+      // Full width and height fitted to inner badge:
+      // Guarantees 100% of the image width is visible (no cut-off on "DESIGNER" or "BARATH SACHWIN")
+      // and 100% of the height is filled (no top or bottom gaps)
+      const dw = rw;
+      const dh = rh;
+      const dx = rx;
+      const dy = ry;
+
       try {
         ctx.drawImage(img, dx, dy, dw, dh);
       } catch (err) {
         console.warn("Error drawing card image:", err);
       }
+
+      // Subtle glossy inner border
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
       ctx.restore();
     };
 
-    if (loadedFront) drawFitted(loadedFront, FRONT_UV_RECT);
-    if (loadedBack) drawFitted(loadedBack, BACK_UV_RECT);
+    if (loadedFront) drawBadgeFace(loadedFront, FRONT_UV_RECT);
+    if (loadedBack) drawBadgeFace(loadedBack, BACK_UV_RECT);
 
     const composite = new THREE.CanvasTexture(canvas);
     composite.colorSpace = THREE.SRGBColorSpace;
@@ -456,6 +491,8 @@ export default function Lanyard({
   strapTopY = STRAP_TOP_Y,
   cardScale = CARD_SCALE,
 }) {
+  const wrapperRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(true);
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== "undefined" && window.innerWidth < 768,
   );
@@ -466,11 +503,25 @@ export default function Lanyard({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { rootMargin: "250px 0px" },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   const mobileCardScale = isMobile ? cardScale * 0.84 : cardScale;
 
   return (
-    <div className="lanyard-wrapper">
+    <div className="lanyard-wrapper" ref={wrapperRef}>
       <Canvas
+        frameloop={isVisible ? "always" : "never"}
         camera={{
           position: isMobile ? [0, -0.65, 21] : position,
           fov: isMobile ? 28 : fov,

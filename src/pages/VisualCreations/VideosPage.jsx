@@ -4,11 +4,9 @@ import {
   ArrowLeft,
   Sparkles,
   Play,
-  Film,
   ChevronRight,
   ChevronUp,
   Plus,
-  Layers,
 } from "lucide-react";
 import { VIDEO_SECTIONS } from "../../data/visualCreationsData";
 import VideoModal from "../../components/Modals/VideoModal";

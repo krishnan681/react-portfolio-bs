@@ -6,10 +6,8 @@ import {
   Play,
   Maximize2,
   Sparkles,
-  Image as ImageIcon,
   Film,
   Layers,
-  Clapperboard,
   Plus,
   ChevronUp,
 } from "lucide-react";
@@ -64,7 +62,6 @@ function StaggeredGridGallery({
     <div className="staggered-custom-wrapper">
       <div className="staggered-custom-gallery">
         {visibleItems.map((item, idx) => {
-          const itemNumber = String(idx + 1).padStart(2, "0");
           const isNewlyRevealed = idx >= initialCount;
           const orientation =
             item.aspect || detectedAspects[item.id || idx] || "portrait";
@@ -156,7 +153,6 @@ function PortraitPostersGrid({
     <div className="portrait-posters-wrapper">
       <div className="portrait-posters-gallery">
         {visibleItems.map((item, idx) => {
-          const itemNumber = String(idx + 1).padStart(2, "0");
           const isNewlyRevealed = idx >= initialCount;
           return (
             <article
@@ -974,7 +970,7 @@ export default function ProjectDetail({ data }) {
                 {/* <Film size={15} /> */}
                 {/* <span>Motion</span> */}
               </div>
-              <h2 className="section-heading">Brand Video Content</h2>
+              <h2 className="section-heading">{videosHeading}</h2>
             </div>
 
             {/* Vertical Video 9:16 Grid (Pure Visuals) */}

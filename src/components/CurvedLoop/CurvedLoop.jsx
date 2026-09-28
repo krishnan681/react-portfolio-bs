@@ -137,9 +137,22 @@ const CurvedLoop = ({
   useEffect(() => {
     if (!isStraight) return;
     let animId;
+    let isVisible = true;
+
+    const el = tickerJacketRef.current;
+    let observer;
+    if (el && typeof IntersectionObserver !== "undefined") {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          isVisible = entry.isIntersecting;
+        },
+        { rootMargin: "100px 0px" },
+      );
+      observer.observe(el);
+    }
 
     const step = () => {
-      if (cycleWidth > 0 && trackRef.current) {
+      if (isVisible && cycleWidth > 0 && trackRef.current) {
         if (isDraggingRef.current) {
           // Handled in pointermove
         } else {
@@ -170,7 +183,10 @@ const CurvedLoop = ({
     };
 
     animId = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(animId);
+    return () => {
+      cancelAnimationFrame(animId);
+      if (observer) observer.disconnect();
+    };
   }, [isStraight, cycleWidth, isHovered]);
 
   // Pointer drag events for straight ticker

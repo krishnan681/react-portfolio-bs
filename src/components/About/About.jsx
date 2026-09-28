@@ -174,7 +174,7 @@ export default function About() {
             <div className="about-lanyard-container">
               <Lanyard
                 frontImage={aboutProfileImg}
-                imageFit="contain"
+                imageFit="cover"
                 lanyardWidth={1.1}
               />
             </div>
