@@ -617,7 +617,7 @@
   position: relative;
   width: 100%;
  
-  aspect-ratio: 2/3 ;
+  aspect-ratio: 2/3;
   border-radius: 8px;
   overflow: hidden;
   background: var(--project-card-bg);
@@ -625,6 +625,22 @@
   box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.25);
   transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.3, 1), box-shadow 0.4s ease, border-color 0.35s ease;
   display: block;
+}
+
+.portrait-poster-card.is-landscape {
+  grid-column: span 2;
+}
+
+.portrait-poster-thumb.is-landscape {
+  aspect-ratio: 16 / 9;
+}
+
+.portrait-poster-thumb.is-square {
+  aspect-ratio: 1 / 1;
+}
+
+.portrait-poster-thumb.is-portrait {
+  aspect-ratio: 2 / 3;
 }
 
 .portrait-poster-card:hover .portrait-poster-thumb {

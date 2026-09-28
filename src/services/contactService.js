@@ -12,9 +12,21 @@ export const CONTACT_CONFIG = {
   email: "barathsachwin13@gmail.com",
   phone: "+91 7868986677",
   rawPhone: "+917868986677",
-  whatsappNumber: "917868986677",
+  phone2: "+91 9791789480",
+  rawPhone2: "+919791789480",
+  whatsappNumber: "9791789480",
   location: "Coimbatore, Tamil Nadu, India",
 };
+
+export const CONTACT_CONFIG2 = {
+  name: "Barath Sachwin",
+  email: "barathsachwin13@gmail.com",
+  phone: "+91 9791789480",
+  rawPhone: "+919791789480",
+  whatsappNumber: "9791789480",
+  location: "Coimbatore, Tamil Nadu, India",
+};
+
 
 /**
  * Copies string text to system clipboard with robust fallback

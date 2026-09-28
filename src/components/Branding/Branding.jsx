@@ -77,8 +77,8 @@ export default function Branding() {
         {/* ================= DESCRIPTION & HINT ================= */}
         <div className="BC-heading text-center" data-aos="fade-up" data-aos-delay="100">
           <p>
-            <span>Creative work delivered across diverse industries — entertainment, retail,</span>
-            <span>hospitality, and healthcare showcasing versatile design and content expertise.</span>
+            <span>Creative work delivered across diverse industries entertainment, retail,</span>
+            <span>hospitality, and  showcasing versatile design and content expertise.</span>
           </p>
 
           {/* <div className="branding-interaction-pill">

@@ -55,7 +55,7 @@ function StaggeredGridGallery({
       const orientation =
         naturalWidth > naturalHeight * 1.15 ? "landscape" : "portrait";
       setDetectedAspects((prev) =>
-        prev[id] === orientation ? prev : { ...prev, [id]: orientation }
+        prev[id] === orientation ? prev : { ...prev, [id]: orientation },
       );
     }
   };
@@ -161,10 +161,12 @@ function PortraitPostersGrid({
           return (
             <article
               key={item.id || `portrait-item-${idx}`}
-              className={`portrait-poster-card ${isNewlyRevealed ? "is-revealed" : ""}`}
+              className={`portrait-poster-card ${item.aspect ? `is-${item.aspect}` : ""} ${isNewlyRevealed ? "is-revealed" : ""}`}
               onClick={() => onSelectImage(item)}
             >
-              <div className="portrait-poster-thumb">
+              <div
+                className={`portrait-poster-thumb ${item.aspect ? `is-${item.aspect}` : ""}`}
+              >
                 <ImageWithSkeleton
                   src={item.src}
                   alt={`${categoryTitle} Poster ${idx + 1}`}
@@ -298,10 +300,11 @@ function PortraitRowsGallery({
           >
             {rowItems.map((item, itemIdx) => {
               const globalIdx = items.findIndex(
-                (i) => (i.id && item.id && i.id === item.id) || i.src === item.src
+                (i) =>
+                  (i.id && item.id && i.id === item.id) || i.src === item.src,
               );
               const itemNumber = String(
-                (globalIdx >= 0 ? globalIdx : itemIdx) + 1
+                (globalIdx >= 0 ? globalIdx : itemIdx) + 1,
               ).padStart(2, "0");
 
               return (
@@ -354,7 +357,11 @@ function PortraitRowsGallery({
                 <Plus size={16} />
                 <span>Load More Designs</span>
                 <span className="staggered-load-count-badge">
-                  +{Math.min(rows[visibleRowsCount]?.length || 6, remainingCount)}
+                  +
+                  {Math.min(
+                    rows[visibleRowsCount]?.length || 6,
+                    remainingCount,
+                  )}
                 </span>
               </button>
             )}
@@ -427,7 +434,7 @@ function FeaturedBannerGallery({ items, onSelectImage, categoryTitle }) {
         <div
           className={`featured-banner-cards-grid featured-banner-cards-${Math.min(
             subItems.length,
-            3
+            3,
           )}`}
         >
           {subItems.map((item, idx) => (
@@ -574,7 +581,8 @@ function VerticalVideosGrid({
             )}
           </div>
           <p className="portrait-load-status-text">
-            Showing {visibleItems.length} of {items.length} {label.toLowerCase()}
+            Showing {visibleItems.length} of {items.length}{" "}
+            {label.toLowerCase()}
           </p>
         </div>
       )}
@@ -593,11 +601,7 @@ export default function ProjectDetail({ data }) {
 
   const handleBackToBranding = (e) => {
     if (e && e.preventDefault) e.preventDefault();
-    if (window.history.length > 2) {
-      navigate(-1);
-    } else {
-      navigate("/#branding");
-    }
+    navigate("/#branding");
   };
 
   // Scroll to top on slug / route change
@@ -631,13 +635,16 @@ export default function ProjectDetail({ data }) {
   const activeImageIndex = useMemo(() => {
     if (!selectedImage || allProjectImages.length === 0) return -1;
     return allProjectImages.findIndex(
-      (img) => img.id === selectedImage.id || img.src === selectedImage.src
+      (img) => img.id === selectedImage.id || img.src === selectedImage.src,
     );
   }, [selectedImage, allProjectImages]);
 
   const handleNextImage = () => {
     if (allProjectImages.length === 0) return;
-    if (activeImageIndex >= 0 && activeImageIndex < allProjectImages.length - 1) {
+    if (
+      activeImageIndex >= 0 &&
+      activeImageIndex < allProjectImages.length - 1
+    ) {
       setSelectedImage(allProjectImages[activeImageIndex + 1]);
     } else {
       setSelectedImage(allProjectImages[0]);
@@ -688,7 +695,8 @@ export default function ProjectDetail({ data }) {
           <span className="not-found-code">404</span>
           <h1 className="not-found-title">Project Not Found</h1>
           <p className="not-found-desc">
-            The branding showcase you are looking for does not exist or has been moved.
+            The branding showcase you are looking for does not exist or has been
+            moved.
           </p>
           <button
             type="button"
@@ -708,6 +716,20 @@ export default function ProjectDetail({ data }) {
   const hasImages = !hasCategories && imagesList.length > 0;
   const videosList = project.videos || [];
   const hasVideos = videosList.length > 0;
+
+  const isColorGradingBrand =
+    project.id === "03" ||
+    project.id === "07" ||
+    project.slug === "giggles-and-twirls" ||
+    project.slug === "pavizham-jewellers";
+
+  const imagesHeading = isColorGradingBrand
+    ? "Color Grading & Finishing"
+    : project.imagesHeading || "Poster Designs";
+
+  const videosHeading = isColorGradingBrand
+    ? "Cinematic Color Finishing"
+    : project.videosHeading || "Brand Video Content";
 
   return (
     <main
@@ -786,7 +808,9 @@ export default function ProjectDetail({ data }) {
                 <span className="deliverables-items">
                   {project.deliverables.map((item, idx) => (
                     <Fragment key={idx}>
-                      {idx > 0 && <span className="deliverables-bullet"> • </span>}
+                      {idx > 0 && (
+                        <span className="deliverables-bullet"> • </span>
+                      )}
                       <span className="deliverables-item">{item}</span>
                     </Fragment>
                   ))}
@@ -810,9 +834,7 @@ export default function ProjectDetail({ data }) {
             const isPortraitRowsLayout =
               category.layout === "portrait-5-4" ||
               category.layout === "portrait-rows";
-            const isPortraitLayout =
-              category.layout === "portrait" || category.id === "portrait-poster";
-
+            const isPortraitLayout = category.layout === "portrait";
             return (
               <section
                 key={category.id}
@@ -827,8 +849,7 @@ export default function ProjectDetail({ data }) {
                       <Layers size={1} />
                     )}
                     <span>
-                      {catImages.length === 0 && catVideos.length > 0
-          }
+                      {catImages.length === 0 && catVideos.length > 0}
                     </span>
                   </div>
                   <h2 className="section-heading">{category.title}</h2>
@@ -882,7 +903,10 @@ export default function ProjectDetail({ data }) {
                           {/* <Film size={13} /> */}
                           <span>IMAX Social Media Campaigns:</span>
                         </div>
-                        <h3 className="category-video-heading">Crafted engaging promotional videos for IMAX movie releases, bringing the cinematic experience to life.</h3>
+                        <h3 className="category-video-heading">
+                          Crafted engaging promotional videos for IMAX movie
+                          releases, bringing the cinematic experience to life.
+                        </h3>
                       </div>
                     )}
 
@@ -907,7 +931,7 @@ export default function ProjectDetail({ data }) {
                 {/* <ImageIcon size={15} /> */}
                 {/* <span>Gallery</span> */}
               </div>
-              <h2 className="section-heading">Visual Showcase</h2>
+              <h2 className="section-heading">{imagesHeading}</h2>
             </div>
 
             {/* Layout Tactic Dispatcher */}
@@ -950,7 +974,7 @@ export default function ProjectDetail({ data }) {
                 {/* <Film size={15} /> */}
                 {/* <span>Motion</span> */}
               </div>
-              <h2 className="section-heading">Vertical Video Reels</h2>
+              <h2 className="section-heading">Brand Video Content</h2>
             </div>
 
             {/* Vertical Video 9:16 Grid (Pure Visuals) */}
@@ -979,6 +1003,7 @@ export default function ProjectDetail({ data }) {
           {prevProject && (
             <Link
               to={`/branding/${prevProject.slug}`}
+              replace
               className="project-nav-link prev"
             >
               <ArrowLeft size={16} />
@@ -1002,6 +1027,7 @@ export default function ProjectDetail({ data }) {
           {nextProject && (
             <Link
               to={`/branding/${nextProject.slug}`}
+              replace
               className="project-nav-link next"
             >
               <div className="nav-link-texts text-end">

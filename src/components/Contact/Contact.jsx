@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { CONTACT_CONFIG } from "../../services/contactService";
+import { CONTACT_CONFIG2 } from "../../services/contactService";
+
 import "./Contact.css";
 
 import { Mail, Phone, MapPin } from "lucide-react";
@@ -45,15 +47,27 @@ export default function Contact() {
                     {CONTACT_CONFIG.email}
                   </a>
                 </div>
-                <div className="contact-detail-item" >
+                <div className="contact-detail-item">
                   <Phone />
-                  <a
-                    href={`tel:${CONTACT_CONFIG.rawPhone}`}
-                    className="contact-link"
-                  >
-                    {CONTACT_CONFIG.phone}
-                  </a>
+                  <div className="contact-phone-links">
+                    <a
+                      href={`tel:${CONTACT_CONFIG.rawPhone}`}
+                      className="contact-link"
+                    >
+                      {CONTACT_CONFIG.phone}
+                    </a>
+                    <span className="contact-phone-divider">,</span>
+                    <a
+                      href={`tel:${CONTACT_CONFIG.rawPhone2 || CONTACT_CONFIG2.rawPhone}`}
+                      className="contact-link"
+                    >
+                      {CONTACT_CONFIG.phone2 || CONTACT_CONFIG2.phone}
+                    </a>
+                  </div>
                 </div>
+
+                 
+
                 <div className="contact-detail-item">
                   <MapPin />
                   <span className="contact-location">

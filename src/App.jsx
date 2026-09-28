@@ -50,7 +50,7 @@ function Home() {
       }, 160);
       return () => clearTimeout(timer);
     }
-  }, [location.hash]);
+  }, [location.hash, location.pathname, location.key]);
 
   return (
     <>

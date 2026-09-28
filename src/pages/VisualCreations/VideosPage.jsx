@@ -205,11 +205,7 @@ export default function VideosPage() {
 
   const handleBackToVisuals = (e) => {
     if (e && e.preventDefault) e.preventDefault();
-    if (window.history.length > 2) {
-      navigate(-1);
-    } else {
-      navigate("/#visual");
-    }
+    navigate("/#visual");
   };
 
   useEffect(() => {
@@ -244,9 +240,9 @@ export default function VideosPage() {
             <Film size={14} />
             Visual Creations
           </span> */}
-          <h1 className="video-hero-title">Motion & Video Showcase</h1>
+          <h1 className="video-hero-title">Video Production & Editing</h1>
           <p className="video-hero-desc">
-            A curated showcase of commercial edits, 3D motion graphics, brand teasers, and vertical video reels.
+            A curated showcase of cinematic shoots, commercial edits, brand promotions, and product focused videos created for cinemas, cafes.
           </p>
         </div>
       </section>

@@ -36,11 +36,7 @@ export default function ImagesPage() {
 
   const handleBackToVisuals = (e) => {
     if (e && e.preventDefault) e.preventDefault();
-    if (window.history.length > 2) {
-      navigate(-1);
-    } else {
-      navigate("/#visual");
-    }
+    navigate("/#visual");
   };
 
   useEffect(() => {
@@ -114,11 +110,10 @@ export default function ImagesPage() {
             <Sparkles size={14} />
             Visual Creations
           </span> */}
-          <h1 className="gallery-hero-title">Visual Showcase</h1>
+          <h1 className="gallery-hero-title">Culinary Photography</h1>
           <p className="gallery-hero-desc">
-            A curated gallery of branding collaterals, digital key visuals, posters, and creative artworks.
+            Visually engaging food and beverage imagery created for cafe brands and promotional campaigns.
           </p>
-
         </div>
       </section>
 

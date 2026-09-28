@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState, useEffect } from "react";
 import "./CareerHighlights.css";
-import { ChevronLeft, ChevronRight, Maximize2, Play } from "lucide-react";
+import { Maximize2, Play } from "lucide-react";
 import { SpecularCard } from "../SpecularButton";
 
 import { getR2Url } from "../../config/r2";
@@ -23,6 +23,7 @@ const CHimg4 = getR2Url("career-highlights/images/4.webp");
 /* Videos */
 const IMAX = getR2Url("career-highlights/videos/Stray Kids Promotion.mp4");
 const Parvatha = getR2Url("career-highlights/videos/Youth.mp4");
+const DW = getR2Url("career-highlights/videos/Karuppu_Dream_collab.mp4");
 const epiqandsk = getR2Url("career-highlights/videos/Thaai Kelavi Promotion Reel.mp4");
 const F1 = getR2Url("career-highlights/videos/F1.mp4");
 const hyperx = getR2Url("career-highlights/videos/hyperx.mp4");
@@ -118,7 +119,7 @@ export default function CareerHighlights() {
   }, [selectedVideo, selectedImageIndex]);
 
   /* ===============================
-      Slider Data
+      Slider Data (6 Videos)
   =============================== */
 
   const sliderVideos = useMemo(
@@ -131,37 +132,31 @@ export default function CareerHighlights() {
       },
       {
         id: 2,
-        title: "In Collaboration With: Warner Bros. India",
+        title: "Officially Reposted by: Warner Bros. India",
         video: F1,
         icons: [profileIcon2],
       },
       {
-        id: 5,
+        id: 3,
         title: "In Collaboration With: SK Productions & EPIQ Cinemas",
         video: epiqandsk,
         icons: [profileIcon5, profileIcon6],
       },
       {
-        id: 8,
+        id: 4,
         title: "In Collaboration With: Paarvathaa Entertainments",
         video: Parvatha,
         icons: [profileIcon8],
       },
+      {
+        id: 5,
+        title: "In Collaboration With: Dream Warriors Pictures",
+        video: DW,
+        icons: [profileIcon7],
+      },
+
     ],
     [],
-  );
-
-  /* =====================================
-      Duplicate for Infinite Slider (3 sets for smooth infinite loop)
-  ====================================== */
-
-  const infiniteVideos = useMemo(
-    () => [
-      ...sliderVideos,
-      ...sliderVideos,
-      ...sliderVideos,
-    ],
-    [sliderVideos],
   );
 
   /* ===============================
@@ -191,117 +186,74 @@ export default function CareerHighlights() {
   );
 
   const sliderRef = useRef(null);
-  const isPausedRef = useRef(false);
-  const pauseTimeoutRef = useRef(null);
-  const animationFrameRef = useRef(null);
-  const metricsRef = useRef({ setWidth: 0, startOffset: 0 });
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
-  useEffect(() => {
+  // Mouse Drag to Scroll State
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftStartRef = useRef(0);
+  const hasDraggedRef = useRef(false);
+
+  const handleMouseDown = (e) => {
+    if (e.button !== 0 || !sliderRef.current) return;
+    isDraggingRef.current = true;
+    hasDraggedRef.current = false;
+    startXRef.current = e.pageX - sliderRef.current.offsetLeft;
+    scrollLeftStartRef.current = sliderRef.current.scrollLeft;
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDraggingRef.current || !sliderRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - sliderRef.current.offsetLeft;
+    const walk = x - startXRef.current;
+    if (Math.abs(walk) > 6) {
+      hasDraggedRef.current = true;
+    }
+    sliderRef.current.scrollLeft = scrollLeftStartRef.current - walk;
+  };
+
+  const handleMouseUpOrLeave = () => {
+    isDraggingRef.current = false;
+  };
+
+  // Scroll handler to track the currently visible card on responsive screens
+  const handleSliderScroll = () => {
+    if (!sliderRef.current) return;
     const slider = sliderRef.current;
-    if (!slider) return;
+    const cards = slider.querySelectorAll(".video-card");
+    if (!cards || cards.length === 0) return;
 
-    let lastTime = performance.now();
+    const sliderCenter = slider.scrollLeft + slider.clientWidth / 2;
+    let closestIndex = 0;
+    let minDistance = Infinity;
 
-    const computeMetrics = () => {
-      if (!slider) return;
-      const cards = slider.querySelectorAll(".video-card");
-      const n = sliderVideos.length;
-      if (cards.length >= n * 3 && cards[0] && cards[n] && cards[n * 2]) {
-        const setWidth = cards[n].offsetLeft - cards[0].offsetLeft;
-        const startOffset = cards[n].offsetLeft;
-        metricsRef.current = { setWidth, startOffset };
-        if (slider.scrollLeft === 0 && startOffset > 0) {
-          slider.scrollLeft = startOffset;
-        }
+    cards.forEach((card, idx) => {
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const distance = Math.abs(sliderCenter - cardCenter);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = idx;
       }
-    };
+    });
 
-    computeMetrics();
-    const timer = setTimeout(computeMetrics, 150);
-    window.addEventListener("resize", computeMetrics, { passive: true });
+    setActiveSlideIndex(closestIndex);
+  };
 
-    // High performance auto-scroll loop with CACHED metrics (Zero layout thrashing)
-    const step = (now) => {
-      const dt = Math.min((now - lastTime) / 1000, 0.1);
-      lastTime = now;
-
-      if (!isPausedRef.current && slider) {
-        const { setWidth, startOffset } = metricsRef.current;
-        if (setWidth > 0) {
-          const speed = 45; // Smooth pixels per second
-          slider.scrollLeft += speed * dt;
-
-          // Seamless loop wrap
-          if (slider.scrollLeft >= startOffset + setWidth) {
-            slider.scrollLeft -= setWidth;
-          } else if (slider.scrollLeft <= startOffset - setWidth) {
-            slider.scrollLeft += setWidth;
-          }
-        }
-      }
-
-      animationFrameRef.current = requestAnimationFrame(step);
-    };
-
-    animationFrameRef.current = requestAnimationFrame(step);
-
-    const handleScrollWrap = () => {
-      if (!slider) return;
-      const { setWidth, startOffset } = metricsRef.current;
-      if (setWidth <= 0) return;
-
-      if (slider.scrollLeft >= startOffset + setWidth * 1.5) {
-        slider.scrollLeft -= setWidth;
-      } else if (slider.scrollLeft <= startOffset - setWidth * 0.5) {
-        slider.scrollLeft += setWidth;
-      }
-    };
-
-    slider.addEventListener("scroll", handleScrollWrap, { passive: true });
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener("resize", computeMetrics);
-      if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-      slider.removeEventListener("scroll", handleScrollWrap);
-    };
-  }, [infiniteVideos, sliderVideos.length]);
-
-  const scrollSlider = (direction) => {
-    if (sliderRef.current) {
-      const slider = sliderRef.current;
-      const cards = slider.querySelectorAll(".video-card");
-      const n = sliderVideos.length;
-      const card = cards[0];
-      const cardWidth = card ? card.offsetWidth + 24 : 344;
-      const setWidth = cards.length >= n * 2 && cards[n]
-        ? cards[n].offsetLeft - cards[0].offsetLeft
-        : cardWidth * n;
-      const startOffset = cards.length >= n * 3 && cards[n * 2]
-        ? cards[n * 2].offsetLeft
-        : setWidth * 2;
-
-      isPausedRef.current = true;
-
-      // Ensure position is within safe middle range before scrolling
-      if (direction === "left" && slider.scrollLeft <= startOffset - setWidth * 0.5) {
-        slider.scrollLeft += setWidth * 2;
-      } else if (direction === "right" && slider.scrollLeft >= startOffset + setWidth * 2) {
-        slider.scrollLeft -= setWidth * 2;
-      }
-
-      slider.scrollBy({
-        left: direction === "left" ? -cardWidth : cardWidth,
+  // Click dot to smoothly center the corresponding video card
+  const scrollToSlide = (index) => {
+    if (!sliderRef.current) return;
+    const slider = sliderRef.current;
+    const cards = slider.querySelectorAll(".video-card");
+    if (cards[index]) {
+      const card = cards[index];
+      const targetScroll =
+        card.offsetLeft - (slider.clientWidth - card.offsetWidth) / 2;
+      slider.scrollTo({
+        left: Math.max(0, targetScroll),
         behavior: "smooth",
       });
-
-      if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
-      pauseTimeoutRef.current = setTimeout(() => {
-        isPausedRef.current = false;
-      }, 2000);
+      setActiveSlideIndex(index);
     }
   };
 
@@ -357,63 +309,75 @@ export default function CareerHighlights() {
         </div>
 
         {/* =====================================
-            Infinite Video Slider with Arrow Controls
+            Video Showcase
         ====================================== */}
 
-        <div
-          className="video-slider-wrap"
-          onMouseEnter={() => { isPausedRef.current = true; }}
-          onMouseLeave={() => { isPausedRef.current = false; }}
-          onTouchStart={() => { isPausedRef.current = true; }}
-          onTouchEnd={() => {
-            if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
-            pauseTimeoutRef.current = setTimeout(() => {
-              isPausedRef.current = false;
-            }, 1500);
-          }}
-        >
-          <button
-            type="button"
-            className="video-slider-arrow left"
-            onClick={() => scrollSlider("left")}
-            aria-label="Previous videos"
+        <div className="video-slider-wrap">
+          <div
+            className="video-slider"
+            ref={sliderRef}
+            onScroll={handleSliderScroll}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUpOrLeave}
+            onMouseLeave={handleMouseUpOrLeave}
           >
-            <ChevronLeft size={22} />
-          </button>
-
-          <div className="video-slider" ref={sliderRef}>
             <div className="slider-track">
-              {infiniteVideos.map((item, index) => (
+              {sliderVideos.map((item) => (
                 <div
                   className="video-card"
-                  key={`${item.id}-${index}`}
+                  key={item.id}
                   role="button"
                   tabIndex={0}
-                  onClick={() => openVideo(item.video, item.title)}
+                  onClick={() => {
+                    if (hasDraggedRef.current) return;
+                    openVideo(item.video, item.title);
+                  }}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       openVideo(item.video, item.title);
                     }
                   }}
                 >
-                  {/* Profile Icons / Avatar Group */}
-                  <div className="video-avatar-group">
-                    {(item.icons || (item.icon ? [item.icon] : [])).map((iconSrc, iconIdx) => (
-                      <div
-                        className="video-avatar-item"
-                        key={iconIdx}
-                        style={{ zIndex: (item.icons?.length || 1) - iconIdx }}
-                        title="Production House"
-                      >
+                  {/* Profile Icons / Corner Icons */}
+                  {item.id === 3 ? (
+                    <>
+                      <div className="video-avatar-item video-corner-icon left" title="SK Productions">
                         <img
-                          src={iconSrc}
-                          alt="Production House"
+                          src={item.icons[0]}
+                          alt="SK Productions"
                           loading="lazy"
                           decoding="async"
                         />
                       </div>
-                    ))}
-                  </div>
+                      <div className="video-avatar-item video-corner-icon right" title="EPIQ Cinemas">
+                        <img
+                          src={item.icons[1]}
+                          alt="EPIQ Cinemas"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <div className="video-avatar-group">
+                      {(item.icons || (item.icon ? [item.icon] : [])).map((iconSrc, iconIdx) => (
+                        <div
+                          className="video-avatar-item"
+                          key={iconIdx}
+                          style={{ zIndex: (item.icons?.length || 1) - iconIdx }}
+                          title="Production House"
+                        >
+                          <img
+                            src={iconSrc}
+                            alt="Production House"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
 
                   {/* Video Preview Frame */}
                   <div className="video-preview-frame">
@@ -446,14 +410,22 @@ export default function CareerHighlights() {
             </div>
           </div>
 
-          <button
-            type="button"
-            className="video-slider-arrow right"
-            onClick={() => scrollSlider("right")}
-            aria-label="Next videos"
+          {/* Responsive Dot Indicators (Only visible on responsive mobile/tablet <1024px) */}
+          <div
+            className="slider-dots-indicator"
+            aria-label="Video highlights pagination"
           >
-            <ChevronRight size={22} />
-          </button>
+            {sliderVideos.map((item, idx) => (
+              <button
+                key={item.id}
+                type="button"
+                className={`slider-dot ${activeSlideIndex === idx ? "active" : ""}`}
+                onClick={() => scrollToSlide(idx)}
+                aria-label={`Go to video ${idx + 1}: ${item.title}`}
+                aria-current={activeSlideIndex === idx ? "true" : undefined}
+              />
+            ))}
+          </div>
         </div>
 
         {/* =====================================

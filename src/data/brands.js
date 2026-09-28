@@ -111,7 +111,7 @@ export const BRANDS = [
         id: "poster",
         title: "Special Menu",
         subtext:
-          "Designed movie-inspired visuals that brought Broadway Cinemas’ special menu to life.",
+          "Designed movie inspired visuals that brought Broadway Cinemas’ special menu to life.",
         initialCount: 8,
         step: 6,
         images: [
@@ -160,6 +160,16 @@ export const BRANDS = [
             id: "bwc-post-10",
             src: getR2Url("branding/broadway/images/menu_designs/10.webp"),
             aspect: "landscape",
+          },
+          {
+            id: "bwc-post-11",
+            src: getR2Url("branding/broadway/images/menu_designs/11.webp"),
+            aspect: "portrait",
+          },
+          {
+            id: "bwc-post-12",
+            src: getR2Url("branding/broadway/images/menu_designs/12.webp"),
+            aspect: "portrait",
           },
         ],
       },
@@ -224,7 +234,7 @@ export const BRANDS = [
         title: "This Week Movies",
         subtext:
           "Designed promotional posters for weekly movie releases at Broadway Cinemas.",
-        layout: "portrait",
+        // layout: "square",
         images: [
           {
             id: "bwc-twm-1",
@@ -275,18 +285,17 @@ export const BRANDS = [
       {
         id: "portrait-poster",
         title: "Poster Design",
-        layout: "portrait",
+
         subtext: "Designed promotional posters for theatrical movie releases.",
         images: [
           {
             id: "bwc-port-1",
             src: getR2Url("branding/broadway/images/poster_design/1.webp"),
-            aspect: "landscape",
+             
           },
           {
             id: "bwc-port-2",
             src: getR2Url("branding/broadway/images/poster_design/2.webp"),
-            aspect: "landscape",
           },
           {
             id: "bwc-port-3",
@@ -312,14 +321,14 @@ export const BRANDS = [
             id: "bwc-port-8",
             src: getR2Url("branding/broadway/images/poster_design/8.webp"),
           },
-          {
-            id: "bwc-port-9",
-            src: getR2Url("branding/broadway/images/poster_design/9.webp"),
-          },
-          {
-            id: "bwc-port-10",
-            src: getR2Url("branding/broadway/images/poster_design/10.webp"),
-          },
+          // {
+          //   id: "bwc-port-9",
+          //   src: getR2Url("branding/broadway/images/poster_design/9.webp"),
+          // },
+          // {
+          //   id: "bwc-port-10",
+          //   src: getR2Url("branding/broadway/images/poster_design/10.webp"),
+          // },
           {
             id: "bwc-port-11",
             src: getR2Url("branding/broadway/images/poster_design/11.webp"),
@@ -641,7 +650,11 @@ export const BRANDS = [
     rowDistribution: [6, 6, 6, 6],
     initialRows: 2,
     stepRows: 1,
+    
     images: [
+      
+       
+       
       {
         id: "gnt-img-1",
         src: getR2Url("branding/giggles-and-twirls/images/1.webp"),
@@ -1604,9 +1617,9 @@ export const BRANDS = [
       },
       {
         id: "sm-poster-designs",
-        title: "Social Media Poster Designs",
+        title: "Poster Designs",
         subtext:
-          "Creative festival greetings, educational concept awareness, and values-driven social campaigns.",
+          "Creative festival greetings, educational concept awareness, and values driven social campaigns.",
         // layout: "portrait",
         images: [
           {

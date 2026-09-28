@@ -130,10 +130,7 @@ export const VIDEO_SECTIONS = [
       { id: "v2-10", src: getR2Url("visual_creations/videos/video_folder_2/10.mp4") },
       { id: "v2-11", src: getR2Url("visual_creations/videos/video_folder_2/11.mp4") },
       { id: "v2-12", src: getR2Url("visual_creations/videos/video_folder_2/12.mp4") },
-      { id: "v2-13", src: getR2Url("visual_creations/videos/video_folder_2/13.mp4") },
-      { id: "v2-14", src: getR2Url("visual_creations/videos/video_folder_2/14.mp4") },
-      { id: "v2-15", src: getR2Url("visual_creations/videos/video_folder_2/15.mp4") },
-      { id: "v2-16", src: getR2Url("visual_creations/videos/video_folder_2/16.mp4") },
+
     ],
   },
 ];

@@ -212,8 +212,22 @@
   }
 }
 
-.contact-detail-item{
+.contact-detail-item {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
+}
+
+.contact-phone-links {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.contact-phone-divider {
+  color: #000000;
+  font-weight: 500;
+  user-select: none;
 }
