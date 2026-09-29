@@ -21,7 +21,7 @@ export default function VideoModal({ isOpen, onClose, src, title, tag }) {
           <X size={20} />
         </button>
         <div className="custom-modal-video-wrapper">
-          <video src={src} controls autoPlay playsInline />
+          <video src={src} controls autoPlay playsInline controlsList="nodownload" />
         </div>
         {(title || tag) && (
           <div className="custom-modal-caption">

@@ -1,6 +1,5 @@
 import "./CreativeExpertise.css";
 import { Sparkles, Type, Palette, Share2, Camera, Clapperboard } from "lucide-react";
-import { SpecularCard } from "../SpecularButton";
 
 export default function CreativeExpertise() {
   return (
@@ -21,7 +20,7 @@ export default function CreativeExpertise() {
         <div className="row g-4 d-flex align-items-stretch">
           {/* Left Card */}
           <div className="col-lg-6 d-flex" data-aos="fade-up" data-aos-delay="150">
-            <SpecularCard radius={20} lineColor="#1b4ef5" baseColor="#3b82f6" intensity={1} className="expertise-specular-wrap">
+            <div className="expertise-specular-wrap">
               <div className="expertise-card">
                 <div className="card-top">
                   <span className="line"></span>
@@ -80,12 +79,12 @@ export default function CreativeExpertise() {
                   </div>
                 </div>
               </div>
-            </SpecularCard>
+            </div>
           </div>
 
           {/* Right Card */}
           <div className="col-lg-6 d-flex" data-aos="fade-up" data-aos-delay="250">
-            <SpecularCard radius={20} lineColor="#06b6d4" baseColor="#3b82f6" intensity={1} className="expertise-specular-wrap">
+            <div className="expertise-specular-wrap">
               <div className="expertise-card">
                 <div className="card-top">
                   <span className="line"></span>
@@ -146,7 +145,7 @@ export default function CreativeExpertise() {
                   </div>
                 </div>
               </div>
-            </SpecularCard>
+            </div>
           </div>
         </div>
       </div>

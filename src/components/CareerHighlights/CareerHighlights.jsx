@@ -1,7 +1,6 @@
 import { useMemo, useRef, useState, useEffect } from "react";
 import "./CareerHighlights.css";
 import { Maximize2, Play } from "lucide-react";
-import { SpecularCard } from "../SpecularButton";
 
 import { getR2Url } from "../../config/r2";
 
@@ -281,31 +280,23 @@ export default function CareerHighlights() {
             Production House 
         ====================================== */}
         <div className="production-house-section">
-          <SpecularCard
-            radius={999}
-            lineColor="#0284c7"
-            baseColor="#38bdf8"
-            intensity={1.1}
-            className="production-house-specular-wrap"
-          >
-            <div className="production-house">
-              <div className="production-house-heading">
-                <span>PRODUCTION HOUSE</span>
-                <span className="colon">:</span>
-              </div>
-
-              <div className="production-house-images">
-                <img src={profileIcon1} alt="Production House" loading="lazy" decoding="async" style={{objectFit:"contain"}} />
-                <img src={profileIcon2} alt="Production House" loading="lazy" decoding="async" />
-                <img src={profileIcon3} alt="Production House" loading="lazy" decoding="async" />
-                <img src={profileIcon4} alt="Production House" loading="lazy" decoding="async" />
-                <img src={profileIcon5} alt="Production House" loading="lazy" decoding="async" />
-                <img src={profileIcon6} alt="Production House" loading="lazy" decoding="async" />
-                <img src={profileIcon7} alt="Production House" loading="lazy" decoding="async" />
-                <img src={profileIcon8} alt="Production House" loading="lazy" decoding="async" />
-              </div>
+          <div className="production-house">
+            <div className="production-house-heading">
+              <span>PRODUCTION HOUSE</span>
+              <span className="colon">:</span>
             </div>
-          </SpecularCard>
+
+            <div className="production-house-images">
+              <img src={profileIcon1} alt="Production House" loading="lazy" decoding="async" style={{objectFit:"contain"}} />
+              <img src={profileIcon2} alt="Production House" loading="lazy" decoding="async" />
+              <img src={profileIcon3} alt="Production House" loading="lazy" decoding="async" />
+              <img src={profileIcon4} alt="Production House" loading="lazy" decoding="async" />
+              <img src={profileIcon5} alt="Production House" loading="lazy" decoding="async" />
+              <img src={profileIcon6} alt="Production House" loading="lazy" decoding="async" />
+              <img src={profileIcon7} alt="Production House" loading="lazy" decoding="async" />
+              <img src={profileIcon8} alt="Production House" loading="lazy" decoding="async" />
+            </div>
+          </div>
         </div>
 
         {/* =====================================
@@ -388,6 +379,7 @@ export default function CareerHighlights() {
                       loop
                       playsInline
                       preload="metadata"
+                      controlsList="nodownload"
                       onLoadedMetadata={(e) => {
                         e.target.muted = true;
                         e.target.play().catch(() => {});
@@ -496,6 +488,7 @@ export default function CareerHighlights() {
                     loop
                     playsInline
                     preload="metadata"
+                    controlsList="nodownload"
                     onLoadedMetadata={(e) => {
                       e.target.muted = true;
                       e.target.play().catch(() => {});
@@ -528,18 +521,18 @@ export default function CareerHighlights() {
 
         {selectedVideo && (
           <div className="video-modal" onClick={closeVideo}>
+            <button
+              className="video-close"
+              onClick={closeVideo}
+              aria-label="Close Video"
+            >
+              ×
+            </button>
+
             <div
               className="video-modal-content portrait-friendly-modal"
               onClick={(e) => e.stopPropagation()}
             >
-              <button
-                className="video-close"
-                onClick={closeVideo}
-                aria-label="Close Video"
-              >
-                ×
-              </button>
-
               <h4 className="modal-title">{selectedVideo.title}</h4>
 
               <div className="modal-video-wrapper">
@@ -549,6 +542,7 @@ export default function CareerHighlights() {
                   controls
                   autoPlay
                   playsInline
+                  controlsList="nodownload"
                 >
                   <source src={selectedVideo.video} type="video/mp4" />
                 </video>
@@ -563,18 +557,18 @@ export default function CareerHighlights() {
 
         {selectedImageIndex !== null && (
           <div className="video-modal image-modal" onClick={closeImageModal}>
+            <button
+              className="video-close"
+              onClick={closeImageModal}
+              aria-label="Close Image Modal"
+            >
+              ×
+            </button>
+
             <div
               className="video-modal-content image-modal-content"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close button */}
-              <button
-                className="video-close"
-                onClick={closeImageModal}
-                aria-label="Close Image Modal"
-              >
-                ×
-              </button>
 
               {/* Prev Carousel Button */}
               <button

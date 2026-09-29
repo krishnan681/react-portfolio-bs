@@ -529,6 +529,7 @@ function VerticalVideosGrid({
                   muted
                   loop
                   autoPlay
+                  controlsList="nodownload"
                   className="vertical-video-media"
                 />
 

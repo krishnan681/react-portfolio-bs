@@ -69,6 +69,7 @@ function VideoCardItem({ item, index, onSelectVideo }) {
           playsInline
           muted
           loop
+          controlsList="nodownload"
           className="video-card-media"
         />
 

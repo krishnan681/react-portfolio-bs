@@ -11,7 +11,6 @@ import {
   PlaySquare,
 } from "lucide-react";
 import "./VisualCreations.css";
-import { SpecularButton, SpecularCard } from "../SpecularButton";
 
 const IMAGE_FILES = [
   {
@@ -135,13 +134,7 @@ export default function VisualCreations() {
         <div className="row g-4 justify-content-center d-flex align-items-stretch">
           {/* ==================== IMAGE FOLDER ==================== */}
           <div className="col-12 col-md-6 col-lg-5 d-flex">
-            <SpecularCard
-              radius={24}
-              lineColor="#ff5f6d"
-              baseColor="#38bdf8"
-              intensity={1}
-              className="folder-specular-wrap"
-            >
+            <div className="folder-specular-wrap">
               <div className="folder-wrapper-card" onClick={handleOpenImages}>
                 <div
                   className={`folder-card image-folder-card ${imageOpen ? "is-open" : ""}`}
@@ -199,32 +192,22 @@ export default function VisualCreations() {
                     </div>
                   </div>
                    
-                  <SpecularButton
-                    size="md"
-                    radius={999}
-                    lineColor="#ff5f6d"
-                    baseColor="#1b4ef5"
-                    intensity={1}
+                  <button
+                    type="button"
                     className="folder-open-cta-btn"
                     onClick={handleOpenImages}
                   >
                     <span>Explore my works</span>
                     <ArrowUpRight size={15} />
-                  </SpecularButton>
+                  </button>
                 </div>
               </div>
-            </SpecularCard>
+            </div>
           </div>
 
           {/* ==================== VIDEO FOLDER ==================== */}
           <div className="col-12 col-md-6 col-lg-5 d-flex">
-            <SpecularCard
-              radius={24}
-              lineColor="#0284c7"
-              baseColor="#38bdf8"
-              intensity={1}
-              className="folder-specular-wrap"
-            >
+            <div className="folder-specular-wrap">
               <div className="folder-wrapper-card" onClick={handleOpenVideos}>
                 <div
                   className={`folder-card video-folder-card ${videoOpen ? "is-open" : ""}`}
@@ -282,21 +265,17 @@ export default function VisualCreations() {
                     </div>
                   </div>
                
-                  <SpecularButton
-                    size="md"
-                    radius={999}
-                    lineColor="#0284c7"
-                    baseColor="#1b4ef5"
-                    intensity={1}
+                  <button
+                    type="button"
                     className="folder-open-cta-btn"
                     onClick={handleOpenVideos}
                   >
                     <span>Explore my works</span>
                     <ArrowUpRight size={15} />
-                  </SpecularButton>
+                  </button>
                 </div>
               </div>
-            </SpecularCard>
+            </div>
           </div>
         </div>
       </div>
